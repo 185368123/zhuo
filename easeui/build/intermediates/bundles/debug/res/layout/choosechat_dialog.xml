@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="100dp"
+    android:layout_marginRight="100dp"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/abroad_add"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/abroad_dialog_item_hight"
+        android:background="@drawable/abroad_dialogitem_selector"
+        android:gravity="center"
+        android:text="加为好友"
+        android:textColor="@color/abroad_dialog_textcolor"
+        android:textSize="@dimen/abroad_dialog_textsize" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/abroad_dialog_view_bg" />
+    <TextView
+        android:id="@+id/abroad_jubao"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/abroad_dialog_item_hight"
+        android:background="@drawable/abroad_dialogitem_selector"
+        android:gravity="center"
+        android:text="举报"
+        android:textColor="@color/abroad_dialog_textcolor"
+        android:textSize="@dimen/abroad_dialog_textsize" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/abroad_dialog_view_bg" />
+
+    <TextView
+        android:id="@+id/abroad_qingkong"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/abroad_dialog_item_hight"
+        android:background="@drawable/abroad_dialogitem_selector"
+        android:gravity="center"
+        android:text="清空记录"
+        android:textColor="@color/abroad_dialog_textcolor"
+        android:textSize="@dimen/abroad_dialog_textsize" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/abroad_dialog_view_bg" />
+
+    <TextView
+        android:paddingBottom="20dp"
+        android:id="@+id/abroad_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/abroad_dialog_item_hight"
+        android:layout_marginTop="@dimen/abroad_feedback_top"
+        android:background="@drawable/abroad_dialogitem_selector"
+        android:gravity="center"
+        android:text="取消"
+        android:textColor="@color/abroad_dialog_textcolor"
+        android:textSize="@dimen/abroad_dialog_textsize" />
+
+</LinearLayout>

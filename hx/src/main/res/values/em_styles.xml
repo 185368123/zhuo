@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <style name="text_style">
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    <style name="mine_text_style">
+        <item name="android:background">#FFFFFF</item>
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">#9b9696</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="chat_room_menu_item_text_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">50dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:lineSpacingExtra">2dp</item>
+    </style>
+
+    <style name="chat_room_menu_item_splitter">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dip</item>
+        <item name="android:layout_marginLeft">10dip</item>
+        <item name="android:layout_marginRight">10dip</item>
+        <item name="android:background">#E6E6E6</item>
+    </style>
+
+    <style name="chat_room_menu_item_wrapper">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <!-- Dialog Style -->
+    <style name="progress_dialog_style1" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!-- 按钮的颜色,进度对话框时，是进度条的颜色 -->
+        <item name="colorAccent">@color/my_color2</item>
+        <!-- 背景颜色 -->
+        <item name="android:background">@color/white</item>
+        <!-- 字体颜色 -->
+        <item name="android:textColor">@color/app_black</item>
+    </style>
+
+
+    <style name="progress_dialog_style3" parent="progress_dialog_style1">
+        <!--设置对话框显示时 Activity 是透明的-->
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <style name="alert_dialog_style1" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!-- 按钮的颜色,进度对话框时，是进度条的颜色 -->
+        <item name="colorAccent">@color/black</item>
+        <!-- 标题，字体的颜色 -->
+        <item name="android:textColorPrimary">@color/black</item>
+        <!-- 背景的颜色 -->
+        <item name="android:background">@color/white</item>
+        <!-- 标题颜色 -->
+        <item name="android:textColor">@color/black</item>
+    </style>
+</resources>
