@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/linearlayout"
+    android:clickable="true"
+   >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv1_fragment2"
+            style="@style/mine_text_style1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:clickable="true"
+            android:gravity="center_horizontal"
+            android:text="篮球赛" />
+
+        <ImageView
+            android:id="@+id/iv_fragment2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center"
+            android:background="@drawable/go_blue"
+            android:clickable="true"
+            android:visibility="gone" />
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_fragment2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="20dp"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="选择"
+                android:id="@+id/tv2_fragment2"
+                android:textColor="@color/app_black"
+                android:textSize="@dimen/text_size_15" />
+
+        </LinearLayout>
+
+        <RadioGroup
+            android:id="@+id/group_fragment2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/groupbutton1_fragment2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/register_button_selector"
+                android:button="@null"
+                android:gravity="center"
+                android:text="宵夜"
+                android:textColor="@color/app_black"
+                android:textSize="@dimen/text_size_20" />
+
+            <RadioButton
+                android:id="@+id/groupbutton2_fragment2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/register_button_selector"
+                android:button="@null"
+                android:gravity="center"
+                android:text="饮料"
+                android:textColor="@color/app_black"
+                android:textSize="@dimen/text_size_20" />
+
+            <RadioButton
+                android:id="@+id/groupbutton3_fragment2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/register_button_selector"
+                android:button="@null"
+                android:gravity="center"
+                android:text="无筹码"
+                android:textColor="@color/app_black"
+                android:textSize="@dimen/text_size_20" />
+        </RadioGroup>
+    </LinearLayout>
+</LinearLayout>

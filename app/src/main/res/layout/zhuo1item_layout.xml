@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingBottom="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp">
+
+    <TextView
+        android:gravity="center_vertical"
+        android:id="@+id/zhuo1_tv1"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="@string/zhuo1_text1_1"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_20" />
+
+    <TextView
+        android:id="@+id/zhuo1_tv2"
+        android:layout_toRightOf="@+id/zhuo1_tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:text="@string/zhuo1_text1_2"
+        android:textColor="@color/app_gray" />
+
+
+    <Button
+        android:layout_centerInParent="true"
+        android:gravity="center_vertical"
+        android:layout_alignParentRight="true"
+        android:id="@+id/zhuo1_button"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/go_blue" />
+
+</RelativeLayout>

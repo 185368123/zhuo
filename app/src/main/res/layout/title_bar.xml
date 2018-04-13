@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/title_bar_linear3"
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    android:background="@color/white"
+    android:orientation="horizontal">
+
+    <!-- 左 文本 -->
+    <TextView
+        android:clickable="true"
+        android:id="@+id/title_bar_text1"
+        android:layout_width="55dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/white_selector1"
+        android:gravity="center"
+        android:maxLength="2"
+        android:maxLines="1"
+        android:text="左边"
+        android:textColor="@color/main_color2"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+    <!-- 左 图片 -->
+    <LinearLayout
+        android:id="@+id/title_bar_linear1"
+        android:layout_width="55dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/white_selector1"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/title_bar_image1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/app_name"
+            />
+    </LinearLayout>
+
+    <!-- 标题 -->
+    <TextView
+        android:id="@+id/title_bar_text2"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="标题"
+        android:textColor="@color/main_color2"
+        android:textSize="16sp" />
+
+    <!-- 右 图片 -->
+    <LinearLayout
+        android:id="@+id/title_bar_linear2"
+        android:layout_width="55dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/white_selector1"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/title_bar_image2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/app_name"
+             />
+    </LinearLayout>
+
+    <!-- 右 文本 -->
+    <TextView
+        android:id="@+id/title_bar_text3"
+        android:layout_width="55dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/white_selector1"
+        android:gravity="center"
+        android:maxLength="2"
+        android:maxLines="1"
+        android:minWidth="55dp"
+        android:text="右边"
+        android:textColor="@color/main_color2"
+        android:textSize="16sp"
+        android:visibility="gone" />
+</LinearLayout>

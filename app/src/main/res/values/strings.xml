@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">啄啄</string>
+    <!--SlidingFragment-->
+    <string name="chart">聊天</string>
+    <string name="friend">好友</string>
+    <!--Zhuo1Fragment-->
+    <string name="zhuo1_text1_1">暖男</string>
+    <string name="zhuo1_text1_2">做/找个暖男</string>
+
+    <!--LoginWeiXinActivity-->
+    <string name="login_text1">请输入手机号码</string>
+    <string name="login_text2">请输入密码</string>
+    <string name="login_text3">忘记密码？</string>
+    <string name="login_text4">登录</string>
+    <string name="login_text5">已有账号，去登录</string>
+
+    <string name="login_text6">手机注册</string>
+    <string name="login_text7">手机号码格式错误</string>
+    <string name="login_text8">登录成功</string>
+    <string name="login_text12">正在登录...</string>
+    <string name="login_text14">修改成功</string>
+    <string name="login_text15">微信</string>
+
+    <!--RegisterActivity-->
+    <string name="register_text2">请输入验证码</string>
+    <string name="register_text3">获取验证码</string>
+    <string name="register_text4">请设置密码6-20位字符，含数字和字母</string>
+    <string name="register_text5">注册即代表阅读并同意</string>
+
+    <string name="register_text6">《使用条款》</string>
+    <string name="register_text7">《隐私政策》</string>
+    <string name="register_text9">和</string>
+    <string name="register_text10">请输入6-20位的密码</string>
+    <string name="register_text11">注册成功</string>
+
+    <string name="register_text15">输入昵称</string>
+    <string name="register_text16">手机号码：</string>
+    <string name="register_text18">设置密码：</string>
+    <string name="register_text17">短信验证码：</string>
+    <string name="register_text19">昵称：</string>
+    <string name="register_text20">注册</string>
+
+    <string name="dialog_msg_load">正在加载...</string>
+    <string name="dialog_msg_wait">请稍后...</string>
+
+
+    <string name="terms_text">啄啄协议</string>
+
+    <string name="main_text19">网络繁忙，请稍后重试</string>
+    <string name="main_text20">加载数据失败，请检查网络后重试</string>
+
+    <string name="main_text21">响应数据包错误，请稍后重试</string>
+    <string name="main_text22">手机号码格式不正确</string>
+    <string name="main_text61">提交成功</string>
+    <string name="leave_text29">删除成功</string>
+    <string name="add_contacts_text10">添加成功</string>
+    <string name="add_contacts_text12">请输入手机号码</string>
+    <string name="add_contacts_text16">修改成功</string>
+
+
+    <string name="forget_pwd_text6">验证码已发送</string>
+
+    <string name="personal_text13">S</string>
+    <string name="personal_text15">秒后重新获取</string>
+
+    <string name="mine_text1">匹配场数：</string>
+    <string name="mine_text2">匹配经验：</string>
+    <string name="mine_text3">我的评分</string>
+    <string name="mine_text4">反馈论坛</string>
+    <string name="mine_text5">设置</string>
+    <string name="mine_text6">头像</string>
+    <string name="mine_text7">昵称</string>
+    <string name="mine_text8">性别</string>
+    <string name="mine_text9">手机号码</string>
+    <string name="mine_text10">学院信息</string>
+    <string name="mine_text11">日常爱好</string>
+    <string name="mine_text16">修改</string>
+    <string name="mine_text17">个人故事</string>
+
+
+    <string name="set_text4">退出当前账号</string>
+
+    <string name="forget_text5">确认</string>
+
+</resources>

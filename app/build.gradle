@@ -1,0 +1,70 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
+    defaultConfig {
+        multiDexEnabled true
+        applicationId "zhuozhuo.com.zhuo"
+        minSdkVersion 19
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0.9"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", "x86", "arm64-v8a"
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+        }
+        debug {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+        }
+    }
+    signingConfigs {
+        debug {
+            storeFile file('../my.jks')
+            storePassword "0323love0510"
+            keyAlias "zhuozhuo"
+            keyPassword "123456"
+            println("====== signingConfigs.debug ======")
+        }
+        release {
+            storeFile file('../my.jks')//签名文件路径
+            storePassword "0323love0510"
+            keyAlias "zhuozhuo"
+            keyPassword "123456" //签名密码
+            println("====== signingConfigs.release ======")
+        }
+    }
+
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile project(':sliding_menu')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.squareup.okhttp3:okhttp:latest.release'
+    testCompile 'junit:junit:4.12'
+    compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
+    compile files('libs/umeng_social_api.jar')
+    compile files('libs/umeng_social_net.jar')
+    compile files('libs/umeng_social_tool.jar')
+    //图片选择器 https://github.com/donglua/PhotoPicker
+    compile 'me.iwf.photopicker:PhotoPicker:0.8.4@aar'
+    //旧版本动画兼容库
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'org.java-websocket:Java-WebSocket:1.3.4'
+    compile 'se.emilsjolander:stickylistheaders:2.7.0'
+    compile project(':hx')
+    compile project(':easeui')
+    compile project(':library')
+}

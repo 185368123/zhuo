@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_change"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="zhuozhuo.com.zhuo.view.activity.ChangeActivity">
+    <zhuozhuo.com.zhuo.widget.TitleBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title_bar_background="@color/main_color4"
+        app:title_bar_right_linear_background="@color/main_color4"
+        app:title_bar_left_linear_background="@color/main_color4"
+        app:title_bar_left_text_background="@color/main_color4"
+        app:title_bar_right_text_background="@color/main_color4"
+        android:id="@+id/titlebar_namechange"></zhuozhuo.com.zhuo.widget.TitleBarLayout>
+<EditText
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/et_namechange"
+    />
+    <Button
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:id="@+id/button_namechange"
+        android:paddingTop="15dp"
+        style="@style/login_button_style1"
+        android:text="@string/mine_text16"/>
+</LinearLayout>
