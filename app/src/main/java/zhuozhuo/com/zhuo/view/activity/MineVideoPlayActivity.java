@@ -54,6 +54,8 @@ public class MineVideoPlayActivity extends BaseActivity implements IShareVideo, 
     private boolean isPlay;
     private boolean isPause;
     private ImageView imageView;
+    private ImageView iv_back;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_mine_video_play;
@@ -79,12 +81,15 @@ public class MineVideoPlayActivity extends BaseActivity implements IShareVideo, 
         button_commnet = (Button) findViewById(R.id.comment_button);
         mineLayoutVideo = (MineLayoutVideo) findViewById(R.id.mine_video);
 
+        iv_back = (ImageView) findViewById(R.id.back);
+        iv_back.setVisibility(View.VISIBLE);
         iv_share = (ImageView) findViewById(R.id.iv_share);
         iv_go = (ImageView) findViewById(R.id.iv_go);
         button_zan.setOnClickListener(this);
         button_commnet.setOnClickListener(this);
         iv_share.setOnClickListener(this);
         iv_go.setOnClickListener(this);
+        iv_back.setOnClickListener(this);
 
 
         //判断是否有赞，有则显示
@@ -232,6 +237,9 @@ public class MineVideoPlayActivity extends BaseActivity implements IShareVideo, 
                 intent.putExtra("title","");
                 intent.putExtra("photo","");
                 startActivity(intent);
+                break;
+            case R.id.back:
+                onBackPressed();
                 break;
         }
 

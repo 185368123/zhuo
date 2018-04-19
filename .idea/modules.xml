@@ -11,6 +11,7 @@
       <module fileurl="file://$PROJECT_DIR$/locktableview/locktableview.iml" filepath="$PROJECT_DIR$/locktableview/locktableview.iml" />
       <module fileurl="file://$PROJECT_DIR$/opengl/opengl.iml" filepath="$PROJECT_DIR$/opengl/opengl.iml" />
       <module fileurl="file://$PROJECT_DIR$/sliding_menu/sliding_menu.iml" filepath="$PROJECT_DIR$/sliding_menu/sliding_menu.iml" />
+      <module fileurl="file://$PROJECT_DIR$/videobeauty/videobeauty.iml" filepath="$PROJECT_DIR$/videobeauty/videobeauty.iml" />
       <module fileurl="file://$PROJECT_DIR$/zhuo.iml" filepath="$PROJECT_DIR$/zhuo.iml" />
     </modules>
   </component>

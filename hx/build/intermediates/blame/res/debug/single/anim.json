@@ -120,6 +120,10 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.0.0\\res\\anim\\design_snackbar_out.xml"
     },
     {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\debug\\anim\\focusview_show.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\videobeauty\\unspecified\\res\\anim\\focusview_show.xml"
+    },
+    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\debug\\anim\\head_out.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\easeui\\unspecified\\res\\anim\\head_out.xml"
     },

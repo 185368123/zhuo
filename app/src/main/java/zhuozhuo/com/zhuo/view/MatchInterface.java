@@ -5,7 +5,8 @@ package zhuozhuo.com.zhuo.view;
  */
 
 public interface MatchInterface {
+
     public void doClick(String id);
 
-
+     public void doHundreadClick(String string);
 }

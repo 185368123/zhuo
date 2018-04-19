@@ -31,6 +31,8 @@ import com.cjt2325.cameralibrary.util.DeviceUtil;
 import com.cjt2325.cameralibrary.util.FileUtil;
 import com.cjt2325.cameralibrary.util.LogUtil;
 import com.cjt2325.cameralibrary.util.ScreenUtils;
+import com.example.cj.videoeditor.gpufilter.helper.MagicFilterType;
+import com.example.cj.videoeditor.mediacodec.VideoClipper;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -41,6 +43,7 @@ import java.util.List;
 import VideoHandle.EpEditor;
 import VideoHandle.EpVideo;
 import VideoHandle.OnEditorListener;
+import li.com.base.baseuntils.LogUtils;
 
 import static android.graphics.Bitmap.createBitmap;
 
@@ -51,6 +54,8 @@ public class CameraInterface implements Camera.PreviewCallback {
     private static final String TAG = "CJT";
 
     private volatile static CameraInterface mCameraInterface;
+
+    private MagicFilterType filterType = MagicFilterType.NONE;
 
     public static void destroyCameraInterface() {
         if (mCameraInterface != null) {
@@ -619,7 +624,7 @@ public class CameraInterface implements Camera.PreviewCallback {
     }
 
     //停止录像
-    public void stopRecord(boolean isShort, final StopRecordCallback callback) {
+    public void stopRecord(boolean isShort, final long time, final StopRecordCallback callback) {
         if (!isRecorder) {
             return;
         }
@@ -649,12 +654,28 @@ public class CameraInterface implements Camera.PreviewCallback {
             doStopPreview();
             final String fileName = saveVideoPath + File.separator + videoFileName;
             final  String  fileName_= saveVideoPath + File.separator +"mirror"+ videoFileName;
+            final  String  fileName__= saveVideoPath + File.separator +"mirror_beauty"+ videoFileName;
             EpVideo epVideo=new EpVideo(fileName);
             epVideo.rotation(0,true);
             EpEditor.exec(epVideo, new EpEditor.OutputOption(fileName_), new OnEditorListener() {
                 @Override
                 public void onSuccess() {
-                    callback.recordResult(fileName_, videoFirstFrame);
+                    VideoClipper clipper=new VideoClipper();
+                    clipper.showBeauty();
+                    clipper.setFilterType(filterType);
+                    clipper.setInputVideoPath(fileName_);
+                    clipper.setOutputVideoPath(fileName__);
+                    clipper.setOnVideoCutFinishListener(new VideoClipper.OnVideoCutFinishListener() {
+                        @Override
+                        public void onFinish() {
+                            callback.recordResult(fileName__, videoFirstFrame);
+                        }
+                    });
+                    try {
+                        clipper.clipVideo(0,time*1000);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 @Override
@@ -701,7 +722,6 @@ public class CameraInterface implements Camera.PreviewCallback {
             focusAreas.add(new Camera.Area(focusRect, 800));
             params.setFocusAreas(focusAreas);
         } else {
-            Log.i(TAG, "focus areas not supported");
             callback.focusSuccess();
             return;
         }

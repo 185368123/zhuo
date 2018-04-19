@@ -1,15 +1,15 @@
 [
     {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\color\\switch_thumb_material_dark.xml",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\color\\switch_thumb_material_dark.xml"
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\color\\abc_secondary_text_material_dark.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\color\\abc_secondary_text_material_dark.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\color\\abc_tint_switch_track.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\color\\abc_tint_switch_track.xml"
     },
     {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\color\\abc_secondary_text_material_dark.xml",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\color\\abc_secondary_text_material_dark.xml"
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\color\\switch_thumb_material_dark.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\color\\switch_thumb_material_dark.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\color\\switch_thumb_material_light.xml",

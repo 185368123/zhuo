@@ -4,6 +4,10 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\11.4.0\\res\\drawable\\common_google_signin_btn_text_dark.xml"
     },
     {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\t_progressbar.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\videobeauty\\unspecified\\res\\drawable\\t_progressbar.xml"
+    },
+    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\abc_list_selector_background_transition_holo_light.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\drawable\\abc_list_selector_background_transition_holo_light.xml"
     },
@@ -22,6 +26,10 @@
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\em_chat_error_item_bg.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\bundles\\debug\\res\\drawable\\em_chat_error_item_bg.xml"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\em_context_menu_item_bg.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\bundles\\debug\\res\\drawable\\em_context_menu_item_bg.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\abc_spinner_textfield_background_material.xml",
@@ -86,6 +94,10 @@
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\selector_gray.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\base\\unspecified\\res\\drawable\\selector_gray.xml"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\selector_rewardcamera.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\videobeauty\\unspecified\\res\\drawable\\selector_rewardcamera.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\abc_text_cursor_material.xml",
@@ -240,6 +252,10 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\drawable\\abc_ic_go_search_api_material.xml"
     },
     {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\bt_capture.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\videobeauty\\unspecified\\res\\drawable\\bt_capture.xml"
+    },
+    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\ease_sidebar_background_pressed.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\easeui\\unspecified\\res\\drawable\\ease_sidebar_background_pressed.xml"
     },
@@ -250,6 +266,10 @@
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\abc_ic_search_api_material.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\drawable\\abc_ic_search_api_material.xml"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\btn_camera_beauty.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\videobeauty\\unspecified\\res\\drawable\\btn_camera_beauty.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\em_call_hangup_bg.xml",
@@ -294,6 +314,10 @@
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\loading_01.png",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.github.RmondJone\\locktableview\\unspecified\\res\\drawable\\loading_01.png"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\toast_shape.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\videobeauty\\unspecified\\res\\drawable\\toast_shape.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\em_chat_video_selector.xml",
@@ -464,6 +488,10 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\bundles\\debug\\res\\drawable\\shape_bottom_lib_button_n.xml"
     },
     {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\selector_beauty.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\videobeauty\\unspecified\\res\\drawable\\selector_beauty.xml"
+    },
+    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\abc_btn_colored_material.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\drawable\\abc_btn_colored_material.xml"
     },
@@ -526,6 +554,10 @@
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\ic_pulltorefresh_arrow.png",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.github.RmondJone\\locktableview\\unspecified\\res\\drawable\\ic_pulltorefresh_arrow.png"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\btn_camera_filter.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\videobeauty\\unspecified\\res\\drawable\\btn_camera_filter.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\shape_bottom_lib_list_bg.xml",

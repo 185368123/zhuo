@@ -80,20 +80,20 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\drawable-hdpi-v4\\abc_list_pressed_holo_light.9.png"
     },
     {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_ic_star_half_black_16dp.png",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\drawable-hdpi-v4\\abc_ic_star_half_black_16dp.png"
-    },
-    {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_ab_share_pack_mtrl_alpha.9.png",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\drawable-hdpi-v4\\abc_ab_share_pack_mtrl_alpha.9.png"
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_record_animate_09.png",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\easeui\\unspecified\\res\\drawable-hdpi-v4\\ease_record_animate_09.png"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_record_animate_14.png",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\easeui\\unspecified\\res\\drawable-hdpi-v4\\ease_record_animate_14.png"
     },
     {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_record_animate_09.png",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\easeui\\unspecified\\res\\drawable-hdpi-v4\\ease_record_animate_09.png"
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_ab_share_pack_mtrl_alpha.9.png",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\drawable-hdpi-v4\\abc_ab_share_pack_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_ic_star_half_black_16dp.png",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\drawable-hdpi-v4\\abc_ic_star_half_black_16dp.png"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_new_friends_icon.png",
@@ -156,24 +156,24 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\drawable-hdpi-v4\\abc_ic_star_black_36dp.png"
     },
     {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_default_image.png",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\easeui\\unspecified\\res\\drawable-hdpi-v4\\ease_default_image.png"
-    },
-    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ic_flash_auto.png",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\cjt.library.wheel\\camera\\1.1.8\\res\\drawable-hdpi-v4\\ic_flash_auto.png"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_default_image.png",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\easeui\\unspecified\\res\\drawable-hdpi-v4\\ease_default_image.png"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\default_ptr_rotate.png",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\library\\unspecified\\res\\drawable-hdpi-v4\\default_ptr_rotate.png"
     },
     {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_btn_check_to_on_mtrl_015.png",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\drawable-hdpi-v4\\abc_btn_check_to_on_mtrl_015.png"
-    },
-    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\drawable-hdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_btn_check_to_on_mtrl_015.png",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\drawable-hdpi-v4\\abc_btn_check_to_on_mtrl_015.png"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\notification_bg_low_pressed.9.png",
@@ -184,12 +184,12 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\src\\main\\res\\drawable-hdpi\\em_smiley_add_btn_pressed.png"
     },
     {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ee_7.png",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\easeui\\unspecified\\res\\drawable-hdpi-v4\\ee_7.png"
-    },
-    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ee_19.png",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\easeui\\unspecified\\res\\drawable-hdpi-v4\\ee_19.png"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ee_7.png",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\easeui\\unspecified\\res\\drawable-hdpi-v4\\ee_7.png"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ee_32.png",

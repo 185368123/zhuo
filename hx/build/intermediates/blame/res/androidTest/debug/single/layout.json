@@ -44,6 +44,10 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\bundles\\debug\\res\\layout\\bottom_lib_layout.xml"
     },
     {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\item_video_select.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\videobeauty\\unspecified\\res\\layout\\item_video_select.xml"
+    },
+    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\ease_search_bar.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\easeui\\unspecified\\res\\layout\\ease_search_bar.xml"
     },
@@ -188,6 +192,10 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.0.0\\res\\layout\\design_bottom_navigation_item.xml"
     },
     {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_recorde.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\videobeauty\\unspecified\\res\\layout\\activity_recorde.xml"
+    },
+    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_offline_push_settings.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\bundles\\debug\\res\\layout\\activity_offline_push_settings.xml"
     },
@@ -246,6 +254,10 @@
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_set_servers.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\bundles\\debug\\res\\layout\\activity_set_servers.xml"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_video_preview.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\videobeauty\\unspecified\\res\\layout\\activity_video_preview.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\add_list_layout.xml",
@@ -308,6 +320,10 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.0.0\\res\\layout\\design_bottom_sheet_dialog.xml"
     },
     {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_audio.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\videobeauty\\unspecified\\res\\layout\\activity_audio.xml"
+    },
+    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\em_activity_new_friends_msg.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\bundles\\debug\\res\\layout\\em_activity_new_friends_msg.xml"
     },
@@ -340,6 +356,10 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.shuyu\\gsyVideoPlayer-java\\2.1.1\\res\\layout\\video_progress_dialog.xml"
     },
     {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\em_context_menu_for_image.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\bundles\\debug\\res\\layout\\em_context_menu_for_image.xml"
+    },
+    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_action_mode_close_item_material.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\layout\\abc_action_mode_close_item_material.xml"
     },
@@ -360,6 +380,14 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\easeui\\unspecified\\res\\layout\\ease_alert_dialog.xml"
     },
     {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\em_context_menu_for_voice.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\bundles\\debug\\res\\layout\\em_context_menu_for_voice.xml"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\em_context_menu_for_video.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\bundles\\debug\\res\\layout\\em_context_menu_for_video.xml"
+    },
+    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\em_contacts_header.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\bundles\\debug\\res\\layout\\em_contacts_header.xml"
     },
@@ -378,6 +406,10 @@
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\ease_widget_chat_input_menu.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\easeui\\unspecified\\res\\layout\\ease_widget_chat_input_menu.xml"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_video_select.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\videobeauty\\unspecified\\res\\layout\\activity_video_select.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_came.xml",
@@ -484,12 +516,12 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\easeui\\unspecified\\res\\layout\\video_normal.xml"
     },
     {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\em_chat_neterror_item.xml",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\bundles\\debug\\res\\layout\\em_chat_neterror_item.xml"
-    },
-    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\ucrop_aspect_ratio.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.yalantis\\ucrop\\2.2.0\\res\\layout\\ucrop_aspect_ratio.xml"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\em_chat_neterror_item.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\bundles\\debug\\res\\layout\\em_chat_neterror_item.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_pick_at_user.xml",
@@ -596,6 +628,10 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\bundles\\debug\\res\\layout\\em_activity_new_group.xml"
     },
     {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\em_context_menu_for_text.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\bundles\\debug\\res\\layout\\em_context_menu_for_text.xml"
+    },
+    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\ease_row_received_message.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\easeui\\unspecified\\res\\layout\\ease_row_received_message.xml"
     },
@@ -640,6 +676,14 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\bundles\\debug\\res\\layout\\em_logout_actionsheet.xml"
     },
     {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_audio_preview.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\videobeauty\\unspecified\\res\\layout\\activity_audio_preview.xml"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\em_context_menu_for_location.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\bundles\\debug\\res\\layout\\em_context_menu_for_location.xml"
+    },
+    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_camera.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\opengl\\unspecified\\res\\layout\\activity_camera.xml"
     },
@@ -657,7 +701,7 @@
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_main.xml",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\opengl\\unspecified\\res\\layout\\activity_main.xml"
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\videobeauty\\unspecified\\res\\layout\\activity_main.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_activity_chooser_view.xml",
@@ -696,8 +740,16 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\layout\\abc_popup_menu_item_layout.xml"
     },
     {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\t_loading.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\videobeauty\\unspecified\\res\\layout\\t_loading.xml"
+    },
+    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_dialog_title_material.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\layout\\abc_dialog_title_material.xml"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_audio_mix.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\videobeauty\\unspecified\\res\\layout\\activity_audio_mix.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\listview_header.xml",
@@ -730,6 +782,10 @@
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\em_row_group.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\bundles\\debug\\res\\layout\\em_row_group.xml"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\item_media_audio.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\videobeauty\\unspecified\\res\\layout\\item_media_audio.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_egl_back_env.xml",
@@ -770,6 +826,10 @@
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\ucrop_layout_scale_wheel.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.yalantis\\ucrop\\2.2.0\\res\\layout\\ucrop_layout_scale_wheel.xml"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_music_select.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\videobeauty\\unspecified\\res\\layout\\activity_music_select.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\em_activity_user_profile.xml",

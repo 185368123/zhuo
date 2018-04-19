@@ -108,12 +108,12 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\easeui\\unspecified\\res\\drawable-hdpi-v4\\ease_chatting_setmode_keyboard_btn_normal.png"
     },
     {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\em_show_head_toast_bg.9.png",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\src\\main\\res\\drawable-hdpi\\em_show_head_toast_bg.9.png"
-    },
-    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ee_17.png",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\easeui\\unspecified\\res\\drawable-hdpi-v4\\ee_17.png"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\em_show_head_toast_bg.9.png",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\src\\main\\res\\drawable-hdpi\\em_show_head_toast_bg.9.png"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ease_login_error_icon.png",
@@ -144,12 +144,12 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\drawable-hdpi-v4\\abc_list_selector_disabled_holo_dark.9.png"
     },
     {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ease_conversation_selected.png",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\easeui\\unspecified\\res\\drawable-hdpi-v4\\ease_conversation_selected.png"
-    },
-    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ease_record_animate_02.png",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\easeui\\unspecified\\res\\drawable-hdpi-v4\\ease_record_animate_02.png"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ease_conversation_selected.png",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\easeui\\unspecified\\res\\drawable-hdpi-v4\\ease_conversation_selected.png"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\em_mm_title_act_btn_pressed.9.png",
@@ -200,12 +200,12 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\easeui\\unspecified\\res\\drawable-hdpi-v4\\ease_video_play_btn_small_nor.png"
     },
     {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ucrop_ic_done.png",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.yalantis\\ucrop\\2.2.0\\res\\drawable-hdpi-v4\\ucrop_ic_done.png"
-    },
-    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\em_mm_title_back.png",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\src\\main\\res\\drawable-hdpi\\em_mm_title_back.png"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ucrop_ic_done.png",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.yalantis\\ucrop\\2.2.0\\res\\drawable-hdpi-v4\\ucrop_ic_done.png"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_scrubber_control_off_mtrl_alpha.png",

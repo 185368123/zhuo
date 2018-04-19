@@ -1,6 +1,8 @@
 package li.com.base.baseuntils;
 
 
+import android.util.Log;
+
 import com.orhanobut.logger.LogLevel;
 import com.orhanobut.logger.Logger;
 import li.com.base.baseapp.AppConfig;

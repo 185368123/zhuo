@@ -4,12 +4,12 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\src\\main\\res\\layout\\em_listview_footer_view.xml"
     },
     {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\em_contacts_header.xml",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\src\\main\\res\\layout\\em_contacts_header.xml"
-    },
-    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\ease_activity_show_file.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\easeui\\unspecified\\res\\layout\\ease_activity_show_file.xml"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\em_contacts_header.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\src\\main\\res\\layout\\em_contacts_header.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\abc_alert_dialog_material.xml",
@@ -32,12 +32,12 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\src\\main\\res\\layout\\em_shared_file_row.xml"
     },
     {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\glview.xml",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\opengl\\unspecified\\res\\layout\\glview.xml"
-    },
-    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_received_voice.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\easeui\\unspecified\\res\\layout\\ease_row_received_voice.xml"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\glview.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\opengl\\unspecified\\res\\layout\\glview.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\em_activity_voice_call.xml",
@@ -48,12 +48,12 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\opengl\\unspecified\\res\\layout\\activity_picture.xml"
     },
     {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_sent_bigexpression.xml",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\easeui\\unspecified\\res\\layout\\ease_row_sent_bigexpression.xml"
-    },
-    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\pull_to_refresh_header_horizontal.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\library\\unspecified\\res\\layout\\pull_to_refresh_header_horizontal.xml"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_sent_bigexpression.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\easeui\\unspecified\\res\\layout\\ease_row_sent_bigexpression.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\em_activity_add_contact.xml",
@@ -88,6 +88,10 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.0.0\\res\\layout\\design_bottom_navigation_item.xml"
     },
     {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\em_context_menu_for_image.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\src\\main\\res\\layout\\em_context_menu_for_image.xml"
+    },
+    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\notification_action_tombstone.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\layout\\notification_action_tombstone.xml"
     },
@@ -110,6 +114,10 @@
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\abc_screen_simple.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\layout\\abc_screen_simple.xml"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\activity_audio_preview.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\videobeauty\\unspecified\\res\\layout\\activity_audio_preview.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\em_row_add_group.xml",
@@ -136,12 +144,16 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\src\\main\\res\\layout\\em_activity_chat.xml"
     },
     {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_bar_up_container.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\layout\\abc_action_bar_up_container.xml"
+    },
+    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_sent_voice.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\easeui\\unspecified\\res\\layout\\ease_row_sent_voice.xml"
     },
     {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_bar_up_container.xml",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\layout\\abc_action_bar_up_container.xml"
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\activity_recorde.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\videobeauty\\unspecified\\res\\layout\\activity_recorde.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_sent_message.xml",
@@ -168,6 +180,10 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\opengl\\unspecified\\res\\layout\\activity_camera3.xml"
     },
     {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\activity_audio_mix.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\videobeauty\\unspecified\\res\\layout\\activity_audio_mix.xml"
+    },
+    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\design_navigation_item_header.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.0.0\\res\\layout\\design_navigation_item_header.xml"
     },
@@ -180,12 +196,12 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\src\\main\\res\\layout\\em_choose_griditem.xml"
     },
     {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\activity_set_servers.xml",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\src\\main\\res\\layout\\activity_set_servers.xml"
-    },
-    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\support_simple_spinner_dropdown_item.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\layout\\support_simple_spinner_dropdown_item.xml"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\activity_set_servers.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\src\\main\\res\\layout\\activity_set_servers.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\ease_widget_emojicon.xml",
@@ -198,6 +214,10 @@
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\ease_activity_baidumap.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\easeui\\unspecified\\res\\layout\\ease_activity_baidumap.xml"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\em_context_menu_for_location.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\src\\main\\res\\layout\\em_context_menu_for_location.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\video_layout_normal.xml",
@@ -228,12 +248,12 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\base\\unspecified\\res\\layout\\dialog_loading.xml"
     },
     {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_media_custom.xml",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\layout\\notification_template_media_custom.xml"
-    },
-    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\em_widget_contact_item.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\src\\main\\res\\layout\\em_widget_contact_item.xml"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_media_custom.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\layout\\notification_template_media_custom.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_chat_history.xml",
@@ -316,12 +336,12 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\opengl\\unspecified\\res\\layout\\activity_camera.xml"
     },
     {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\em_chat_neterror_item.xml",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\src\\main\\res\\layout\\em_chat_neterror_item.xml"
-    },
-    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\select_dialog_singlechoice_material.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\layout\\select_dialog_singlechoice_material.xml"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\em_chat_neterror_item.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\src\\main\\res\\layout\\em_chat_neterror_item.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\em_activity_new_group.xml",
@@ -330,6 +350,10 @@
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\ease_conversation_item.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\easeui\\unspecified\\res\\layout\\ease_conversation_item.xml"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\activity_music_select.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\videobeauty\\unspecified\\res\\layout\\activity_music_select.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\ucrop_controls.xml",
@@ -350,6 +374,10 @@
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\lock_item.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.github.RmondJone\\locktableview\\unspecified\\res\\layout\\lock_item.xml"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\activity_audio.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\videobeauty\\unspecified\\res\\layout\\activity_audio.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_received_video_call.xml",
@@ -404,12 +432,12 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\opengl\\unspecified\\res\\layout\\activity_fglview.xml"
     },
     {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\activity_zip.xml",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\opengl\\unspecified\\res\\layout\\activity_zip.xml"
-    },
-    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\notification_action.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\layout\\notification_action.xml"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\activity_zip.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\opengl\\unspecified\\res\\layout\\activity_zip.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_icon_group.xml",
@@ -464,6 +492,10 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\easeui\\unspecified\\res\\layout\\ease_widget_chat_input_menu.xml"
     },
     {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\activity_video_preview.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\videobeauty\\unspecified\\res\\layout\\activity_video_preview.xml"
+    },
+    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_mode_bar.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\layout\\abc_action_mode_bar.xml"
     },
@@ -486,6 +518,10 @@
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\activity_fbo.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\opengl\\unspecified\\res\\layout\\activity_fbo.xml"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\em_context_menu_for_video.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\src\\main\\res\\layout\\em_context_menu_for_video.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\ease_widget_contact_list.xml",
@@ -540,8 +576,16 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\easeui\\unspecified\\res\\layout\\ease_layout_emojicon_menu.xml"
     },
     {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\t_loading.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\videobeauty\\unspecified\\res\\layout\\t_loading.xml"
+    },
+    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\design_navigation_item.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.0.0\\res\\layout\\design_navigation_item.xml"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\activity_video_select.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\videobeauty\\unspecified\\res\\layout\\activity_video_select.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\em_search_bar_with_padding.xml",
@@ -593,7 +637,7 @@
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\activity_main.xml",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\opengl\\unspecified\\res\\layout\\activity_main.xml"
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\videobeauty\\unspecified\\res\\layout\\activity_main.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_received_bigexpression.xml",
@@ -622,6 +666,10 @@
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\pull_to_refresh_header_vertical.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\library\\unspecified\\res\\layout\\pull_to_refresh_header_vertical.xml"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\em_context_menu_for_voice.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\src\\main\\res\\layout\\em_context_menu_for_voice.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\ucrop_layout_rotate_wheel.xml",
@@ -660,16 +708,16 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\src\\main\\res\\layout\\em_multi_dev_item.xml"
     },
     {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\mine_video_normal1.xml",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\src\\main\\res\\layout\\mine_video_normal1.xml"
-    },
-    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\em_row_invite_msg.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\src\\main\\res\\layout\\em_row_invite_msg.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\ease_fragment_contact_list.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\easeui\\unspecified\\res\\layout\\ease_fragment_contact_list.xml"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\mine_video_normal1.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\src\\main\\res\\layout\\mine_video_normal1.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\em_image_grid_fragment.xml",
@@ -728,6 +776,10 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\easeui\\unspecified\\res\\layout\\ease_widget_emojicon_tab_bar.xml"
     },
     {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\item_video_select.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\videobeauty\\unspecified\\res\\layout\\item_video_select.xml"
+    },
+    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_sent_video_call.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\easeui\\unspecified\\res\\layout\\ease_row_sent_video_call.xml"
     },
@@ -750,6 +802,10 @@
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\em_logout_actionsheet.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\src\\main\\res\\layout\\em_logout_actionsheet.xml"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\em_context_menu_for_text.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\src\\main\\res\\layout\\em_context_menu_for_text.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_expression.xml",
@@ -810,6 +866,10 @@
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\video_progress_dialog.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.shuyu\\gsyVideoPlayer-java\\2.1.1\\res\\layout\\video_progress_dialog.xml"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\item_media_audio.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\zhuo\\videobeauty\\unspecified\\res\\layout\\item_media_audio.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\layout\\design_layout_tab_icon.xml",

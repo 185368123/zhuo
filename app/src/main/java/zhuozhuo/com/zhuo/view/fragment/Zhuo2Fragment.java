@@ -299,6 +299,11 @@ public class Zhuo2Fragment extends BaseFragment<Zhuo2FragmentPresenter,Zhuo2Frag
         }
     }
 
+    @Override
+    public void doHundreadClick(String string) {
+
+    }
+
     public void setMatchWaitView() {
         wait_ll.setVisibility(View.VISIBLE);
         //设置开始时间

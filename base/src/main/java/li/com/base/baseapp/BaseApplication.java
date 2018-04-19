@@ -4,6 +4,7 @@ package li.com.base.baseapp;
 import android.content.Context;
 import android.content.res.Resources;
 import android.support.multidex.MultiDex;
+import android.util.DisplayMetrics;
 
 import org.litepal.LitePalApplication;
 
@@ -15,11 +16,19 @@ public class BaseApplication extends LitePalApplication {
     public static Context applicationContext;
     public static BaseApplication baseApplication;
 
+    public static int screenWidth;
+    public static int screenHeight;
+
     @Override
     public void onCreate() {
         super.onCreate();
         baseApplication = this;
         applicationContext = this;
+
+        DisplayMetrics mDisplayMetrics = getApplicationContext().getResources()
+                .getDisplayMetrics();
+        screenWidth = mDisplayMetrics.widthPixels;
+        screenHeight = mDisplayMetrics.heightPixels;
     }
 
     public static Context getAppContext() {

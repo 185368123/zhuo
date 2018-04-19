@@ -8,8 +8,6 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Handler;
-import android.os.Message;
 import android.os.SystemClock;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
@@ -37,18 +35,14 @@ import com.hyphenate.chatuidemo.my.bean.HundredBean;
 import li.com.base.basesinglebean.SingleBeans;
 import li.com.base.basesinglebean.SingleChooseBean;
 import li.com.base.basesinglebean.SingleChooseDetailBean;
-import com.hyphenate.chatuidemo.my.bean.UserDB;
 import com.hyphenate.chatuidemo.my.EmptyView;
-import com.hyphenate.chatuidemo.my.model.GetUserMsgModel;
 import com.hyphenate.chatuidemo.my.model.InitializationModel;
-import com.hyphenate.chatuidemo.my.presenter.GetUserMsgPresenter;
 import com.hyphenate.chatuidemo.my.presenter.InitializationPresenter;
 import com.hyphenate.chatuidemo.provider.UserInfoProvider;
 import com.hyphenate.chatuidemo.ui.ChatActivity;
 import com.hyphenate.easeui.events.RxBusConstants;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.litepal.crud.DataSupport;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -60,6 +54,7 @@ import li.com.base.base.BaseFragment;
 import li.com.base.baserx.RxManager;
 import li.com.base.basesinglebean.SingleStatusBean;
 import li.com.base.baseuntils.LogUtils;
+import li.com.base.baseuntils.ToastUitl;
 import li.com.base.basewidget.LoadingTip;
 import rx.functions.Action1;
 import zhuozhuo.com.zhuo.R;
@@ -93,13 +88,9 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
     private AnimationDrawable drawable;
     private Chronometer chronometer;
 
-
-    int reclen1 = 0;//深大倒计时时间
-    int reclen2 = 0;//深职倒计时时间
-    boolean flag1 = true;//深大是否刷新倒计时
-    boolean flag2 = true;//深职是否刷新倒计时
     int[] picId = {R.drawable.go_blue, R.drawable.go_green, R.drawable.go_red, R.drawable.go_yellow};
     private List<SingleChooseBean> list;
+    private List<HundredBean> list2;
     private Zhuo1ListViewAdapter adapter;
     private MainActivity activity;
     private TextView tv_unread;
@@ -115,27 +106,10 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
     private LinearLayout layout_user;
     private ImageView iv_animation;
     private AnimationDrawable animationDrawable;
-    private TextView group_tv1;
-    private TextView group_tv2;
-    private TextView group_tv3;
-    private TextView group_tv4;
-    private TextView group_tv5;
-    private TextView group_tv6;
-    private TextView group_tv7;
-    private TextView group_tv8;
-    private Button group_bt1;
+    private String is_member;
     private String groupID;
     private String hundred_id;
     private String userName;
-    private String groupID1;
-    private String hundred_id1;
-    private String userName1;
-    private String is_member1;
-    private Button group_bt2;
-    private String groupID2;
-    private String hundred_id2;
-    private String is_member2;
-    private String userName2;
     private CountDownUtils countDownUtils1;
     private InitializationPresenter initializationPresenter;
     private InitializationModel initializationModel;
@@ -176,7 +150,8 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
 
 
         list = new ArrayList<>();
-        adapter = new Zhuo1ListViewAdapter(list, getContext(), picId, this);
+        list2=new ArrayList<>();
+        adapter = new Zhuo1ListViewAdapter(list,list2, getContext(), picId, this);
         pulllist_zhuo1 = (PullToRefreshListView) view.findViewById(R.id.pulllistview_zhuo1);
         pulllist_zhuo1.setAdapter(adapter);
         mPresenter.getSingleChoose();
@@ -195,8 +170,6 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
         iv_cancle = (ImageView) view.findViewById(R.id.cancle_iv);
         button_skip = (Button) view.findViewById(R.id.button_skip);
         button_receive = (TextView) view.findViewById(R.id.button_receive);
-        group_bt1 = (Button) view.findViewById(R.id.group_bt1);
-        group_bt2 = (Button) view.findViewById(R.id.group_bt2);
 
         circleImageView = (CircleImageView) view.findViewById(R.id.zhuo1_iv);
         tv_service = view.findViewById(R.id.tv_service);
@@ -205,14 +178,6 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
         tv5 = (TextView) view.findViewById(R.id.zhuo1_tv5);
         tv6 = (TextView) view.findViewById(R.id.zhuo1_tv6);
         tv7 = (TextView) view.findViewById(R.id.zhuo1_tv7);
-        group_tv1 = (TextView) view.findViewById(R.id.group_tv1);
-        group_tv2 = (TextView) view.findViewById(R.id.group_tv2);
-        group_tv3 = (TextView) view.findViewById(R.id.group_tv3);
-        group_tv4 = (TextView) view.findViewById(R.id.group_tv4);
-        group_tv5 = (TextView) view.findViewById(R.id.group_tv5);
-        group_tv6 = (TextView) view.findViewById(R.id.group_tv6);
-        group_tv7 = (TextView) view.findViewById(R.id.group_tv7);
-        group_tv8 = (TextView) view.findViewById(R.id.group_tv8);
 
         rv = view.findViewById(R.id.zhuo1_recycle);
         layout = (LinearLayout) view.findViewById(R.id.wait);
@@ -231,8 +196,7 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
         iv_cancle.setOnClickListener(this);
         button_skip.setOnClickListener(this);
         button_receive.setOnClickListener(this);
-        group_bt1.setOnClickListener(this);
-        group_bt2.setOnClickListener(this);
+
 
 
         pulllist_zhuo1.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
@@ -301,6 +265,28 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
     }
 
     @Override
+    public void doHundreadClick(String string) {
+      String[] str=string.split(",");
+        is_member=str[0];
+        groupID=str[1];
+        hundred_id=str[2];
+        userName=str[3];
+        if (groupID != null) {
+            final Intent intent = new Intent(getActivity(), ChatActivity.class);
+            intent.putExtra("userId", groupID);
+            intent.putExtra("hundred_id", hundred_id);
+            intent.putExtra("userName", userName);
+            intent.putExtra(com.hyphenate.chatuidemo.Constant.EXTRA_CHAT_TYPE, com.hyphenate.chatuidemo.Constant.CHATTYPE_GROUP);
+            if (is_member.equals("0")) {
+                mPresenter.joinHundredGroup(hundred_id);
+            } else {
+                mPresenter.getHundredMsg();//获取白人群的信息
+                startActivity(intent);
+            }
+        }
+    }
+
+    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.cancle_iv://取消匹配
@@ -332,42 +318,6 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
                 button_receive.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.skip_button_maincolor_shape));
                 mPresenter.accept_(other_party_id,user_id,choice_id);
                 break;
-            case R.id.group_bt1:
-                if (groupID1 != null) {
-                    final Intent intent = new Intent(getActivity(), ChatActivity.class);
-                    groupID=groupID1;
-                    hundred_id=hundred_id1;
-                    userName=userName1;
-                    intent.putExtra("userId", groupID);
-                    intent.putExtra("hundred_id", hundred_id);
-                    intent.putExtra("userName", userName);
-                    intent.putExtra(com.hyphenate.chatuidemo.Constant.EXTRA_CHAT_TYPE, com.hyphenate.chatuidemo.Constant.CHATTYPE_GROUP);
-                    if (is_member1.equals("0")) {
-                        mPresenter.joinHundredGroup(hundred_id1);
-                    } else {
-                        mPresenter.getHundredMsg();//获取白人群的信息
-                        startActivity(intent);
-                    }
-                }
-                break;
-            case R.id.group_bt2:
-                if (groupID1 != null) {
-                    final Intent intent2 = new Intent(getActivity(), ChatActivity.class);
-                    groupID=groupID2;
-                    hundred_id=hundred_id2;
-                    userName=userName2;
-                    intent2.putExtra("userId", groupID);
-                    intent2.putExtra("hundred_id", hundred_id);
-                    intent2.putExtra("userName", userName);
-                    intent2.putExtra(com.hyphenate.chatuidemo.Constant.EXTRA_CHAT_TYPE, com.hyphenate.chatuidemo.Constant.CHATTYPE_GROUP);
-                    if (is_member2.equals("0")) {
-                      mPresenter.joinHundredGroup(hundred_id2);
-                    } else {
-                        mPresenter.getHundredMsg();//刷新百人群的信息
-                        startActivity(intent2);
-                    }
-                }
-                break;
             case R.id.tv_service:
                 Intent intent = new Intent(getActivity(), ChatActivity.class);
                 intent.putExtra("userId","1");
@@ -397,103 +347,11 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
         layout.setVisibility(View.GONE);
         chronometer.stop();
         drawable.stop();
-        List<UserDB> userDBList = DataSupport.select().where("user_id = ?", user_id).find(UserDB.class);
-        if (!(userDBList.size() > 0)) {
-            GetUserMsgPresenter getUserMsgPresenter=new GetUserMsgPresenter();
-            getUserMsgPresenter.setVM(new GetUserMsgModel(),null);
-            getUserMsgPresenter.getUserMsg(UserInfoProvider.getUserID());
-        }
         Intent intent = new Intent(getActivity(), ChatActivity.class);
         intent.putExtra("userId", user_id);
         startActivityForResult(intent, CHAT);
         initializationPresenter.getSingleStatus();
     }
-
-
-    Handler handler1 = new Handler();
-    Runnable runnable1 = new Runnable() {
-        @Override
-        public void run() {
-            if (reclen1 > 0) {
-                reclen1 = reclen1 - 1;
-                int seconds;
-                int min = 00;
-                int hour = 00;
-                seconds = reclen1;
-                if (seconds > 60) {
-                    min = seconds / 60;
-                    seconds = seconds % 60;
-                }
-                if (min > 60) {
-                    hour = min / 60;
-                    min = min % 60;
-                }
-                group_tv5.setText(hour + ":" + min + ":" + seconds);
-                handler1.postDelayed(this, 1000);
-            } else if (reclen1 == 0) {
-                flag1 = true;
-                Message message = new Message();
-                message.what = 1;
-                handlerStop.sendMessage(message);
-                mPresenter.getHundredMsg();
-                reclen1 = -1;
-            } else {
-            }
-        }
-    };
-
-
-    Handler handler2 = new Handler();
-    Runnable runnable2 = new Runnable() {
-        @Override
-        public void run() {
-            if (reclen2 > 0) {
-                reclen2 = reclen2 - 1;
-                int seconds;
-                int min = 00;
-                int hour = 00;
-                //将毫秒转换成秒
-                seconds = reclen2;
-                if (seconds > 60) {
-                    min = seconds / 60;
-                    seconds = seconds % 60;
-                }
-                if (min > 60) {
-                    hour = min / 60;
-                    min = min % 60;
-                }
-                group_tv6.setText(hour + ":" + min + ":" + seconds);
-                handler2.postDelayed(this, 1000);
-            } else if (reclen2 == 0) {
-                flag2 = true;
-                Message message = new Message();
-                message.what = 2;
-                handlerStop.sendMessage(message);
-                mPresenter.getHundredMsg();
-                reclen2 = -1;
-            } else {
-
-            }
-        }
-    };
-
-
-    final Handler handlerStop = new Handler() {
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 1:
-                    handler1.removeCallbacks(runnable1);
-                    break;
-                case 2:
-                    handler2.removeCallbacks(runnable2);
-                    break;
-            }
-            super.handleMessage(msg);
-        }
-    };
-
-
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -536,16 +394,18 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
                 layout.setVisibility(View.GONE);
                 layout_user.setVisibility(View.GONE);
                 UserInfoProvider.setHelloFlag(true);//设置第一次进入聊天
+                UserMsgDBHelp.getUserMsgDBHelp().searchByUserId(user_id);
+                if (countDownUtils1 != null) {
+                    countDownUtils1.deletCallBack();
+                }
+                ToastUitl.showLong("匹配成功");
                 Timer timer = new Timer();
                 timer.schedule(new TimerTask() {
                     @Override
                     public void run() {
                         gochat();
                     }
-                },1000);
-                if (countDownUtils1 != null) {
-                    countDownUtils1.deletCallBack();
-                }
+                }, 1000);
             }
         });
         mRxManager.on(RxBusConstants.UPDATE_HUNDRED, new Action1<String>() {
@@ -695,11 +555,7 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
 
     @Override
     public void returnSingleChoose(List<SingleChooseBean>  data) {
-        list.clear();
-        if (data.size()>0){
-            list.addAll(data);
-        }
-        adapter.notifyDataSetChanged();
+      adapter.upadteChoose(data);
         pulllist_zhuo1.onRefreshComplete();
     }
 
@@ -711,6 +567,9 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
 
     @Override
     public void returnHundredMsg(List<HundredBean> list) {
+        adapter.upadteHundread(list);
+        pulllist_zhuo1.onRefreshComplete();
+
         for (int i = 0; i < list.size(); i++) {
             HundredBean bean=list.get(i);
             String[] member_ids=bean.getMember_ids().split(",");
@@ -718,61 +577,7 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
                 UserMsgDBHelp.getUserMsgDBHelp().searchByUserId(member_ids[j]);
             }
         }
-        HundredBean dataBean1 = list.get(0);
-        HundredBean dataBean2 = list.get(1);
-        //第一个百人群的UI显示
-        group_tv1.setText(dataBean1.getGroup_name());
-        group_tv2.setText(dataBean1.getMember_count() - 2 + "/" + (dataBean1.getMaxuser() - 2));
-        reclen1 = (int) data(dataBean1.getEnd_time());
-        if (flag1) {
-            handler1.postDelayed(runnable1, 1000);
-            flag1 = false;
-        }
-        groupID1 = dataBean1.getGroup_id();
-        this.hundred_id1 = dataBean1.getHundred_id();
-        this.is_member1 = dataBean1.getIs_member();
-        userName1 = dataBean1.getGroup_name();
-        if (dataBean1.getIs_close().equals("1")) {
-            group_tv5.setVisibility(View.GONE);
-            group_tv7.setVisibility(View.VISIBLE);
-            group_bt1.setVisibility(View.GONE);
-        } else {
-            group_tv5.setVisibility(View.VISIBLE);
-            group_tv7.setVisibility(View.GONE);
-            group_bt1.setVisibility(View.VISIBLE);
-        }
-        if (is_member1.equals("0")) {
-            group_bt1.setText("加入");
-        } else {
-            group_bt1.setText("已加入");
-        }
 
-        //第二个百人群的UI显示
-        group_tv3.setText(dataBean2.getGroup_name());
-        group_tv4.setText(dataBean2.getMember_count() - 2 + "/" + (dataBean2.getMaxuser() - 2));
-        reclen2 = (int) data(dataBean2.getEnd_time());
-        if (flag2) {
-            handler2.postDelayed(runnable2, 1000);
-            flag2 = false;
-        }
-        groupID2 = dataBean2.getGroup_id();
-        this.hundred_id2 = dataBean2.getHundred_id();
-        this.is_member2 = dataBean2.getIs_member();
-        userName2 = dataBean2.getGroup_name();
-        if (dataBean2.getIs_close().equals("1")) {
-            group_tv6.setVisibility(View.GONE);
-            group_tv8.setVisibility(View.VISIBLE);
-            group_bt2.setVisibility(View.GONE);
-        } else {
-            group_tv6.setVisibility(View.VISIBLE);
-            group_tv8.setVisibility(View.GONE);
-            group_bt2.setVisibility(View.VISIBLE);
-        }
-        if (is_member2.equals("0")) {
-            group_bt2.setText("加入");
-        } else {
-            group_bt2.setText("已加入");
-        }
     }
 
     @Override

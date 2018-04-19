@@ -430,6 +430,7 @@
     <string name="push_save_failed">保存失败</string>
     <string name="push_saving_settings">正在保存...</string>
     <string name="push_settings">消息推送设置</string>
+    <string name="recall">撤回</string>
     <string name="receive_the_passthrough">收到透传：action：</string>
     <string name="recoding_fail">录音失败，请重试！</string>
     <string name="recording_video">录制视频</string>

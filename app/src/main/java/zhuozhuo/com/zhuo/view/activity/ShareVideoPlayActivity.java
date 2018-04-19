@@ -1,5 +1,6 @@
 package zhuozhuo.com.zhuo.view.activity;
 
+import android.support.v4.content.ContextCompat;
 import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.AdapterView;
@@ -44,10 +45,7 @@ public class ShareVideoPlayActivity extends BaseActivity implements CommentPopup
     private String zan[];
     private String zanName;
     private CommentPopupWindow popupWindow;//评论输入弹出框
-    private Button button_detail;//显示或隐藏点赞评论按钮
-    private Button button_remart;//评论按钮
-    private Button button_love;//点赞按钮
-    private LinearLayout linearLayout;
+
     private CommentListAdapter adapter;
     private TextView tv_zan;
     private LinearLayout zan_ll;
@@ -61,6 +59,9 @@ public class ShareVideoPlayActivity extends BaseActivity implements CommentPopup
     private String title;
     private String photo;
     private StringBuffer buffer;
+    private TextView tv_remark; //评论按钮
+    private ImageView iv_zan;
+    private LinearLayout zan_linear;
 
     @Override
     public int getLayoutId() {
@@ -76,21 +77,19 @@ public class ShareVideoPlayActivity extends BaseActivity implements CommentPopup
     public void initView() {
         popupWindow = new CommentPopupWindow(this, this);
         detailPlayer = (LandLayoutVideo) findViewById(R.id.detail_player);
-        button_detail = (Button) findViewById(R.id.button_detile);
-        button_remart = (Button) findViewById(R.id.button_remart);
-        linearLayout = (LinearLayout) findViewById(R.id.linear);
         refreshListView = (PullToRefreshListView) findViewById(R.id.lv_comment);
         getList = new GetCommentListPresentModel(this);
         tv_zan = (TextView) findViewById(R.id.tv_zan);
         zan_ll = (LinearLayout) findViewById(R.id.zan_ll);
-        button_love = (Button) findViewById(R.id.button_love);
+        tv_remark = (TextView) findViewById(R.id.tv_comment_button);
+        iv_zan = (ImageView) findViewById(R.id.iv_zan);
+        zan_linear = (LinearLayout) findViewById(R.id.zan_linear);
 
         lovePresentModel = new LovePresentModel(this);
         commentPresentModel = new CommentPresentModel();
 
-        button_detail.setOnClickListener(this);
-        button_love.setOnClickListener(this);
-        button_remart.setOnClickListener(this);
+        zan_linear.setOnClickListener(this);
+        tv_remark.setOnClickListener(this);
 
         adapter = new CommentListAdapter(this, list);
         refreshListView.setOnItemClickListener(this);
@@ -131,7 +130,7 @@ public class ShareVideoPlayActivity extends BaseActivity implements CommentPopup
             for (int i = 0; i < zan.length; i++) {
                 if (zan[i].equals(UserInfoProvider.getNickName())) {
                     iszan = true;
-                    button_love.setBackgroundResource(R.drawable.qqlove);
+                    iv_zan.setBackground(ContextCompat.getDrawable(this,R.drawable.qqlove));
                 } else {
                     if (i == zan.length - 1) {
                         buffer.append(zan[i]);
@@ -184,19 +183,10 @@ public class ShareVideoPlayActivity extends BaseActivity implements CommentPopup
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.button_remart://写评论
+            case R.id.tv_comment_button://写评论
                 popupWindow.showReveal();
                 break;
-            case R.id.button_detile://是否显示点赞和评论按钮
-                if (linear) {
-                    linearLayout.setVisibility(View.GONE);
-                    linear = false;
-                } else {
-                    linearLayout.setVisibility(View.VISIBLE);
-                    linear = true;
-                }
-                break;
-            case R.id.button_love://点赞按钮
+            case R.id.zan_linear://点赞按钮
                 lovePresentModel.sendLove(id);
                 break;
         }
@@ -220,7 +210,7 @@ public class ShareVideoPlayActivity extends BaseActivity implements CommentPopup
                 tv_zan.setText("");
                 zan_ll.setVisibility(View.GONE);
             }
-            button_love.setBackgroundResource(R.drawable.qqunlove);
+            iv_zan.setBackground(ContextCompat.getDrawable(this,R.drawable.qqunlove));;
             iszan = false;
 
         } else {
@@ -236,7 +226,7 @@ public class ShareVideoPlayActivity extends BaseActivity implements CommentPopup
                 zan_ll.setVisibility(View.VISIBLE);
             }
             iszan = true;
-            button_love.setBackgroundResource(R.drawable.qqlove);
+            iv_zan.setBackground(ContextCompat.getDrawable(this,R.drawable.qqlove));;
         }
     }
 

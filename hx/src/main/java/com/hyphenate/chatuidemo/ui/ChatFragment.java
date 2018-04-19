@@ -667,6 +667,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
 
     public void takeVideo(String flag) {
         Intent intentVideo = new Intent();
+        //intentVideo.setClass(getActivity(), CameActivity.class);
         intentVideo.setClass(getActivity(), CameActivity.class);
         intentVideo.putExtra("flag", flag);
         startActivityForResult(intentVideo, REQUEST_CODE_TAKE_VIDEO);

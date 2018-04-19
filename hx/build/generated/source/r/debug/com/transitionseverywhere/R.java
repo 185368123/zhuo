@@ -8,31 +8,31 @@ package com.transitionseverywhere;
 
 public final class R {
 	public static final class attr {
-		public static int disappearedScale = 0x7f010132;
-		public static int duration = 0x7f010181;
-		public static int excludeClass = 0x7f01018c;
-		public static int excludeId = 0x7f01018a;
-		public static int excludeName = 0x7f01018e;
-		public static int fadingMode = 0x7f0100fc;
-		public static int fromScene = 0x7f010186;
-		public static int interpolator = 0x7f010183;
-		public static int matchOrder = 0x7f010184;
+		public static int disappearedScale = 0x7f01015d;
+		public static int duration = 0x7f0101ac;
+		public static int excludeClass = 0x7f0101b7;
+		public static int excludeId = 0x7f0101b5;
+		public static int excludeName = 0x7f0101b9;
+		public static int fadingMode = 0x7f010124;
+		public static int fromScene = 0x7f0101b1;
+		public static int interpolator = 0x7f0101ae;
+		public static int matchOrder = 0x7f0101af;
 		public static int maximumAngle = 0x7f0100ac;
 		public static int minimumHorizontalAngle = 0x7f0100aa;
 		public static int minimumVerticalAngle = 0x7f0100ab;
-		public static int patternPathData = 0x7f010116;
+		public static int patternPathData = 0x7f010141;
 		public static int reparent = 0x7f0100b3;
 		public static int reparentWithOverlay = 0x7f0100b2;
 		public static int resizeClip = 0x7f0100b1;
-		public static int slideEdge = 0x7f010145;
-		public static int startDelay = 0x7f010182;
-		public static int targetClass = 0x7f01018b;
-		public static int targetId = 0x7f010189;
-		public static int targetName = 0x7f01018d;
-		public static int toScene = 0x7f010187;
-		public static int transition = 0x7f010185;
-		public static int transitionOrdering = 0x7f010188;
-		public static int transitionVisibilityMode = 0x7f010194;
+		public static int slideEdge = 0x7f010170;
+		public static int startDelay = 0x7f0101ad;
+		public static int targetClass = 0x7f0101b6;
+		public static int targetId = 0x7f0101b4;
+		public static int targetName = 0x7f0101b8;
+		public static int toScene = 0x7f0101b2;
+		public static int transition = 0x7f0101b0;
+		public static int transitionOrdering = 0x7f0101b3;
+		public static int transitionVisibilityMode = 0x7f0101bf;
 	}
 	public static final class id {
 		public static int bottom = 0x7f0d004e;
@@ -68,22 +68,22 @@ public final class R {
 		public static int[] ChangeTransform = { 0x7f0100b2, 0x7f0100b3 };
 		public static int ChangeTransform_reparent = 1;
 		public static int ChangeTransform_reparentWithOverlay = 0;
-		public static int[] Fade = { 0x7f0100fc };
+		public static int[] Fade = { 0x7f010124 };
 		public static int Fade_fadingMode = 0;
-		public static int[] PatternPathMotion = { 0x7f010116 };
+		public static int[] PatternPathMotion = { 0x7f010141 };
 		public static int PatternPathMotion_patternPathData = 0;
-		public static int[] Scale = { 0x7f010132 };
+		public static int[] Scale = { 0x7f01015d };
 		public static int Scale_disappearedScale = 0;
-		public static int[] Slide = { 0x7f010145 };
+		public static int[] Slide = { 0x7f010170 };
 		public static int Slide_slideEdge = 0;
-		public static int[] Transition = { 0x01010141, 0x01010198, 0x7f010181, 0x7f010182, 0x7f010183, 0x7f010184 };
-		public static int[] TransitionManager = { 0x7f010185, 0x7f010186, 0x7f010187 };
+		public static int[] Transition = { 0x01010141, 0x01010198, 0x7f0101ac, 0x7f0101ad, 0x7f0101ae, 0x7f0101af };
+		public static int[] TransitionManager = { 0x7f0101b0, 0x7f0101b1, 0x7f0101b2 };
 		public static int TransitionManager_fromScene = 1;
 		public static int TransitionManager_toScene = 2;
 		public static int TransitionManager_transition = 0;
-		public static int[] TransitionSet = { 0x7f010188 };
+		public static int[] TransitionSet = { 0x7f0101b3 };
 		public static int TransitionSet_transitionOrdering = 0;
-		public static int[] TransitionTarget = { 0x7f010189, 0x7f01018a, 0x7f01018b, 0x7f01018c, 0x7f01018d, 0x7f01018e };
+		public static int[] TransitionTarget = { 0x7f0101b4, 0x7f0101b5, 0x7f0101b6, 0x7f0101b7, 0x7f0101b8, 0x7f0101b9 };
 		public static int TransitionTarget_excludeClass = 3;
 		public static int TransitionTarget_excludeId = 1;
 		public static int TransitionTarget_excludeName = 5;
@@ -96,7 +96,7 @@ public final class R {
 		public static int Transition_interpolator = 4;
 		public static int Transition_matchOrder = 5;
 		public static int Transition_startDelay = 3;
-		public static int[] VisibilityTransition = { 0x7f010194 };
+		public static int[] VisibilityTransition = { 0x7f0101bf };
 		public static int VisibilityTransition_transitionVisibilityMode = 0;
 	}
 }

@@ -1,5 +1,6 @@
 package zhuozhuo.com.zhuo.presenter;
 
+import com.hyphenate.chatuidemo.UserMsgDBHelp;
 import com.hyphenate.chatuidemo.provider.UserInfoProvider;
 import java.util.List;
 import li.com.base.baserx.RxSubscriber;
@@ -32,6 +33,7 @@ public class ChangeMsgPresenter extends ChangeMsgConstract.Presenter {
                 }else if (key.equals("location")) {
                     UserInfoProvider.setLocation(value);
                 }
+                UserMsgDBHelp.getUserMsgDBHelp().updateMsg(UserInfoProvider.getUserID());
                 mView.changeMsgSucess();
             }
 

@@ -80,12 +80,12 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\src\\main\\res\\layout\\ease_row_contact.xml"
     },
     {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_menu_layout.xml",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\layout\\abc_action_menu_layout.xml"
-    },
-    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\activity_msg_video_play.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\src\\main\\res\\layout\\activity_msg_video_play.xml"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_menu_layout.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\layout\\abc_action_menu_layout.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\notification_action_tombstone.xml",
@@ -148,12 +148,12 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
     },
     {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_bar_view_list_nav_layout.xml",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
-    },
-    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_chat_message_list.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\src\\main\\res\\layout\\ease_chat_message_list.xml"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_bar_view_list_nav_layout.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\video_layout_standard.xml",

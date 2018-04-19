@@ -82,31 +82,33 @@
             android:orientation="horizontal"
             android:visibility="visible">
 
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="match_parent" />
             <Button
                 android:id="@+id/zan_button"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/qqunlove"
-                android:padding="5dp" />
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/qqunlove" />
 
             <TextView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:gravity="center"
+                android:gravity="center_vertical"
                 android:text="赞"
                 android:textColor="@color/white" />
 
             <Button
                 android:id="@+id/comment_button"
-                android:layout_width="40dp"
-                android:layout_height="30dp"
+                android:layout_width="34dp"
+                android:layout_height="24dp"
                 android:background="@drawable/remark"
-                android:padding="5dp" />
+                android:paddingLeft="10dp" />
 
             <TextView
                 android:layout_width="50dp"
                 android:layout_height="30dp"
-                android:gravity="center"
+                android:gravity="center_vertical"
                 android:text="评论"
                 android:textColor="@color/white" />
 
@@ -116,8 +118,8 @@
                 android:layout_weight="1" />
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/qqunlove"
                 android:padding="5dp" />
 
@@ -125,17 +127,20 @@
                 android:id="@+id/zan_num"
                 android:layout_width="30dp"
                 android:layout_height="15dp"
-                android:gravity="center"
+                android:gravity="center_vertical"
                 android:text=""
                 android:textColor="@color/white" />
 
             <ImageView
                 android:id="@+id/iv_go"
-                android:layout_width="40dp"
-                android:layout_height="30dp"
+                android:layout_width="34dp"
+                android:layout_height="24dp"
                 android:layout_marginLeft="5dp"
                 android:background="@drawable/remark"
-                android:padding="5dp" />
+                android:paddingLeft="10dp" />
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="match_parent" />
         </LinearLayout>
     </LinearLayout>
 
