@@ -99,12 +99,11 @@
                 android:visibility="gone">
 
                 <TextView
-                    android:id="@+id/tv_group_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:paddingLeft="20dip"
-                    android:text="@string/group_id"
+                    android:text="群组人数"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
                     android:typeface="serif" />

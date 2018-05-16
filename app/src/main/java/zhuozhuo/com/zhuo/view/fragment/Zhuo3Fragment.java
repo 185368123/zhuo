@@ -86,7 +86,6 @@ public class Zhuo3Fragment extends BaseFragment<Zhuo3FragmentPresenter,Zhuo3Frag
     private void initRxBus() {
         mRxManager=new RxManager();
         mRxManager.on("unread", new Action1<String>() {
-
             @Override
             public void call(String s) {
                     int num= SingleBeans.getInstance().getUnReadBean().getComNum();
@@ -127,8 +126,10 @@ public class Zhuo3Fragment extends BaseFragment<Zhuo3FragmentPresenter,Zhuo3Frag
 
         data = SingleBeans.getInstance().getSingleChooseBeans();
         for (int i = 0; i < data.size(); i++) {
-            tablayout.addTab(tablayout.newTab().setText(data.get(i).getChoice_name()));
-            tablayout.getTabAt(i+1).setTag(data.get(i).getChoice_id());
+            if(data.get(i).getValue().split(",").length>2){
+                tablayout.addTab(tablayout.newTab().setText(data.get(i).getChoice_name()));
+                tablayout.getTabAt(i+1).setTag(data.get(i).getChoice_id());
+            }
         }
         tablayout.addTab(tablayout.newTab().setText("其他"));
         tablayout.getTabAt(tablayout.getTabCount()-1).setTag("0");

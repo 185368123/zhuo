@@ -1,6 +1,10 @@
 package com.hyphenate.chatuidemo.my.constract;
 
+import com.hyphenate.chatuidemo.my.bean.TagBean;
+import com.hyphenate.easeui.HundredCupBean;
 import com.hyphenate.chatuidemo.my.bean.VideoLinkBean;
+
+import java.util.List;
 
 import li.com.base.base.BaseModel;
 import li.com.base.base.BasePresenter;
@@ -21,6 +25,14 @@ public interface ChatFragmentConstract {
         Observable<VideoLinkBean> getVideo(String token, String you_user_id);
 
         Observable<Object> startVideo(String token, String video_id);
+
+        Observable<HundredCupBean> getDetail(String token, String hundred_id,String group_id);
+
+        Observable<Object> teamRegister(String token, String line_id,String hundred_id);
+
+        Observable<TagBean> getTag(String token, String choice_id, String you_user_id);
+
+        Observable<List<Object>> getRandom(String token, String you_user_id, String choice_id);
     }
 
     interface View extends BaseView {
@@ -32,6 +44,12 @@ public interface ChatFragmentConstract {
         void setMoneySucess();
 
         void returnVieo(String video_link);
+
+        void returnHundredDetail(HundredCupBean hundredCupBean);
+
+        void teamRegisterSucess();
+
+        void returnTag(TagBean tagBean);
 
     }
 
@@ -48,5 +66,13 @@ public interface ChatFragmentConstract {
         public abstract void getVideo(String you_user_id);
 
         public abstract void startVideo(String video_id);
+
+        public abstract void getDetail(String hundred_id);
+
+        public abstract void teamRegister(String line_id,String hundred_id);
+
+        public abstract void getTag(String choice_id,String you_user_id);
+
+        public abstract void getRandom(String you_user_id,String choice_id);
     }
 }

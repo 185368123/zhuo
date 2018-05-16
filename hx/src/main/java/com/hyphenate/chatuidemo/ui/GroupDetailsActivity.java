@@ -92,6 +92,7 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 	    super.onCreate(savedInstanceState);
 	    
         groupId = getIntent().getStringExtra("groupId");
+        boolean qiutGroup=getIntent().getBooleanExtra("quitGroup",false);
         group = EMClient.getInstance().groupManager().getGroup(groupId);
 
         // we are not supposed to show the group if we don't find the group
@@ -104,6 +105,11 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 
 		bt_quit_group = (Button) findViewById(R.id.bt_quit_group);
 		bt_quit_group.setOnClickListener(this);
+		if (qiutGroup){
+			bt_quit_group.setVisibility(View.VISIBLE);
+		}else {
+			bt_quit_group.setVisibility(View.GONE);
+		}
 
 		instance = this;
 		st = getResources().getString(R.string.people);
@@ -119,7 +125,7 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 		offlinePushSwitch = (EaseSwitchButton) findViewById(R.id.switch_block_offline_message);
 
 
-		idText.setText(groupId);
+		idText.setText(group.getMemberCount()+"");
 
 		//get push configs
 		pushConfigs = EMClient.getInstance().pushManager().getPushConfigs();
@@ -592,8 +598,11 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 							refreshMembersAdapter();
 							refreshOwnerAdminAdapter();
 //							refreshUIVisibility();
+
 							((TextView) findViewById(R.id.group_name)).setText(group.getGroupName() + "(" + group.getMemberCount()
 									+ ")");
+							((TextView) findViewById(R.id.tv_group_id_value)).setText(group.getMemberCount()+"");
+
 							loadingPB.setVisibility(View.INVISIBLE);
 
 							// update block

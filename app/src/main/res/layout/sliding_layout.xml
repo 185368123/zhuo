@@ -13,32 +13,63 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/button_chat"
+            <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="50dp"
-                android:layout_weight="1"
-                android:background="@drawable/sliding_button_selector"
-                android:button="@null"
-                android:checked="true"
-                android:gravity="center"
-                android:text="@string/chart"
-                android:textColor="@color/app_white"
-                android:textSize="@dimen/text_size_13" />
-
+                android:layout_weight="1">
+                <RadioButton
+                    android:id="@+id/button_chat"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/sliding_button_selector"
+                    android:button="@null"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:text="@string/chart"
+                    android:textColor="@color/app_white"
+                    android:textSize="@dimen/text_size_13" />
+                <TextView
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="right|top"
+                    android:gravity="center"
+                    android:text="0"
+                    android:visibility="gone"
+                    android:textSize="10sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/tv_shape"
+                    android:id="@+id/tv_chat_unread"/>
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1">
             <RadioButton
                 android:id="@+id/button_friend"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="@drawable/sliding_button_selector"
                 android:button="@null"
                 android:gravity="center"
                 android:text="@string/friend"
                 android:textColor="@color/app_white"
                 android:textSize="@dimen/text_size_13" />
-
+                <TextView
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="right|top"
+                    android:gravity="center"
+                    android:text="0"
+                    android:visibility="gone"
+                    android:textSize="10sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/tv_shape"
+                    android:id="@+id/tv_friend_unread"/>
+            </FrameLayout>
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

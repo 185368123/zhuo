@@ -31,7 +31,7 @@
 
     <meta-data
         android:name="android.support.VERSION"
-        android:value="25.3.1" />
+        android:value="25.3.0" />
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
@@ -58,6 +58,12 @@
         <activity
             android:name="com.hyphenate.chatuidemo.my.CameActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hyphenate.chatuidemo.my.CreatTeamActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyDialogStyle" />
+        <activity android:name="com.hyphenate.chatuidemo.my.InviteMemberActivity" />
+        <activity android:name="com.hyphenate.chatuidemo.my.SetTagActivity" />
         <!--
  FirebaseMessagingService performs security checks at runtime,
              no need for explicit permissions despite exported="true"
@@ -70,34 +76,6 @@
             </intent-filter>
         </service>
 
-        <activity
-            android:name="com.example.cj.videoeditor.activity.MainActivity"
-            android:hardwareAccelerated="true" >
-        </activity>
-        <activity
-            android:name="com.example.cj.videoeditor.activity.RecordedActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.cj.videoeditor.activity.VideoSelectActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.cj.videoeditor.activity.BaseActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.cj.videoeditor.activity.PreviewActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.cj.videoeditor.activity.AudioEditorActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.cj.videoeditor.activity.AudioPreviewActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.cj.videoeditor.activity.AudioSelectActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.cj.videoeditor.activity.AudioMixActivity"
-            android:screenOrientation="portrait" />
         <activity android:name="com.hyphenate.easeui.video.MsgVideoPlayActivity" />
         <activity
             android:name="com.google.android.gms.common.api.GoogleApiActivity"

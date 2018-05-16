@@ -43,6 +43,7 @@ public class ArticleDetaileActivity extends BaseActivity implements ArticleDetai
     private GetCommentListPresentModel getList;//获取评论数据层
     private String id;
     private int index = 0;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_article_detaile;
@@ -67,18 +68,18 @@ public class ArticleDetaileActivity extends BaseActivity implements ArticleDetai
 
         iv = (CircleImageView) findViewById(R.id.iv_article);
         //vb = (WebView) findView(R.id.wv_article);
-        vb=new WebView(this);
+        vb = new WebView(this);
         vb.setMinimumHeight(500);
-        refreshListView= (PullToRefreshListView) findViewById(R.id.lv_article);
-      refreshListView.setMode(PullToRefreshBase.Mode.DISABLED);
-        adapter = new CommentListAdapter(this,list);
+        refreshListView = (PullToRefreshListView) findViewById(R.id.lv_article);
+        refreshListView.setMode(PullToRefreshBase.Mode.DISABLED);
+        adapter = new CommentListAdapter(this, list);
         refreshListView.setAdapter(adapter);
-       ListView listView=refreshListView.getRefreshableView();
+        ListView listView = refreshListView.getRefreshableView();
         listView.addHeaderView(vb);
         refreshListView.setOnItemClickListener(this);
         commentPresentModel = new CommentPresentModel();
         getList = new GetCommentListPresentModel(this);
-         getList.getList(index,id);
+        getList.getList(index, id);
 
     }
 
@@ -109,14 +110,14 @@ public class ArticleDetaileActivity extends BaseActivity implements ArticleDetai
 
     @Override
     public void showArticleDeatile(List<ArticleDetailBean.DataBean> list) {
-        if (list.size()>0){
-            ArticleDetailBean.DataBean bean=list.get(0);
+        if (list.size() > 0) {
+            ArticleDetailBean.DataBean bean = list.get(0);
             Glide.with(this).load(bean.getPhoto_link()).into(iv);
             tv_1.setText(bean.getShare_title());
             tv_2.setText(bean.getNick_name());
             tv_3.setText(bean.getCreated());
-            String html="<html><body>"+bean.getContent()+"</body></html>";
-            vb.loadDataWithBaseURL(null,html,"text/html","UTF-8",null);
+            String html = "<html><body>" + bean.getContent() + "</body></html>";
+            vb.loadDataWithBaseURL(null, html, "text/html", "UTF-8", null);
         }
     }
 
@@ -132,8 +133,10 @@ public class ArticleDetaileActivity extends BaseActivity implements ArticleDetai
 
     @Override
     public void changeList(List<CommentBean.DataBean> data) {
-        for (int i = 0; i < data.size(); i++) {
-            list.add(data.get(i));
+        if (data != null) {
+            list.clear();
+            list.addAll(data);
+
         }
         adapter.notifyDataSetChanged();
         refreshListView.onRefreshComplete();

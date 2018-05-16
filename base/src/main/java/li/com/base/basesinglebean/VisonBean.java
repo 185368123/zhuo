@@ -6,79 +6,43 @@ package li.com.base.basesinglebean;
 
 public class VisonBean {
 
-
-    /**
-     * error_code : 0
-     * msg : 版本更新
-     * android_version : 1.0.8
-     * android_strong :
-     * android_url : http://a.app.qq.com/o/simple.jsp?pkgname=zhuozhuo.com.zhuo
-     * data : {"phone":{"image_type":"1","image_name":"美男","image_url":"http://zhuozhuo.oss-cn-shenzhen.aliyuncs.com/head/head1523256467199012.png","http_type":"1","http_url":""},"phone_x":{"image_type":"2","image_name":"美男X","image_url":"http://zhuozhuo.oss-cn-shenzhen.aliyuncs.com/head/head15232564979394853.png","http_type":"1","http_url":""}}
-     */
-
-    private int error_code;
-    private String msg;
-    private String android_version;
-    private String android_strong;
-    private String android_url;
-    private DataBean data;
-
-    public int getError_code() {
-        return error_code;
-    }
-
-    public void setError_code(int error_code) {
-        this.error_code = error_code;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public String getAndroid_version() {
-        return android_version;
-    }
-
-    public void setAndroid_version(String android_version) {
-        this.android_version = android_version;
-    }
-
-    public String getAndroid_strong() {
-        return android_strong;
-    }
-
-    public void setAndroid_strong(String android_strong) {
-        this.android_strong = android_strong;
-    }
-
-    public String getAndroid_url() {
-        return android_url;
-    }
-
-    public void setAndroid_url(String android_url) {
-        this.android_url = android_url;
-    }
-
-    public DataBean getData() {
-        return data;
-    }
-
-    public void setData(DataBean data) {
-        this.data = data;
-    }
-
-    public static class DataBean {
         /**
-         * phone : {"image_type":"1","image_name":"美男","image_url":"http://zhuozhuo.oss-cn-shenzhen.aliyuncs.com/head/head1523256467199012.png","http_type":"1","http_url":""}
+         * android_version : 1.0.10
+         * android_strong :
+         * android_url : http://a.app.qq.com/o/simple.jsp?pkgname=zhuozhuo.com.zhuo
+         * phone : {"image_type":"1","image_name":"美男","image_url":"http://zhuozhuo.oss-cn-shenzhen.aliyuncs.com/head/head15232613698836489.png","http_type":"1","http_url":""}
          * phone_x : {"image_type":"2","image_name":"美男X","image_url":"http://zhuozhuo.oss-cn-shenzhen.aliyuncs.com/head/head15232564979394853.png","http_type":"1","http_url":""}
          */
 
+        private String android_version;
+        private String android_strong;
+        private String android_url;
         private PhoneBean phone;
         private PhoneXBean phone_x;
+
+        public String getAndroid_version() {
+            return android_version;
+        }
+
+        public void setAndroid_version(String android_version) {
+            this.android_version = android_version;
+        }
+
+        public String getAndroid_strong() {
+            return android_strong;
+        }
+
+        public void setAndroid_strong(String android_strong) {
+            this.android_strong = android_strong;
+        }
+
+        public String getAndroid_url() {
+            return android_url;
+        }
+
+        public void setAndroid_url(String android_url) {
+            this.android_url = android_url;
+        }
 
         public PhoneBean getPhone() {
             return phone;
@@ -100,7 +64,7 @@ public class VisonBean {
             /**
              * image_type : 1
              * image_name : 美男
-             * image_url : http://zhuozhuo.oss-cn-shenzhen.aliyuncs.com/head/head1523256467199012.png
+             * image_url : http://zhuozhuo.oss-cn-shenzhen.aliyuncs.com/head/head15232613698836489.png
              * http_type : 1
              * http_url :
              */
@@ -207,5 +171,4 @@ public class VisonBean {
                 this.http_url = http_url;
             }
         }
-    }
 }

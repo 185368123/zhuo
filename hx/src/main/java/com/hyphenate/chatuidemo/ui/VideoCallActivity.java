@@ -795,7 +795,7 @@ public class VideoCallActivity extends CallActivity implements OnClickListener, 
             } else {*/
             mRenderer = new VideoCallActivity.Camera1Renderer();
             // }
-            mSurfaceView = (SurfaceView) findViewById(edu.wuwang.opengl.R.id.mSurface);
+            mSurfaceView = (SurfaceView)findViewById(R.id.mSurface);
             mController = new TextureController(VideoCallActivity.this);
             onFilterSet(mController);
             mController.setFrameCallback(720, 1280, VideoCallActivity.this);

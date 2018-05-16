@@ -7,6 +7,8 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -21,31 +23,35 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.hyphenate.chatuidemo.UserMsgDBHelp;
-import com.hyphenate.chatuidemo.provider.PreferenceManager;
-import com.hyphenate.chatuidemo.provider.UserInfoProvider;
+import com.hyphenate.easeui.provider.PreferenceManager;
+import com.hyphenate.easeui.provider.UserInfoProvider;
 import com.umeng.socialize.UMShareAPI;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import zhuozhuo.com.zhuo.R;
 import zhuozhuo.com.zhuo.contract.GetVisonConstract;
 import zhuozhuo.com.zhuo.model.GetVisonModel;
 import zhuozhuo.com.zhuo.presenter.GetVisonPresenter;
+import zhuozhuo.com.zhuo.util.UpdateUtils;
 import zhuozhuo.com.zhuo.view.fragment.WelcomeFragment;
 
-public class Welcome2Activity extends BaseActivity<GetVisonModel, GetVisonPresenter> implements GetVisonConstract.View {
+public class Welcome2Activity extends BaseActivity<GetVisonModel, GetVisonPresenter> implements GetVisonConstract.View, UpdateUtils.OnCheckUpdateListener {
 
+    public boolean isBack = true;
     // 要申请的权限
-    private String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_WIFI_STATE};
+    private String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE};
     private AlertDialog dialog;
 
-    int maxIndex=2;//Viewpage总的页数
+
+    int maxIndex = 2;//Viewpage总的页数
 
     ViewPager viewpager;
 
@@ -56,12 +62,30 @@ public class Welcome2Activity extends BaseActivity<GetVisonModel, GetVisonPresen
     private int mTouchSlop;
     private ImageView iv;
 
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            isBack = false;
+            ll.setVisibility(View.VISIBLE);
+            pb.setProgress(msg.arg1);
+            tv.setText("已下载" + msg.arg1 + "%");
+            if (msg.arg1 == 100) {
+                isBack = true;
+            }
+        }
+    };
+
+    private ProgressBar pb;
+    private TextView tv;
+    private LinearLayout ll;
+
     @Override
     public void doBeforeSetcontentView() {
         super.doBeforeSetcontentView();
         //全屏
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        flag=false;
+        flag = false;
     }
 
     @Override
@@ -76,19 +100,25 @@ public class Welcome2Activity extends BaseActivity<GetVisonModel, GetVisonPresen
 
     @Override
     public void initView() {
+
         //初始化控件
         viewpager = (ViewPager) findViewById(R.id.viewPager);
 
         UMShareAPI.get(this);
         iv = (ImageView) findViewById(R.id.iv_welcome);
+        pb = (ProgressBar) findViewById(R.id.pb_welcome);
+        tv = (TextView) findViewById(R.id.tv_welcome);
+        ll = (LinearLayout) findViewById(R.id.ll_welcome);
         Glide.with(this).load(R.drawable.welcome2).into(iv);
         mPresenter.getVison();
+
 
         ViewConfiguration configuration = ViewConfiguration.get(this);
         mTouchSlop = ViewConfigurationCompat.getScaledPagingTouchSlop(configuration);
         viewpager.setOnTouchListener(new View.OnTouchListener() {
             int touchFlag = 0;
             float x = 0, y = 0;
+
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
@@ -108,9 +138,9 @@ public class Welcome2Activity extends BaseActivity<GetVisonModel, GetVisonPresen
                     case MotionEvent.ACTION_UP:
                         if (touchFlag == 0) {//ViewPage的点击事件(滑动不会触发)，点击后进入广告详情页，目前无广告设置为滑动一页
                             int currentItem = viewpager.getCurrentItem();
-                            if (currentItem+1<maxIndex){//没有到最后一页继续滑动
-                                viewpager.setCurrentItem(currentItem+1);
-                            }else {
+                            if (currentItem + 1 < maxIndex) {//没有到最后一页继续滑动
+                                viewpager.setCurrentItem(currentItem + 1);
+                            } else {
                                 //跳转到主页
                                 if (PreferenceManager.getPreferenceManager().isFirstStart()) {
                                     //跳转到登录界面
@@ -119,11 +149,11 @@ public class Welcome2Activity extends BaseActivity<GetVisonModel, GetVisonPresen
                                     finish();
                                 } else {
                                     //跳转到主界面
-                                    if (UserInfoProvider.getLocation().equals("")||UserInfoProvider.getLocation()==null||UserInfoProvider.getLocation().equals("无")){
-                                        Intent intent=new Intent(Welcome2Activity.this,LocationChangeActivity.class);
-                                        intent.putExtra("isFirst",true);
+                                    if (UserInfoProvider.getLocation().equals("") || UserInfoProvider.getLocation() == null || UserInfoProvider.getLocation().equals("无")) {
+                                        Intent intent = new Intent(Welcome2Activity.this, LocationChangeActivity.class);
+                                        intent.putExtra("isFirst", true);
                                         startActivity(intent);
-                                    }else {
+                                    } else {
                                         startActivity(MainActivity.class);
                                     }
                                     finish();
@@ -171,11 +201,11 @@ public class Welcome2Activity extends BaseActivity<GetVisonModel, GetVisonPresen
                                 finish();
                             } else {
                                 //跳转到主界面
-                                if (UserInfoProvider.getLocation().equals("")||UserInfoProvider.getLocation()==null||UserInfoProvider.getLocation().equals("无")){
-                                    Intent intent=new Intent(Welcome2Activity.this,LocationChangeActivity.class);
-                                    intent.putExtra("isFirst",true);
+                                if (UserInfoProvider.getLocation().equals("") || UserInfoProvider.getLocation() == null || UserInfoProvider.getLocation().equals("无")) {
+                                    Intent intent = new Intent(Welcome2Activity.this, LocationChangeActivity.class);
+                                    intent.putExtra("isFirst", true);
                                     startActivity(intent);
-                                }else {
+                                } else {
                                     startActivity(MainActivity.class);
                                 }
                                 finish();
@@ -195,6 +225,7 @@ public class Welcome2Activity extends BaseActivity<GetVisonModel, GetVisonPresen
         });
     }
 
+
     private void initAdapter() {
         viewpager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
@@ -208,6 +239,7 @@ public class Welcome2Activity extends BaseActivity<GetVisonModel, GetVisonPresen
             }
         });
     }
+
     private void initDatas(String imageUrl) {
         //加载Fragment
         for (int i = 0; i < maxIndex; i++) {
@@ -215,7 +247,7 @@ public class Welcome2Activity extends BaseActivity<GetVisonModel, GetVisonPresen
             //设置参数
             Bundle bundle = new Bundle();
             bundle.putInt("index", i);
-            bundle.putString("image",imageUrl);
+            bundle.putString("image", imageUrl);
             sf.setArguments(bundle);
             //添加到集合中
             fragments.add(sf);
@@ -244,8 +276,17 @@ public class Welcome2Activity extends BaseActivity<GetVisonModel, GetVisonPresen
                         } else
                             finish();
                     } else {
-                        startActivity(Welcome2Activity.class);
-                        finish();
+                        if (grantResults[1] != PackageManager.PERMISSION_GRANTED) {
+                            boolean a = shouldShowRequestPermissionRationale(permissions[1]);
+                            if (!a) {
+                                // 用户还是想用我的 APP 的
+                                // 提示用户去应用设置界面手动开启权限
+                                showDialogTipUserGoToAppSettting();
+                            } else
+                                finish();
+                        } else {
+                            checkUpdate();
+                        }
                     }
                 }
             }
@@ -257,7 +298,7 @@ public class Welcome2Activity extends BaseActivity<GetVisonModel, GetVisonPresen
     private void showDialogTipUserGoToAppSettting() {
 
         dialog = new AlertDialog.Builder(this)
-                .setTitle("读写权限不可用")
+                .setTitle("读写权限或通话权限不可用")
                 .setMessage("请在-应用设置-权限-中，打开读写权限")
                 .setPositiveButton("立即开启", new DialogInterface.OnClickListener() {
                     @Override
@@ -301,8 +342,6 @@ public class Welcome2Activity extends BaseActivity<GetVisonModel, GetVisonPresen
                     if (dialog != null && dialog.isShowing()) {
                         dialog.dismiss();
                     }
-                    startActivity(Welcome2Activity.class);
-                    finish();
                 }
             }
         }
@@ -325,42 +364,16 @@ public class Welcome2Activity extends BaseActivity<GetVisonModel, GetVisonPresen
     }
 
     @Override
-    public void returnVison(boolean isUpate, final String upateUrl,String imageUrl) {
+    public void returnVison(boolean isUpate, final String upateUrl, String imageUrl) {
         //加载数据
         initDatas(imageUrl);
         //设置adapter
         initAdapter();
 
-        if (isUpate) {
-            goNext();
-        } else {
-            // 创建构建器
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            // 设置参数
-            builder.setTitle("版本提示").setIcon(R.drawable.logo_80)
-                    .setMessage("发现新版本，是否更新？")
-                    .setPositiveButton("是", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Intent intent= new Intent();
-                            intent.setAction("android.intent.action.VIEW");
-                            Uri content_url = Uri.parse(upateUrl);
-                            intent.setData(content_url);
-                            startActivity(intent);
-                            finish();
-                        }
-                    }).setNegativeButton("否", new DialogInterface.OnClickListener() {
-
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    goNext();
-                }
-            });
-            builder.create().show();
-        }
+        goNext();
     }
 
-    public void setIv(){
+    public void setIv() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -369,27 +382,92 @@ public class Welcome2Activity extends BaseActivity<GetVisonModel, GetVisonPresen
             }
         });
     }
-    protected void goNext(){
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                // 版本判断。当手机系统大于 23 时，才有必要去判断权限是否获取
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    // 检查该权限是否已经获取
-                    int j = ContextCompat.checkSelfPermission(Welcome2Activity.this, permissions[0]);
-                    // 权限是否已经 授权 GRANTED---授权  DINIED---拒绝
-                    if (j != PackageManager.PERMISSION_GRANTED) {
-                        // 如果没有授予该权限，就去提示用户请求
-                        // showDialogTipUserRequestPermission();
-                        startRequestPermission();
-                    } else {
-                        setIv();
-                    }
-                } else {
-                    setIv();
-                }
+
+
+    public void checkUpdate() {
+        UpdateUtils.getInstance().initUpdateSDK();
+        UpdateUtils.getInstance().checkUpdate(this);
+    }
+
+    protected void goNext() {
+        // 版本判断。当手机系统大于 23 时，才有必要去判断权限是否获取
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            // 检查该权限是否已经获取
+            int j = ContextCompat.checkSelfPermission(Welcome2Activity.this, permissions[0]);
+            int i = ContextCompat.checkSelfPermission(Welcome2Activity.this, permissions[1]);
+            // 权限是否已经 授权 GRANTED---授权  DINIED---拒绝
+            if (j != PackageManager.PERMISSION_GRANTED || i != PackageManager.PERMISSION_GRANTED) {
+                // 如果没有授予该权限，就去提示用户请求
+                startRequestPermission();
+            } else {
+                checkUpdate();
             }
-        }, 2000);
+        } else {
+            checkUpdate();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (isBack) {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public void onCheckUpdateFailure() {
+        setIv();
+    }
+
+    @Override
+    public void onNoUpdate() {
+        setIv();
+    }
+
+    @Override
+    public void already_installed() {
+        // 创建构建器
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        // 设置参数
+        builder.setTitle("版本提示").setIcon(R.drawable.logo_80)
+                .setMessage("发现新版本，是否更新？")
+                .setNeutralButton("普通更新", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                       UpdateUtils.getInstance().startUpdate(false,handler);
+                    }
+                }).setNegativeButton("应用宝省流量更新", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                UpdateUtils.getInstance().startUpdate(true,handler);
+            }
+        }).setPositiveButton("暂不更新", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                setIv();
+            }
+        });
+        builder.create().show();
+    }
+
+    @Override
+    public void un_installed() {
+        // 创建构建器
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        // 设置参数
+        builder.setTitle("版本提示").setIcon(R.drawable.logo_80)
+                .setMessage("发现新版本，是否更新？")
+                .setPositiveButton("是", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        UpdateUtils.getInstance().startUpdate(false,handler);
+                    }
+                }).setNegativeButton("否", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                setIv();
+            }
+        });
+        builder.create().show();
     }
 }

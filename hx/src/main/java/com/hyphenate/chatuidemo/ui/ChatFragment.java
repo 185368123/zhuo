@@ -13,7 +13,9 @@ import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
@@ -27,7 +29,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.sdk.android.oss.ClientException;
@@ -44,6 +48,15 @@ import com.hyphenate.chatuidemo.Constant;
 import com.hyphenate.chatuidemo.DemoHelper;
 import com.hyphenate.chatuidemo.R;
 import com.hyphenate.chatuidemo.UserMsgDBHelp;
+import com.hyphenate.chatuidemo.adapter.TagRecycleViewAdapter;
+import com.hyphenate.chatuidemo.my.CreatTeamActivity;
+import com.hyphenate.chatuidemo.my.CupActivity;
+import com.hyphenate.chatuidemo.my.InviteMemberActivity;
+import com.hyphenate.chatuidemo.my.SetTagActivity;
+import com.hyphenate.chatuidemo.my.TeamActivity;
+import com.hyphenate.chatuidemo.my.TeamMenuActivity;
+import com.hyphenate.chatuidemo.my.bean.TagBean;
+import com.hyphenate.easeui.HundredCupBean;
 import com.hyphenate.chatuidemo.my.constract.ChatFragmentConstract;
 import com.hyphenate.chatuidemo.domain.EmojiconExampleGroupData;
 import com.hyphenate.chatuidemo.domain.RobotUser;
@@ -65,7 +78,7 @@ import com.hyphenate.chatuidemo.my.https.UpLoad;
 import com.hyphenate.chatuidemo.my.model.ChatFragmentModel;
 import com.hyphenate.chatuidemo.my.okhttp.ToastUtils;
 import com.hyphenate.chatuidemo.my.presenter.ChatFragmentPresenter;
-import com.hyphenate.chatuidemo.provider.UserInfoProvider;
+import com.hyphenate.easeui.provider.UserInfoProvider;
 import com.hyphenate.chatuidemo.widget.BottomDialog;
 import com.hyphenate.chatuidemo.widget.ChatRowVoiceCall;
 import com.hyphenate.chatuidemo.widget.EaseChatRowRecall;
@@ -74,6 +87,7 @@ import com.hyphenate.easeui.events.RxBusConstants;
 import com.hyphenate.easeui.ui.EaseChatFragment;
 import com.hyphenate.easeui.ui.EaseChatFragment.EaseChatFragmentHelper;
 import com.hyphenate.easeui.utils.EaseCommonUtils;
+import com.hyphenate.easeui.widget.TeamRecycleView;
 import com.hyphenate.easeui.widget.chatrow.EaseChatRow;
 import com.hyphenate.easeui.widget.chatrow.EaseCustomChatRowProvider;
 import com.hyphenate.easeui.widget.emojicon.EaseEmojiconMenu;
@@ -88,12 +102,13 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import li.com.base.baserx.RxManager;
 import li.com.base.basesinglebean.SingleChooseBean;
-import li.com.base.baseuntils.LogUtils;
 import li.com.base.baseuntils.ToastUitl;
 import rx.functions.Action1;
 
@@ -101,6 +116,7 @@ import static android.app.Activity.RESULT_OK;
 
 
 public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHelper, View.OnClickListener, ChatFragmentConstract.View, RadioGroup.OnCheckedChangeListener {
+
     private static final String SAMPLE_CROPPED_IMAGE_NAME = "ZhuoCropImage";
     // 要申请的权限
     private String[] permissions3 = {Manifest.permission.CAMERA};
@@ -127,6 +143,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
 
     protected static final int CODE_CAMERA = 1000;
     protected static final int CODE_LOCAL = 2000;
+    protected static final int CODE_CREATTEAM = 1100;
     private String i;
     private UIDispatcher UIDispatcher;
     private boolean flag = true;
@@ -151,6 +168,30 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
     private boolean isMatch = false;//
     private BottomDialog bottomDialog;
     private String mystatus;
+    private HundredCupBean cupBean;
+    private String choice_id;
+    private List<TagBean.DataBean> list = new ArrayList<>();
+    public TagRecycleViewAdapter tagRecycleViewAdapter;
+    int startTime = 0;
+    int stopTime = 0;
+    public int num = 0;
+    public Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+            try {
+                Change(num);  //改变背景色
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+                num++;                 //依次下一个
+                  //如果到了最后一个item，则循环
+            if (num >= 12) {
+                num = 0;
+            }
+        }
+    };
+    private TagBean tagBean_;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -173,36 +214,6 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
         match_input.setNumColumns(2);
         match_input.registerMenuItem("小视频", itemdrawables[0], TAKE_VIDEO, extendMenuItemClickListener);
         match_input.registerMenuItem(R.string.attach_video_call, R.drawable.em_chat_video_call_selector, ITEM_VIDEO_CALL, extendMenuItemClickListener);
-        if (UserInfoProvider.getHelloFlag()) {
-            // 版本判断。当手机系统大于 23 时，才有必要去判断权限是否获取
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                str = "拍照";
-                // 检查该权限是否已经获取
-                int j = ContextCompat.checkSelfPermission(getContext(), permissions3[0]);
-                // 权限是否已经 授权 GRANTED---授权  DINIED---拒绝
-                if (j != PackageManager.PERMISSION_GRANTED) {
-                    // 如果没有授予该权限，就去提示用户请求
-                    // showDialogTipUserRequestPermission();
-                    startRequestPermission(permissions3);
-                } else {
-                    // 检查该权限是否已经获取
-                    str = "录音";
-                    int i = ContextCompat.checkSelfPermission(getContext(), permissions2[0]);
-                    // 权限是否已经 授权 GRANTED---授权  DINIED---拒绝
-                    if (i != PackageManager.PERMISSION_GRANTED) {
-                        // 如果没有授予该权限，就去提示用户请求
-                        // showDialogTipUserRequestPermission();
-                        startRequestPermission(permissions2);
-                    } else {
-                        takeVideo("true");
-                    }
-                }
-            } else {
-                takeVideo("true");
-            }
-            UserInfoProvider.setHelloFlag(false);
-        }
-
 
         button.setOnClickListener(this);
         button_upload.setOnClickListener(this);
@@ -213,7 +224,49 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
         group3.setOnCheckedChangeListener(this);
         group4.setOnCheckedChangeListener(this);
         button_7.setOnClickListener(this);
+        hundred_bt1.setOnClickListener(this);
+        hundred_bt2.setOnClickListener(this);
+        hundred_bt2.setText("积分表&对战表");
+        hundred_bt3.setOnClickListener(this);
+        bt_register_cup.setOnClickListener(this);
+        bt_start.setOnClickListener(this);
 
+        tagRecycleViewAdapter = new TagRecycleViewAdapter(list, getContext());
+        rv_tag.setAdapter(tagRecycleViewAdapter);
+
+        rv_team.setOnItemClickListener_(new TeamRecycleView.MyAdapter.OnItemClick() {
+            @Override
+            public void goTeamChat(HundredCupBean.DataBean dataBean) {
+                if (dataBean != null) {
+                    getActivity().finish();
+                    Intent intent = new Intent(getActivity(), ChatActivity.class);
+                    intent.putExtra("userId", dataBean.getGroup_id());
+                    intent.putExtra("userName", dataBean.getGroup_name());
+                    intent.putExtra(com.hyphenate.chatuidemo.Constant.EXTRA_CHAT_TYPE, com.hyphenate.chatuidemo.Constant.CHATTYPE_GROUP);
+                    startActivity(intent);
+                }
+            }
+
+
+            @Override
+            public void inviteMember() {
+                Intent intent = new Intent(getContext(), InviteMemberActivity.class);
+                intent.putExtra("hundred_id", cupBean.getHundred_id());
+                intent.putExtra("line_id", cupBean.getData().get(0).getLine_id());
+                getActivity().startActivity(intent);
+            }
+
+            @Override
+            public void onLongClick(String type, int index) {
+                Intent intent = new Intent(getContext(), TeamMenuActivity.class);
+                intent.putExtra("type", type);
+                intent.putExtra("line_id", cupBean.getData().get(index).getLine_id());
+                intent.putExtra("you_user_id", cupBean.getData().get(index).getUser_id());
+                intent.putExtra("group_id", cupBean.getData().get(index).getGroup_id());
+                startActivity(intent);
+
+            }
+        });
         setChatFragmentHelper(this);
         if (chatType == Constant.CHATTYPE_SINGLE) {
 
@@ -223,8 +276,13 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
             }
             setVisibility(View.GONE);
             setNormal_input();
-            buffer.append("{action: step,token: " + UserInfoProvider.getToken() + ", user_id:" + UserInfoProvider.getUserID() + ",you_user_id  :" + toChatUsername + ",new_step:123" + "}");
-            sendSocketMsg();
+            for (int j = 0; j < SingleBeans.getInstance().getMatchPersonBeans().size(); j++) {
+                if (SingleBeans.getInstance().getMatchPersonBeans().get(j).getUser_id().equals(toChatUsername)){
+                    buffer.append("{action: step,token: " + UserInfoProvider.getToken() + ", user_id:" + UserInfoProvider.getUserID() + ",you_user_id  :" + toChatUsername + ",new_step:123" + "}");
+                    sendSocketMsg();
+                }
+            }
+
             if (SingleBeans.getInstance().getMatchPersonBeans().size() > 0) {
                 for (int j = 0; j < SingleBeans.getInstance().getMatchPersonBeans().size(); j++) {
                     if (SingleBeans.getInstance().getMatchPersonBeans().get(j).isMe(toChatUsername)) {
@@ -299,8 +357,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
         });
         ((EaseEmojiconMenu) inputMenu.getEmojiconMenu()).addEmojiconGroup(EmojiconExampleGroupData.getData());
         if (chatType == EaseConstant.CHATTYPE_GROUP) {
-            buffer.append("{" + "action: groupstep,token:" + UserInfoProvider.getToken() + ",group_id:" + toChatUsername + "}");
-            sendSocketMsg();
+            mPresenter.getDetail(toChatUsername);
             inputMenu.getPrimaryMenu().getEditText().addTextChangedListener(new TextWatcher() {
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -363,20 +420,20 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CODE_CAMERA) {
+        if (requestCode == CODE_CREATTEAM) {
+            mPresenter.getDetail(toChatUsername);
+        } else if (requestCode == CODE_CAMERA) {
             if (cameraFile != null && cameraFile.exists()) {
                 doUCrop(Uri.fromFile(cameraFile));
             }
-        }
-        if (requestCode == CODE_LOCAL) {
+        } else if (requestCode == CODE_LOCAL) {
             if (data != null) {
                 Uri selectedImage = data.getData();
                 if (selectedImage != null) {
                     doUCrop(selectedImage);
                 }
             }
-        }
-        if (requestCode == REQUEST_CODE_TAKE_VIDEO && resultCode == RESULT_OK) {
+        } else if (requestCode == REQUEST_CODE_TAKE_VIDEO && resultCode == RESULT_OK) {
             Uri uri = data.getParcelableExtra("uri");
             String[] projects = new String[]{MediaStore.Video.Media.DATA,
                     MediaStore.Video.Media.DURATION};
@@ -406,8 +463,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
                 cursor.close();
                 cursor = null;
             }
-        }
-        if (requestCode == REQUEST_CODE_CONTEXT_MENU) {
+        } else if (requestCode == REQUEST_CODE_CONTEXT_MENU) {
             switch (resultCode) {
                 case ContextMenuActivity.RESULT_CODE_COPY: // copy
                     clipboard.setPrimaryClip(ClipData.newPlainText(null,
@@ -541,7 +597,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
                 return;
             }
             startActivityForResult(
-                    (new Intent(getActivity(), GroupDetailsActivity.class).putExtra("groupId", toChatUsername)),
+                    (new Intent(getActivity(), GroupDetailsActivity.class).putExtra("groupId", toChatUsername)).putExtra("quitGroup", quitGroup),
                     REQUEST_CODE_GROUP_DETAIL);
         } else if (chatType == Constant.CHATTYPE_CHATROOM) {
             startActivityForResult(new Intent(getActivity(), ChatRoomDetailsActivity.class).putExtra("roomId", toChatUsername), REQUEST_CODE_GROUP_DETAIL);
@@ -551,9 +607,13 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
     @Override
     public void onAvatarClick(String username) {
         //handling when user click avatar
-        Intent intent = new Intent(getActivity(), UserProfileActivity.class);
-        intent.putExtra("username", username);
-        startActivity(intent);
+        if (username.equals("admin")) {
+
+        } else {
+            Intent intent = new Intent(getActivity(), UserProfileActivity.class);
+            intent.putExtra("username", username);
+            startActivity(intent);
+        }
     }
 
     @Override
@@ -694,21 +754,26 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
     public void onClick(View view) {
         int i1 = view.getId();
         if (i1 == R.id.chat_next) {
-            if ((step + 1) == title.length) {
-                button.setText("视频制作中...");
-                dialogUtils.showWaitDialog("视频制作中...", false);
-                buffer.append("{action: next,token: " + UserInfoProvider.getToken() + ", user_id:" + UserInfoProvider.getUserID() + " ,total_step: " + title.length + ",video_id:" + video_id + ",you_user_id  :" + toChatUsername + ",new_step:123" + "}");
-                sendSocketMsg();
-                new getVideoThread().start();
-                mPresenter.changeFinish(toChatUsername);
+            if (title.length == 1) {
+                layout_chatted.setVisibility(View.VISIBLE);
             } else {
-                button.setText("请等待对方回应");
-                buffer.append("{action: next,token: " + UserInfoProvider.getToken() + ", user_id:" + UserInfoProvider.getUserID() + " ,total_step: " + title.length + ",video_id:" + video_id + ",you_user_id  :" + toChatUsername + ",new_step:123" + "}");
-                sendSocketMsg();
+                if ((step + 1) == title.length) {
+                    button.setText("视频制作中...");
+                    dialogUtils.showWaitDialog("视频制作中...", false);
+                    buffer.append("{action: next,token: " + UserInfoProvider.getToken() + ", user_id:" + UserInfoProvider.getUserID() + " ,total_step: " + title.length + ",video_id:" + video_id + ",you_user_id  :" + toChatUsername + ",new_step:123" + "}");
+                    sendSocketMsg();
+                    new getVideoThread().start();
+                    mPresenter.changeFinish(toChatUsername);
+                } else {
+                    button.setText("请等待对方回应");
+                    buffer.append("{action: next,token: " + UserInfoProvider.getToken() + ", user_id:" + UserInfoProvider.getUserID() + " ,total_step: " + title.length + ",video_id:" + video_id + ",you_user_id  :" + toChatUsername + ",new_step:123" + "}");
+                    sendSocketMsg();
+                }
+                button.setTextColor(ContextCompat.getColor(getContext(), R.color.gray_pressed));
+                button.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.button_shape1));
+                button.setClickable(false);
             }
-            button.setTextColor(ContextCompat.getColor(getContext(), R.color.gray_pressed));
-            button.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.button_shape1));
-            button.setClickable(false);
+
         } else if (i1 == R.id.button_upload) {
             chooseImage();
             buffer.append("{action: next,token: " + UserInfoProvider.getToken() + ", user_id:" + UserInfoProvider.getUserID() + " ,total_step: " + (step + 1) + ",you_user_id  :" + toChatUsername + ",new_step:123" + "}");
@@ -764,6 +829,19 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
             } else {
                 mPresenter.remark(toChatUsername, socor, card);
             }
+        } else if (i1 == R.id.hundred_bt_1) {
+            Intent intent = new Intent(getContext(), CreatTeamActivity.class);
+            startActivityForResult(intent, CODE_CREATTEAM);
+        } else if (i1 == R.id.hundred_bt_2) {
+            Intent intent = new Intent(getContext(), CupActivity.class);
+            intent.putExtra("hunderd_id", cupBean.getHundred_id());
+            startActivity(intent);
+        } else if (i1 == R.id.bt_register_cup) {
+            mPresenter.teamRegister(cupBean.getLine_id(), cupBean.getHundred_id());
+        } else if (i1 == R.id.hundred_bt_3) {
+            startActivity(new Intent(getContext(), TeamActivity.class));
+        } else if (i1 == R.id.bt_start) {
+            mPresenter.getRandom(choice_id,toChatUsername);
         }
     }
 
@@ -775,7 +853,6 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
 
         cameraFile = new File(PathUtil.getInstance().getImagePath(), EMClient.getInstance().getCurrentUser()
                 + System.currentTimeMillis() + ".jpg");
-        //noinspection ResultOfMethodCallIgnored
         cameraFile.getParentFile().mkdirs();
         startActivityForResult(
                 new Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(cameraFile)),
@@ -863,7 +940,6 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
         is_upload = "1";
         setButtonUnClick(button_upload);
         button.setVisibility(View.VISIBLE);
-        LogUtils.logd("执行next方法，step=" + step);
         if ((step + 1) == title.length) {
             mPresenter.startVideo(video_id);
             button.setTextColor(ContextCompat.getColor(getContext(), R.color.m_color4));
@@ -902,6 +978,94 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
         dialogUtils.closeDialog();
         isTimeStart = false;
         flag = false;
+    }
+
+    @Override
+    public void returnHundredDetail(HundredCupBean hundredCupBean) {
+        cupBean = hundredCupBean;
+        if (hundredCupBean.getFinish() == null) {
+            quitGroup = false;
+        } else {
+            if (hundredCupBean.getFinish().equals("1")) {
+                hundred_tv3.setText(hundredCupBean.getConditions());
+                rv_team.upadteList(hundredCupBean.getData());
+                frameLayout.setVisibility(View.VISIBLE);
+                chatlinearLayout.setVisibility(View.GONE);
+                setNormal_input();
+                group_ll.setVisibility(View.GONE);
+                hundred_rl.setVisibility(View.VISIBLE);
+                hundred_tv2.setVisibility(View.GONE);
+                hundred_bt.setVisibility(View.GONE);
+                hundred_tv3.setVisibility(View.VISIBLE);
+                hundred_bt1.setVisibility(View.VISIBLE);
+                hundred_bt2.setVisibility(View.VISIBLE);
+                if (hundredCupBean.getData().size() > 0) {
+                    rv_team.setVisibility(View.VISIBLE);
+                    hundred_ll.setVisibility(View.GONE);
+                    SingleBeans.getInstance().setTeam(true);
+                    SingleBeans.getInstance().setLine_id(hundredCupBean.getLine_id());
+                } else {
+                    rv_team.setVisibility(View.GONE);
+                    hundred_ll.setVisibility(View.VISIBLE);
+                    SingleBeans.getInstance().setTeam(false);
+                }
+                if (hundredCupBean.getLine_match().equals("1")) {
+                    bt_register_cup.setVisibility(View.VISIBLE);
+                    bt_register_cup.setText("已报名");
+                    bt_register_cup.setClickable(false);
+                } else {
+                    if (hundredCupBean.getData().size() == 5) {
+                        if (hundredCupBean.getData().get(0).getUser_id().equals(UserInfoProvider.getUserID())) {
+                            bt_register_cup.setVisibility(View.VISIBLE);
+                            bt_register_cup.setText("报名");
+                            bt_register_cup.setClickable(true);
+                        } else {
+                            bt_register_cup.setVisibility(View.VISIBLE);
+                            bt_register_cup.setText("等待队长报名");
+                            bt_register_cup.setClickable(false);
+                        }
+                    } else {
+                        bt_register_cup.setVisibility(View.GONE);
+                    }
+                }
+
+            } else {
+                buffer.append("{" + "action: groupstep,token:" + UserInfoProvider.getToken() + ",group_id:" + toChatUsername + "}");
+                sendSocketMsg();
+            }
+        }
+    }
+
+    @Override
+    public void teamRegisterSucess() {
+        ToastUitl.showLong("报名成功");
+        mPresenter.getDetail(toChatUsername);
+    }
+
+    @Override
+    public void returnTag(TagBean tagBean) {
+        tagBean_ = tagBean;
+        if (tagBean.getLabel_error() == 1) {
+            Intent intent = new Intent(getContext(), SetTagActivity.class);
+            intent.putExtra("choice_id", choice_id);
+            intent.putExtra("you_user_id", toChatUsername);
+            startActivity(intent);
+        } else if (tagBean.getData().size() > 0) {
+            list.clear();
+            list.addAll(tagBean.getData());
+            tagRecycleViewAdapter.notifyDataSetChanged();
+            if (tagBean.getData().size() != 12) {
+                bt_start.setTextColor(ContextCompat.getColor(getContext(), R.color.gray_pressed));
+                bt_start.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.button_shape1));
+                bt_start.setText("等待对方设置标签");
+                bt_start.setClickable(false);
+            } else {
+                bt_start.setTextColor(ContextCompat.getColor(getContext(), R.color.main_color));
+                bt_start.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.button_shape2));
+                bt_start.setText("开始");
+                bt_start.setClickable(true);
+            }
+        }
     }
 
 
@@ -996,6 +1160,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
 
         }
     }
+
 
     /**
      * chat row provider
@@ -1154,52 +1319,60 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
         }
     }
 
-    public void setStep(int step,String mystatu) {
-        if (step >= title.length) {
-            button.setTextColor(ContextCompat.getColor(getContext(), R.color.gray_pressed));
-            button.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.button_shape1));
-            button.setText("视频制作中...");
-            dialogUtils.showWaitDialog("视频制作中...", false);
-            mPresenter.changeFinish(toChatUsername);
-            new getVideoThread().start();
-        }
-        if ((step + 1) == title.length) {
-            button.setText("完成");
-            button.setTextColor(ContextCompat.getColor(getContext(), R.color.m_color4));
-            button.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.button_shape2));
-            if (!isTimeStart) {
-                button.setClickable(false);
-                CountDownUtil countDownUtil = new CountDownUtil(button, 60 * 1000, "", "完成");
-                countDownUtil.setSetClick(true);
-                countDownUtil.start();
-                isTimeStart = true;
+    public void setStep(int step, String mystatu) {
+        if (title.length == 1) {
+            setNormal_input();
+            chatlinearLayout.setVisibility(View.GONE);
+            ll_tag.setVisibility(View.VISIBLE);
+            mPresenter.getTag(choice_id, toChatUsername);
+
+        } else {
+            if (step >= title.length) {
+                button.setTextColor(ContextCompat.getColor(getContext(), R.color.gray_pressed));
+                button.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.button_shape1));
+                button.setText("视频制作中...");
+                dialogUtils.showWaitDialog("视频制作中...", false);
+                mPresenter.changeFinish(toChatUsername);
+                new getVideoThread().start();
             }
-        } else  if (mystatu.equals("1")){
-            button.setText("请等待对方回应");
-            button.setTextColor(ContextCompat.getColor(getContext(), R.color.gray_pressed));
-            button.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.button_shape1));
-            button.setClickable(false);
-        }else {
-            button.setTextColor(ContextCompat.getColor(getContext(), R.color.m_color4));
-            button.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.button_shape2));
-            button.setText("下一步");
+            if ((step + 1) == title.length) {
+                button.setText("完成");
+                button.setTextColor(ContextCompat.getColor(getContext(), R.color.m_color4));
+                button.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.button_shape2));
+                if (!isTimeStart) {
+                    button.setClickable(false);
+                    CountDownUtil countDownUtil = new CountDownUtil(button, 60 * 1000, "", "完成");
+                    countDownUtil.setSetClick(true);
+                    countDownUtil.start();
+                    isTimeStart = true;
+                }
+            } else if (mystatu.equals("1")) {
+                button.setText("请等待对方回应");
+                button.setTextColor(ContextCompat.getColor(getContext(), R.color.gray_pressed));
+                button.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.button_shape1));
+                button.setClickable(false);
+            } else {
+                button.setTextColor(ContextCompat.getColor(getContext(), R.color.m_color4));
+                button.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.button_shape2));
+                button.setText("下一步");
+            }
+            if (is_upload.equals("0")) {
+                setButtonClick(button_upload);
+                button.setVisibility(View.GONE);
+            } else {
+                setButtonUnClick(button_upload);
+                button.setVisibility(View.VISIBLE);
+            }
+            if (step <= title.length - 1) {
+                tv_step.setText("step." + (step + 1));
+                tv_title.setText(title[step]);
+                tv_deteil.setText(detail[step]);
+            } else {
+                tv_title.setText("已完成");
+                tv_deteil.setText("");
+            }
+            button.setClickable(true);
         }
-        if (is_upload.equals("0")) {
-            setButtonClick(button_upload);
-            button.setVisibility(View.GONE);
-        } else {
-            setButtonUnClick(button_upload);
-            button.setVisibility(View.VISIBLE);
-        }
-        if (step <= title.length - 1) {
-            tv_step.setText("step." + (step + 1));
-            tv_title.setText(title[step]);
-            tv_deteil.setText(detail[step]);
-        } else {
-            tv_title.setText("已完成");
-            tv_deteil.setText("");
-        }
-        button.setClickable(true);
     }
 
     @Override
@@ -1240,7 +1413,6 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
     private void initRxMange() {
         rxManager = new RxManager();
         rxManager.on("step", new Action1<String>() {
-
             @Override
             public void call(String s) {
                 if (s != null) {
@@ -1257,7 +1429,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
                             int finish = jsonObject.getInt("finish");
                             int status = jsonObject.getInt("status");
                             int is_status = jsonObject.getInt("is_status");
-                            String choice_id = jsonObject.getString("choice_id");
+                            choice_id = jsonObject.getString("choice_id");
                             List<SingleChooseBean> singleChooseBeans = SingleBeans.getInstance().getSingleChooseBeans();
                             for (int j = 0; j < singleChooseBeans.size(); j++) {
                                 if (singleChooseBeans.get(j).getChoice_id().equals(choice_id)) {
@@ -1272,11 +1444,11 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
                                 tv_step.setText("");
                                 new getVideoThread().start();
                             } else {
-                                if (status == 1 || is_status == 1) {
+                                if (is_status == 1|| status == 1) {
                                     layout_chatted.setVisibility(View.VISIBLE);
                                     ToastUitl.showLong("对方已放弃，请评价完成此次匹配");
                                 } else {
-                                    setStep(step,mystatus);
+                                    setStep(step, mystatus);
                                 }
                             }
                         } else {
@@ -1350,6 +1522,11 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
                             setNormal_input();
                             group_ll.setVisibility(View.GONE);
                             hundred_rl.setVisibility(View.VISIBLE);
+                            hundred_tv2.setVisibility(View.VISIBLE);
+                            hundred_bt.setVisibility(View.VISIBLE);
+                            hundred_tv3.setVisibility(View.GONE);
+                            hundred_ll.setVisibility(View.GONE);
+                            hundred_bt2.setVisibility(View.GONE);
                             int index = new Integer(busBean.getConditions_num());
                             String[] msg = busBean.getConditions().split(",");
                             hundred_tv2.setText(msg[index]);
@@ -1429,6 +1606,13 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
                 }
             }
         });
+
+        rxManager.on("upadteTeam", new Action1<String>() {
+            @Override
+            public void call(String s) {
+                mPresenter.getDetail(toChatUsername);
+            }
+        });
         rxManager.on("RefrshMatch", new Action1<String>() {
             @Override
             public void call(String s) {
@@ -1454,6 +1638,43 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
                 }
             }
         });
+        rxManager.on("match_line", new Action1<String>() {
+            @Override
+            public void call(String s) {
+                try {
+                    JSONObject object = new JSONObject(s);
+                    final String type = object.getString("type");
+                    if (type.equals("9") || type.equals("2")) {
+                        mPresenter.getDetail(toChatUsername);
+                    } else if (type.equals("1001")) {
+                        if (!(tagBean_.getLabel_error() == 1)) {
+                            mPresenter.getTag(choice_id, toChatUsername);
+                        }
+                    }else if (type.equals("1002")){
+                        int random_num=object.getInt("random_num");
+                        String id=object.getString("random_user_id");
+                        if (id.equals(toChatUsername)||id.equals(UserInfoProvider.getUserID())){
+                            CountDownUtil countDownUtil=new CountDownUtil(bt_start,6*1000,"s","开始");
+                            countDownUtil.setSetClick(true);
+                            countDownUtil.start();
+                            tagRecycleViewAdapter.notifyDataSetChanged();
+                            startTime = 0;
+                            stopTime = 2400+(random_num-num-1)*100;
+                            runnable.run();
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        rxManager.on("GetTag", new Action1<String>() {
+            @Override
+            public void call(String s) {
+                mPresenter.getTag(choice_id, toChatUsername);
+            }
+        });
+
     }
 
     private void videoFinish(String video_link, String video_name) {
@@ -1480,7 +1701,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
 
     private void addstep() {
         if (step < title.length) {
-            setStep(step,"0");
+            setStep(step, "0");
         } else {
             //图片步骤完成
             button.setTextColor(ContextCompat.getColor(getContext(), R.color.gray_pressed));
@@ -1499,5 +1720,43 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
     public void onPause() {
         super.onPause();
         MobclickAgent.onPageEnd(this.getClass().getSimpleName());
+    }
+
+
+
+    Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            handler.sendEmptyMessage(0);  //发送消息
+            //如果到达指定的时间,则停止
+            if (startTime >= stopTime) {
+                if (list.size()>=num){
+                    ((TextView) (rv_tag.getChildAt(num).findViewById(R.id.tv_tag_item))).setText(list.get(num).getLabel_name());
+                }
+                startTime = 0;
+                stopTime = 0;
+                return;
+            }
+            if ((stopTime-startTime)<700){
+                //每隔100毫秒运行一次
+                handler.postDelayed(runnable, startTime+700-stopTime);
+            }else {
+                //每隔100毫秒运行一次
+                handler.postDelayed(runnable, 100);
+            }
+            startTime += 100;
+        }
+    };
+
+    public void Change(int id) {
+        for (int i = 0; i < rv_tag.getChildCount(); i++) {
+            if (i == id) {
+                //如果是选中的，则改变图片为数组2中的图片
+                ((TextView) (rv_tag.getChildAt(i).findViewById(R.id.tv_tag_item))).setBackground(ContextCompat.getDrawable(getContext(), R.drawable.maincolor_shape_));
+            } else {
+                //未选中的就设置为数组1中的图片
+                ((TextView) (rv_tag.getChildAt(i).findViewById(R.id.tv_tag_item))).setBackground(ContextCompat.getDrawable(getContext(), R.drawable.maincolor_shape));
+            }
+        }
     }
 }

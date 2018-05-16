@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide;
 import com.hyphenate.chatuidemo.my.Untils.IShareVideo;
 import com.hyphenate.chatuidemo.my.Untils.ShareVideo;
 import com.hyphenate.chatuidemo.my.okhttp.ToastUtils;
-import com.hyphenate.chatuidemo.provider.UserInfoProvider;
+import com.hyphenate.easeui.provider.UserInfoProvider;
 import com.hyphenate.chatuidemo.widget.BottomDialog;
 import com.shuyu.gsyvideoplayer.builder.GSYVideoOptionBuilder;
 import com.shuyu.gsyvideoplayer.utils.Debuger;
@@ -55,6 +55,7 @@ public class MineVideoPlayActivity extends BaseActivity implements IShareVideo, 
     private boolean isPause;
     private ImageView imageView;
     private ImageView iv_back;
+    private ImageView iv_love_num;
 
     @Override
     public int getLayoutId() {
@@ -80,6 +81,7 @@ public class MineVideoPlayActivity extends BaseActivity implements IShareVideo, 
         button_zan = (Button) findViewById(R.id.zan_button);
         button_commnet = (Button) findViewById(R.id.comment_button);
         mineLayoutVideo = (MineLayoutVideo) findViewById(R.id.mine_video);
+        iv_love_num = (ImageView) findViewById(R.id.iv_love_num);
 
         iv_back = (ImageView) findViewById(R.id.back);
         iv_back.setVisibility(View.VISIBLE);
@@ -90,6 +92,7 @@ public class MineVideoPlayActivity extends BaseActivity implements IShareVideo, 
         iv_share.setOnClickListener(this);
         iv_go.setOnClickListener(this);
         iv_back.setOnClickListener(this);
+        iv_love_num.setOnClickListener(this);
 
 
         //判断是否有赞，有则显示
@@ -235,11 +238,20 @@ public class MineVideoPlayActivity extends BaseActivity implements IShareVideo, 
                 intent.putExtra("url", mPlayUrl);
                 intent.putExtra("zan", zanString);
                 intent.putExtra("title","");
-                intent.putExtra("photo","");
+                intent.putExtra("photo","123456");
                 startActivity(intent);
                 break;
             case R.id.back:
                 onBackPressed();
+                break;
+            case R.id.iv_love_num:
+                Intent intent_ = new Intent(this, ShareVideoPlayActivity.class);
+                intent_.putExtra("id", id);
+                intent_.putExtra("url", mPlayUrl);
+                intent_.putExtra("zan", zanString);
+                intent_.putExtra("title","");
+                intent_.putExtra("photo","123456");
+                startActivity(intent_);
                 break;
         }
 

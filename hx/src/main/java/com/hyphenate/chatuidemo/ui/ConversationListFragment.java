@@ -18,13 +18,31 @@ import com.hyphenate.chat.EMConversation.EMConversationType;
 import com.hyphenate.chatuidemo.Constant;
 import com.hyphenate.chatuidemo.R;
 import com.hyphenate.chatuidemo.db.InviteMessgeDao;
+import com.hyphenate.chatuidemo.my.adatper.UnreadListAdapter;
+import com.hyphenate.chatuidemo.my.constract.GetTeamUnreadConstract;
+import com.hyphenate.chatuidemo.my.constract.TheBaseConstract;
+import com.hyphenate.chatuidemo.my.model.GetTeamUnreadModel;
+import com.hyphenate.chatuidemo.my.model.TheBaseModel;
+import com.hyphenate.chatuidemo.my.presenter.GetTeamUnreadPresenter;
+import com.hyphenate.chatuidemo.my.presenter.TheBasePresenter;
+import com.hyphenate.easeui.TeamUnreadBean;
+import com.hyphenate.easeui.adapter.EaseConversationAdapter;
 import com.hyphenate.easeui.model.EaseAtMessageHelper;
 import com.hyphenate.easeui.ui.EaseConversationListFragment;
 import com.hyphenate.util.NetUtils;
 
-public class ConversationListFragment extends EaseConversationListFragment{
+import java.util.ArrayList;
+import java.util.List;
+
+public class ConversationListFragment extends EaseConversationListFragment implements GetTeamUnreadConstract.View, TheBaseConstract.View, UnreadListAdapter.onButtonClick {
 
     private TextView errorText;
+    private GetTeamUnreadPresenter unreadPresenter;
+    private GetTeamUnreadModel unreadModel;
+    private TheBasePresenter basePresenter;
+    private TheBaseModel baseModel;
+    List<TeamUnreadBean.DataBean> unreadBeans=new ArrayList<>();
+    private UnreadListAdapter adapter;
 
     @Override
     protected void initView() {
@@ -33,6 +51,18 @@ public class ConversationListFragment extends EaseConversationListFragment{
         View errorView = (LinearLayout) View.inflate(getActivity(),R.layout.em_chat_neterror_item, null);
         errorItemContainer.addView(errorView);
         errorText = (TextView) errorView.findViewById(R.id.tv_connect_errormsg);
+        unreadPresenter = new GetTeamUnreadPresenter();
+        unreadModel = new GetTeamUnreadModel();
+        unreadPresenter.setVM(unreadModel,this);
+        unreadPresenter.getTeamUnread();
+
+        basePresenter = new TheBasePresenter();
+        baseModel = new TheBaseModel();
+        basePresenter.setVM(baseModel,this);
+
+        adapter = new UnreadListAdapter(getContext(),unreadBeans);
+        adapter.setOnButtonClick(this);
+        lv.setAdapter(adapter);
     }
     
     @Override
@@ -78,6 +108,79 @@ public class ConversationListFragment extends EaseConversationListFragment{
         } else {
           errorText.setText(R.string.the_current_network);
         }
+    }
+
+    @Override
+    public void showLoading(String title) {
+
+    }
+
+    @Override
+    public void stopLoading() {
+
+    }
+
+    @Override
+    public void showErrorTip(String msg) {
+
+    }
+
+    @Override
+    public void returnTeamUnread(TeamUnreadBean teamUnreadBean) {
+        unreadBeans.clear();;
+        unreadBeans.addAll(teamUnreadBean.getData());
+        adapter.notifyDataSetChanged();
+
+    }
+
+    @Override
+    public void receiveInvite(String line_id, String group_id, String nick_user_id) {
+          basePresenter.receiveInvite(line_id, group_id, nick_user_id);
+    }
+
+    @Override
+    public void refuseInvite(String line_id, String group_id, String nick_user_id) {
+        basePresenter.refuseInvite(line_id, group_id, nick_user_id);
+    }
+
+    @Override
+    public void receiveApply(String line_id, String you_user_id) {
+         basePresenter.receiveApply(line_id, you_user_id);
+    }
+
+    @Override
+    public void refuseApply(String line_id, String you_user_id) {
+           basePresenter.refuseApply(line_id, you_user_id);
+    }
+
+    @Override
+    public void receiveInviteSucess() {
+        unreadPresenter.getTeamUnread();
+    }
+
+    @Override
+    public void refuseInviteSucess() {
+        unreadPresenter.getTeamUnread();
+    }
+
+    @Override
+    public void refuseApplySucess() {
+        unreadPresenter.getTeamUnread();
+    }
+
+    @Override
+    public void receiveApplySucess() {
+        unreadPresenter.getTeamUnread();
+    }
+
+    @Override
+    public void acceptSucess() {
+
+    }
+
+    @Override
+    public void denySucess() {
+
     }
     
     

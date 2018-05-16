@@ -459,22 +459,51 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide" />
-        <activity android:name=".view.activity.TermsActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".view.activity.LocationChangeActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".view.activity.Welcome2Activity"
+        <activity
+            android:name=".view.activity.TermsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activity.LocationChangeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activity.Welcome2Activity"
             android:screenOrientation="portrait">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-        <activity android:name=".view.activity.MyLevelActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".view.activity.TotalRateActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".view.activity.MyLevelActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activity.TotalRateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hyphenate.chatuidemo.my.TeamActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hyphenate.chatuidemo.my.CupActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hyphenate.chatuidemo.my.TeamMenuActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyDialogStyle" />
+        <activity
+            android:name=".view.activity.TeamWindowActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyDialogStyle" />
+
+        <service
+            android:name="com.tencent.tmdownloader.TMAssistantDownloadService"
+            android:exported="false"
+            android:process=":TMAssistantDownloadSDKService" />
+
+        <activity android:name=".view.activity.UpdateActivity" />
+        <activity android:name=".view.activity.RecordVideoActivity" />
+        <activity android:name=".view.activity.MyVideoPlayActivity" />
+        <activity android:name=".view.activity.VideoSelectActivity"></activity>
     </application>
 
 </manifest>

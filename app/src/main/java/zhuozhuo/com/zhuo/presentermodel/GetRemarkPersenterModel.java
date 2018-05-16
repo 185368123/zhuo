@@ -1,7 +1,7 @@
 package zhuozhuo.com.zhuo.presentermodel;
 
 import com.google.gson.Gson;
-import com.hyphenate.chatuidemo.provider.UserInfoProvider;
+import com.hyphenate.easeui.provider.UserInfoProvider;
 import com.zhy.http.okhttp.request.RequestCall;
 import org.json.JSONObject;
 import java.util.HashMap;

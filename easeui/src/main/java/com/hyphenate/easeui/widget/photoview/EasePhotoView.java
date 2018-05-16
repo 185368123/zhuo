@@ -159,6 +159,11 @@ public class EasePhotoView extends ImageView implements IPhotoView {
 		mAttacher.setOnPhotoTapListener(listener);
 	}
 
+
+	public void setOnPhotoMoveListener(PhotoViewAttacher.OnPhotoMoveListener listener) {
+		mAttacher.setOnPhotoMoveListener(listener);
+	}
+
 	@Override
 	public void setOnViewTapListener(OnViewTapListener listener) {
 		mAttacher.setOnViewTapListener(listener);

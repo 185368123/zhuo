@@ -2,8 +2,8 @@ package zhuozhuo.com.zhuo.presenter;
 
 import com.hyphenate.chatuidemo.my.model.InitializationModel;
 import com.hyphenate.chatuidemo.my.presenter.InitializationPresenter;
-import com.hyphenate.chatuidemo.provider.PreferenceManager;
-import com.hyphenate.chatuidemo.provider.UserInfoProvider;
+import com.hyphenate.easeui.provider.PreferenceManager;
+import com.hyphenate.easeui.provider.UserInfoProvider;
 import java.util.List;
 import java.util.Map;
 import li.com.base.baserx.RxSubscriber;
@@ -51,6 +51,7 @@ public class WeiXinLoginPresenter extends WeiXinLoginConstract.Presenter {
                         UserInfoProvider.setExp(userInfo.getExp());
                         UserInfoProvider.setLocation(userInfo.getLocation());
                         UserInfoProvider.setHobby(userInfo.getAccount());
+                        UserInfoProvider.setUserVideo(userInfo.getUser_video());
                         PreferenceManager.getPreferenceManager().setIsFirstStart(false);
                         InitializationPresenter initializationPresenter=new InitializationPresenter();
                         InitializationModel initializationModel=new InitializationModel();

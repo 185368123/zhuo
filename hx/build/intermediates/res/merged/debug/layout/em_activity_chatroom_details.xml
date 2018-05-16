@@ -113,14 +113,12 @@
                 android:background="#E6E6E6" />
 
             <RelativeLayout
-                android:id="@+id/rl_chat_room_id"
                 android:layout_width="match_parent"
                 android:layout_height="50dip"
                 android:background="@drawable/em_btn_bottom_selector"
                 android:visibility="visible" >
 
                 <TextView
-                    android:id="@+id/tv_chat_room_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -148,7 +146,6 @@
             </RelativeLayout>
 
 			<RelativeLayout
-                android:id="@+id/rl_chat_room_nick"
                 android:layout_width="match_parent"
                 android:layout_height="50dip"
                 android:background="@drawable/em_btn_bottom_selector"

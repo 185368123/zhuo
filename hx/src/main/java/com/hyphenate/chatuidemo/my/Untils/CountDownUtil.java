@@ -100,7 +100,7 @@ public class CountDownUtil extends CountDownTimer {
         if (!TextUtils.isEmpty(showText)) {
             textView.setText((millisUntilFinished / 1000) + " " + showText);
         } else {
-            textView.setText((millisUntilFinished / 1000) + " S" );
+            textView.setText((millisUntilFinished / 1000)+"");
         }
     }
 

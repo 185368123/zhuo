@@ -1,19 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_welcome2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="zhuozhuo.com.zhuo.view.activity.Welcome2Activity">
+
     <android.support.v4.view.ViewPager
-        android:visibility="gone"
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
     <ImageView
-        android:clickable="true"
+        android:id="@+id/iv_welcome"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/iv_welcome"/>
+        android:clickable="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:id="@+id/ll_welcome"
+        android:padding="5dp">
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+            android:id="@+id/pb_welcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center" />
+    </LinearLayout>
 </FrameLayout>

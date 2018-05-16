@@ -13,8 +13,6 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.hyphenate.chatuidemo.provider.UserInfoProvider;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.util.ArrayList;

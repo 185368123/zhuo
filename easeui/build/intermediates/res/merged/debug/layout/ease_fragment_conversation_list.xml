@@ -6,29 +6,32 @@
     android:background="@color/common_bg"
     android:orientation="vertical">
 
-	<com.hyphenate.easeui.widget.EaseTitleBar 
-	    android:id="@+id/title_bar"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    hyphenate:titleBarTitle="@string/session"
-	    />
-    
-    <FrameLayout
+    <com.hyphenate.easeui.widget.EaseTitleBar
+        android:id="@+id/title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/fl_error_item"
-        >
-    </FrameLayout>
+        hyphenate:titleBarTitle="@string/session" />
 
+    <FrameLayout
+        android:id="@+id/fl_error_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></FrameLayout>
+
+    <ListView
+        android:id="@+id/lv_unread"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+    </ListView>
 
     <com.hyphenate.easeui.widget.EaseConversationList
         android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:cacheColorHint="#00000000"
         android:divider="@null"
-        hyphenate:cvsListPrimaryTextSize="16sp"
-         />
+        hyphenate:cvsListPrimaryTextSize="16sp" />
 
 </LinearLayout>

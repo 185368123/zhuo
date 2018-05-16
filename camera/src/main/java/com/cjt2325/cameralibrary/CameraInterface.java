@@ -31,9 +31,6 @@ import com.cjt2325.cameralibrary.util.DeviceUtil;
 import com.cjt2325.cameralibrary.util.FileUtil;
 import com.cjt2325.cameralibrary.util.LogUtil;
 import com.cjt2325.cameralibrary.util.ScreenUtils;
-import com.example.cj.videoeditor.gpufilter.helper.MagicFilterType;
-import com.example.cj.videoeditor.mediacodec.VideoClipper;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -54,8 +51,6 @@ public class CameraInterface implements Camera.PreviewCallback {
     private static final String TAG = "CJT";
 
     private volatile static CameraInterface mCameraInterface;
-
-    private MagicFilterType filterType = MagicFilterType.NONE;
 
     public static void destroyCameraInterface() {
         if (mCameraInterface != null) {
@@ -660,22 +655,22 @@ public class CameraInterface implements Camera.PreviewCallback {
             EpEditor.exec(epVideo, new EpEditor.OutputOption(fileName_), new OnEditorListener() {
                 @Override
                 public void onSuccess() {
-                    VideoClipper clipper=new VideoClipper();
+                   /* VideoClipper clipper=new VideoClipper();
                     clipper.showBeauty();
                     clipper.setFilterType(filterType);
                     clipper.setInputVideoPath(fileName_);
                     clipper.setOutputVideoPath(fileName__);
                     clipper.setOnVideoCutFinishListener(new VideoClipper.OnVideoCutFinishListener() {
                         @Override
-                        public void onFinish() {
-                            callback.recordResult(fileName__, videoFirstFrame);
-                        }
+                        public void onFinish() {*/
+                            callback.recordResult(fileName_, videoFirstFrame);
+                    /*    }
                     });
                     try {
                         clipper.clipVideo(0,time*1000);
                     } catch (IOException e) {
                         e.printStackTrace();
-                    }
+                    }*/
                 }
 
                 @Override

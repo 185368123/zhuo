@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <RelativeLayout
-        android:id="@+id/ll_user"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@drawable/ease_mm_listitem"

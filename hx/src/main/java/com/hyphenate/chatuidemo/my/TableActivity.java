@@ -9,7 +9,7 @@ import com.hyphenate.chatuidemo.my.bean.RateBean;
 import com.hyphenate.chatuidemo.my.constract.TableActivityConstract;
 import com.hyphenate.chatuidemo.my.model.TableActivityModel;
 import com.hyphenate.chatuidemo.my.presenter.TableActivityPresenter;
-import com.hyphenate.chatuidemo.provider.UserInfoProvider;
+import com.hyphenate.easeui.provider.UserInfoProvider;
 import com.hyphenate.easeui.widget.EaseTitleBar;
 import com.rmondjone.locktableview.DisplayUtil;
 import com.rmondjone.locktableview.LockTableView;

@@ -2,6 +2,8 @@ package li.com.base.basesinglebean;
 
 import java.util.List;
 
+import rx.Single;
+
 /**
  * Created by Administrator on 2018/3/26.
  * 管理需要临时存储的数据
@@ -109,5 +111,36 @@ public class SingleBeans {
             }
         }
         return unReadBean;
+    }
+
+    private boolean isTeam;
+
+    public boolean isTeam() {
+        return isTeam;
+    }
+
+    public void setTeam(boolean team) {
+        isTeam = team;
+    }
+
+
+    private String line_id;
+
+    public void setLine_id(String line_id) {
+        this.line_id = line_id;
+    }
+
+    public String getLine_id() {
+        return line_id;
+    }
+
+    private List<String> friends;
+
+    public void setFriends(List<String> friends) {
+        this.friends = friends;
+    }
+
+    public List<String> getFriends() {
+        return friends;
     }
 }

@@ -9,31 +9,45 @@
     android:paddingTop="10dp">
 
     <TextView
-        android:gravity="center_vertical"
         android:id="@+id/zhuo1_tv1"
         android:layout_width="100dp"
         android:layout_height="50dp"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center_vertical"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
         android:text="@string/zhuo1_text1_1"
         android:textColor="@color/black"
+        android:clickable="true"
         android:textSize="@dimen/text_size_20" />
 
     <TextView
+        android:clickable="true"
         android:id="@+id/zhuo1_tv2"
-        android:layout_toRightOf="@+id/zhuo1_tv1"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
+        android:layout_toRightOf="@+id/zhuo1_tv1"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:gravity="center_vertical"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
         android:text="@string/zhuo1_text1_2"
         android:textColor="@color/app_gray" />
 
 
     <Button
-        android:layout_centerInParent="true"
-        android:gravity="center_vertical"
-        android:layout_alignParentRight="true"
         android:id="@+id/zhuo1_button"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:background="@drawable/go_blue" />
+        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
+        android:background="@drawable/go_blue"
+        android:gravity="center_vertical" />
 
 </RelativeLayout>

@@ -2,9 +2,7 @@ package zhuozhuo.com.zhuo.view.activity;
 
 import android.support.v7.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -17,8 +15,8 @@ import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chatuidemo.DemoHelper;
 import com.hyphenate.chatuidemo.DemoModel;
-import com.hyphenate.chatuidemo.provider.PreferenceManager;
-import com.hyphenate.chatuidemo.provider.UserInfoProvider;
+import com.hyphenate.easeui.provider.PreferenceManager;
+import com.hyphenate.easeui.provider.UserInfoProvider;
 import com.hyphenate.chatuidemo.widget.BottomDialog;
 import com.hyphenate.easeui.widget.EaseSwitchButton;
 
@@ -28,12 +26,10 @@ import java.util.List;
 import zhuozhuo.com.zhuo.MainApplication;
 import zhuozhuo.com.zhuo.R;
 import zhuozhuo.com.zhuo.adapter.SpinnerAdapter;
-import zhuozhuo.com.zhuo.contract.GetVisonConstract;
-import zhuozhuo.com.zhuo.model.GetVisonModel;
-import zhuozhuo.com.zhuo.presenter.GetVisonPresenter;
+import zhuozhuo.com.zhuo.util.UpdateUtils;
 import zhuozhuo.com.zhuo.widget.TitleBarLayout;
 
-public class SetActivity extends BaseActivity<GetVisonModel, GetVisonPresenter> implements AdapterView.OnItemSelectedListener, View.OnClickListener, GetVisonConstract.View {
+public class SetActivity extends BaseActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener, UpdateUtils.OnCheckUpdateListener {
 
     private DemoModel settingsModel;
 
@@ -68,7 +64,7 @@ public class SetActivity extends BaseActivity<GetVisonModel, GetVisonPresenter> 
 
     @Override
     public void initPresenter() {
-        mPresenter.setVM(mModel, this);
+
     }
 
     @Override
@@ -197,7 +193,7 @@ public class SetActivity extends BaseActivity<GetVisonModel, GetVisonPresenter> 
                 settingsModel.setSettingMsgVibrate(true);
             }
         } else if (i == R.id.linearlayout_set) {
-            mPresenter.getVison();
+            UpdateUtils.getInstance().checkUpdate(this);
         }
     }
 
@@ -213,7 +209,6 @@ public class SetActivity extends BaseActivity<GetVisonModel, GetVisonPresenter> 
                         String st = getResources().getString(com.hyphenate.chatuidemo.R.string.Are_logged_out);
                         UserInfoProvider.setStatus("0");
                         DemoHelper.getInstance().logout(true, new EMCallBack() {
-
                             @Override
                             public void onSuccess() {
                                 PreferenceManager.getPreferenceManager().setIsFirstStart(true);
@@ -252,59 +247,80 @@ public class SetActivity extends BaseActivity<GetVisonModel, GetVisonPresenter> 
 
 
     @Override
-    public void showLoading(String title) {
-
+    public void onCheckUpdateFailure() {
+        showNoUpdateDialog();
     }
 
     @Override
-    public void stopLoading() {
-
+    public void onNoUpdate() {
+        showNoUpdateDialog();
     }
 
     @Override
-    public void showErrorTip(String msg) {
-
+    public void already_installed() {
+        showUpdateDialog();
     }
 
-
-
     @Override
-    public void returnVison(boolean isUpate, final String upateUrl, String imageUrl) {
-        if (isUpate) {
-            AlertDialog.Builder builder_ = new AlertDialog.Builder(this);
-            builder_.setTitle("版本提示").setIcon(R.drawable.logo_80)
-                    .setMessage("当前已是最新版本")
-                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-            builder_.create().show();
-        } else {
-            // 创建构建器
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            // 设置参数
-            builder.setTitle("版本提示").setIcon(R.drawable.logo_80)
-                    .setMessage("发现新版本，是否更新？")
-                    .setPositiveButton("是", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Intent intent = new Intent();
-                            intent.setAction("android.intent.action.VIEW");
-                            Uri content_url = Uri.parse(upateUrl);
-                            intent.setData(content_url);
-                            startActivity(intent);
-                            finish();
-                        }
-                    }).setNegativeButton("否", new DialogInterface.OnClickListener() {
+    public void un_installed() {
+        showUpdateDialog_();
+    }
 
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
-            builder.create().show();
-        }
+    public void showNoUpdateDialog(){
+        AlertDialog.Builder builder_ = new AlertDialog.Builder(this);
+        builder_.setTitle("版本提示").setIcon(R.drawable.logo_80)
+                .setMessage("当前已是最新版本")
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        builder_.create().show();
+    }
+
+    public void showUpdateDialog(){
+        // 创建构建器
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        // 设置参数
+        builder.setTitle("版本提示").setIcon(R.drawable.logo_80)
+                .setMessage("发现新版本，是否更新？")
+                .setNeutralButton("普通更新", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                       startActivity(UpdateActivity.class);
+                    }
+                }).setNegativeButton("应用宝省流量更新", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                UpdateUtils.getInstance().startUpdate(true,null);
+            }
+        }).setPositiveButton("暂不更新", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.create().show();
+    }
+
+    public void showUpdateDialog_(){
+        // 创建构建器
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        // 设置参数
+        builder.setTitle("版本提示").setIcon(R.drawable.logo_80)
+                .setMessage("发现新版本，是否更新？")
+                .setNeutralButton("普通更新", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(UpdateActivity.class);
+                    }
+                }).setPositiveButton("暂不更新", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.create().show();
     }
 }

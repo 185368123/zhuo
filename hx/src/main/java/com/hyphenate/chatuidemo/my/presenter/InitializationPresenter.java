@@ -1,8 +1,8 @@
 package com.hyphenate.chatuidemo.my.presenter;
 
 import com.hyphenate.chatuidemo.my.constract.InitializationConstract;
-import com.hyphenate.chatuidemo.provider.UserInfoProvider;
-import com.hyphenate.easeui.events.RxBusConstants;
+import com.hyphenate.easeui.provider.UserInfoProvider;
+
 import li.com.base.baserx.RxManager;
 import li.com.base.baserx.RxSubscriber;
 import li.com.base.basesinglebean.SingleBeans;
@@ -20,8 +20,10 @@ public class InitializationPresenter extends InitializationConstract.Presenter{
             protected void _onNext(SingleStatusBean singleStatusBean) {
                 SingleBeans.getInstance().setSingleStatusBean(singleStatusBean);
                 SingleBeans.getInstance().getUnReadBean().setComNum(Integer.valueOf(singleStatusBean.getUnread_share_count()));
-
-                new RxManager().post("unread",singleStatusBean.getUnread_share_count());
+                SingleBeans.getInstance().getUnReadBean().setReamrkNum(singleStatusBean.getUnread_msg_count());
+                RxManager manager=new RxManager();
+                manager.post("remarkUnread","");
+                manager.post("unread",singleStatusBean.getUnread_share_count());
                 if (mView!=null){
                     mView.returnSingleStatus(singleStatusBean);
                 }

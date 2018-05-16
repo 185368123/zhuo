@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="abroad_photo">拍照</string>
-    <string name="abroad_choosephotp">从相册选择</string>
     <string name="abroad_cancel">取消</string>
     <string name="main_text19">网络繁忙，请稍后重试</string>
     <string name="main_text20">加载数据失败，请检查网络后重试</string>
@@ -12,7 +10,6 @@
     <string name="dialog_msg_load">正在加载...</string>
     <string name="dialog_msg_wait">请稍后...</string>
 
-    <string name="app_slogon">即时通讯云领导者</string>
     <string name="text_ack_msg">已读</string>
     <string name="text_delivered_msg">送达</string>
     <string name="back">返回</string>
@@ -92,8 +89,6 @@
     <string name="yangshengqi">使用扬声器播放语音</string>
     <string name="push_settings">消息推送设置</string>
     <string name="book_black">通讯录黑名单</string>
-    <string name="set_custom_appkey">自定义App key</string>
-    <string name="set_custom_server">自定义server</string>
     <string name="session">会话</string>
     <string name="address_book">通讯录</string>
     <string name="setting">设置</string>
@@ -123,7 +118,6 @@
     <string name="Open_group_chat">公开的群聊</string>
     <string name="join_need_owner_approval">加入公开群需要群主同意</string>
     <string name="blacklist">黑名单列表</string>
-    <string name="serach_group_message">消息搜索</string>
     <string name="Empty_the_chat_record">清空聊天记录</string>
     <string name="Shielding_of_the_message">屏蔽群消息</string>
     <string name="block_offline_group_push">屏蔽离线消息推送</string>
@@ -206,13 +200,8 @@
     <string name="are_empty_group_of_news">正在清空群消息……</string>
     <string name="messages_are_empty">聊天记录已被清空</string>
     <string name="is_modify_the_group_name">正在修改群名称……</string>
-    <string name="is_modify_the_group_description">正在修改群详情..</string>
     <string name="Modify_the_group_name_successful">修改群名称成功</string>
-    <string name="Modify_the_group_description_successful">修改群详情成功</string>
-    <string name="Modify_the_group_extension_successful">修改群扩展成功</string>
     <string name="change_the_group_name_failed_please">改变群名称失败，请检查网络或稍后重试</string>
-    <string name="change_the_group_description_failed_please">修改群详情失败，请检查网络或稍后重试</string>
-    <string name="change_the_group_extension_failed_please">修改群扩展失败，请检查网络或稍后重试</string>
     <string name="Are_moving_to_blacklist">正在移入至黑名单</string>
     <string name="failed_to_move_into">移入黑名单失败,请检查网络或稍后重试</string>
     <string name="Exit_the_group_chat_failure">退出群聊失败:</string>
@@ -263,8 +252,6 @@
     <string name="Registered_successfully">注册成功</string>
     <string name="network_anomalies">网络异常，请检查网络！</string>
     <string name="User_already_exists">用户已存在！</string>
-    <string name="registration_failed_without_permission">注册失败，无权限！</string>
-    <string name="Registration_failed">注册失败</string>
     <string name="Are_logged_out">正在退出登录..</string>
     <string name="Download_the_pictures">下载图片: 0%</string>
     <string name="Download_the_pictures_new">下载图片:</string>
@@ -303,8 +290,6 @@
     <string name="Delete_the_contact">删除联系人</string>
     <string name="Move_into_the_blacklist_new">移入到黑名单</string>
     <string name="Change_the_group_name">改变群名称</string>
-    <string name="change_the_group_description">改变群描述</string>
-    <string name="change_the_group_extension">改变群扩展</string>
     <string name="Sync_Groups_From_Server">从服务器下载群聊信息</string>
     
     <string name="update_contact_list">更新联系人列表</string>
@@ -319,14 +304,9 @@
     <string name= "no_more_messages">没有更多的消息了</string>
     <string name="join_public_group">加入公开群</string>
     <string name="chatroom_allow_owner_leave"> 允许聊天室群主离开</string>
-    <string name="delete_msg_when_exit_group">退出群组时删除聊天数据</string>
-    <string name="auto_accept_group_invitation">自动同意群组加群邀请</string>
-    <string name="adaptive_video_encode">视频自适应码率编码</string>
-    <string name="msg_roaming">消息漫游</string>
     <string name="offline_call_push">通话离线推送</string>
     <string name="group_id">群ID</string>
     <string name="group_announcement">公告</string>
-    <string name="share_files">共享文件</string>
     <string name="move_out_backlist">移出黑名单</string>
     <string name="input_new_nick_hint">输入新昵称</string>
     <string name="search_pubic_group">搜索公开群</string>
@@ -358,8 +338,6 @@
     <string name="toast_updatephoto_success">更新头像成功!</string>
     <string name="toast_updatephoto_fail">更新头像失败!</string>
     <string name="user_already_in_contactlist">此用户已是你好友(被拉黑状态)，从黑名单列表中移出即可</string>
-    <string name="group_nick">聊天室名称:</string>
-    <string name="group_owner">群主：</string>
 
     <string name="network_unstable">网络不稳定</string>
     <string name="no_call_data">没有通话数据</string>
@@ -409,5 +387,7 @@
     <string name="multi_device_group_remove_mute">将%s在群组中解除禁言[remote]</string>
 
     <string name="multi_device_logged_in_device_kick_item">将设备移除</string>
+
+
 
 </resources>

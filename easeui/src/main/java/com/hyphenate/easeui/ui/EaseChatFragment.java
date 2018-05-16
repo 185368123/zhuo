@@ -23,6 +23,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -69,15 +71,19 @@ import com.hyphenate.easeui.widget.EaseChatInputMenu.ChatInputMenuListener;
 import com.hyphenate.easeui.widget.EaseChatMessageList;
 import com.hyphenate.easeui.widget.EaseVoiceRecorderView;
 import com.hyphenate.easeui.widget.EaseVoiceRecorderView.EaseVoiceRecorderCallback;
+import com.hyphenate.easeui.widget.TeamRecycleView;
 import com.hyphenate.easeui.widget.chatrow.EaseCustomChatRowProvider;
 import com.hyphenate.exceptions.HyphenateException;
 import com.hyphenate.util.EMLog;
 import com.hyphenate.util.PathUtil;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import li.com.base.baseuntils.ToastUitl;
 
 /**
  * you can new an EaseChatFragment to use or you can inherit it to expand.
@@ -171,6 +177,22 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     protected String card;
     protected Button button_7;
     protected LinearLayout layout_chatted;
+    protected String finish;
+    protected TextView hundred_tv3;
+    protected Button hundred_bt1;
+    protected Button hundred_bt2;
+    protected TeamRecycleView rv_team;
+    protected Button bt_register_cup;
+    protected Button hundred_bt3;
+    protected LinearLayout hundred_ll;
+    protected boolean quitGroup=true;
+    protected TextView tv_upload;
+    protected RecyclerView rv_tag;
+    protected LinearLayout ll_tag;
+    protected StaggeredGridLayoutManager glm;
+    protected TextView bt_start;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -201,6 +223,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         toChatUsername = fragmentArgs.getString(EaseConstant.EXTRA_USER_ID);
         hundred_id = fragmentArgs.getString("hundred_id");
         groupName=fragmentArgs.getString("userName");
+        finish = fragmentArgs.getString("finish");
 
         super.onActivityCreated(savedInstanceState);
     }
@@ -216,6 +239,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         tv_title = (TextView) getView().findViewById(R.id.tv_title);
         button = (Button) getView().findViewById(R.id.chat_next);
         button_upload = (Button) getView().findViewById(R.id.button_upload);
+        tv_upload = (TextView) getView().findViewById(R.id.tv_upload);
         group_ll = (LinearLayout) getView().findViewById(R.id.group_chat);
         group_tv = (TextView) getView().findViewById(R.id.group_tv);
         group_name= (TextView) getView().findViewById(R.id.group_name);
@@ -233,6 +257,22 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         group3 = (RadioGroup) getView().findViewById(R.id.car_radiogroup2);
         group4 = (RadioGroup) getView().findViewById(R.id.car_radiogroup3);
         button_7 = (Button) getView().findViewById(R.id.tijiao_button);
+        hundred_tv3 = getView().findViewById(R.id.hundred_tv_3);
+        hundred_bt1 = getView().findViewById(R.id.hundred_bt_1);
+        hundred_bt2 = getView().findViewById(R.id.hundred_bt_2);
+        hundred_bt3 = getView().findViewById(R.id.hundred_bt_3);
+        hundred_ll = getView().findViewById(R.id.hundred_ll);
+        rv_team= (TeamRecycleView) getView().findViewById(R.id.rv_team);
+        bt_register_cup = (Button)getView().findViewById(R.id.bt_register_cup);
+        rv_tag = getView().findViewById(R.id.rv_tag);
+        ll_tag = getView().findViewById(R.id.chat_tag);
+        bt_start=getView().findViewById(R.id.bt_start);
+        //创建布局管理器
+        glm = new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL);
+        rv_tag.setLayoutManager(glm);
+
+
+
         layout_chatted = (LinearLayout) getView().findViewById(R.id.linearlayout_chatted);
         // hold to record voice
         //noinspection ConstantConditions
@@ -1129,7 +1169,6 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
             getActivity().runOnUiThread(new Runnable() {
                 public void run() {
                     if (toChatUsername.equals(groupId)) {
-                        Toast.makeText(getActivity(), R.string.you_are_group, Toast.LENGTH_LONG).show();
                         Activity activity = getActivity();
                         if (activity != null && !activity.isFinishing()) {
                             activity.finish();
@@ -1145,7 +1184,6 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
             getActivity().runOnUiThread(new Runnable() {
                 public void run() {
                     if (toChatUsername.equals(groupId)) {
-                        Toast.makeText(getActivity(), R.string.the_current_group_destroyed, Toast.LENGTH_LONG).show();
                         Activity activity = getActivity();
                         if (activity != null && !activity.isFinishing()) {
                             activity.finish();

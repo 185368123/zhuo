@@ -52,10 +52,10 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.1'
     compile 'com.yalantis:ucrop:2.2.0'
     compile project(':library')
-    compile project(':locktableview')
     compile project(':camera')
     compile files('libs/umeng-update-v2.6.0.1.jar')
     compile project(':opengl')
+    compile 'com.android.support.constraint:constraint-layout:1.1.0'
 }
 
 // ADD THIS AT THE BOTTOM

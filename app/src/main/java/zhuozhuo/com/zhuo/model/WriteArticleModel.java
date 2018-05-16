@@ -1,6 +1,6 @@
 package zhuozhuo.com.zhuo.model;
 
-import com.hyphenate.chatuidemo.provider.UserInfoProvider;
+import com.hyphenate.easeui.provider.UserInfoProvider;
 import com.zhy.http.okhttp.request.RequestCall;
 
 import java.util.HashMap;

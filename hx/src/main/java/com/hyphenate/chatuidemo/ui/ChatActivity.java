@@ -24,6 +24,7 @@ public class ChatActivity extends BaseActivity {
     private Bundle bundle;
     private String hundred_id="";
     private String userName="";
+    private String finish="";
 
 
     @Override
@@ -46,10 +47,15 @@ public class ChatActivity extends BaseActivity {
             userName = getIntent().getStringExtra("userName");
 
         }
+        if (getIntent().getStringExtra("finish")!=null){
+            finish = getIntent().getStringExtra("finish");
+
+        }
         //use EaseChatFratFragment
         chatFragment = new ChatFragment();
         bundle.putString("hundred_id", hundred_id);
         bundle.putString("userName", userName);
+        bundle.putString("finish", finish);
         bundle.putString(EaseConstant.EXTRA_USER_ID, toChatUsername);
         bundle.putInt(EaseConstant.EXTRA_CHAT_TYPE,getIntent().getIntExtra(EaseConstant.EXTRA_CHAT_TYPE,EaseConstant.CHATTYPE_SINGLE));
         //pass parameters to chat fragment

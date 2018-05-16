@@ -318,6 +318,13 @@ public class JCameraView extends FrameLayout implements CameraInterface.CameraOp
         CameraInterface.getInstance().doDestroyCamera();
     }
 
+    public void setDuration(int duration) {
+        mCaptureLayout.setDuration(duration);
+    }
+
+    public void setMinDuration(int minDuration) {
+        mCaptureLayout.setMinDuration(minDuration);
+    }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {

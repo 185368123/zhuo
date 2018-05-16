@@ -17,7 +17,6 @@ import com.hyphenate.easeui.EaseConstant;
 
 public class Constant extends EaseConstant{
 
-
 	/**
 	 * 服务器返回响应数据成功
 	 */

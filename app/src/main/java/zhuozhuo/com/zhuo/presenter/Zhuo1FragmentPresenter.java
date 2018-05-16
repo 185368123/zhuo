@@ -2,7 +2,7 @@ package zhuozhuo.com.zhuo.presenter;
 
 import com.hyphenate.chatuidemo.my.bean.HundredBean;
 import li.com.base.basesinglebean.MatchPersonBean;
-import com.hyphenate.chatuidemo.provider.UserInfoProvider;
+import com.hyphenate.easeui.provider.UserInfoProvider;
 
 import java.util.List;
 

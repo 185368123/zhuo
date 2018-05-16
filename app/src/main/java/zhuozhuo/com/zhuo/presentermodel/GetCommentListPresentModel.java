@@ -40,10 +40,10 @@ public class GetCommentListPresentModel extends BaseImportPresenter {
 
     @Override
     public void onVerifySucceed(String strResponse, JSONObject jsonResponse, String errMsg, int id) {
-        LogUtils.logd("GetCommentListPresentModel获取评论"+ strResponse);
+
         try {
             if (new JSONObject(strResponse).getJSONArray("data").length() == 0) {
-
+                view.changeList(null);
             } else {
                 CommentBean commentBean = new Gson().fromJson(strResponse, CommentBean.class);
                 view.changeList(commentBean.getData());

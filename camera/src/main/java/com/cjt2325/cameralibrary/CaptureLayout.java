@@ -323,6 +323,11 @@ public class CaptureLayout extends FrameLayout {
         btn_capture.setDuration(duration);
     }
 
+    public void setMinDuration(int minDuration) {
+        btn_capture.setMinDuration(minDuration);
+    }
+
+
     public void setButtonFeatures(int state) {
         btn_capture.setButtonFeatures(state);
     }

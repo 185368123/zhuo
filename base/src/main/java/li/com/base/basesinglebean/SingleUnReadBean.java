@@ -14,6 +14,8 @@ public class SingleUnReadBean {
 
     private int newFriendNum=0;
 
+    private int reamrkNum=0;
+
     public int getNewFriendNum() {
         return newFriendNum;
     }
@@ -50,5 +52,11 @@ public class SingleUnReadBean {
         return mesNum+newFriendNum;
     }
 
+    public void setReamrkNum(int reamrkNum) {
+        this.reamrkNum = reamrkNum;
+    }
 
+    public int getReamrkNum() {
+        return reamrkNum;
+    }
 }

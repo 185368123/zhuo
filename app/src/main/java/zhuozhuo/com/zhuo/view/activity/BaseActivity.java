@@ -4,7 +4,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
@@ -12,12 +17,18 @@ import android.view.Window;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chatuidemo.DemoHelper;
-import com.hyphenate.chatuidemo.provider.PreferenceManager;
+import com.hyphenate.chatuidemo.my.constract.TheBaseConstract;
+import com.hyphenate.chatuidemo.my.model.TheBaseModel;
+import com.hyphenate.chatuidemo.my.presenter.TheBasePresenter;
+import com.hyphenate.easeui.provider.PreferenceManager;
 import com.hyphenate.easeui.events.RxBusConstants;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import li.com.base.R;
 import li.com.base.base.BaseModel;
@@ -29,8 +40,7 @@ import li.com.base.baseuntils.ToastUitl;
 import li.com.base.basewidget.LoadingDialog;
 import rx.functions.Action1;
 import zhuozhuo.com.zhuo.MainApplication;
-import zhuozhuo.com.zhuo.presentermodel.AcceptPresentModel;
-import zhuozhuo.com.zhuo.presentermodel.DenyPresentModel;
+
 
 /**
  * Created by Administrator on 2018/2/27.
@@ -42,7 +52,10 @@ public abstract class BaseActivity<M extends BaseModel, P extends BasePresenter>
     public Context mContext;
     public RxManager mRxManager;
     private AlertDialog dialog;
-    protected boolean flag=true;
+    protected boolean flag = true;
+    private AlertDialog.Builder builder;
+    private List<AlertDialog> dialogs = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,13 +67,15 @@ public abstract class BaseActivity<M extends BaseModel, P extends BasePresenter>
         if (mPresenter != null) {
             mPresenter.mContext = this;
         }
-        if (flag){
+        if (flag) {
             MainApplication.getInstance().addActivity(this);
         }
+        builder = new AlertDialog.Builder(mContext);
         initRxBus();
         initPresenter();
         initView();
     }
+
 
     protected void initRxBus() {
         mRxManager = new RxManager();
@@ -70,16 +85,18 @@ public abstract class BaseActivity<M extends BaseModel, P extends BasePresenter>
                 try {
                     JSONObject object = new JSONObject(s);
                     if (object.getString("method").equals("accept")) {
-                        dialog = new AlertDialog.Builder(mContext)
+                        dialog = builder
                                 .setCancelable(false)
                                 .setMessage(object.getString("nick_name") + "  接受了邀请")
                                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
+                                        mRxManager.post("dismiss", "");
                                         dialog.dismiss();
                                     }
                                 }).create();
                     }
+                    dialogs.add(dialog);
                     dialog.show();
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -92,16 +109,18 @@ public abstract class BaseActivity<M extends BaseModel, P extends BasePresenter>
                 try {
                     JSONObject object = new JSONObject(s);
                     if (object.getString("method").equals("deny")) {
-                        dialog = new AlertDialog.Builder(mContext)
+                        dialog = builder
                                 .setCancelable(false)
                                 .setMessage(object.getString("nick_name") + "  拒绝了邀请")
                                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
+                                        mRxManager.post("dismiss", "");
                                         dialog.dismiss();
                                     }
                                 }).create();
                     }
+                    dialogs.add(dialog);
                     dialog.show();
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -115,27 +134,42 @@ public abstract class BaseActivity<M extends BaseModel, P extends BasePresenter>
                     final JSONObject object = new JSONObject(s);
                     final String user_id = object.getString("current_user_id");
                     final String team_id = object.getString("team_id");
-                    dialog = new AlertDialog.Builder(mContext)
+                    dialog = builder
                             .setTitle("邀请函")
                             .setCancelable(false)
                             .setMessage("来自" + object.getString("nick_name") + "用户的组队邀请")
                             .setPositiveButton("丑拒", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    new DenyPresentModel().deny(user_id, team_id);
+                                    //basePresenter.deny(user_id, team_id);
+                                    mRxManager.post("dismiss", "");
                                     dialog.dismiss();
                                 }
                             })
                             .setNegativeButton("接受", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    new AcceptPresentModel().accept(user_id, team_id);
+                                   // basePresenter.accept(user_id, team_id);
+                                    mRxManager.post("dismiss", "");
                                     dialog.dismiss();
                                 }
                             }).create();
+                    dialogs.add(dialog);
                     dialog.show();
                 } catch (JSONException e) {
                     e.printStackTrace();
+                }
+            }
+        });
+
+        mRxManager.on("dismiss", new Action1<String>() {
+            @Override
+            public void call(String s) {
+                if (dialog != null) {
+                    for (int i = 0; i < dialogs.size(); i++) {
+                        dialogs.get(i).dismiss();
+                        dialogs.remove(i);
+                    }
                 }
             }
         });
@@ -148,7 +182,7 @@ public abstract class BaseActivity<M extends BaseModel, P extends BasePresenter>
                 DemoHelper.getInstance().logout(true, new EMCallBack() {
                     @Override
                     public void onSuccess() {
-                        LogUtils.logd("环信注销成功"+PreferenceManager.getPreferenceManager().isFirstStart());
+                        LogUtils.logd("环信注销成功" + PreferenceManager.getPreferenceManager().isFirstStart());
                         PreferenceManager.getPreferenceManager().setIsFirstStart(true);
                         EMClient.getInstance().logout(true);
                         startActivity(LoginWeiXinActivity.class);
@@ -327,4 +361,5 @@ public abstract class BaseActivity<M extends BaseModel, P extends BasePresenter>
             mRxManager.clear();
         }
     }
+
 }

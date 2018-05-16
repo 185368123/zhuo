@@ -47,7 +47,9 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 
-class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, VersionedGestureDetector.OnGestureListener,
+import li.com.base.baseuntils.LogUtils;
+
+public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, VersionedGestureDetector.OnGestureListener,
 		GestureDetector.OnDoubleTapListener, ViewTreeObserver.OnGlobalLayoutListener {
 
 	static final String LOG_TAG = "PhotoViewAttacher";
@@ -148,6 +150,7 @@ class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, VersionedGe
 	// Listeners
 	private OnMatrixChangedListener mMatrixChangeListener;
 	private OnPhotoTapListener mPhotoTapListener;
+	private OnPhotoMoveListener mPhotoMoveListener;
 	private OnViewTapListener mViewTapListener;
 	private OnLongClickListener mLongClickListener;
 
@@ -180,6 +183,7 @@ class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, VersionedGe
 						@Override
 						public void onLongPress(MotionEvent e) {
 							if (null != mLongClickListener) {
+								LogUtils.logd("mLongClickListener");
 								mLongClickListener.onLongClick(mImageView.get());
 							}
 						}
@@ -418,12 +422,14 @@ class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, VersionedGe
 						float xResult = (x - displayRect.left) / displayRect.width();
 						float yResult = (y - displayRect.top) / displayRect.height();
 
+						LogUtils.logd("onPhotoTap"+"---xResult:"+xResult+"-yResult:"+yResult);
 						mPhotoTapListener.onPhotoTap(imageView, xResult, yResult);
 						return true;
 					}
 				}
 			}
 			if (null != mViewTapListener) {
+				LogUtils.logd("mViewTapListener"+"---e.getX():"+e.getX()+"---e.getY():"+e.getY());
 				mViewTapListener.onViewTap(imageView, e.getX(), e.getY());
 			}
 		}
@@ -431,10 +437,10 @@ class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, VersionedGe
 		return false;
 	}
 
+	float x = 0, y = 0;
 	@Override
 	public final boolean onTouch(View v, MotionEvent ev) {
 		boolean handled = false;
-
 		if (mZoomEnabled) {
 			switch (ev.getAction()) {
 			case MotionEvent.ACTION_DOWN:
@@ -445,18 +451,24 @@ class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, VersionedGe
 				// If we're flinging, and the user presses down, cancel
 				// fling
 				cancelFling();
+				x = ev.getX();
+				y = ev.getY();
 				break;
 
 			case MotionEvent.ACTION_CANCEL:
 			case MotionEvent.ACTION_UP:
 				// If the user has zoomed less than min scale, zoom back
 				// to min scale
+				float yDiff = ev.getY() - y;
+				LogUtils.logd("滑动y轴距离："+yDiff);
 				if (getScale() < mMinScale) {
 					RectF rect = getDisplayRect();
 					if (null != rect) {
 						v.post(new AnimatedZoomRunnable(getScale(), mMinScale, rect.centerX(), rect.centerY()));
 						handled = true;
 					}
+				}else if (yDiff> 150&&mPhotoMoveListener!=null){
+					mPhotoMoveListener.onPhotoMove();
 				}
 				break;
 			}
@@ -513,6 +525,11 @@ class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, VersionedGe
 	@Override
 	public final void setOnPhotoTapListener(OnPhotoTapListener listener) {
 		mPhotoTapListener = listener;
+	}
+
+
+	public final void setOnPhotoMoveListener(OnPhotoMoveListener onPhotoMoveListener) {
+		mPhotoMoveListener = onPhotoMoveListener;
 	}
 
 	@Override
@@ -714,6 +731,7 @@ class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, VersionedGe
 			if (null != mMatrixChangeListener) {
 				RectF displayRect = getDisplayRect(matrix);
 				if (null != displayRect) {
+					LogUtils.logd("onMatrixChanged");
 					mMatrixChangeListener.onMatrixChanged(displayRect);
 				}
 			}
@@ -827,6 +845,11 @@ class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, VersionedGe
 		 *            percentage of the Drawable height.
 		 */
 		void onPhotoTap(View view, float x, float y);
+	}
+
+	public interface OnPhotoMoveListener {
+
+		void onPhotoMove();
 	}
 
 	/**

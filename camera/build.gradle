@@ -30,7 +30,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile('com.android.support:appcompat-v7:25.3.0') { exclude module: 'support-v4' }
     compile 'com.github.yangjie10930:EpMedia:v0.9.4'
-    compile project(':videobeauty')
+    compile project(':base')
 }
 def siteUrl = 'https://github.com/CJT2325/CameraView'   // 项目的主页
 def gitUrl = 'https://github.com/CJT2325/CameraView.git'   // Git仓库的url

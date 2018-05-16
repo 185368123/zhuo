@@ -10,10 +10,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import java.util.List;
 
+import cn.jpush.android.api.JPushInterface;
 import zhuozhuo.com.zhuo.MainApplication;
 import zhuozhuo.com.zhuo.R;
 import com.hyphenate.chatuidemo.my.bean.LoginBean;
-import com.hyphenate.chatuidemo.provider.UserInfoProvider;
+import com.hyphenate.easeui.provider.UserInfoProvider;
 
 import zhuozhuo.com.zhuo.contract.LoginConstract;
 import zhuozhuo.com.zhuo.model.LoginModel;
@@ -136,6 +137,7 @@ public class LoginPhoneActivity extends BaseActivity<LoginModel,LoginPresenter> 
         }
         // 登陆成功
         ToastUtils.showToast(R.string.login_text8);
+        JPushInterface.setAlias(getApplicationContext(), 1,"zhuozhuo"+UserInfoProvider.getUserID());
         MainApplication.getInstance().finishAllActivity();
     }
 

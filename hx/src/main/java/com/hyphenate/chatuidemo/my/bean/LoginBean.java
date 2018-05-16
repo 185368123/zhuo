@@ -1,5 +1,7 @@
 package com.hyphenate.chatuidemo.my.bean;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2017/10/18.
  */
@@ -7,18 +9,19 @@ package com.hyphenate.chatuidemo.my.bean;
 public class LoginBean {
 
         /**
-         * user_id : 7
-         * session_id : gml38gei57bqt3ucac1hjdme9iukh09u
-         * token : bc5bad69e25257cebf605f8188ac38de
-         * account : 无
-         * sex : 1
-         * photo_link : http://zhuozhuo.oss-cn-shenzhen.aliyuncs.com/UserIcon/20170926100108.png
-         * nick_name : 啊了巴
-         * phone : 13888888888
+         * user_id : 76
+         * session_id : re6jek4pjvjrkt17p9bq10d498sfk1r0
+         * token : 04eaf683b7661df85e8ac22c6779d25d
+         * account : jsjdjdhdhdjdjjdjsksjdjdidndjso
+         * sex : 2
+         * photo_link : http://img1.imgtn.bdimg.com/it/u=1435593655,1758121938&fm=27&gp=0.jpg
+         * nick_name : 糖糖糖糖
+         * phone : 13300000015
          * wechat_id :
          * reg_mode : 1
-         * exp : 8100
-         * location : 无
+         * user_video :
+         * exp : 65
+         * location : 深职,汽车与交通学院,大三
          */
 
         private String user_id;
@@ -31,6 +34,7 @@ public class LoginBean {
         private String phone;
         private String wechat_id;
         private String reg_mode;
+        private String user_video;
         private String exp;
         private String location;
 
@@ -114,6 +118,14 @@ public class LoginBean {
             this.reg_mode = reg_mode;
         }
 
+        public String getUser_video() {
+            return user_video;
+        }
+
+        public void setUser_video(String user_video) {
+            this.user_video = user_video;
+        }
+
         public String getExp() {
             return exp;
         }
@@ -129,23 +141,4 @@ public class LoginBean {
         public void setLocation(String location) {
             this.location = location;
         }
-
-        @Override
-        public String toString() {
-            return "DataBean{" +
-                    "user_id='" + user_id + '\'' +
-                    ", session_id='" + session_id + '\'' +
-                    ", token='" + token + '\'' +
-                    ", account='" + account + '\'' +
-                    ", sex='" + sex + '\'' +
-                    ", photo_link='" + photo_link + '\'' +
-                    ", nick_name='" + nick_name + '\'' +
-                    ", phone='" + phone + '\'' +
-                    ", wechat_id='" + wechat_id + '\'' +
-                    ", reg_mode='" + reg_mode + '\'' +
-                    ", exp='" + exp + '\'' +
-                    ", location='" + location + '\'' +
-                    '}';
-        }
-
 }

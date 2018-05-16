@@ -2,10 +2,6 @@
 <resources>
 
 
-    <color name="text_normal">#FF4081</color>
-    <color name="text_press">#bbFF4081</color>
-    <color name="control_bar_bg">#77000000</color>
-
     <color name="abroad_dialog_item">#ffffff</color>
     <color name="abroad_dialog_item_press">#dfdfdf</color>
     <color name="abroad_dialog_textcolor">#222222</color>
@@ -20,40 +16,21 @@
     <color name="black">@android:color/black</color>
 
     <!-- Application Color -->
-    <color name="app_blue_light">@color/main_color1</color>
     <color name="app_blue_dark">@color/main_color4</color>
     <color name="app_gray">@color/my_color1</color>
     <color name="app_black">@color/main_color2</color>
     <color name="app_white">@color/white</color>
 
-    <color name="app_gray_hint">@color/login_color2</color>
-    <color name="app_red">@color/main_color3</color>
-    <color name="app_green_light">@android:color/holo_green_light</color>
-    <color name="app_green_dark">@android:color/holo_green_dark</color>
-
     <!--MainActivity-->
     <color name="main_color1">#f47055</color>
     <color name="main_color2">#333333</color>
-    <color name="main_color3">#f03436</color>
     <color name="main_color4">#f76243</color>
-    <color name="main_color5">#20bf7a</color>
 
     <!--MyFragment-->
     <color name="my_color1">#a3a3a3</color>
     <color name="my_color2">#bcbcbc</color>
-    <color name="my_color3">@android:color/holo_green_dark</color>
-    <color name="my_color4">@android:color/holo_green_light</color>
 
     <!--LoginActivity-->
-    <color name="login_color1">#f0f0f0</color>
     <color name="login_color2">#dddddd</color>
-    <color name="login_color5">#c2c2c2</color>
-
-    <color name="app_color1">#e8f2fc</color>
-    <color name="app_color2">#999E9E9E</color>
-    <color name="app_color3">#99727272</color>
-    <color name="app_color4">#ebebeb</color>
-    <color name="app_color5">#dcdcdc</color>
-    <color name="app_color6">#e1e1e1</color>
 
 </resources>

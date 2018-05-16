@@ -57,7 +57,6 @@ public class KitkatCamera implements ICamera {
             Camera.Size pic=param.getPictureSize();
             mPicSize=new Point(pic.height,pic.width);
             mPreSize=new Point(pre.height,pre.width);
-            Log.e("wuwang","camera previewSize:"+mPreSize.x+"/"+mPreSize.y);
             return true;
         }
         return false;
@@ -142,7 +141,6 @@ public class KitkatCamera implements ICamera {
 
     public void setOnPreviewFrameCallbackWithBuffer(final PreviewFrameCallback callback) {
         if(mCamera!=null){
-            Log.e("wuwang","Camera set CallbackWithBuffer");
             mCamera.setPreviewCallbackWithBuffer(new Camera.PreviewCallback() {
                 @Override
                 public void onPreviewFrame(byte[] data, Camera camera) {

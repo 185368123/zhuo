@@ -3,22 +3,19 @@ package com.hyphenate.easeui.ui;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ListView;
 
 import com.hyphenate.EMConnectionListener;
 import com.hyphenate.EMConversationListener;
@@ -49,18 +46,19 @@ public class EaseConversationListFragment extends EaseBaseFragment implements EM
     protected List<EMConversation> conversationList = new ArrayList<EMConversation>();
     protected EaseConversationList conversationListView;
     protected FrameLayout errorItemContainer;
+    protected ListView lv;
 
     protected boolean isConflict;
     
     protected EMConversationListener convListener = new EMConversationListener(){
-
 		@Override
 		public void onCoversationUpdate() {
 			refresh();
 		}
     	
     };
-    
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.ease_fragment_conversation_list, container, false);
@@ -79,6 +77,7 @@ public class EaseConversationListFragment extends EaseBaseFragment implements EM
         conversationListView = (EaseConversationList) getView().findViewById(R.id.list);
         clearSearch = (ImageButton) getView().findViewById(R.id.search_clear);
         errorItemContainer = (FrameLayout) getView().findViewById(R.id.fl_error_item);
+        lv = (ListView)getView().findViewById(R.id.lv_unread);
         EMClient.getInstance().chatManager().addMessageListener(this);
     }
     

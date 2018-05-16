@@ -7,13 +7,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.hyphenate.chatuidemo.provider.UserInfoProvider;
+import com.hyphenate.easeui.provider.UserInfoProvider;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import java.util.List;
 import java.util.Map;
 
+import cn.jpush.android.api.JPushInterface;
 import li.com.base.basesinglebean.SingleBeans;
 import li.com.base.baseuntils.ToastUitl;
 import zhuozhuo.com.zhuo.MainApplication;
@@ -56,8 +57,8 @@ public class LoginWeiXinActivity extends BaseActivity<WeiXinLoginModel, WeiXinLo
         button_phonelogin.setOnClickListener(this);
 
         MainApplication.getInstance().addActivity(this);
-        if (SingleBeans.getInstance().getVisonBean().getData().getPhone().getImage_url()!=null){
-            Glide.with(this).load(SingleBeans.getInstance().getVisonBean().getData().getPhone().getImage_url()).into(iv_login);
+        if (SingleBeans.getInstance().getVisonBean().getPhone().getImage_url()!=null){
+            Glide.with(this).load(SingleBeans.getInstance().getVisonBean().getPhone().getImage_url()).into(iv_login);
         }
     }
 
@@ -168,6 +169,7 @@ public class LoginWeiXinActivity extends BaseActivity<WeiXinLoginModel, WeiXinLo
         }
         // 登陆成功
         ToastUtils.showToast(R.string.login_text8);
+        JPushInterface.setAlias(getApplicationContext(), 1,"zhuozhuo"+UserInfoProvider.getUserID());
         MainApplication.getInstance().finishAllActivity();
     }
 

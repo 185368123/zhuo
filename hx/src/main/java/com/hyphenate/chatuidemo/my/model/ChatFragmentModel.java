@@ -2,8 +2,13 @@ package com.hyphenate.chatuidemo.my.model;
 
 import com.hyphenate.chatuidemo.my.api.Api;
 import com.hyphenate.chatuidemo.my.api.HostType;
+import com.hyphenate.chatuidemo.my.bean.TagBean;
+import com.hyphenate.easeui.HundredCupBean;
 import com.hyphenate.chatuidemo.my.bean.VideoLinkBean;
 import com.hyphenate.chatuidemo.my.constract.ChatFragmentConstract;
+import com.hyphenate.easeui.provider.UserInfoProvider;
+
+import java.util.List;
 
 import li.com.base.baserx.BaseRespose;
 import li.com.base.baserx.RxHelper;
@@ -55,6 +60,32 @@ public class ChatFragmentModel implements ChatFragmentConstract.Model{
         return Api.getDefault(HostType.INCLUE_COOKIE).startVideo(token,video_id)
                 .compose(RxSchedulers.<BaseRespose<Object>>io_main())
                 .compose(RxHelper.handleResult());
+    }
+
+    @Override
+    public Observable<HundredCupBean> getDetail(String token, String hundred_id,String group_id) {
+        return Api.getDefault(HostType.INCLUE_COOKIE).getHundredCupDetail(token,hundred_id,group_id)
+                .compose(RxSchedulers.<HundredCupBean>io_main());
+    }
+
+    @Override
+    public Observable<Object> teamRegister(String token, String line_id,String hundred_id) {
+        return Api.getDefault(HostType.INCLUE_COOKIE).teamRegister(token,line_id,hundred_id)
+                .compose(RxSchedulers.<BaseRespose<Object>>io_main())
+                .compose(RxHelper.handleResult());
+    }
+
+    @Override
+    public Observable<TagBean> getTag(String token, String choice_id, String you_user_id) {
+        return Api.getDefault(HostType.INCLUE_COOKIE).getTag(token, choice_id, you_user_id)
+                .compose(RxSchedulers.<TagBean>io_main());
+    }
+
+    @Override
+    public Observable<List<Object>> getRandom(String token, String you_user_id, String choice_id) {
+        return Api.getDefault(HostType.INCLUE_COOKIE).getRandom(token, you_user_id, choice_id)
+                .compose(RxSchedulers.<BaseRespose<List<Object>>>io_main())
+                .compose(RxHelper.<List<Object>>handleResult());
     }
 
 }

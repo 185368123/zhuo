@@ -4,7 +4,6 @@ import android.support.v4.content.ContextCompat;
 import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -12,7 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
-import com.hyphenate.chatuidemo.provider.UserInfoProvider;
+import com.hyphenate.easeui.provider.UserInfoProvider;
 import com.shuyu.gsyvideoplayer.builder.GSYVideoOptionBuilder;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 import com.shuyu.gsyvideoplayer.video.base.GSYVideoPlayer;
@@ -170,8 +169,11 @@ public class ShareVideoPlayActivity extends BaseActivity implements CommentPopup
                 detailPlayer.startWindowFullscreen(ShareVideoPlayActivity.this, true, true);
             }
         });
-       detailPlayer.getStartButton().performClick();
-       detailPlayer.getFullscreenButton().performClick();
+        if (!photo.equals("123456")){
+            detailPlayer.getStartButton().performClick();
+            detailPlayer.getFullscreenButton().performClick();
+        }
+
     }
 
     private void refresh() {
@@ -292,11 +294,16 @@ public class ShareVideoPlayActivity extends BaseActivity implements CommentPopup
     //当评论加载完毕回调
     @Override
     public void changeList(List<CommentBean.DataBean> data) {
-        for (int i = 0; i < data.size(); i++) {
-            list.add(data.get(i));
+        if (data==null){
+            adapter.notifyDataSetChanged();
+            refreshListView.onRefreshComplete();
+        }else {
+            for (int i = 0; i < data.size(); i++) {
+                list.add(data.get(i));
+            }
+            adapter.notifyDataSetChanged();
+            refreshListView.onRefreshComplete();
         }
-        adapter.notifyDataSetChanged();
-        refreshListView.onRefreshComplete();
     }
 
 

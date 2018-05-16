@@ -18,6 +18,7 @@ public class GetVisonModel implements GetVisonConstract.Model {
     @Override
     public Observable<VisonBean> getVison(String type) {
         return Api.getDefault(HostType.UNINCLUE_COOKIE).getVison(type)
-                .compose(RxSchedulers.<VisonBean>io_main());
+                .compose(RxSchedulers.<BaseRespose<VisonBean>>io_main())
+                .compose(RxHelper.<VisonBean>handleResult());
     }
 }

@@ -35,6 +35,10 @@ public class BaseApplication extends LitePalApplication {
         return baseApplication;
     }
 
+    public static Context getAppApplication() {
+        return baseApplication;
+    }
+
     public static Resources getAppResources() {
         return baseApplication.getResources();
     }

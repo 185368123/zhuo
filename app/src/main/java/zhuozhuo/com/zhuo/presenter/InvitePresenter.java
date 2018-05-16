@@ -1,6 +1,6 @@
 package zhuozhuo.com.zhuo.presenter;
 
-import com.hyphenate.chatuidemo.provider.UserInfoProvider;
+import com.hyphenate.easeui.provider.UserInfoProvider;
 
 import java.util.List;
 import li.com.base.baserx.RxSubscriber;

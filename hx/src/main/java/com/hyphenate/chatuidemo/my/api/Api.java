@@ -7,7 +7,7 @@ import android.util.SparseArray;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.hyphenate.chatuidemo.provider.PreferenceManager;
+import com.hyphenate.easeui.provider.PreferenceManager;
 
 import java.io.File;
 import java.io.IOException;

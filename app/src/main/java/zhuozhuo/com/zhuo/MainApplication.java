@@ -10,6 +10,8 @@ import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
 import java.util.ArrayList;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * Created by Administrator on 2017/10/16.
  */
@@ -34,6 +36,9 @@ public class MainApplication extends DemoApplication {
         //initHotfix();
         this.initInstance();
         initUCrash();
+
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
     }
 
     private void initUCrash() {

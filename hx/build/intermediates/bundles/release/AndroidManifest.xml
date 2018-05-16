@@ -18,6 +18,12 @@
         <activity
             android:name="com.hyphenate.chatuidemo.my.CameActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hyphenate.chatuidemo.my.CreatTeamActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyDialogStyle" />
+        <activity android:name="com.hyphenate.chatuidemo.my.InviteMemberActivity" />
+        <activity android:name="com.hyphenate.chatuidemo.my.SetTagActivity" />
     </application>
 
 </manifest>

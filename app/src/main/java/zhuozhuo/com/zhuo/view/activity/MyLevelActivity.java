@@ -14,7 +14,7 @@ import com.hyphenate.chat.EMClient;
 import com.hyphenate.chatuidemo.my.bean.UserDB;
 import com.hyphenate.chatuidemo.my.model.GetUserMsgModel;
 import com.hyphenate.chatuidemo.my.presenter.GetUserMsgPresenter;
-import com.hyphenate.chatuidemo.provider.UserInfoProvider;
+import com.hyphenate.easeui.provider.UserInfoProvider;
 import com.hyphenate.easeui.widget.EaseTitleBar;
 import com.hyphenate.exceptions.HyphenateException;
 

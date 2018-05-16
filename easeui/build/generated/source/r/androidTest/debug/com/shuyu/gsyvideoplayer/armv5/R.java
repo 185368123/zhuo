@@ -8,6 +8,6 @@ package com.shuyu.gsyvideoplayer.armv5;
 
 public final class R {
 	public static final class string {
-		public static final int app_name = 0x7f06015d;
+		public static final int app_name = 0x7f060165;
 	}
 }

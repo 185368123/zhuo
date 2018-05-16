@@ -120,12 +120,13 @@
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
+                android:id="@+id/iv_love_num"
                 android:background="@drawable/qqunlove"
                 android:padding="5dp" />
 
             <TextView
                 android:id="@+id/zan_num"
-                android:layout_width="30dp"
+                android:layout_width="wrap_content"
                 android:layout_height="15dp"
                 android:gravity="center_vertical"
                 android:text=""
@@ -137,7 +138,7 @@
                 android:layout_height="24dp"
                 android:layout_marginLeft="5dp"
                 android:background="@drawable/remark"
-                android:paddingLeft="10dp" />
+                />
             <TextView
                 android:layout_width="10dp"
                 android:layout_height="match_parent" />

@@ -1,17 +1,15 @@
 package zhuozhuo.com.zhuo.view.fragment;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.AnimationDrawable;
-import android.net.Uri;
 import android.os.Build;
 import android.os.SystemClock;
-import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.format.DateUtils;
@@ -23,7 +21,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import com.bumptech.glide.Glide;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.hyphenate.chat.EMClient;
@@ -38,9 +35,11 @@ import li.com.base.basesinglebean.SingleChooseDetailBean;
 import com.hyphenate.chatuidemo.my.EmptyView;
 import com.hyphenate.chatuidemo.my.model.InitializationModel;
 import com.hyphenate.chatuidemo.my.presenter.InitializationPresenter;
-import com.hyphenate.chatuidemo.provider.UserInfoProvider;
+import com.hyphenate.easeui.provider.UserInfoProvider;
 import com.hyphenate.chatuidemo.ui.ChatActivity;
 import com.hyphenate.easeui.events.RxBusConstants;
+import com.shuyu.gsyvideoplayer.builder.GSYVideoOptionBuilder;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.text.SimpleDateFormat;
@@ -66,7 +65,9 @@ import zhuozhuo.com.zhuo.presenter.Zhuo1FragmentPresenter;
 import zhuozhuo.com.zhuo.util.CountDownUtils;
 import zhuozhuo.com.zhuo.view.MatchInterface;
 import zhuozhuo.com.zhuo.view.activity.MainActivity;
-import zhuozhuo.com.zhuo.widget.CircleImageView;
+import zhuozhuo.com.zhuo.view.activity.RecordVideoActivity;
+import zhuozhuo.com.zhuo.view.activity.VideoSelectActivity;
+import zhuozhuo.com.zhuo.widget.SimpleVideo;
 
 
 /**
@@ -97,15 +98,12 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
     private FrameLayout frameLayout;
     private Button button_skip;
     private TextView button_receive;
-    private CircleImageView circleImageView;
     private TextView tv3;
     private TextView tv4;
     private TextView tv5;
     private TextView tv6;
     private TextView tv7;
     private LinearLayout layout_user;
-    private ImageView iv_animation;
-    private AnimationDrawable animationDrawable;
     private String is_member;
     private String groupID;
     private String hundred_id;
@@ -122,7 +120,9 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
     private LoadingTip loadingTip;
     private String choice_id;
     private String user_id;
-    private AlertDialog dialog;
+    private String finish;
+    private SimpleVideo simpleVideo;
+    private GSYVideoOptionBuilder gsyVideoOption;
 
 
     @Override
@@ -165,13 +165,14 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
             tv_unread.setVisibility(View.INVISIBLE);
         }
 
+        simpleVideo=view.findViewById(R.id.lv_fragment);
         loadingTip = view.findViewById(R.id.loadedTip_zhuo3);
         iv_cancle1 = (ImageView) view.findViewById(R.id.cancle_iv1);
         iv_cancle = (ImageView) view.findViewById(R.id.cancle_iv);
         button_skip = (Button) view.findViewById(R.id.button_skip);
         button_receive = (TextView) view.findViewById(R.id.button_receive);
 
-        circleImageView = (CircleImageView) view.findViewById(R.id.zhuo1_iv);
+
         tv_service = view.findViewById(R.id.tv_service);
         tv3 = (TextView) view.findViewById(R.id.zhuo1_tv3);
         tv4 = (TextView) view.findViewById(R.id.zhuo1_tv4);
@@ -183,9 +184,6 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
         layout = (LinearLayout) view.findViewById(R.id.wait);
         layout_user = (LinearLayout) view.findViewById(R.id.zhuo1_user);
         iv = (ImageView) view.findViewById(R.id.iv_wait);
-        iv_animation = (ImageView) view.findViewById(R.id.iv_animation);
-        animationDrawable = (AnimationDrawable) iv_animation.getDrawable();
-        animationDrawable.start();
         drawable = (AnimationDrawable) iv.getDrawable();
         chronometer = (Chronometer) view.findViewById(R.id.time);
         frameLayout = (FrameLayout) view.findViewById(R.id.chat_frame);
@@ -196,8 +194,6 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
         iv_cancle.setOnClickListener(this);
         button_skip.setOnClickListener(this);
         button_receive.setOnClickListener(this);
-
-
 
         pulllist_zhuo1.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override
@@ -233,6 +229,7 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
     }
 
 
+
     public void doClick(String choice_id) {
         this.choice_id=choice_id;
         // 版本判断。当手机系统大于 23 时，才有必要去判断权限是否获取
@@ -255,11 +252,59 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
                     // showDialogTipUserRequestPermission();
                     startRequestPermission(permissions2);
                 } else {
-                    mPresenter.match_(choice_id);
+                    if(UserInfoProvider.getUserVideo()!=null&&!UserInfoProvider.getUserVideo().equals("")){
+                        mPresenter.match_(choice_id);
+                    }else {
+                        // 创建构建器
+                        AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getContext());
+                        // 设置参数
+                        builder.setMessage("你还没有录制视频，是否现在去录制？")
+                                .setNeutralButton("暂不设置", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                }).setNegativeButton("录制视频", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                startActivity(RecordVideoActivity.class);
+                            }
+                        }).setPositiveButton("选择视频", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        builder.create().show();
+                    }
                 }
             }
         } else {
-            mPresenter.match_(choice_id);
+            if(UserInfoProvider.getUserVideo()!=null&&!UserInfoProvider.getUserVideo().equals("")){
+                mPresenter.match_(choice_id);
+            }else {
+                // 创建构建器
+                AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getContext());
+                // 设置参数
+                builder.setMessage("你还没有录制视频，是否现在去录制？")
+                        .setNeutralButton("暂不设置", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        }).setNegativeButton("录制视频", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(RecordVideoActivity.class);
+                    }
+                }).setPositiveButton("选择视频", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(VideoSelectActivity.class);
+                    }
+                });
+                builder.create().show();
+            }
         }
 
     }
@@ -271,11 +316,13 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
         groupID=str[1];
         hundred_id=str[2];
         userName=str[3];
+        finish = str[4];
         if (groupID != null) {
             final Intent intent = new Intent(getActivity(), ChatActivity.class);
             intent.putExtra("userId", groupID);
             intent.putExtra("hundred_id", hundred_id);
             intent.putExtra("userName", userName);
+            intent.putExtra("finish", finish);
             intent.putExtra(com.hyphenate.chatuidemo.Constant.EXTRA_CHAT_TYPE, com.hyphenate.chatuidemo.Constant.CHATTYPE_GROUP);
             if (is_member.equals("0")) {
                 mPresenter.joinHundredGroup(hundred_id);
@@ -333,7 +380,6 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
     }
 
     public void timebegin(SingleStatusBean singleStatusBean) {
-        LogUtils.logd("singleStatusBean.getTime:"+singleStatusBean.getTime());
         if (singleStatusBean != null) {
                 chronometer.setBase(SystemClock.elapsedRealtime() - singleStatusBean.getTime() * 1000);
         }else {
@@ -452,7 +498,7 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
                 try {
                     JSONObject object = new JSONObject(s);
                     String userId = object.getString("user_id");
-                    String photo = object.getString("photo_link");
+                    String user_video = object.getString("user_video");
                     String name = object.getString("nick_name");
                     String location = object.getString("location");
                     String account = object.getString("account");
@@ -460,7 +506,7 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
                     other_party_id=object.getString("other_party_id");
                     choice_id = object.getString("choice_id");
                     user_id = object.getString("user_id");
-                    judge(userId, photo, name, location, account, sex);
+                    judge(userId, user_video, name, location, account, sex);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -468,15 +514,18 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
         });
     }
 
-    private void judge(String userId, String photo, String userName, String location, String hobby, String sex) {//第一次匹配成功时候更改UI界面
+    private void judge(String userId, String user_video, String userName, String location, String hobby, String sex) {//第一次匹配成功时候更改UI界面
         chronometer.stop();
         drawable.stop();
         if (userId != null && !userId.equals("")) {
             LogUtils.logd("userId" + userId + ";   name" + userName);
 
         }
-        if (photo != null) {
-
+        if (user_video != null) {
+            gsyVideoOption = new GSYVideoOptionBuilder();
+            gsyVideoOption.setUrl(user_video);
+            gsyVideoOption.build(simpleVideo);
+            simpleVideo.getStartButton().performClick();
         }
         if (userName != null) {
          tv7.setText(userName);
@@ -499,12 +548,13 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
         button_receive.setClickable(true);
         button_skip.setClickable(true);
         button_receive.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.receive_button_maincolor_shape));
-        Glide.with(this).load(photo).into(circleImageView);
+
         tv6.setVisibility(View.VISIBLE);
-        countDownUtils1 = new CountDownUtils(tv6, 10 * 1000, new EmptyView() {
+        countDownUtils1 = new CountDownUtils(tv6, 30 * 1000, new EmptyView() {
             @Override
             public void emptyBack() {//倒计时跳过这次匹配
                 mPresenter.match_(choice_id);
+
             }
         });
         countDownUtils1.start();
@@ -555,7 +605,7 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
 
     @Override
     public void returnSingleChoose(List<SingleChooseBean>  data) {
-      adapter.upadteChoose(data);
+        adapter.upadteChoose(data);
         pulllist_zhuo1.onRefreshComplete();
     }
 
@@ -569,7 +619,6 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
     public void returnHundredMsg(List<HundredBean> list) {
         adapter.upadteHundread(list);
         pulllist_zhuo1.onRefreshComplete();
-
         for (int i = 0; i < list.size(); i++) {
             HundredBean bean=list.get(i);
             String[] member_ids=bean.getMember_ids().split(",");
@@ -605,40 +654,6 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
             rv.setVisibility(View.GONE);
         }
 
-    }
-
-
-    // 提示用户去应用设置界面手动开启权限
-
-    private void showDialogTipUserGoToAppSettting() {
-
-        dialog = new AlertDialog.Builder(getContext())
-                .setTitle("读写权限不可用")
-                .setMessage("请在-应用设置-权限-中，打开拍照和录音权限")
-                .setPositiveButton("立即开启", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // 跳转到应用设置界面
-                        goToAppSetting();
-                    }
-                })
-                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        getActivity().finish();
-                    }
-                }).setCancelable(false).show();
-    }
-
-    // 跳转到当前应用的设置界面
-    private void goToAppSetting() {
-        Intent intent = new Intent();
-
-        intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-        Uri uri = Uri.fromParts("package", getActivity().getPackageName(), null);
-        intent.setData(uri);
-
-        startActivityForResult(intent, 123);
     }
 
 }

@@ -9,6 +9,7 @@ import android.widget.ListView;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.R;
+import com.hyphenate.easeui.TeamUnreadBean;
 import com.hyphenate.easeui.adapter.EaseConversationAdapter;
 
 import java.util.ArrayList;
@@ -60,6 +61,8 @@ public class EaseConversationList extends ListView{
     public void init(List<EMConversation> conversationList){
         this.init(conversationList, null);
     }
+
+
 
     public void init(List<EMConversation> conversationList, EaseConversationListHelper helper){
         conversations = conversationList;

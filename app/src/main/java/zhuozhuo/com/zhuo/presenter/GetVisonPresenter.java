@@ -18,8 +18,7 @@ public class GetVisonPresenter extends GetVisonConstract.Presenter {
         mModel.getVison("2").subscribe(new RxSubscriber<VisonBean>(mContext,false) {
             @Override
             protected void _onNext(VisonBean visonBean) {
-                LogUtils.logd("visonBean.getAndroid_version():"+visonBean.getAndroid_version()+"----MainApplication.getInstance().getVison():"+MainApplication.getInstance().getVison());
-                    mView.returnVison(visonBean.getAndroid_version().equals(MainApplication.getInstance().getVison()),visonBean.getAndroid_url(),visonBean.getData().getPhone().getImage_url());
+                mView.returnVison(visonBean.getAndroid_version().equals(MainApplication.getInstance().getVison()),visonBean.getAndroid_url(),visonBean.getPhone().getImage_url());
                 SingleBeans.getInstance().setVisonBean(visonBean);
             }
 

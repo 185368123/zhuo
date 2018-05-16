@@ -1,7 +1,7 @@
 package zhuozhuo.com.zhuo.presenter;
 
 import com.hyphenate.chatuidemo.my.bean.GroupChoicesBean;
-import com.hyphenate.chatuidemo.provider.UserInfoProvider;
+import com.hyphenate.easeui.provider.UserInfoProvider;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

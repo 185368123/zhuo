@@ -4,8 +4,8 @@ import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import com.hyphenate.chatuidemo.provider.PreferenceManager;
-import com.hyphenate.chatuidemo.provider.UserInfoProvider;
+import com.hyphenate.easeui.provider.PreferenceManager;
+import com.hyphenate.easeui.provider.UserInfoProvider;
 import java.util.List;
 import li.com.base.baserx.RxSubscriber;
 import zhuozhuo.com.zhuo.base.ClearTextClickListener;
@@ -61,6 +61,7 @@ public class ForgetPasswordPresenter extends ForgetPasswordConstract.Presenter {
                         UserInfoProvider.setPhone(userInfo.getPhone());
                         UserInfoProvider.setRegMode(userInfo.getReg_mode());
                         UserInfoProvider.setExp(userInfo.getExp());
+                        UserInfoProvider.setUserVideo(userInfo.getUser_video());
                         PreferenceManager.getPreferenceManager().setIsFirstStart(false);
                     }
                 }

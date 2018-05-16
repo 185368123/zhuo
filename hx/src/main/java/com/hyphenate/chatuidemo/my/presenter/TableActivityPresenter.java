@@ -2,7 +2,7 @@ package com.hyphenate.chatuidemo.my.presenter;
 
 import com.hyphenate.chatuidemo.my.bean.RateBean;
 import com.hyphenate.chatuidemo.my.constract.TableActivityConstract;
-import com.hyphenate.chatuidemo.provider.UserInfoProvider;
+import com.hyphenate.easeui.provider.UserInfoProvider;
 
 import java.util.List;
 

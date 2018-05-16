@@ -68,7 +68,8 @@ public class UrlConstant {
     public static final String GetChoices_URL="/handler/get_choices";
 
     //个人条件和问题获取
-    public static final String GetChoicesList_URL="/handler/get_choices_list";
+    //public static final String GetChoicesList_URL="/handler/get_choices_list";
+    public static final String GetChoicesList_URL="/Evaluate/get_choices_list";
 
     //获取个人故事视频列表
     public static final String GetStory_URL="/handler/get_story_list";
@@ -133,7 +134,7 @@ public class UrlConstant {
     public static final String CancelGroupMatch_URL="/handler/cancel_group_wait";
 
     //获取百人团最新条件群
-    public static final String GetHundred_URL="/handler/get_hundred";
+    public static final String GetHundred_URL="/Line/get_hundred";
 
     //获取百人团排名接口
     public static final String GetTotalRate_URL="/handler/get_total_rate";
@@ -188,7 +189,7 @@ public class UrlConstant {
     //加入百人团
     public static final String JoinHundredGroup_URL="/handler/join_hundred";
 
-    //加入百人团
+    //退出百人团
     public static final String QuitHundredGroup_URL="/handler/quit_hundred";
 
     //获取得分列表
@@ -196,7 +197,6 @@ public class UrlConstant {
 
     //获取用户状态
     public static final String GetStaus_URL="/Evaluate/get_match_status";
-
 
 
     //匹配接口（新）
@@ -214,4 +214,67 @@ public class UrlConstant {
     //评价接口（新）
     public static final String Evaluate_URL="/Evaluate/evaluate";
 
+    //获取网吧杯详情
+    public static final String GetHundredCup_URL="/Line/getHundred";
+
+    //创建网吧杯队伍
+    public static final String CreatTeam_URL="/Line/addGroup";
+
+    //获取全部成员
+    public static final String GetHundredCupMember_URL="/Line/searchUser";
+
+    //邀请队员
+    public static final String InviteMember_URL="/Line/joinGroup";
+
+    //踢出队员,退出组队
+    public static final String DeleteMember_URL="/Line/GroupSignOut";
+
+    // 解散队伍
+    public static final String DeleteTeam_URL="/Line/dissolutionGroup";
+
+    // 申请加入队伍
+    public static final String ApplyTeam_URL="Line/applyJoinGroup";
+
+    // 队伍报名
+    public static final String TeamRegister_URL="/Line/joinMatch";
+
+    // 获取好友
+    public static final String GetFriend_URL="/Line/getUserData";
+
+    // 获取全部队伍
+    public static final String GetTeam_URL="/Line/getGroupUser";
+
+    // 接受邀请
+    public static final String ReceiveInvite_URL="/Line/receiveJoinGroup";
+
+    // 拒绝邀请
+    public static final String RefuseInvite_URL="/Line/refuseJoinGroup";
+
+    // 同意申请
+    public static final String ReceiveApply_URL="/Line/approvalJoinGroup";
+
+    // 拒绝申请
+    public static final String RefuseApply_URL="/Line/refuseCaptainJoinGroup";
+
+    // 获取未读消息列表
+    public static final String GetTeamUnread_URL="/Line/getUserMessage";
+
+    // 获取比赛赛程
+    public static final String GetRace_URL="/Line/getRace";
+
+    // 获取比赛积分
+    public static final String GetIntegral_URL="/Line/getIntegral";
+
+    // 获取匹配成功后填写的的12个标签
+    public static final String GetTag_URL="/Line/labelData";
+
+    // 用户提交6个标签
+    public static final String SetTag_URL="/Line/labelMatch";
+
+    // 获取系统推荐标签
+    public static final String GetSuggestTag_URL="/Line/label";
+
+
+    // 生成随机数
+    public static final String GetRandom_URL="/Line/randomMatch";
 }

@@ -1,11 +1,10 @@
 package com.hyphenate.chatuidemo.my.Untils;
 
-import com.hyphenate.chatuidemo.Constant;
 import com.hyphenate.chatuidemo.my.api.UrlConstant;
 import com.hyphenate.chatuidemo.my.okhttp.MyOkHttpClient;
 import com.hyphenate.chatuidemo.my.okhttp.OkHttpVerifyResponseHandler;
 import com.hyphenate.chatuidemo.my.okhttp.RequestUtils;
-import com.hyphenate.chatuidemo.provider.UserInfoProvider;
+import com.hyphenate.easeui.provider.UserInfoProvider;
 import com.zhy.http.okhttp.request.RequestCall;
 
 import org.json.JSONObject;

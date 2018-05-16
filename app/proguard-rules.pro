@@ -212,8 +212,13 @@
    #hotfix
     -keep class com.taobao.sophix.**{*;}
    -keep class com.ta.utdid2.device.**{*;}
-   #防止inline
-   -dontoptimize
+
+   -dontwarn cn.jpush.**
+   -keep class cn.jpush.** { *; }
+   -keep class * extends cn.jpush.android.helpers.JPushMessageReceiver { *; }
+
+   -dontwarn cn.jiguang.**
+   -keep class cn.jiguang.** { *; }
 
 #-------------------------------------------------------------------------
 
@@ -296,6 +301,22 @@
 -keepclassmembers class * {
     void *(**On*Event);
 }
+
+
+-dontwarn com.tencent.**
+-keep public class * extends android.app.Service
+-keep public class * extends android.content.BroadcastReceiver
+-keep class com.tencent.beaconselfupdate.** {*;}
+-keep class com.tencent.hlyyb.** {*;}
+-keep class com.tencent.tmapkupdatesdk.** {*;}
+-keep class com.tencent.tmassistantbase.** {*;}
+-keep class com.tencent.tmdownloader.** {*;}
+-keep class com.tencent.tmassistantsdk.** {*;}
+-keep class com.tencent.tmselfupdatesdk.** {*;}
+-keep class com.tencent.yybsdk.apkpatch.** {*;}
+-keep class com.tencent.assistant.sdk.remote.**{public protected private *;}
+-keep public interface com.tencent.tmassistantbase.common.download.ITMAssistantDownloadClientListener{*;}
+-keep class com.qq.** {*;}
 #----------------------------------------------------------------------------
 
 #---------------------------------webview------------------------------------

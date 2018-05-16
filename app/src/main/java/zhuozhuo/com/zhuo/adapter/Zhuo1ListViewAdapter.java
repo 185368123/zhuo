@@ -102,7 +102,7 @@ public class Zhuo1ListViewAdapter extends BaseAdapter implements View.OnClickLis
                     button_.setVisibility(View.VISIBLE);
                 }
                 button_.setText(data2.get(i).getIs_member().equals("0")?"加入":"已加入");
-                button_.setTag(data2.get(i).getIs_member()+","+data2.get(i).getGroup_id()+","+data2.get(i).getHundred_id()+","+data2.get(i).getGroup_name());
+                button_.setTag(data2.get(i).getIs_member()+","+data2.get(i).getGroup_id()+","+data2.get(i).getHundred_id()+","+data2.get(i).getGroup_name()+","+data2.get(i).getFinish());
                 button_.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -122,7 +122,9 @@ public class Zhuo1ListViewAdapter extends BaseAdapter implements View.OnClickLis
                 button = (Button) view.findViewById(R.id.zhuo1_button);
                 tv1.setText(data1.get(i-data2.size()).getChoice_name());
                 tv2.setText(data1.get(i-data2.size()).getChoice_title());
-                button.setBackground(ContextCompat.getDrawable(context, picId[i-data2.size() % 4]));
+                tv1.setSelected(true);
+                tv2.setSelected(true);
+                button.setBackground(ContextCompat.getDrawable(context, picId[(i-data2.size()) % 4]));
                 button.setOnClickListener(this);
                 button.setTag(data1.get(i-data2.size()).getChoice_id());//选项ID跟名字拼接保存在Tag中，用逗号隔开
             }

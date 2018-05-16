@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.IBinder;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,8 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.hyphenate.EMCallBack;
+import com.hyphenate.EMConnectionListener;
+import com.hyphenate.EMError;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chatuidemo.DemoApplication;
 import com.hyphenate.chatuidemo.DemoHelper;
@@ -23,14 +26,16 @@ import com.hyphenate.chatuidemo.UserMsgDBHelp;
 import com.hyphenate.chatuidemo.my.bean.UserDB;
 import com.hyphenate.chatuidemo.my.model.GetUserMsgModel;
 import com.hyphenate.chatuidemo.my.presenter.GetUserMsgPresenter;
-import com.hyphenate.chatuidemo.provider.UserInfoProvider;
+import com.hyphenate.easeui.provider.UserInfoProvider;
 import com.hyphenate.chatuidemo.ui.ContactListFragment;
 import com.hyphenate.chatuidemo.ui.ConversationListFragment;
 import com.hyphenate.easeui.EaseUI;
 import com.hyphenate.easeui.domain.EaseUser;
 import com.hyphenate.easeui.events.RxBusConstants;
 import com.hyphenate.exceptions.HyphenateException;
+import com.hyphenate.util.NetUtils;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.litepal.tablemanager.Connector;
@@ -58,8 +63,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private ContactListFragment contactListFragment;
     private TextView tv1;
     private TextView tv3;
+    private TextView tv4;
     private SlidingMenu menu;
     private TextView tv2;
+    private TextView tv_chat_unread;
+    private TextView tv_friend_unread;
 
     @Override
     public int getLayoutId() {
@@ -85,6 +93,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         //登录环信聊天系统
         initChat();
 
+        //设置Sliding的布局
+        initSliding();
+
         //TabHost添加标签
         initTabs();
 
@@ -92,10 +103,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         initRxManger();
 
         tabHost.setCurrentTab(0);
-        //设置Sliding的布局
-        initSliding();
+
         //创建用户列表数据库
         SQLiteDatabase db = Connector.getDatabase();
+
         //更新我的个人信息
         GetUserMsgPresenter getUserMsgPresenter=new GetUserMsgPresenter();
         getUserMsgPresenter.setVM(new GetUserMsgModel(),null);
@@ -105,15 +116,23 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         easeUI.setUserProfileProvider(new EaseUI.EaseUserProfileProvider() {
             @Override
             public EaseUser getUser(String username) {
-                UserDB userDB = UserMsgDBHelp.getUserMsgDBHelp().searchByUserId(username);
-                if (userDB != null) {
-                    EaseUser easeUser = new EaseUser(userDB.getUser_id());
-                    easeUser.setNickname(userDB.getNick_name());
-                    easeUser.setAvatar(userDB.getPhoto_link());
+                if (username.equals("admin")){
+                    EaseUser easeUser = new EaseUser(username);
+                    easeUser.setNickname("系统提示");
+                    easeUser.setAvatar("http://zhuozhuo.oss-cn-shenzhen.aliyuncs.com/head/head15242085638782585.png");
                     return easeUser;
-                } else
-                    return null;
-            }
+                }else {
+                    UserDB userDB = UserMsgDBHelp.getUserMsgDBHelp().searchByUserId(username);
+                    if (userDB != null) {
+                        EaseUser easeUser = new EaseUser(userDB.getUser_id());
+                        easeUser.setNickname(userDB.getNick_name());
+                        easeUser.setAvatar(userDB.getPhoto_link());
+                        return easeUser;
+                    } else
+                        return null;
+                }
+                }
+
         });
     }
 
@@ -122,11 +141,25 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             @Override
             public void call(Integer nm) {
                 int num=SingleBeans.getInstance().getUnReadBean().getAllMsgNum();
+                int num_msg=SingleBeans.getInstance().getUnReadBean().getMesNum();
+                int num_friend=SingleBeans.getInstance().getUnReadBean().getNewFriendNum();
                 if (num > 0) {
                     tv1.setVisibility(View.VISIBLE);
                     tv1.setText(num + "");
                 } else {
                     tv1.setVisibility(View.INVISIBLE);
+                }
+                if (num_msg > 0) {
+                    tv_chat_unread.setVisibility(View.VISIBLE);
+                    tv_chat_unread.setText(num_msg + "");
+                } else {
+                    tv_chat_unread.setVisibility(View.INVISIBLE);
+                }
+                if (num_friend > 0) {
+                    tv_friend_unread.setVisibility(View.VISIBLE);
+                    tv_friend_unread.setText(num_friend + "");
+                } else {
+                    tv_friend_unread.setVisibility(View.INVISIBLE);
                 }
             }
         });
@@ -142,54 +175,96 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                     }
             }
         });
+
+        mRxManager.on("stateless", new Action1<String>() {
+            @Override
+            public void call(String s) {
+                int num= SingleBeans.getInstance().getUnReadBean().getReamrkNum();
+                if (num > 0) {
+                    tv4.setVisibility(View.VISIBLE);
+                } else {
+                    tv4.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+        mRxManager.on("remarkUnread", new Action1<String>() {
+            @Override
+            public void call(String s) {
+                int num= SingleBeans.getInstance().getUnReadBean().getReamrkNum();
+                if (num > 0) {
+                    tv4.setVisibility(View.VISIBLE);
+                } else {
+                    tv4.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+
+        mRxManager.on("match_line", new Action1<String>() {
+            @Override
+            public void call(String s) {
+                JSONObject object = null;
+                try {
+                    object = new JSONObject(s);
+                    final String type = object.getString("type");
+                    if (type.equals("1003")){
+                        int num= SingleBeans.getInstance().getUnReadBean().getReamrkNum();
+                        if (num > 0) {
+                            tv4.setVisibility(View.VISIBLE);
+                        } else {
+                            tv4.setVisibility(View.INVISIBLE);
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
     }
 
     private void initChat() {
-        LogUtils.logd("UserInfoProvider.getUserID()" + UserInfoProvider.getUserID());
         DemoHelper.getInstance().init(DemoApplication.getContext());
         DemoHelper.getInstance().setCurrentUserName(UserInfoProvider.getUserID());
         DemoHelper.getInstance().initHandler(this.getMainLooper());
+        linkChat();
+        EMClient.getInstance().updateCurrentUserNick(UserInfoProvider.getNickName());
+         //注册一个监听连接状态的listener
+        EMClient.getInstance().addConnectionListener(new MyConnectionListener());
+
+    }
+
+        //实现ConnectionListener接口
+    private class MyConnectionListener implements EMConnectionListener {
+        @Override
+        public void onConnected() {
+        }
+        @Override
+        public void onDisconnected(final int error) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                  linkChat();
+                   /* if(error == EMError.USER_REMOVED){
+                        // 显示帐号已经被移除
+                    }else if (error == EMError.USER_LOGIN_ANOTHER_DEVICE) {
+                        // 显示帐号在其他设备登录
+                    } else {
+                        if (NetUtils.hasNetwork(MainActivity.this)){
+                            //连接不到聊天服务器
+                        } else{
+                            //当前网络不可用，请检查网络设置
+                        }
+                    }*/
+                }
+            });
+        }
+    }
+
+    public void linkChat(){
         EMClient.getInstance().login(UserInfoProvider.getUserID(), "111111", new EMCallBack() {//回调
             @Override
             public void onSuccess() {
-                rx.Observable.create(new rx.Observable.OnSubscribe<List<String>>() {
-                    private List<String> usernames;
-
-                    @Override
-                    public void call(Subscriber<? super List<String>> subscriber) {
-                        try {
-                           LogUtils.logd("从服务器拉取好友列表！");
-                            usernames = EMClient.getInstance().contactManager().getAllContactsFromServer();
-                        } catch (HyphenateException e) {
-                            e.printStackTrace();
-                        }
-                        subscriber.onNext(usernames);
-                    }
-                }).subscribeOn(Schedulers.newThread())
-                        .subscribe(new Subscriber<List<String>>() {
-                            @Override
-                            public void onCompleted() {
-
-                            }
-
-                            @Override
-                            public void onError(Throwable e) {
-
-                            }
-
-                            @Override
-                            public void onNext(List<String> strings) {
-                                for (int i = 0; i < strings.size(); i++) {
-                                    int j = i + 1;
-                                    LogUtils.logd("第" + j + "位好友ID为" + strings.get(i) + "载入到本地列表！");
-                                    DemoHelper.getInstance().saveContact(new EaseUser(strings.get(i)));
-                                }
-                                EMClient.getInstance().groupManager().loadAllGroups();
-                                EMClient.getInstance().chatManager().loadAllConversations();
-                                LogUtils.logd("登录聊天服务器成功！");
-                                DemoHelper.getInstance().getUserProfileManager().asyncGetCurrentUserInfo();
-                            }
-                        });
+                LogUtils.logd("登录聊天服务器成功！");
             }
 
             @Override
@@ -200,13 +275,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             @Override
             public void onError(int code, String message) {
                 LogUtils.logd("登录聊天服务器失败！");
-                initChat();
+                linkChat();
             }
 
         });
     }
-
-
     private void initSliding() {
         // configure the SlidingMenu
         menu = new SlidingMenu(this);
@@ -228,6 +301,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         supportFragmentManager = getSupportFragmentManager();
         button_chat = (Button) menu.findViewById(R.id.button_chat);
         button_friend = (Button) menu.findViewById(R.id.button_friend);
+        tv_chat_unread = menu.findViewById(R.id.tv_chat_unread);
+        tv_friend_unread = menu.findViewById(R.id.tv_friend_unread);
         conversationListFragment = new ConversationListFragment();
         contactListFragment = new ContactListFragment();
         FragmentTransaction transaction = supportFragmentManager.beginTransaction();
@@ -267,14 +342,34 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             tv1.setVisibility(View.INVISIBLE);
         }
 
-        View mView3 = tabHost.getTabWidget().getChildAt(2);
+        View mView3 = tabHost.getTabWidget().getChildAt(1);
         tv3 = (TextView) mView3.findViewById(R.id.tab_msg);
-        int num= SingleBeans.getInstance().getUnReadBean().getAllMsgNum();
+
+        View mView4 = tabHost.getTabWidget().getChildAt(2);
+        tv4 = (TextView) mView4.findViewById(R.id.tab_msg);
+        tv4.setWidth(15);
+        tv4.setHeight(15);
+
+        int num=SingleBeans.getInstance().getUnReadBean().getAllMsgNum();
+        int num_mg=SingleBeans.getInstance().getUnReadBean().getMesNum();
+        int num_friend=SingleBeans.getInstance().getUnReadBean().getNewFriendNum();
         if (num > 0) {
-            tv3.setVisibility(View.VISIBLE);
-            tv3.setText(num + "");
+            tv1.setVisibility(View.VISIBLE);
+            tv1.setText(num + "");
         } else {
-            tv3.setVisibility(View.INVISIBLE);
+            tv1.setVisibility(View.INVISIBLE);
+        }
+        if (num_mg > 0) {
+            tv_chat_unread.setVisibility(View.VISIBLE);
+            tv_chat_unread.setText(num_mg + "");
+        } else {
+            tv_chat_unread.setVisibility(View.INVISIBLE);
+        }
+        if (num_friend > 0) {
+            tv_friend_unread.setVisibility(View.VISIBLE);
+            tv_friend_unread.setText(num_friend + "");
+        } else {
+            tv_friend_unread.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -298,10 +393,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             case R.id.button_chat://聊天
                 FragmentTransaction transaction1 = supportFragmentManager.beginTransaction();
                 transaction1.replace(R.id.fragment_sliding, conversationListFragment).commit();
+                button_friend.setBackgroundColor(getResources().getColor(R.color.black));
+                button_chat.setBackground(ContextCompat.getDrawable(this, R.drawable.slidingtop));
                 break;
             case R.id.button_friend://好友
                 FragmentTransaction transaction2 = supportFragmentManager.beginTransaction();
                 transaction2.replace(R.id.fragment_sliding, contactListFragment).commit();
+                button_chat.setBackgroundColor(getResources().getColor(R.color.black));
+                button_friend.setBackground(ContextCompat.getDrawable(this, R.drawable.slidingtop));
                 break;
         }
     }
@@ -358,4 +457,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             }
         }
     }
+
+
 }

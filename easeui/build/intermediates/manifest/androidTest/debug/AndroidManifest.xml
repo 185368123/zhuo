@@ -13,10 +13,6 @@
         android:label="Tests for com.hyphenate.easeui.test"
         android:targetPackage="com.hyphenate.easeui.test" />
 
-    <meta-data
-        android:name="android.support.VERSION"
-        android:value="25.3.1" />
-
     <application
         android:allowBackup="true"
         android:label="@string/app_name"

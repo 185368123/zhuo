@@ -42,7 +42,7 @@ import li.com.base.basesinglebean.SingleBeans;
 import li.com.base.baseuntils.LogUtils;
 
 import com.hyphenate.chatuidemo.parse.UserProfileManager;
-import com.hyphenate.chatuidemo.provider.UserInfoProvider;
+import com.hyphenate.easeui.provider.UserInfoProvider;
 import com.hyphenate.chatuidemo.receiver.CallReceiver;
 import com.hyphenate.chatuidemo.ui.ChatActivity;
 import com.hyphenate.chatuidemo.utils.PreferenceManager;

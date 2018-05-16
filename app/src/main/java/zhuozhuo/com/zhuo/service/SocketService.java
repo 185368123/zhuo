@@ -6,8 +6,8 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
-import com.baidu.platform.comapi.map.E;
-import com.hyphenate.chatuidemo.provider.UserInfoProvider;
+import com.hyphenate.chatuidemo.my.CreatTeamActivity;
+import com.hyphenate.easeui.provider.UserInfoProvider;
 import com.hyphenate.easeui.events.RxBusConstants;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
@@ -19,6 +19,7 @@ import li.com.base.baserx.RxManager;
 import li.com.base.basesinglebean.SingleBeans;
 import li.com.base.baseuntils.LogUtils;
 import rx.functions.Action1;
+import zhuozhuo.com.zhuo.view.activity.TeamWindowActivity;
 
 /**
  * Created by Administrator on 2017/10/24.
@@ -107,8 +108,44 @@ public class SocketService extends Service {
                             String method = object.getString("method");
                             if (method.equals("unread")) {
                                 SingleBeans.getInstance().getUnReadBean().setComNum(object.getInt("unread_share_count"));
+                                manager.post(method,message);
+                            }else if (method.equals("stateless")){
+                                SingleBeans.getInstance().getUnReadBean().setReamrkNum(1);
+                                manager.post(method,message);
+                            } else if (method.equals("match_line")){
+                                Intent intent=new Intent(SocketService.this, TeamWindowActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                String type = object.getString("type");
+                                if (type.equals("9")) {
+                                    manager.post(method,message);
+                                }else if (type.equals("1001")||type.equals("1002")){
+                                    manager.post(method,message);
+                                }else if (type.equals("1003")){
+                                    SingleBeans.getInstance().getUnReadBean().setReamrkNum(1);
+                                    manager.post(method,message);
+                                }else if (type.equals("2")) {
+                                    String group_name = object.getString("group_name");
+                                    intent.putExtra("type",type);
+                                    intent.putExtra("group_name",group_name);
+                                    startActivity(intent);
+                                }else {
+                                    String user_id = object.getString("user_id");
+                                    String group_id = object.getString("group_id");
+                                    String line_id = object.getString("line_id");
+                                    String nick_name = object.getString("nick_name");
+                                    String group_name = object.getString("group_name");
+
+                                    intent.putExtra("type",type);
+                                    intent.putExtra("group_name",group_name);
+                                    intent.putExtra("user_id",user_id);
+                                    intent.putExtra("group_id",group_id);
+                                    intent.putExtra("line_id",line_id);
+                                    intent.putExtra("nick_name",nick_name);
+                                    startActivity(intent);
+                                }
+                            }else {
+                                manager.post(method,message);
                             }
-                            manager.post(method,message);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

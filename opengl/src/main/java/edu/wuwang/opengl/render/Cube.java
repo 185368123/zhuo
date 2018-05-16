@@ -1,6 +1,6 @@
 /*
  *
- * Cube.java
+
  * 
  * Created by Wuwang on 2016/9/30
  */

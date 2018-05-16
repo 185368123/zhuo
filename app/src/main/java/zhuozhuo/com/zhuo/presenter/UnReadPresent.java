@@ -1,7 +1,7 @@
 package zhuozhuo.com.zhuo.presenter;
 
 import com.google.gson.Gson;
-import com.hyphenate.chatuidemo.provider.UserInfoProvider;
+import com.hyphenate.easeui.provider.UserInfoProvider;
 import org.json.JSONObject;
 
 import li.com.base.baseuntils.LogUtils;

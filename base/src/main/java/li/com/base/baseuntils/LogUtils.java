@@ -1,8 +1,5 @@
 package li.com.base.baseuntils;
 
-
-import android.util.Log;
-
 import com.orhanobut.logger.LogLevel;
 import com.orhanobut.logger.Logger;
 import li.com.base.baseapp.AppConfig;
@@ -12,6 +9,7 @@ import li.com.base.baseapp.AppConfig;
  * 使用logger封装
  */
 public class LogUtils {
+
     public static boolean DEBUG_ENABLE =true;// 是否调试模式
     /**
      * 在application调用初始化

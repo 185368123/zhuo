@@ -14,7 +14,6 @@
         tools:ignore="UseCompoundDrawables">
 
         <ImageView
-            android:id="@+id/iv_neterror"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="9dp"

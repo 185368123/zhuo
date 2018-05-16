@@ -4,8 +4,8 @@
     <string name="chart">聊天</string>
     <string name="friend">好友</string>
     <!--Zhuo1Fragment-->
-    <string name="zhuo1_text1_1">暖男</string>
-    <string name="zhuo1_text1_2">做/找个暖男</string>
+    <string name="zhuo1_text1_1">暖男暖男暖男暖男暖男暖男暖男暖男暖男暖男暖男</string>
+    <string name="zhuo1_text1_2">做/找个暖男找个暖男找个暖男找个暖男找个暖男找个暖男</string>
 
     <!--LoginWeiXinActivity-->
     <string name="login_text1">请输入手机号码</string>
@@ -17,8 +17,6 @@
     <string name="login_text6">手机注册</string>
     <string name="login_text7">手机号码格式错误</string>
     <string name="login_text8">登录成功</string>
-    <string name="login_text12">正在登录...</string>
-    <string name="login_text14">修改成功</string>
     <string name="login_text15">微信</string>
 
     <!--RegisterActivity-->
@@ -44,8 +42,6 @@
     <string name="dialog_msg_wait">请稍后...</string>
 
 
-    <string name="terms_text">啄啄协议</string>
-
     <string name="main_text19">网络繁忙，请稍后重试</string>
     <string name="main_text20">加载数据失败，请检查网络后重试</string>
 
@@ -58,13 +54,8 @@
     <string name="add_contacts_text16">修改成功</string>
 
 
-    <string name="forget_pwd_text6">验证码已发送</string>
-
-    <string name="personal_text13">S</string>
     <string name="personal_text15">秒后重新获取</string>
 
-    <string name="mine_text1">匹配场数：</string>
-    <string name="mine_text2">匹配经验：</string>
     <string name="mine_text3">我的评分</string>
     <string name="mine_text4">反馈论坛</string>
     <string name="mine_text5">设置</string>

@@ -1,7 +1,7 @@
 package zhuozhuo.com.zhuo.presentermodel;
 
 import com.hyphenate.chatuidemo.my.EmptyView;
-import com.hyphenate.chatuidemo.provider.UserInfoProvider;
+import com.hyphenate.easeui.provider.UserInfoProvider;
 import com.zhy.http.okhttp.request.RequestCall;
 
 import org.json.JSONException;

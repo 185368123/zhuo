@@ -10,6 +10,8 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.hyphenate.easeui.widget.EaseTitleBar;
 import java.util.ArrayList;
 import java.util.List;
+
+import li.com.base.basesinglebean.SingleBeans;
 import zhuozhuo.com.zhuo.R;
 import zhuozhuo.com.zhuo.adapter.RemarkListAdapter;
 import zhuozhuo.com.zhuo.bean.RemarkBean;
@@ -113,6 +115,8 @@ public class GetRemarkActivity extends BaseActivity implements RemarkView {
 
     @Override
     public void changeRemark(List<RemarkBean.DataBean> list) {
+        SingleBeans.getInstance().getUnReadBean().setReamrkNum(0);
+        mRxManager.post("remarkUnread","");
         if (list==null||list.size()==0){
            isBottom=true;
         }else {

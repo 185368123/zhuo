@@ -162,4 +162,5 @@ public class AllArticleActivity extends BaseActivity<AllArticleActivityModel, Al
         }
         listView.onRefreshComplete();
     }
+
 }

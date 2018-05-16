@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.hyphenate.chatuidemo.my.SetTagActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:background="#f76243"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:paddingRight="10dp"
+            android:text="设置六个互动活动"
+            android:textColor="#ffffff" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:paddingRight="10dp"
+            android:text="提交"
+            android:id="@+id/tv_save_tag"
+            android:textColor="#ffffff" />
+    </RelativeLayout>
+    <LinearLayout
+        android:paddingTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="5dp"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:background="@drawable/maincolor_shape"
+            android:layout_width="0dp"
+            android:hint="输入活动名称（限5字以内）"
+            android:maxLength="5"
+            android:id="@+id/et_add_tag"
+            android:layout_height="40dp"
+            android:layout_weight="1"/>
+        <TextView
+            android:layout_width="5dp"
+            android:layout_height="wrap_content" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="增加"
+            android:background="@drawable/maincolor_shape"
+            android:id="@+id/bt_add_tag"/>
+        <TextView
+            android:layout_width="5dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <com.hyphenate.chatuidemo.my.easytagdragview.EasyTipDragView
+        android:id="@+id/easy_tip_drag_view"
+        android:layout_width="match_parent"
+        android:clickable="true"
+        android:layout_gravity="center"
+        android:layout_height="match_parent"></com.hyphenate.chatuidemo.my.easytagdragview.EasyTipDragView>
+</LinearLayout>

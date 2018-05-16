@@ -20,7 +20,6 @@
     <dimen name="image_thumbnail_spacing">1dp</dimen>
 	<dimen name="chat_nick_margin_left">17dp</dimen>
 
-    <dimen name="bottom_lib_dialog_item_text">16sp</dimen>
     <dimen name="bottom_lib_dialog_title_text">18sp</dimen>
     <dimen name="bottom_lib_dialog_cancel_text">18sp</dimen>
 
@@ -28,4 +27,8 @@
     <dimen name="bottom_lib_dialog_padding_bottom">12dp</dimen>
     <dimen name="bottom_lib_dialog_padding_left">12dp</dimen>
     <dimen name="bottom_lib_dialog_padding_right">12dp</dimen>
+
+
+    <dimen name="text_size_date">16sp</dimen>
+    <dimen name="text_size_name">14sp</dimen>
 </resources>

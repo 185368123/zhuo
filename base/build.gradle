@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
 
     defaultConfig {
         minSdkVersion 19
-        targetSdkVersion 26
+        targetSdkVersion 25
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -24,7 +24,8 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:appcompat-v7:25.0.0'
+    compile 'com.android.support:recyclerview-v7:25.0.0'
     testCompile 'junit:junit:4.12'
     //retrofit和rxjava
     compile 'com.squareup.retrofit2:retrofit:2.0.0-beta3'
@@ -45,6 +46,5 @@ dependencies {
     compile 'com.orhanobut:logger:1.13'
     //compile files('libs/umeng-analytics-v5.2.4.jar')
     compile files('libs/umeng-analytics-v5.2.4.jar')
-
     compile 'com.github.bumptech.glide:glide:3.7.0'
 }

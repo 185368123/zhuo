@@ -6,8 +6,8 @@ import android.widget.ImageView;
 
 import com.hyphenate.chatuidemo.my.model.InitializationModel;
 import com.hyphenate.chatuidemo.my.presenter.InitializationPresenter;
-import com.hyphenate.chatuidemo.provider.PreferenceManager;
-import com.hyphenate.chatuidemo.provider.UserInfoProvider;
+import com.hyphenate.easeui.provider.PreferenceManager;
+import com.hyphenate.easeui.provider.UserInfoProvider;
 import java.util.List;
 import li.com.base.baserx.RxSubscriber;
 import zhuozhuo.com.zhuo.base.ClearTextClickListener;
@@ -62,6 +62,7 @@ public class RegisterPresenter extends RegisterConstract.Presenter {
                         UserInfoProvider.setExp(userInfo.getExp());
                         UserInfoProvider.setLocation(userInfo.getLocation());
                         UserInfoProvider.setHobby(userInfo.getAccount());
+                        UserInfoProvider.setUserVideo(userInfo.getUser_video());
                         PreferenceManager.getPreferenceManager().setIsFirstStart(false);
                         InitializationPresenter initializationPresenter=new InitializationPresenter();
                         InitializationModel initializationModel=new InitializationModel();

@@ -102,7 +102,44 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/colorBackground" />
+        <!--我的评分-->
+        <LinearLayout
+            android:id="@+id/linearlayout7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10dp">
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/mine1" />
+
+            <TextView
+                style="@style/mine_text_style1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="8dp"
+                android:text="我的介绍视频" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/next"
+                android:paddingLeft="5dp" />
+        </LinearLayout>
+        <!--分割线-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorBackground" />
         <!--我的评分-->
         <LinearLayout
             android:id="@+id/linearlayout1"
@@ -129,7 +166,13 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
-
+             <TextView
+                 android:layout_gravity="center_vertical"
+                 android:visibility="gone"
+                 android:layout_width="10dp"
+                 android:layout_height="10dp"
+                 android:id="@+id/tv_remark_unread"
+                 android:background="@drawable/tv_shape"/>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="zhuozhuo.com.zhuo.view.activity.MyVideoPlayActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:background="#f76243"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_my_video"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:src="@drawable/ease_mm_title_back"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:paddingRight="10dp"
+            android:text="更改"
+            android:id="@+id/tv_my_video"
+            android:textColor="#ffffff" />
+
+    </RelativeLayout>
+
+    <zhuozhuo.com.zhuo.widget.SimpleVideo
+        android:id="@+id/lv_my_video"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></zhuozhuo.com.zhuo.widget.SimpleVideo>
+</LinearLayout>

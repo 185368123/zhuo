@@ -48,6 +48,10 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\cjt.library.wheel\\camera\\1.1.8\\res\\drawable-ldpi-v4\\ic_flash_on.png"
     },
     {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\tag_add_bg_.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\src\\main\\res\\drawable-ldpi\\tag_add_bg_.xml"
+    },
+    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\ic_flash_auto.png",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\cjt.library.wheel\\camera\\1.1.8\\res\\drawable-ldpi-v4\\ic_flash_auto.png"
     }

@@ -24,7 +24,6 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/rl_switch_min_video_kbps"
         android:layout_width="match_parent"
         android:layout_height="50dip"
         android:background="@drawable/em_btn_bottom_selector"
@@ -52,7 +51,6 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/rl_switch_max_video_kbps"
         android:layout_width="match_parent"
         android:layout_height="50dip"
         android:background="@drawable/em_btn_bottom_selector"
@@ -81,7 +79,6 @@
 
 
     <RelativeLayout
-        android:id="@+id/rl_switch_max_frame_rate"
         android:layout_width="match_parent"
         android:layout_height="50dip"
         android:background="@drawable/em_btn_bottom_selector"

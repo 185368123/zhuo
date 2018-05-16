@@ -62,7 +62,6 @@
     <color name="holo_black">#ff111111</color>
 
     <color name="bottom_lib_transport">#00000000</color>
-    <color name="bottom_lib_dialog_item_text_color">#333333</color>
     <color name="bottom_lib_dialog_title_text_color">#666666</color>
     <color name="bottom_lib_dialog_cancel_text_color">#666666</color>
 </resources>

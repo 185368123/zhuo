@@ -14,14 +14,14 @@ import zhuozhuo.com.zhuo.view.fragment.Zhuo3Fragment;
 public class TabHostConstant {
     public static final String[] tabText = {
             "啄",
-            "啄啄",
+            //"啄啄",
             "啄啄啄",
             "我"
     };
     //底部图片选择器的id数组
     public static final int[] tabImgIds = {
             R.drawable.tab_z_selector,
-            R.drawable.tab_zz_selector,
+            //R.drawable.tab_zz_selector,
             R.drawable.tab_zzz_selector,
             R.drawable.tab_mine_selector
     };
@@ -29,7 +29,7 @@ public class TabHostConstant {
     //标签对应的Fragment的Class
     public static final Class[] fragments = {
             Zhuo1Fragment.class,
-            Zhuo2Fragment.class,
+            //Zhuo2Fragment.class,
             Zhuo3Fragment.class,
             MineFragment.class
     };
