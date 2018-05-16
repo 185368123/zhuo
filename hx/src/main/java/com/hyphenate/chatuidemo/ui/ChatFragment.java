@@ -105,7 +105,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import li.com.base.baserx.RxManager;
 import li.com.base.basesinglebean.SingleChooseBean;
@@ -1421,7 +1420,11 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
                         if (jsonObject.has("step_count")) {
                             if (jsonObject.get("l_user_id").equals(UserInfoProvider.getUserID())) {
                                 i = "l_user_status";
-                            } else i = "r_user_status";
+                            } else if (jsonObject.get("r_user_id").equals(UserInfoProvider.getUserID())){
+                                i = "r_user_status";
+                            }else {
+                                return;
+                            }
                             step = jsonObject.getInt("step_count");
                             is_upload = jsonObject.getString("is_upload");
                             video_id = jsonObject.getString("video_id");
@@ -1466,9 +1469,11 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
                 if (s != null) {
                     try {
                         JSONObject jsonObject = new JSONObject(s);
-                        step = jsonObject.getInt("step_count");
-                        is_upload = "0";
-                        addstep();
+                        if (jsonObject.getString("l_user_id").equals(toChatUsername)||jsonObject.getString("r_user_id").equals(toChatUsername)){
+                            step = jsonObject.getInt("step_count");
+                            is_upload = "0";
+                            addstep();
+                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -1478,7 +1483,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
         rxManager.on("stepupload", new Action1<String>() {
             @Override
             public void call(String s) {
-                if (s != null) {
+                /*if (s != null) {
                     try {
                         JSONObject jsonObject = new JSONObject(s);
                         donext();
@@ -1486,7 +1491,9 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                }
+                }*/
+                buffer.append("{action: step,token: " + UserInfoProvider.getToken() + ", user_id:" + UserInfoProvider.getUserID() + ",you_user_id  :" + toChatUsername + ",new_step:123" + "}");
+                sendSocketMsg();
             }
         });
         rxManager.on("stepvideo", new Action1<String>() {
@@ -1505,8 +1512,15 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
         rxManager.on("stateless", new Action1<String>() {
             @Override
             public void call(String s) {
-                ToastUitl.showLong("对方已放弃，请评价完成此次匹配");
-                layout_chatted.setVisibility(View.VISIBLE);
+                try {
+                    JSONObject object = new JSONObject(s);
+                    if (object.getString("user_id").equals(toChatUsername)){
+                        ToastUitl.showLong("对方已放弃，请评价完成此次匹配");
+                        layout_chatted.setVisibility(View.VISIBLE);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
         rxManager.on("groupstep", new Action1<String>() {
@@ -1587,11 +1601,14 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
                 if (s != null) {
                     try {
                         JSONObject jsonObject = new JSONObject(s);
-                        if (jsonObject.getInt("step_count") >= title.length) {
-                            button.setText("视频制作中...");
-                            dialogUtils.showWaitDialog("视频制作中...", false);
-                            new getVideoThread().start();
+                        if (jsonObject.getString("l_user_id").equals(toChatUsername)||jsonObject.getString("r_user_id").equals(toChatUsername)){
+                            if (jsonObject.getInt("step_count") >= title.length) {
+                                button.setText("视频制作中...");
+                                dialogUtils.showWaitDialog("视频制作中...", false);
+                                new getVideoThread().start();
+                            }
                         }
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -1647,7 +1664,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
                     if (type.equals("9") || type.equals("2")) {
                         mPresenter.getDetail(toChatUsername);
                     } else if (type.equals("1001")) {
-                        if (!(tagBean_.getLabel_error() == 1)) {
+                        if (tagBean_!=null&&!(tagBean_.getLabel_error() == 1)) {
                             mPresenter.getTag(choice_id, toChatUsername);
                         }
                     }else if (type.equals("1002")){
