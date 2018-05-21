@@ -5194,10 +5194,16 @@ containing a value of this type.
         public static int Base_Widget_Design_TabLayout=0x7f0800db;
         public static int CustomDialog=0x7f0800dc;
         public static int CustomProgressDialog=0x7f0800dd;
+        /**  模糊 
+         */
         public static int HeadScale=0x7f0800de;
         public static int MyAlertDialog=0x7f0800df;
         public static int MyDialogStyle=0x7f0800e0;
+        /**  模糊 
+         */
         public static int MyDialogStyleBottom=0x7f0800e1;
+        /**  模糊 
+         */
         public static int MyDialogStyleTop=0x7f0800e2;
         public static int Platform_AppCompat=0x7f08001b;
         public static int Platform_AppCompat_Light=0x7f08001c;

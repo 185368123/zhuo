@@ -4,22 +4,6 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\cjt.library.wheel\\camera\\1.1.8\\res\\drawable-anydpi-v21\\ic_flash_off.xml"
     },
     {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\drawable-anydpi-v21\\exo_edit_mode_logo.xml",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.google.android.exoplayer\\exoplayer-ui\\2.6.1\\res\\drawable-anydpi-v21\\exo_edit_mode_logo.xml"
-    },
-    {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\drawable-anydpi-v21\\exo_controls_repeat_off.xml",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.google.android.exoplayer\\exoplayer-ui\\2.6.1\\res\\drawable-anydpi-v21\\exo_controls_repeat_off.xml"
-    },
-    {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\drawable-anydpi-v21\\exo_controls_repeat_all.xml",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.google.android.exoplayer\\exoplayer-ui\\2.6.1\\res\\drawable-anydpi-v21\\exo_controls_repeat_all.xml"
-    },
-    {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\drawable-anydpi-v21\\exo_controls_pause.xml",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.google.android.exoplayer\\exoplayer-ui\\2.6.1\\res\\drawable-anydpi-v21\\exo_controls_pause.xml"
-    },
-    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\drawable-anydpi-v21\\ic_photo.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\cjt.library.wheel\\camera\\1.1.8\\res\\drawable-anydpi-v21\\ic_photo.xml"
     },
@@ -28,36 +12,8 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\cjt.library.wheel\\camera\\1.1.8\\res\\drawable-anydpi-v21\\ic_camera.xml"
     },
     {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\drawable-anydpi-v21\\exo_controls_play.xml",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.google.android.exoplayer\\exoplayer-ui\\2.6.1\\res\\drawable-anydpi-v21\\exo_controls_play.xml"
-    },
-    {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\drawable-anydpi-v21\\exo_controls_previous.xml",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.google.android.exoplayer\\exoplayer-ui\\2.6.1\\res\\drawable-anydpi-v21\\exo_controls_previous.xml"
-    },
-    {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\drawable-anydpi-v21\\exo_controls_next.xml",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.google.android.exoplayer\\exoplayer-ui\\2.6.1\\res\\drawable-anydpi-v21\\exo_controls_next.xml"
-    },
-    {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\drawable-anydpi-v21\\exo_controls_repeat_one.xml",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.google.android.exoplayer\\exoplayer-ui\\2.6.1\\res\\drawable-anydpi-v21\\exo_controls_repeat_one.xml"
-    },
-    {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\drawable-anydpi-v21\\exo_controls_fastforward.xml",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.google.android.exoplayer\\exoplayer-ui\\2.6.1\\res\\drawable-anydpi-v21\\exo_controls_fastforward.xml"
-    },
-    {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\drawable-anydpi-v21\\exo_controls_shuffle.xml",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.google.android.exoplayer\\exoplayer-ui\\2.6.1\\res\\drawable-anydpi-v21\\exo_controls_shuffle.xml"
-    },
-    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\drawable-anydpi-v21\\ic_flash_auto.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\cjt.library.wheel\\camera\\1.1.8\\res\\drawable-anydpi-v21\\ic_flash_auto.xml"
-    },
-    {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\drawable-anydpi-v21\\exo_controls_rewind.xml",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\exploded-aar\\com.google.android.exoplayer\\exoplayer-ui\\2.6.1\\res\\drawable-anydpi-v21\\exo_controls_rewind.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\release\\drawable-anydpi-v21\\ic_flash_on.xml",

@@ -92,16 +92,8 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.0.0\\res\\anim\\design_fab_in.xml"
     },
     {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\res\\merged\\release\\anim\\tooltip_enter.xml",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\26.0.2\\res\\anim\\tooltip_enter.xml"
-    },
-    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\res\\merged\\release\\anim\\abc_fade_in.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.0.0\\res\\anim\\abc_fade_in.xml"
-    },
-    {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\res\\merged\\release\\anim\\tooltip_exit.xml",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\26.0.2\\res\\anim\\tooltip_exit.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\res\\merged\\release\\anim\\abc_popup_enter.xml",

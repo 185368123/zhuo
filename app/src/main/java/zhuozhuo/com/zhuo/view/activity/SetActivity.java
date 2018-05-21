@@ -1,5 +1,6 @@
 package zhuozhuo.com.zhuo.view.activity;
 
+import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -20,9 +21,15 @@ import com.hyphenate.easeui.provider.UserInfoProvider;
 import com.hyphenate.chatuidemo.widget.BottomDialog;
 import com.hyphenate.easeui.widget.EaseSwitchButton;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import li.com.base.baseuntils.LogUtils;
 import zhuozhuo.com.zhuo.MainApplication;
 import zhuozhuo.com.zhuo.R;
 import zhuozhuo.com.zhuo.adapter.SpinnerAdapter;
@@ -56,6 +63,11 @@ public class SetActivity extends BaseActivity implements AdapterView.OnItemSelec
     List<String> list = new ArrayList<>();
     private LinearLayout linearLayout;
     private TextView tv_vison;
+    private LinearLayout ll_clear;
+    private TextView tv_clear;
+    private String saveVideoPath;
+    private File file;
+    private FileInputStream fis = null;
 
     @Override
     public int getLayoutId() {
@@ -77,6 +89,9 @@ public class SetActivity extends BaseActivity implements AdapterView.OnItemSelec
         list.add("女");
         settingsModel = DemoHelper.getInstance().getModel();
         spinnerAdapter = new SpinnerAdapter(this, list);
+        saveVideoPath = Environment.getExternalStorageDirectory().getPath()+ "/JCamera";
+        file = new File(saveVideoPath);
+        LogUtils.logd(saveVideoPath);
 
 
         notifySwitch = (EaseSwitchButton) findViewById(R.id.switch_notification);
@@ -87,6 +102,8 @@ public class SetActivity extends BaseActivity implements AdapterView.OnItemSelec
         rl_switch_vibrate = (RelativeLayout) findViewById(R.id.rl_switch_vibrate);
         linearLayout = (LinearLayout) findViewById(R.id.linearlayout_set);
         tv_vison = (TextView) findViewById(R.id.tv_vison);
+        ll_clear = findViewById(R.id.linearlayout_clear);
+        tv_clear = findViewById(R.id.tv_clear);
 
         spinner = (Spinner) findViewById(R.id.spinner_set);
         spinner.setAdapter(spinnerAdapter);
@@ -94,12 +111,14 @@ public class SetActivity extends BaseActivity implements AdapterView.OnItemSelec
 
 
         tv_vison.setText("V" + MainApplication.getInstance().getVison());
+        tv_clear.setText(getSize(file));
         spinner.setOnItemSelectedListener(this);
         notifySwitch.setOnClickListener(this);
         rl_switch_notification.setOnClickListener(this);
         rl_switch_sound.setOnClickListener(this);
         rl_switch_vibrate.setOnClickListener(this);
         linearLayout.setOnClickListener(this);
+        ll_clear.setOnClickListener(this);
 
         // the vibrate and sound notification are allowed or not?
         if (settingsModel.getSettingMsgNotification()) {
@@ -194,7 +213,50 @@ public class SetActivity extends BaseActivity implements AdapterView.OnItemSelec
             }
         } else if (i == R.id.linearlayout_set) {
             UpdateUtils.getInstance().checkUpdate(this);
+        }else if (i==R.id.linearlayout_clear){
+            if (file != null && file.exists() && file.isDirectory()) {
+                for (File item : file.listFiles()) {
+                    item.delete();
+                }
+                tv_clear.setText(getSize(file));
+            }
         }
+    }
+
+    public String getSize(File file){
+        int size=0;
+        if (file != null && file.exists() && file.isDirectory()) {
+            for (File item : file.listFiles()) {
+                if (!item.isDirectory()){
+                    try {
+                        fis = new FileInputStream(item);
+                        size =size+fis.available();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+                item.delete();
+            }
+        }
+        DecimalFormat df = new DecimalFormat("#.00");
+        String fileSizeString = "";
+        String wrongSize = "0B";
+        if (size == 0) {
+            return wrongSize;
+        }
+        if (size < 1024) {
+            fileSizeString = df.format((double) size) + "B";
+        } else if (size < 1048576) {
+            fileSizeString = df.format((double) size / 1024) + "KB";
+        } else if (size < 1073741824) {
+            fileSizeString = df.format((double) size / 1048576) + "MB";
+        } else {
+            fileSizeString = df.format((double) size / 1073741824) + "GB";
+        }
+        return fileSizeString;
     }
 
     void logout() {

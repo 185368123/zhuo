@@ -7,20 +7,20 @@ import java.util.List;
  */
 
 public class UserMsgBean {
-
         /**
-         * account : 5566
-         * nick_name : 苍井空
+         * account : 无
+         * nick_name : 波结衣
          * sex : 2
-         * photo_link : http://zhuozhuo.oss-cn-shenzhen.aliyuncs.com/UserIcon/471521798026072.jpg
-         * location : 深职,数字创意与动画学院,大三
-         * exp : 50
-         * match_count : 5
+         * photo_link : http://zhuozhuo.oss-cn-shenzhen.aliyuncs.com/UserIcon/321523605352436.jpg
+         * location : 深职,医学技术与护理学院,大三
+         * exp : 140
+         * match_count : 16
          * group_match_count : 0
          * phone_type : 0
          * hundred_rate : 0
+         * user_video : http://zhuozhuo.oss-cn-shenzhen.aliyuncs.com/Single/321525853429252.mp4
          * hundred_level : c
-         * card : ["0","0","2","0","0","1","0","0","1"]
+         * card : ["0","2","5","0","1","1","0","0","2"]
          */
 
         private String account;
@@ -33,6 +33,7 @@ public class UserMsgBean {
         private String group_match_count;
         private String phone_type;
         private String hundred_rate;
+        private String user_video;
         private String hundred_level;
         private List<String> card;
 
@@ -114,6 +115,14 @@ public class UserMsgBean {
 
         public void setHundred_rate(String hundred_rate) {
             this.hundred_rate = hundred_rate;
+        }
+
+        public String getUser_video() {
+            return user_video;
+        }
+
+        public void setUser_video(String user_video) {
+            this.user_video = user_video;
         }
 
         public String getHundred_level() {

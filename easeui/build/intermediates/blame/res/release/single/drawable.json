@@ -16,10 +16,6 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\exploded-aar\\zhuo\\base\\unspecified\\res\\drawable\\shape_loading_dialog.xml"
     },
     {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\res\\merged\\release\\drawable\\video_jump_btn_bg.xml",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\exploded-aar\\com.shuyu\\gsyVideoPlayer-java\\4.1.2\\res\\drawable\\video_jump_btn_bg.xml"
-    },
-    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\res\\merged\\release\\drawable\\selector_gray.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\exploded-aar\\zhuo\\base\\unspecified\\res\\drawable\\selector_gray.xml"
     },
@@ -292,10 +288,6 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\src\\main\\res\\drawable\\ease_mm_listitem.xml"
     },
     {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\res\\merged\\release\\drawable\\tooltip_frame_light.xml",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\26.0.2\\res\\drawable\\tooltip_frame_light.xml"
-    },
-    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\res\\merged\\release\\drawable\\design_snackbar_background.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.0.0\\res\\drawable\\design_snackbar_background.xml"
     },
@@ -346,10 +338,6 @@
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\res\\merged\\release\\drawable\\abc_item_background_holo_dark.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.0.0\\res\\drawable\\abc_item_background_holo_dark.xml"
-    },
-    {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\res\\merged\\release\\drawable\\tooltip_frame_dark.xml",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\26.0.2\\res\\drawable\\tooltip_frame_dark.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\res\\merged\\release\\drawable\\common_google_signin_btn_icon_light_focused.xml",

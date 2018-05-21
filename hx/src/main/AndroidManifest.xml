@@ -19,7 +19,8 @@
             android:screenOrientation="portrait"
             android:theme="@style/MyDialogStyle" />
         <activity android:name=".my.InviteMemberActivity" />
-        <activity android:name=".my.SetTagActivity"></activity>
+        <activity android:name=".my.SetTagActivity" />
+        <activity android:name=".my.SimpleVideoActivity"></activity>
     </application>
 
 </manifest>

@@ -53,10 +53,9 @@
                     app:suffixTextSize="15sp"
                     app:timeTextColor="#000000"
                     app:suffixDay="天"
-                    app:suffixHour="小时"
-                    app:suffixMillisecond="毫秒"
-                    app:suffixMinute="分钟"
-                    app:suffixSecond="秒"
+                    app:suffixHour=":"
+                    app:suffixMillisecond=":"
+                    app:suffixMinute=":"
                     app:timeTextSize="@dimen/text_size_13"/>
 
                 <TextView

@@ -552,12 +552,7 @@ public class CameraInterface implements Camera.PreviewCallback {
         } else {
             mediaRecorder.setVideoSize(videoSize.width, videoSize.height);
         }
-//        if (SELECTED_CAMERA == CAMERA_FRONT_POSITION) {
-//            mediaRecorder.setOrientationHint(270);
-//        } else {
-//            mediaRecorder.setOrientationHint(nowAngle);
-////            mediaRecorder.setOrientationHint(90);
-//        }
+
 
         if (SELECTED_CAMERA == CAMERA_FRONT_POSITION) {
             //手机预览倒立的处理
@@ -649,41 +644,28 @@ public class CameraInterface implements Camera.PreviewCallback {
             doStopPreview();
             final String fileName = saveVideoPath + File.separator + videoFileName;
             final  String  fileName_= saveVideoPath + File.separator +"mirror"+ videoFileName;
-            final  String  fileName__= saveVideoPath + File.separator +"mirror_beauty"+ videoFileName;
-            EpVideo epVideo=new EpVideo(fileName);
-            epVideo.rotation(0,true);
-            EpEditor.exec(epVideo, new EpEditor.OutputOption(fileName_), new OnEditorListener() {
-                @Override
-                public void onSuccess() {
-                   /* VideoClipper clipper=new VideoClipper();
-                    clipper.showBeauty();
-                    clipper.setFilterType(filterType);
-                    clipper.setInputVideoPath(fileName_);
-                    clipper.setOutputVideoPath(fileName__);
-                    clipper.setOnVideoCutFinishListener(new VideoClipper.OnVideoCutFinishListener() {
-                        @Override
-                        public void onFinish() {*/
-                            callback.recordResult(fileName_, videoFirstFrame);
-                    /*    }
-                    });
-                    try {
-                        clipper.clipVideo(0,time*1000);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }*/
-                }
+            if (SELECTED_CAMERA == CAMERA_POST_POSITION) {
+                callback.recordResult(fileName, videoFirstFrame);
+            } else {
+                EpVideo epVideo=new EpVideo(fileName);
+                epVideo.rotation(0,true);
+                EpEditor.exec(epVideo, new EpEditor.OutputOption(fileName_), new OnEditorListener() {
+                    @Override
+                    public void onSuccess() {
+                        callback.recordResult(fileName_, videoFirstFrame);
+                    }
 
-                @Override
-                public void onFailure() {
+                    @Override
+                    public void onFailure() {
 
-                }
+                    }
 
-                @Override
-                public void onProgress(float v) {
+                    @Override
+                    public void onProgress(float v) {
 
-                }
-            });
-
+                    }
+                });
+            }
         }
     }
 

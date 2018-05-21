@@ -2,7 +2,7 @@
 <litepal>
     <dbname value="user" ></dbname>
 
-    <version value="3" ></version>
+    <version value="4" ></version>
     <list>
         <mapping class="com.hyphenate.chatuidemo.my.bean.UserDB"></mapping>
     </list>

@@ -35,9 +35,9 @@ public class UserDB extends DataSupport {
     private String group_match_count;
     private String phone_type;
     private String hundred_rate;
+    private String user_video;
     private String hundred_level;
     private List<String> card;
-
     public String getAccount() {
         return account;
     }
@@ -142,6 +142,14 @@ public class UserDB extends DataSupport {
         this.user_id = user_id;
     }
 
+    public String getUser_video() {
+        return user_video;
+    }
+
+    public void setUser_video(String user_video) {
+        this.user_video = user_video;
+    }
+
     @Override
     public String toString() {
         return "UserDB{" +
@@ -154,6 +162,10 @@ public class UserDB extends DataSupport {
                 ", exp='" + exp + '\'' +
                 ", match_count='" + match_count + '\'' +
                 ", group_match_count='" + group_match_count + '\'' +
+                ", phone_type='" + phone_type + '\'' +
+                ", hundred_rate='" + hundred_rate + '\'' +
+                ", user_video='" + user_video + '\'' +
+                ", hundred_level='" + hundred_level + '\'' +
                 ", card=" + card +
                 '}';
     }

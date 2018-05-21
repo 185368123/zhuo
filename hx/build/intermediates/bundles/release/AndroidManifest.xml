@@ -24,6 +24,7 @@
             android:theme="@style/MyDialogStyle" />
         <activity android:name="com.hyphenate.chatuidemo.my.InviteMemberActivity" />
         <activity android:name="com.hyphenate.chatuidemo.my.SetTagActivity" />
+        <activity android:name="com.hyphenate.chatuidemo.my.SimpleVideoActivity" />
     </application>
 
 </manifest>

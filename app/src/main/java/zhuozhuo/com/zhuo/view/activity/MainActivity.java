@@ -18,7 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.EMConnectionListener;
-import com.hyphenate.EMError;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chatuidemo.DemoApplication;
 import com.hyphenate.chatuidemo.DemoHelper;
@@ -32,20 +31,15 @@ import com.hyphenate.chatuidemo.ui.ConversationListFragment;
 import com.hyphenate.easeui.EaseUI;
 import com.hyphenate.easeui.domain.EaseUser;
 import com.hyphenate.easeui.events.RxBusConstants;
-import com.hyphenate.exceptions.HyphenateException;
-import com.hyphenate.util.NetUtils;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.litepal.tablemanager.Connector;
-import java.util.List;
 
 import li.com.base.basesinglebean.SingleBeans;
 import li.com.base.baseuntils.LogUtils;
-import rx.Subscriber;
 import rx.functions.Action1;
-import rx.schedulers.Schedulers;
 import zhuozhuo.com.zhuo.R;
 import zhuozhuo.com.zhuo.constants.TabHostConstant;
 import zhuozhuo.com.zhuo.service.SocketService;

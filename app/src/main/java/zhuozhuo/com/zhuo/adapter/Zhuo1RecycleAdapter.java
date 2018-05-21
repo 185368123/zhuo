@@ -62,7 +62,7 @@ public class Zhuo1RecycleAdapter extends RecyclerView.Adapter<Zhuo1RecycleAdapte
             holder.tv2.setText("已完成");
         }else if (data.get(position).getIs_status().equals("1")||data.get(position).getStatus().equals("1")){
             holder.tv2.setVisibility(View.VISIBLE);
-            holder.tv2.setText("未评价");
+            holder.tv2.setText("评价");
         }else {
             holder.tv2.setVisibility(View.GONE);
         }

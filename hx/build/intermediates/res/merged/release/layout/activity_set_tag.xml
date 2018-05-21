@@ -42,6 +42,7 @@
         <EditText
             android:background="@drawable/maincolor_shape"
             android:layout_width="0dp"
+            android:gravity="center"
             android:hint="输入活动名称（限5字以内）"
             android:maxLength="5"
             android:id="@+id/et_add_tag"
@@ -52,7 +53,7 @@
             android:layout_height="wrap_content" />
         <Button
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="35dp"
             android:text="增加"
             android:background="@drawable/maincolor_shape"
             android:id="@+id/bt_add_tag"/>

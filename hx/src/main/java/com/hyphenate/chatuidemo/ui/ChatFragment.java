@@ -29,7 +29,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -181,7 +180,6 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
             }catch (Exception e){
                 e.printStackTrace();
             }
-
                 num++;                 //依次下一个
                   //如果到了最后一个item，则循环
             if (num >= 12) {

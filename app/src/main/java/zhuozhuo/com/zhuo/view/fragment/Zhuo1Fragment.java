@@ -166,6 +166,7 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
         }
 
         simpleVideo=view.findViewById(R.id.lv_fragment);
+        simpleVideo.getBackButton().setVisibility(View.GONE);
         loadingTip = view.findViewById(R.id.loadedTip_zhuo3);
         iv_cancle1 = (ImageView) view.findViewById(R.id.cancle_iv1);
         iv_cancle = (ImageView) view.findViewById(R.id.cancle_iv);
@@ -256,7 +257,7 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
                         mPresenter.match_(choice_id);
                     }else {
                         // 创建构建器
-                        AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getContext());
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                         // 设置参数
                         builder.setMessage("你还没有录制视频，是否现在去录制？")
                                 .setNeutralButton("暂不设置", new DialogInterface.OnClickListener() {
@@ -272,7 +273,7 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
                         }).setPositiveButton("选择视频", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
+                                startActivity(VideoSelectActivity.class);
                             }
                         });
                         builder.create().show();
@@ -284,7 +285,7 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
                 mPresenter.match_(choice_id);
             }else {
                 // 创建构建器
-                AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getContext());
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 // 设置参数
                 builder.setMessage("你还没有录制视频，是否现在去录制？")
                         .setNeutralButton("暂不设置", new DialogInterface.OnClickListener() {
@@ -293,16 +294,16 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
 
                             }
                         }).setNegativeButton("录制视频", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        startActivity(RecordVideoActivity.class);
-                    }
-                }).setPositiveButton("选择视频", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        startActivity(VideoSelectActivity.class);
-                    }
-                });
+                              @Override
+                              public void onClick(DialogInterface dialog, int which) {
+                                startActivity(RecordVideoActivity.class);
+                              }
+                        }).setPositiveButton("选择视频", new DialogInterface.OnClickListener() {
+                              @Override
+                             public void onClick(DialogInterface dialog, int which) {
+                             startActivity(VideoSelectActivity.class);
+                              }
+                         });
                 builder.create().show();
             }
         }
@@ -342,7 +343,6 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
                 layout.setVisibility(View.GONE);
                 layout_user.setVisibility(View.GONE);
                 chronometer.stop();
-                initializationPresenter.getSingleStatus();
                 drawable.stop();
                 break;
             case R.id.cancle_iv1://取消匹配
@@ -350,7 +350,6 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
                 layout.setVisibility(View.GONE);
                 layout_user.setVisibility(View.GONE);
                 chronometer.stop();
-                initializationPresenter.getSingleStatus();
                 drawable.stop();
                 break;
             case R.id.chat_frame:
@@ -481,6 +480,7 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
         mRxManager.on("stateless", new Action1<String>() {
             @Override
             public void call(String s) {
+                mPresenter.getAllMatch();
                 try {
                     JSONObject object=new JSONObject(s);
                     if (!DemoHelper.getInstance().getContactList().containsKey(object.getString("user_id"))) {
@@ -653,7 +653,6 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
         }else {
             rv.setVisibility(View.GONE);
         }
-
     }
 
 }

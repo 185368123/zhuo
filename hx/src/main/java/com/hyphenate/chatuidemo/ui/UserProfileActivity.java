@@ -1,10 +1,12 @@
 package com.hyphenate.chatuidemo.ui;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,11 +16,14 @@ import com.hyphenate.chatuidemo.DBOpenHelp;
 import com.hyphenate.chatuidemo.DemoHelper;
 import com.hyphenate.chatuidemo.R;
 import com.hyphenate.chatuidemo.UserMsgDBHelp;
+import com.hyphenate.chatuidemo.my.SimpleVideoActivity;
 import com.hyphenate.chatuidemo.my.bean.UserDB;
 
 import java.util.List;
 
-public class UserProfileActivity extends BaseActivity {
+import li.com.base.baseuntils.ToastUitl;
+
+public class UserProfileActivity extends BaseActivity implements View.OnClickListener {
     private ImageView headAvatar;
     private TextView tvNickName;
     private TextView tv_card1;
@@ -36,6 +41,8 @@ public class UserProfileActivity extends BaseActivity {
     protected String username;
     private Button bt_add_friend;
     private ProgressDialog progressDialog;
+    private LinearLayout ll_video;
+    private UserDB userDB;
 
 
     @Override
@@ -49,8 +56,8 @@ public class UserProfileActivity extends BaseActivity {
     }
 
     private void setView(final String username) {
-        UserDB userDB = UserMsgDBHelp.getUserMsgDBHelp().searchByUserId(username);
-        if (userDB!=null) {
+        userDB = UserMsgDBHelp.getUserMsgDBHelp().searchByUserId(username);
+        if (userDB !=null) {
             Glide.with(this).load(userDB.getPhoto_link()).into(headAvatar);
             tvNickName.setText(userDB.getNick_name());
             if (userDB.getSex().equals("1")) {
@@ -58,18 +65,18 @@ public class UserProfileActivity extends BaseActivity {
             } else if (userDB.getSex().equals("2")) {
                 tv_sex.setText("女");
             }
-            if (userDB.getLocation()==null||userDB.getLocation().equals("")){
+            if (userDB.getLocation()==null|| userDB.getLocation().equals("")){
                 tv_college.setText("无");
             }else {
                 tv_college.setText(userDB.getLocation());
             }
-            if (userDB.getAccount()==null||userDB.getAccount().equals("")){
+            if (userDB.getAccount()==null|| userDB.getAccount().equals("")){
                 tv_hobby.setText("无");
             }else {
                 tv_hobby.setText(userDB.getAccount());
             }
 
-            List<String> card=userDB.getCard();
+            List<String> card= userDB.getCard();
             tv_card1.setText(card.get(0%card.size()));
             tv_card2.setText(card.get(1%card.size()));
             tv_card3.setText(card.get(2%card.size()));
@@ -140,9 +147,25 @@ public class UserProfileActivity extends BaseActivity {
         tv_card8 = (TextView) findViewById(R.id.tv_card8);
         tv_card9 = (TextView) findViewById(R.id.tv_card9);
         bt_add_friend = (Button) findViewById(R.id.bt_add_friend);
+        ll_video = (LinearLayout) findViewById(R.id.ll_video);
+
+        ll_video.setOnClickListener(this);
     }
 
 
+    @Override
+    public void onClick(View v) {
+        int i = v.getId();
+        if (i == R.id.ll_video) {
+            if (userDB.getUser_video()==null){
+                ToastUitl.showLong("对方未设置视频");
+        }else {
+                Intent intent = new Intent(this, SimpleVideoActivity.class);
+                intent.putExtra("url", userDB.getUser_video());
+                startActivity(intent);
+            }
+        }
+    }
 }
 
 	

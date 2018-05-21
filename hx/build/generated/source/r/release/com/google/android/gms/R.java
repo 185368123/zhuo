@@ -59,7 +59,7 @@ public final class R {
 		public static int adjust_height = 0x7f0d0076;
 		public static int adjust_width = 0x7f0d0077;
 		public static int auto = 0x7f0d0060;
-		public static int button_0 = 0x7f0d014b;
+		public static int button_0 = 0x7f0d014c;
 		public static int center = 0x7f0d0061;
 		public static int dark = 0x7f0d0088;
 		public static int icon_only = 0x7f0d0086;
@@ -69,9 +69,9 @@ public final class R {
 		public static int progressBar = 0x7f0d00d1;
 		public static int radio = 0x7f0d00ac;
 		public static int standard = 0x7f0d002e;
-		public static int text = 0x7f0d0121;
-		public static int text2 = 0x7f0d0268;
-		public static int toolbar = 0x7f0d0284;
+		public static int text = 0x7f0d0122;
+		public static int text2 = 0x7f0d026a;
+		public static int toolbar = 0x7f0d0286;
 		public static int wide = 0x7f0d0087;
 		public static int wrap_content = 0x7f0d005f;
 	}
