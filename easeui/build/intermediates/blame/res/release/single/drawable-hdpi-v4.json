@@ -8,12 +8,12 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.0.0\\res\\drawable-hdpi-v4\\abc_switch_track_mtrl_alpha.9.png"
     },
     {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_video_recorder_start_btn.png",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\src\\main\\res\\drawable-hdpi\\ease_video_recorder_start_btn.png"
-    },
-    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_input_bar_bg_active.9.png",
         "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\src\\main\\res\\drawable-hdpi\\ease_input_bar_bg_active.9.png"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_video_recorder_start_btn.png",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\src\\main\\res\\drawable-hdpi\\ease_video_recorder_start_btn.png"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_popup_background_mtrl_mult.9.png",
@@ -24,12 +24,12 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.0.0\\res\\drawable-hdpi-v4\\abc_scrubber_control_to_pressed_mtrl_005.png"
     },
     {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ee_9.png",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\src\\main\\res\\drawable-hdpi\\ee_9.png"
-    },
-    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_chatfrom_voice_playing_f3.png",
         "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\src\\main\\res\\drawable-hdpi\\ease_chatfrom_voice_playing_f3.png"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ee_9.png",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\src\\main\\res\\drawable-hdpi\\ee_9.png"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_btn_switch_to_on_mtrl_00001.9.png",

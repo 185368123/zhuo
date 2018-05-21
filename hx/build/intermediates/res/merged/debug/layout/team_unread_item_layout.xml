@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="59dp"
+    android:gravity="center"
+    android:orientation="horizontal">
+    <TextView
+        android:layout_width="10dp"
+        android:layout_height="match_parent" />
+    <ImageView
+        android:id="@+id/iv_avatar"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ease_default_avatar"
+        android:scaleType="fitXY"/>
+    <LinearLayout
+        android:paddingLeft="7dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:text="名字"
+                android:id="@+id/unread_name"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textColor="@color/list_itease_primary_color"
+                android:textSize="16sp"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+           <Button
+               android:text="同意"
+               android:layout_width="50dp"
+               android:layout_height="wrap_content"
+               android:background="@drawable/maincolor_shape"
+               android:id="@+id/bt_agree"/>
+            <TextView
+                android:layout_width="5dp"
+                android:layout_height="match_parent"
+                />
+            <Button
+                android:text="拒绝"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/maincolor_shape"
+                android:id="@+id/bt_refuse"/>
+            <TextView
+                android:layout_width="5dp"
+                android:layout_height="match_parent"
+               />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="介绍"
+            android:textColor="@color/list_itease_secondary_color"
+            android:textSize="14sp"
+            android:id="@+id/tv_reason"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.hyphenate.chatuidemo" >
+
+    <uses-sdk
+        android:minSdkVersion="19"
+        android:targetSdkVersion="25" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <application android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.hyphenate.chatuidemo.my.VideoPlayActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hyphenate.chatuidemo.my.TableActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hyphenate.chatuidemo.my.CameActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hyphenate.chatuidemo.my.CreatTeamActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyDialogStyle" />
+        <activity android:name="com.hyphenate.chatuidemo.my.InviteMemberActivity" />
+        <activity android:name="com.hyphenate.chatuidemo.my.SetTagActivity" />
+        <activity android:name="com.hyphenate.chatuidemo.my.SimpleVideoActivity" />
+    </application>
+
+</manifest>

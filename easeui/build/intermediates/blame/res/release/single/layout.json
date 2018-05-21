@@ -4,12 +4,12 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\src\\main\\res\\layout\\ease_widget_chat_primary_menu.xml"
     },
     {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\toast_custom.xml",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\exploded-aar\\zhuo\\base\\unspecified\\res\\layout\\toast_custom.xml"
-    },
-    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\abc_activity_chooser_view_list_item.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.0.0\\res\\layout\\abc_activity_chooser_view_list_item.xml"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\toast_custom.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\exploded-aar\\zhuo\\base\\unspecified\\res\\layout\\toast_custom.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_expression_gridview.xml",
@@ -84,16 +84,16 @@
         "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\src\\main\\res\\layout\\ease_row_contact.xml"
     },
     {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\activity_msg_video_play.xml",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\src\\main\\res\\layout\\activity_msg_video_play.xml"
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\design_text_input_password_icon.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.0.0\\res\\layout\\design_text_input_password_icon.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_menu_layout.xml",
         "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.0.0\\res\\layout\\abc_action_menu_layout.xml"
     },
     {
-        "merged": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\design_text_input_password_icon.xml",
-        "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.0.0\\res\\layout\\design_text_input_password_icon.xml"
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\activity_msg_video_play.xml",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\easeui\\src\\main\\res\\layout\\activity_msg_video_play.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\notification_action_tombstone.xml",
