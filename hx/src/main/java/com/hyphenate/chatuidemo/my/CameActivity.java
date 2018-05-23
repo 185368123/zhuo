@@ -1,72 +1,57 @@
 package com.hyphenate.chatuidemo.my;
-
 import android.graphics.Bitmap;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Environment;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
-import com.cjt2325.cameralibrary.JCameraView;
-import com.cjt2325.cameralibrary.listener.JCameraListener;
 import com.hyphenate.chatuidemo.R;
+import com.hyphenate.chatuidemo.my.button.CameraListener;
+import com.hyphenate.chatuidemo.my.videobeauty.BeautyCamerView;
 import com.hyphenate.chatuidemo.ui.BaseActivity;
 
 
-import java.io.File;
 
 public class CameActivity extends BaseActivity {
-    private JCameraView jCameraView;
-    private boolean granted = false;
-    MediaScannerConnection msc = null;
-    String localPath = "";
-    boolean backflag;
+
+    private BeautyCamerView camerView;
+
+    MediaScannerConnection msc;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_came);
-        jCameraView = (JCameraView) findViewById(R.id.jcameraview);
-        String flag=getIntent().getStringExtra("flag");
-        if (flag.equals("true")){
-            jCameraView.setReturnVisibility(View.GONE);
-            backflag=true;
-        }else {
-            jCameraView.setReturnVisibility(View.VISIBLE);
-            backflag=false;
-        }
-        //设置视频保存路径
-        jCameraView.setSaveVideoPath(Environment.getExternalStorageDirectory().getPath() + File.separator + "JCamera");
+        camerView = (BeautyCamerView) findViewById(R.id.bcv);
 
-        //JCameraView监听
-        jCameraView.setJCameraLisenter(new JCameraListener() {
+        camerView.setDuration(30 * 1000);
+        camerView.setMinDuration(2 * 1000);
+
+        camerView.setCameraLisenter(new CameraListener() {
             @Override
             public void captureSuccess(Bitmap bitmap) {
-                //获取图片bitmap
-                Log.i("JCameraView", "captureSuccess = " + bitmap.getWidth());
+
             }
 
             @Override
             public void recordSuccess(String url, Bitmap firstFrame) {
-                //获取图片bitmap
-                Log.i("JCameraView", "recordSuccess = " + url);
-               localPath =  url;
-              sendVideo(null);
+                sendVideo(url);
             }
+
+            @Override
             public void quit() {
-                //退出按钮
-               onBackPressed();
+                finish();
             }
         });
     }
 
 
-    public void sendVideo(View view) {
-        if (TextUtils.isEmpty(localPath)) {
+    public void sendVideo(final String savePath) {
+        if (TextUtils.isEmpty(savePath)) {
             return;
         }
-        if(msc == null)
+        if (msc == null)
             msc = new MediaScannerConnection(this,
                     new MediaScannerConnection.MediaScannerConnectionClient() {
 
@@ -79,7 +64,7 @@ public class CameActivity extends BaseActivity {
 
                         @Override
                         public void onMediaScannerConnected() {
-                            msc.scanFile(localPath, "video/*");
+                            msc.scanFile(savePath, "video/*");
                         }
                     });
         msc.connect();
@@ -109,24 +94,19 @@ public class CameActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (granted) {
-            jCameraView.onResume();
-        }
+        camerView.onResume();
     }
+
 
     @Override
     protected void onPause() {
         super.onPause();
-        jCameraView.onPause();
+        camerView.onPause();
     }
 
     @Override
-    public void onBackPressed() {
-        if (backflag){
-
-        }else {
-            setResult(RESULT_CANCELED, getIntent().putExtra("uri",""));
-            finish();
-        }
+    protected void onDestroy() {
+        super.onDestroy();
+        camerView.onDestroy();
     }
 }

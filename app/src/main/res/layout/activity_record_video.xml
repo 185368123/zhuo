@@ -5,12 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="zhuozhuo.com.zhuo.view.activity.RecordVideoActivity">
-    <com.cjt2325.cameralibrary.JCameraView
-        android:id="@+id/jcv_record"
+    <com.hyphenate.chatuidemo.my.videobeauty.BeautyCamerView
+        android:id="@+id/bcv_record"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:duration_max="14000"
-        app:iconMargin="20dp"
-        app:iconSize="30dp"
-        app:iconSrc="@drawable/ic_camera_enhance_black_24dp"/>
+        />
 </LinearLayout>

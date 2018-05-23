@@ -245,5 +245,14 @@
         style="@style/login_button_style1"
         android:text="@string/set_text4" />
 
+    <Button
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:onClick="test"
+        android:visibility="gone"
+        style="@style/login_button_style1"
+        android:text="测试" />
+
 </LinearLayout>
 

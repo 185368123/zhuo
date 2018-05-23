@@ -113,6 +113,7 @@ public class Welcome2Activity extends BaseActivity<GetVisonModel, GetVisonPresen
         mPresenter.getVison();
 
 
+
         ViewConfiguration configuration = ViewConfiguration.get(this);
         mTouchSlop = ViewConfigurationCompat.getScaledPagingTouchSlop(configuration);
         viewpager.setOnTouchListener(new View.OnTouchListener() {

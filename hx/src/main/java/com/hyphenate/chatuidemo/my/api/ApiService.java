@@ -25,7 +25,9 @@ import com.hyphenate.chatuidemo.my.bean.VideoLinkBean;
 import com.hyphenate.easeui.TeamUnreadBean;
 
 import li.com.base.basesinglebean.VisonBean;
+
 import java.util.List;
+
 import li.com.base.baserx.BaseRespose;
 import li.com.base.basesinglebean.SingleChooseBean;
 import li.com.base.basesinglebean.SingleChooseDetailBean;
@@ -53,7 +55,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST(UrlConstant.GetPhone_URL)
     Observable<BaseRespose<List<Object>>> getAnthCoe(@Field("phone") String phone,
-                                                      @Field("opt") String opt);
+                                                     @Field("opt") String opt);
 
     @FormUrlEncoded
     @POST(UrlConstant.FrogetPassword_URL)
@@ -77,8 +79,8 @@ public interface ApiService {
     @FormUrlEncoded
     @POST(UrlConstant.Change_URL)
     Observable<BaseRespose<List<Object>>> changeMsg(@Field("token") String token,
-                                                     @Field("key") String key,
-                                                     @Field("value") String value);
+                                                    @Field("key") String key,
+                                                    @Field("value") String value);
 
     @FormUrlEncoded
     @POST(UrlConstant.GetUser_URL)
@@ -235,7 +237,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST(UrlConstant.StartVideo)
     Observable<BaseRespose<Object>> startVideo(@Field("token") String token,
-                                             @Field("video_id") String video_id);
+                                               @Field("video_id") String video_id);
 
     @FormUrlEncoded
     @POST(UrlConstant.GetVison_URL)
@@ -270,8 +272,8 @@ public interface ApiService {
     @FormUrlEncoded
     @POST(UrlConstant.CreatTeam_URL)
     Observable<BaseRespose<Object>> creatTeam(@Field("token") String token,
-                                 @Field("group_name") String group_name,
-                                 @Field("game_name") String game_name);
+                                              @Field("group_name") String group_name,
+                                              @Field("game_name") String game_name);
 
     //获取网吧杯成员
     @FormUrlEncoded
@@ -293,7 +295,7 @@ public interface ApiService {
     @POST(UrlConstant.DeleteMember_URL)
     Observable<BaseRespose<Object>> deleteMember(@Field("token") String token,
                                                  @Field("line_id") String line_id,
-                                                 @Field("group_id") String group_id ,
+                                                 @Field("group_id") String group_id,
                                                  @Field("type") String type,
                                                  @Field("you_user_id") String you_user_id);
 
@@ -330,18 +332,18 @@ public interface ApiService {
     @FormUrlEncoded
     @POST(UrlConstant.ReceiveInvite_URL)
     Observable<BaseRespose<Object>> receiveInvite(@Field("token") String token,
-                                                               @Field("line_id") String line_id,
-                                                               @Field("group_id") String group_id,
-                                                               @Field("nick_user_id") String nick_user_id);
+                                                  @Field("line_id") String line_id,
+                                                  @Field("group_id") String group_id,
+                                                  @Field("nick_user_id") String nick_user_id);
 
 
     //拒绝网吧杯队伍邀请
     @FormUrlEncoded
     @POST(UrlConstant.RefuseInvite_URL)
     Observable<BaseRespose<Object>> refuseInvite(@Field("token") String token,
-                                                              @Field("line_id") String line_id,
-                                                              @Field("group_id") String group_id,
-                                                              @Field("nick_user_id") String nick_user_id);
+                                                 @Field("line_id") String line_id,
+                                                 @Field("group_id") String group_id,
+                                                 @Field("nick_user_id") String nick_user_id);
 
     //获得所有队伍
     @FormUrlEncoded
@@ -351,36 +353,36 @@ public interface ApiService {
     //拒绝申请入队
     @FormUrlEncoded
     @POST(UrlConstant.RefuseApply_URL)
-    Observable<BaseRespose<Object>>  refuseApply(@Field("token") String token,
-                                                              @Field("line_id") String line_id,
-                                                              @Field("you_user_id") String you_user_id);
+    Observable<BaseRespose<Object>> refuseApply(@Field("token") String token,
+                                                @Field("line_id") String line_id,
+                                                @Field("you_user_id") String you_user_id);
 
     //同意申请入队
     @FormUrlEncoded
     @POST(UrlConstant.ReceiveApply_URL)
-    Observable<BaseRespose<Object>>  receiveApply(@Field("token") String token,
-                                                               @Field("line_id") String line_id,
-                                                               @Field("you_user_id") String you_user_id);
+    Observable<BaseRespose<Object>> receiveApply(@Field("token") String token,
+                                                 @Field("line_id") String line_id,
+                                                 @Field("you_user_id") String you_user_id);
 
     //获取队伍未读消息列表
     @FormUrlEncoded
     @POST(UrlConstant.GetTeamUnread_URL)
-    Observable<TeamUnreadBean>  getTeamUnread(@Field("token") String token);
+    Observable<TeamUnreadBean> getTeamUnread(@Field("token") String token);
 
 
     //接受组队匹配邀请
     @FormUrlEncoded
     @POST(UrlConstant.Accept_URL)
     Observable<BaseRespose<Object>> accept(@Field("token") String token,
-                                            @Field("from_user_id") String from_user_id,
-                                            @Field("team_id") String team_id);
+                                           @Field("from_user_id") String from_user_id,
+                                           @Field("team_id") String team_id);
 
     //拒绝组队匹配邀请
     @FormUrlEncoded
     @POST(UrlConstant.GetTeamUnread_URL)
-    Observable<BaseRespose<Object>>  deny(@Field("token") String token,
-                                          @Field("from_user_id") String from_user_id,
-                                          @Field("team_id") String team_id);
+    Observable<BaseRespose<Object>> deny(@Field("token") String token,
+                                         @Field("from_user_id") String from_user_id,
+                                         @Field("team_id") String team_id);
 
     //获取比赛赛程
     @FormUrlEncoded
@@ -399,28 +401,37 @@ public interface ApiService {
     //获取匹配成功后填写的的12个标签
     @FormUrlEncoded
     @POST(UrlConstant.GetTag_URL)
-    Observable<TagBean>  getTag(@Field("token") String token,
-                                @Field("choice_id") String choice_id,
-                                @Field("you_user_id") String you_user_id);
+    Observable<TagBean> getTag(@Field("token") String token,
+                               @Field("choice_id") String choice_id,
+                               @Field("you_user_id") String you_user_id);
 
     //获取系统推荐标签
     @FormUrlEncoded
     @POST(UrlConstant.GetSuggestTag_URL)
-    Observable<BaseRespose<List<SuggestTagBean>>>  getSuggestTag(@Field("token") String token);
+    Observable<BaseRespose<List<SuggestTagBean>>> getSuggestTag(@Field("token") String token);
 
 
     //用户提交6个标签
     @FormUrlEncoded
     @POST(UrlConstant.SetTag_URL)
-    Observable<BaseRespose<Object>>  setTag(@Field("token") String token,
-                                            @Field("choice_id") String choice_id,
-                                            @Field("you_user_id") String you_user_id,
-                                            @Field("label") String label);
+    Observable<BaseRespose<Object>> setTag(@Field("token") String token,
+                                           @Field("choice_id") String choice_id,
+                                           @Field("you_user_id") String you_user_id,
+                                           @Field("label") String label);
 
     //用户提交6个标签
     @FormUrlEncoded
     @POST(UrlConstant.GetRandom_URL)
-    Observable<BaseRespose<List<Object>>>  getRandom(@Field("token") String token,
-                                            @Field("choice_id") String choice_id,
-                                            @Field("you_user_id") String you_user_id);
+    Observable<BaseRespose<List<Object>>> getRandom(@Field("token") String token,
+                                                    @Field("choice_id") String choice_id,
+                                                    @Field("you_user_id") String you_user_id);
+
+
+    //用户提交6个标签
+    @FormUrlEncoded
+    @POST(UrlConstant.Order_URL)
+    Observable<BaseRespose<Object>> order(@Field("token") String token,
+                                          @Field("goods_id") String goods_id,
+                                          @Field("goods_price") String goods_price,
+                                          @Field("pay_type") String pay_type);
 }

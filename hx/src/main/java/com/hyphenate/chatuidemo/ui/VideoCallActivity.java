@@ -66,7 +66,6 @@ import com.hyphenate.chat.EMVideoCallHelper;
 import com.hyphenate.chatuidemo.DemoHelper;
 import com.hyphenate.chatuidemo.R;
 import com.hyphenate.chatuidemo.UserMsgDBHelp;
-import com.cjt2325.cameralibrary.MyInvocation;
 import com.hyphenate.chatuidemo.my.bean.UserDB;
 import com.hyphenate.easeui.EaseUI;
 import com.hyphenate.easeui.domain.EaseAvatarOptions;
@@ -78,8 +77,6 @@ import com.superrtc.sdk.VideoView;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Field;
-import java.lang.reflect.Proxy;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.UUID;
@@ -300,29 +297,6 @@ public class VideoCallActivity extends CallActivity implements OnClickListener, 
         callHelper = EMClient.getInstance().callManager().getVideoCallHelper();
 
         EMClient.getInstance().callManager().setCameraDataProcessor(dataProcessor);
-    }
-
-    private void changeMirror(EMCallSurfaceView surface) {
-        // 获取 surfaceView中的 surfaceHolder
-        SurfaceHolder mSurfaceHolder = surface.getHolder();
-        // 创建代理接口的实现
-        MyInvocation testInvocation = new MyInvocation(mSurfaceHolder);
-        // 为 mSurfaceHolder 添加动态代理,并获取添加代理之后的 newSurfaceHolder
-        SurfaceHolder newSurfaceHolder = (SurfaceHolder) Proxy.newProxyInstance(mSurfaceHolder.getClass().getClassLoader(), mSurfaceHolder.getClass().getInterfaces(), testInvocation);
-        // 获取mSurfaceHolder的field
-        Field fieldHolder = null;
-        try {
-            fieldHolder = SurfaceView.class.getDeclaredField("mSurfaceHolder");
-            // 更改为可访问权限
-            fieldHolder.setAccessible(true);
-            // 用添加代理后的 newSurfaceHolder 替换 mSurfaceHolder
-            fieldHolder.set(surface,newSurfaceHolder);
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-
     }
 
 
@@ -554,7 +528,6 @@ public class VideoCallActivity extends CallActivity implements OnClickListener, 
                         });
 
                         break;
-
                     default:
                         break;
                 }

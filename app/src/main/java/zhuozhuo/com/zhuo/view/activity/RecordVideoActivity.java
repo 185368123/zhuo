@@ -2,7 +2,6 @@ package zhuozhuo.com.zhuo.view.activity;
 
 import android.graphics.Bitmap;
 import android.os.Build;
-import android.os.Environment;
 import android.os.Looper;
 import android.view.View;
 
@@ -10,14 +9,13 @@ import com.alibaba.sdk.android.oss.ClientException;
 import com.alibaba.sdk.android.oss.ServiceException;
 import com.alibaba.sdk.android.oss.model.PutObjectRequest;
 import com.alibaba.sdk.android.oss.model.PutObjectResult;
-import com.cjt2325.cameralibrary.JCameraView;
-import com.cjt2325.cameralibrary.listener.JCameraListener;
+import com.hyphenate.chatuidemo.my.button.CameraListener;
 import com.hyphenate.chatuidemo.my.https.UICallback;
 import com.hyphenate.chatuidemo.my.https.UIDispatcher;
 import com.hyphenate.chatuidemo.my.https.UpLoad;
+import com.hyphenate.chatuidemo.my.videobeauty.BeautyCamerView;
 import com.hyphenate.easeui.provider.UserInfoProvider;
 
-import java.io.File;
 import java.io.IOException;
 
 import li.com.base.baseuntils.ToastUitl;
@@ -28,9 +26,8 @@ import zhuozhuo.com.zhuo.presenter.ChangeMsgPresenter;
 
 public class RecordVideoActivity extends BaseActivity<ChangeMsgModel, ChangeMsgPresenter> implements ChangeMsgConstract.View {
 
-    private JCameraView jv;
     private boolean granted = false;
-
+    private BeautyCamerView camerView;
 
     @Override
     protected void onStart() {
@@ -56,14 +53,20 @@ public class RecordVideoActivity extends BaseActivity<ChangeMsgModel, ChangeMsgP
     protected void onResume() {
         super.onResume();
         if (granted) {
-            jv.onResume();
+            camerView.onResume();
         }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        jv.onPause();
+        camerView.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        camerView.onDestroy();
     }
 
 
@@ -79,11 +82,11 @@ public class RecordVideoActivity extends BaseActivity<ChangeMsgModel, ChangeMsgP
 
     @Override
     public void initView() {
-        jv = findViewById(R.id.jcv_record);
-        jv.setSaveVideoPath(Environment.getExternalStorageDirectory().getPath() + File.separator + "JCamera");
-        jv.setDuration(14 * 1000);
-        jv.setMinDuration(4 * 1000);
-        jv.setJCameraLisenter(new JCameraListener() {
+        camerView = findViewById(R.id.bcv_record);
+        camerView.setDuration(14 * 1000);
+        camerView.setMinDuration(4 * 1000);
+
+        camerView.setCameraLisenter(new CameraListener() {
             @Override
             public void captureSuccess(Bitmap bitmap) {
 

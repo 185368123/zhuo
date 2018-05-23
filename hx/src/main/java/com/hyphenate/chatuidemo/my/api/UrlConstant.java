@@ -277,4 +277,7 @@ public class UrlConstant {
 
     // 生成随机数
     public static final String GetRandom_URL="/Line/randomMatch";
+
+    //
+    public static final String Order_URL="/OrderPay/order_goods";
 }

@@ -1000,7 +1000,7 @@
     <string name="agree">Agree</string>
     <string name="all_members">All members</string>
     <string name="answer">Answer</string>
-    <string name="app_name">Test-api</string>
+    <string name="app_name">Base</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
     <string name="are_empty_group_of_news">Clearing messages</string>
     <string name="attach_file">File</string>
@@ -1140,7 +1140,7 @@
     <string name="nickname">NickName</string>
     <string name="nickname_description">Once this nick is set, this nick will be used in push notification (by default this is HuanXin ID ) when the receiver is using the IOS device.</string>
     <string name="no_more_messages">no more messages</string>
-    <string name="no_net">当前找不到网络</string>
+    <string name="no_net">网络不可用,请检查你的网络</string>
     <string name="no_url">播放地址无效</string>
     <string name="nomore_loading">no more to be loaded</string>
     <string name="not_add_myself">"Can't add myself"</string>

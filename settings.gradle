@@ -1,2 +1,2 @@
-include ':app', 'sliding_menu', ':easeui', ':hx', ':locktableview', ':camera', ':base', ':opengl'
+include ':app', 'sliding_menu', ':easeui', ':hx', ':locktableview', ':base', ':opengl'
 include ':library'

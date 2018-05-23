@@ -16,6 +16,7 @@ import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chatuidemo.DemoHelper;
 import com.hyphenate.chatuidemo.DemoModel;
+import com.hyphenate.chatuidemo.my.videobeauty.BeautyCamerView;
 import com.hyphenate.easeui.provider.PreferenceManager;
 import com.hyphenate.easeui.provider.UserInfoProvider;
 import com.hyphenate.chatuidemo.widget.BottomDialog;
@@ -89,7 +90,7 @@ public class SetActivity extends BaseActivity implements AdapterView.OnItemSelec
         list.add("女");
         settingsModel = DemoHelper.getInstance().getModel();
         spinnerAdapter = new SpinnerAdapter(this, list);
-        saveVideoPath = Environment.getExternalStorageDirectory().getPath()+ "/JCamera";
+        saveVideoPath = BeautyCamerView.getBaseFolder()+ "record";
         file = new File(saveVideoPath);
         LogUtils.logd(saveVideoPath);
 
@@ -142,6 +143,9 @@ public class SetActivity extends BaseActivity implements AdapterView.OnItemSelec
 
     }
 
+    public void test(View view){
+
+    }
     protected void initTitleBar() {
         titlebar_set = (TitleBarLayout) findViewById(R.id.titlebar_set);
         titlebar_set.setLeftTitle("返回");

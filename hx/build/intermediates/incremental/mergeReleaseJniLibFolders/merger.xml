@@ -1,2 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="E:\WorkSpace\useless\zhuo\hx\libs"><file name="umeng-analytics-v5.2.4.jar" path="E:\WorkSpace\useless\zhuo\hx\libs\umeng-analytics-v5.2.4.jar"/><file name="umeng-update-v2.6.0.1.jar" path="E:\WorkSpace\useless\zhuo\hx\libs\umeng-update-v2.6.0.1.jar"/></source></dataSet><dataSet config="release"><source path="E:\WorkSpace\useless\zhuo\hx\src\release\jniLibs"/></dataSet></merger>

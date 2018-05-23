@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.hyphenate.chatuidemo.my.CameActivity">
-    <com.cjt2325.cameralibrary.JCameraView
-        android:id="@+id/jcameraview"
+    android:orientation="vertical"
+    >
+    <com.hyphenate.chatuidemo.my.videobeauty.BeautyCamerView
+        android:id="@+id/bcv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:duration_max="10000"
-        app:iconMargin="20dp"
-        app:iconSize="30dp"
-        app:iconSrc="@drawable/ic_camera_enhance_black_24dp"/>
-</RelativeLayout>
+        android:layout_height="match_parent">
+    </com.hyphenate.chatuidemo.my.videobeauty.BeautyCamerView>
+</FrameLayout>

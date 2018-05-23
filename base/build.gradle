@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.0"
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         minSdkVersion 19
-        targetSdkVersion 25
+        targetSdkVersion 26
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -44,6 +44,8 @@ dependencies {
     compile 'com.android.support:multidex:1.0.0'
     //打印日志
     compile 'com.orhanobut:logger:1.13'
+    //GSYV播放器
+    compile 'com.shuyu:GSYVideoPlayer:2.1.1'
     //compile files('libs/umeng-analytics-v5.2.4.jar')
     compile files('libs/umeng-analytics-v5.2.4.jar')
     compile 'com.github.bumptech.glide:glide:3.7.0'

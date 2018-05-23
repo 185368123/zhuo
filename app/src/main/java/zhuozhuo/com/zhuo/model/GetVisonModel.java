@@ -21,4 +21,11 @@ public class GetVisonModel implements GetVisonConstract.Model {
                 .compose(RxSchedulers.<BaseRespose<VisonBean>>io_main())
                 .compose(RxHelper.<VisonBean>handleResult());
     }
+
+    @Override
+    public Observable<Object> order(String token, String goods_id, String goods_price, String pay_type) {
+        return Api.getDefault(HostType.INCLUE_COOKIE).order(token, goods_id, goods_price, pay_type)
+                .compose(RxSchedulers.<BaseRespose<Object>>io_main())
+                .compose(RxHelper.handleResult());
+    }
 }

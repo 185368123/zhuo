@@ -1,5 +1,7 @@
 package zhuozhuo.com.zhuo.presenter;
 
+import com.hyphenate.easeui.provider.UserInfoProvider;
+
 import li.com.base.basesinglebean.SingleBeans;
 import li.com.base.basesinglebean.VisonBean;
 
@@ -20,6 +22,21 @@ public class GetVisonPresenter extends GetVisonConstract.Presenter {
             protected void _onNext(VisonBean visonBean) {
                 mView.returnVison(visonBean.getAndroid_version().equals(MainApplication.getInstance().getVison()),visonBean.getAndroid_url(),visonBean.getPhone().getImage_url());
                 SingleBeans.getInstance().setVisonBean(visonBean);
+            }
+
+            @Override
+            protected void _onError(String message) {
+
+            }
+        });
+    }
+
+    @Override
+    public void order() {
+        mModel.order(UserInfoProvider.getToken(),"265","0.01","2").subscribe(new RxSubscriber<Object>(mContext,false) {
+            @Override
+            protected void _onNext(Object o) {
+
             }
 
             @Override
