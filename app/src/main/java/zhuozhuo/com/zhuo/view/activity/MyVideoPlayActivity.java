@@ -1,6 +1,11 @@
 package zhuozhuo.com.zhuo.view.activity;
 
+import android.Manifest;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,12 +25,17 @@ import zhuozhuo.com.zhuo.R;
 import zhuozhuo.com.zhuo.widget.SimpleVideo;
 
 public class MyVideoPlayActivity extends BaseActivity {
+
+    // 要申请的权限
+    private String[] permissions3 = {Manifest.permission.CAMERA};
+    protected String[] permissions2 = { Manifest.permission.RECORD_AUDIO};
     private SimpleVideo layoutVideo;
     private String mPlayUrl;
     private boolean isPlay;
     private OrientationUtils orientationUtils;
     private TextView tv;
     private ImageView iv;
+    String str="";
 
     @Override
     public int getLayoutId() {
@@ -58,8 +68,31 @@ public class MyVideoPlayActivity extends BaseActivity {
                         }).setNegativeButton("录制视频", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startActivity(RecordVideoActivity.class);
-                        finish();
+                        // 版本判断。当手机系统大于 23 时，才有必要去判断权限是否获取
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            str = "拍照";
+                            // 检查该权限是否已经获取
+                            int j = ContextCompat.checkSelfPermission(MyVideoPlayActivity.this, permissions3[0]);
+                            // 权限是否已经 授权 GRANTED---授权  DINIED---拒绝
+                            if (j != PackageManager.PERMISSION_GRANTED) {
+                                // 如果没有授予该权限，就去提示用户请求
+                                // showDialogTipUserRequestPermission();
+                                startRequestPermission(permissions3);
+                            } else {
+                                // 检查该权限是否已经获取
+                                str = "录音";
+                                int i = ContextCompat.checkSelfPermission(MyVideoPlayActivity.this, permissions2[0]);
+                                // 权限是否已经 授权 GRANTED---授权  DINIED---拒绝
+                                if (i != PackageManager.PERMISSION_GRANTED) {
+                                    // 如果没有授予该权限，就去提示用户请求
+                                    // showDialogTipUserRequestPermission();
+                                    startRequestPermission(permissions2);
+                                } else {
+                                    startActivity(RecordVideoActivity.class);
+                                    finish();
+                                }
+                            }
+                        }
                     }
                 }).setPositiveButton("选择视频", new DialogInterface.OnClickListener() {
                     @Override
@@ -149,6 +182,11 @@ public class MyVideoPlayActivity extends BaseActivity {
         layoutVideo.getStartButton().performClick();
     }
 
+
+    // 开始提交请求权限
+    public void startRequestPermission(String[] permissions) {
+        ActivityCompat.requestPermissions(this, permissions, 321);
+    }
     private void resolveNormalVideoUI() {
         //增加title
         layoutVideo.getTitleTextView().setVisibility(View.GONE);

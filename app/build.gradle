@@ -48,6 +48,8 @@ android {
             println("====== signingConfigs.release ======")
         }
     }
+    lintOptions { checkReleaseBuilds false
+        abortOnError false }
 
 }
 

@@ -29,14 +29,13 @@ import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
+import li.com.base.baseapp.BaseApplication;
 import zhuozhuo.com.zhuo.MainApplication;
 import zhuozhuo.com.zhuo.R;
 import zhuozhuo.com.zhuo.constants.Constant;
 import zhuozhuo.com.zhuo.view.BaseTextWatcher;
 
 /**
- * author：kang
- * time:  2017/3/7
  */
 public class MainUtils {
 
