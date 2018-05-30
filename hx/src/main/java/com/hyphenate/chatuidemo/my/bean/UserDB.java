@@ -37,6 +37,7 @@ public class UserDB extends DataSupport {
     private String hundred_rate;
     private String user_video;
     private String hundred_level;
+    private String line_num;
     private List<String> card;
     public String getAccount() {
         return account;
@@ -150,6 +151,14 @@ public class UserDB extends DataSupport {
         this.user_video = user_video;
     }
 
+    public void setLine_num(String line_num) {
+        this.line_num = line_num;
+    }
+
+    public String getLine_num() {
+        return line_num;
+    }
+
     @Override
     public String toString() {
         return "UserDB{" +
@@ -166,6 +175,7 @@ public class UserDB extends DataSupport {
                 ", hundred_rate='" + hundred_rate + '\'' +
                 ", user_video='" + user_video + '\'' +
                 ", hundred_level='" + hundred_level + '\'' +
+                ", line_num='" + line_num + '\'' +
                 ", card=" + card +
                 '}';
     }

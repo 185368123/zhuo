@@ -102,7 +102,6 @@ public abstract class OkHttpVerifyResponseHandler implements OkHttpVerifyRespons
      * 执行 onErrorCode 方法
      */
     protected void executeOnErrorCode(String response, JSONObject obj, String errMsg, String errCode, int id) {
-        LogUtils.logd("OkHttpVerifyResponseHandler - executeOnErrorCode - response：" + response);
         if (isShowToast) {
             ToastUtils.showToast(errMsg);
         }
@@ -148,11 +147,10 @@ public abstract class OkHttpVerifyResponseHandler implements OkHttpVerifyRespons
      * 请求失败 -- 此方法在 UI 线程中调用(请求失败包装)（子类复写）
      *
      * @param call 请求包
-     * @param e    异常信息
+     * @param e    异常息
      * @param id   请求 id
      */
     public void onFailure(Call call, Exception e, int id) {
-        LogUtils.logd("OkHttpVerifyResponseHandler - onFailure - Exception：" + e.getMessage());
         e.printStackTrace();
         closeWaitDialog(); // 关闭对话框
         if (isShowToast) {

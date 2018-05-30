@@ -6,16 +6,17 @@ import android.view.View;
 import android.widget.Button;
 
 import com.hyphenate.chatuidemo.R;
-import com.hyphenate.chatuidemo.my.Untils.IShareVideo;
-import com.hyphenate.chatuidemo.my.Untils.ShareVideo;
+import com.hyphenate.chatuidemo.my.constract.ShareVideoConstract;
+import com.hyphenate.chatuidemo.my.model.ShareVideoModel;
 import com.hyphenate.chatuidemo.my.okhttp.ToastUtils;
+import com.hyphenate.chatuidemo.my.presenter.ShareVideoPresenter;
 import com.shuyu.gsyvideoplayer.builder.GSYVideoOptionBuilder;
 import com.shuyu.gsyvideoplayer.listener.LockClickListener;
 import com.shuyu.gsyvideoplayer.utils.Debuger;
 import com.shuyu.gsyvideoplayer.utils.OrientationUtils;
 import com.shuyu.gsyvideoplayer.video.base.GSYVideoPlayer;
 
-public class VideoPlayActivity extends AppCompatActivity implements View.OnClickListener, IShareVideo {
+public class VideoPlayActivity extends AppCompatActivity implements View.OnClickListener, ShareVideoConstract.View {
 
     private LayoutVideo layoutVideo;
     private String mPlayUrl;
@@ -24,11 +25,16 @@ public class VideoPlayActivity extends AppCompatActivity implements View.OnClick
     private OrientationUtils orientationUtils;
     private boolean isPlay;
     private boolean isPause;
+    private ShareVideoPresenter mPresenter;
+    private ShareVideoModel mModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_play);
+        mPresenter = new ShareVideoPresenter();
+        mModel = new ShareVideoModel();
+        mPresenter.setVM(mModel,this);
         setResult(RESULT_OK);
         mPlayUrl = getIntent().getStringExtra("url");
 
@@ -112,16 +118,11 @@ public class VideoPlayActivity extends AppCompatActivity implements View.OnClick
             finish();
         } else if (i == R.id.button_share) {
             //分享到啄啄
-            ShareVideo shareVideo=new ShareVideo(this);
-            shareVideo.shareVideo(mPlayUrl);
+            mPresenter.shareVideo(mPlayUrl);
+
         }
     }
 
-    @Override
-    public void shareSucess() {
-        finish();
-        ToastUtils.showToast("视频分享成功");
-    }
 
 
     @Override
@@ -162,4 +163,24 @@ public class VideoPlayActivity extends AppCompatActivity implements View.OnClick
         return layoutVideo;
     }
 
+    @Override
+    public void showLoading(String title) {
+
+    }
+
+    @Override
+    public void stopLoading() {
+
+    }
+
+    @Override
+    public void showErrorTip(String msg) {
+
+    }
+
+    @Override
+    public void shareSudcess() {
+        finish();
+        ToastUtils.showToast("视频分享成功");
+    }
 }

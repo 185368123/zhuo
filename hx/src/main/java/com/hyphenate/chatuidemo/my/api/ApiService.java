@@ -2,12 +2,14 @@ package com.hyphenate.chatuidemo.my.api;
 
 import li.com.base.basesinglebean.GroupStatusBean;
 
+import com.hyphenate.chatuidemo.my.UserListBean;
 import com.hyphenate.chatuidemo.my.bean.AllArticleBean;
 import com.hyphenate.chatuidemo.my.bean.CupMemberBean;
 import com.hyphenate.chatuidemo.my.bean.CupTeamBean;
 import com.hyphenate.chatuidemo.my.bean.GroupChoicesBean;
 import com.hyphenate.chatuidemo.my.bean.IntegralBean;
 import com.hyphenate.chatuidemo.my.bean.RaceBean;
+import com.hyphenate.chatuidemo.my.bean.SaveMatchBean;
 import com.hyphenate.chatuidemo.my.bean.SuggestTagBean;
 import com.hyphenate.chatuidemo.my.bean.TagBean;
 import com.hyphenate.easeui.HundredCupBean;
@@ -434,4 +436,38 @@ public interface ApiService {
                                           @Field("goods_id") String goods_id,
                                           @Field("goods_price") String goods_price,
                                           @Field("pay_type") String pay_type);
+
+
+    //退出百人群聊天
+    @FormUrlEncoded
+    @POST(UrlConstant.QuitHundredGroup_URL)
+    Observable<BaseRespose<Object>> qiutGroup(@Field("token") String token,
+                                          @Field("goods_id") String goods_id);
+
+    //搜索用户
+    @FormUrlEncoded
+    @POST(UrlConstant.SearchUser)
+    Observable<BaseRespose<List<UserListBean>>> searchUser(@Field("index") String index,
+                                                          @Field("keyword") String keyword);
+
+    //搜索用户
+    @FormUrlEncoded
+    @POST(UrlConstant.ShareVideo)
+    Observable<BaseRespose<Object>> shareVideo(@Field("token") String token,
+                                               @Field("video_link") String video_link);
+
+    //保存匹配到的用户
+    @FormUrlEncoded
+    @POST(UrlConstant.MatchSet_URL)
+    Observable<BaseRespose<Object>> matchSet(@Field("token") String token,
+                                             @Field("you_user_id") String you_user_id,
+                                             @Field("choice_id") String choice_id,
+                                             @Field("content") String content);
+
+    //获取保存的用户
+    @FormUrlEncoded
+    @POST(UrlConstant.GetUserLine_URL)
+    Observable<BaseRespose<List<SaveMatchBean>>> getSaveUser(@Field("token") String token,
+                                                             @Field("page") String page,
+                                                             @Field("page_size") String page_size);
 }

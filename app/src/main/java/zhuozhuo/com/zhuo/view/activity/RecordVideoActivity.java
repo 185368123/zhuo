@@ -83,7 +83,7 @@ public class RecordVideoActivity extends BaseActivity<ChangeMsgModel, ChangeMsgP
     @Override
     public void initView() {
         camerView = findViewById(R.id.bcv_record);
-        camerView.setDuration(14 * 1000);
+        camerView.setDuration(17 * 1000);
         camerView.setMinDuration(4 * 1000);
 
         camerView.setCameraLisenter(new CameraListener() {

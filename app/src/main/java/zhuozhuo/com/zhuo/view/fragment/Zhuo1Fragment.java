@@ -27,6 +27,7 @@ import com.hyphenate.chat.EMClient;
 import com.hyphenate.chatuidemo.DemoHelper;
 import li.com.base.basesinglebean.MatchPersonBean;
 import com.hyphenate.chatuidemo.UserMsgDBHelp;
+import com.hyphenate.chatuidemo.my.RemarkActivity;
 import com.hyphenate.chatuidemo.my.constract.InitializationConstract;
 import com.hyphenate.chatuidemo.my.bean.HundredBean;
 import li.com.base.basesinglebean.SingleBeans;
@@ -67,6 +68,7 @@ import zhuozhuo.com.zhuo.view.MatchInterface;
 import zhuozhuo.com.zhuo.view.activity.MainActivity;
 import zhuozhuo.com.zhuo.view.activity.RecordVideoActivity;
 import zhuozhuo.com.zhuo.view.activity.VideoSelectActivity;
+import zhuozhuo.com.zhuo.widget.CommentPopupWindow;
 import zhuozhuo.com.zhuo.widget.SimpleVideo;
 
 
@@ -123,6 +125,9 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
     private String finish;
     private SimpleVideo simpleVideo;
     private GSYVideoOptionBuilder gsyVideoOption;
+    private TextView button_save;
+    private String useId;
+    private CommentPopupWindow popupWindow;
 
 
     @Override
@@ -172,6 +177,7 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
         iv_cancle = (ImageView) view.findViewById(R.id.cancle_iv);
         button_skip = (Button) view.findViewById(R.id.button_skip);
         button_receive = (TextView) view.findViewById(R.id.button_receive);
+        button_save = view.findViewById(R.id.button_save);
 
 
         tv_service = view.findViewById(R.id.tv_service);
@@ -195,8 +201,9 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
         iv_cancle.setOnClickListener(this);
         button_skip.setOnClickListener(this);
         button_receive.setOnClickListener(this);
+        button_save.setOnClickListener(this);
 
-        pulllist_zhuo1.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
+        pulllist_zhuo1.setOnRefreshListener( new PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override
             public void onRefresh(PullToRefreshBase<ListView> refreshView) {
                 String label = DateUtils.formatDateTime(
@@ -362,12 +369,18 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
             case R.id.button_receive://接受这次匹配
                 button_receive.setClickable(false);
                 button_receive.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.skip_button_maincolor_shape));
+                button_skip.setClickable(false);
                 mPresenter.accept_(other_party_id,user_id,choice_id);
                 break;
             case R.id.tv_service:
                 Intent intent = new Intent(getActivity(), ChatActivity.class);
                 intent.putExtra("userId","1");
                 startActivityForResult(intent, CHAT);
+                break;
+            case R.id.button_save:
+                countDownUtils1.deletCallBack();
+                countDownUtils1.cancle();
+                startActivityForResult(RemarkActivity.class,1634);
                 break;
         }
     }
@@ -402,6 +415,11 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         activity.refreshConversationListFragment();
+        if (requestCode==1634){
+            mPresenter.matchSet(useId,choice_id,data.getStringExtra("com"));
+
+            mPresenter.match_(choice_id);
+        }
     }
 
     /**
@@ -519,7 +537,7 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
         drawable.stop();
         if (userId != null && !userId.equals("")) {
             LogUtils.logd("userId" + userId + ";   name" + userName);
-
+            useId = userId;
         }
         if (user_video != null) {
             gsyVideoOption = new GSYVideoOptionBuilder();
@@ -549,12 +567,14 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
         button_skip.setClickable(true);
         button_receive.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.receive_button_maincolor_shape));
 
+        button_save.setClickable(true);
+        button_save.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.receive_button_maincolor_shape));
+
         tv6.setVisibility(View.VISIBLE);
         countDownUtils1 = new CountDownUtils(tv6, 30 * 1000, new EmptyView() {
             @Override
             public void emptyBack() {//倒计时跳过这次匹配
                 mPresenter.match_(choice_id);
-
             }
         });
         countDownUtils1.start();

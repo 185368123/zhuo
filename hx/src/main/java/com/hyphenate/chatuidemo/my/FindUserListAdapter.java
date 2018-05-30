@@ -26,12 +26,12 @@ import java.util.List;
 
 public class FindUserListAdapter extends BaseAdapter implements View.OnClickListener {
     Context context;
-    List<UserListBean.DataBean>  data;
+    List<UserListBean>  data;
     private ProgressDialog progressDialog;
     String user_id;
     Activity activity;
 
-    public FindUserListAdapter(Context context, List<UserListBean.DataBean> data, Activity activity) {
+    public FindUserListAdapter(Context context, List<UserListBean> data, Activity activity) {
         this.context = context;
         this.data = data;
         this.activity=activity;

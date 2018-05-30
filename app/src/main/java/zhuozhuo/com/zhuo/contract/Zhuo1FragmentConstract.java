@@ -36,6 +36,8 @@ public interface Zhuo1FragmentConstract {
 
         Observable<Object> joinHundredGroup(String token, String hundred_id);
 
+        Observable<Object> matchSet(String token, String you_user_id, String choice_id,String content);
+
     }
 
     interface View extends BaseView {
@@ -71,5 +73,6 @@ public interface Zhuo1FragmentConstract {
 
         public abstract void joinHundredGroup(String hundred_id);
 
+        public abstract void matchSet(String you_user_id, String choice_id,String content);
     }
 }

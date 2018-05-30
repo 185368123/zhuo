@@ -54,7 +54,7 @@ public class VideoSelectActivity extends BaseActivity <ChangeMsgModel, ChangeMsg
      getLoaderManager().initLoader(0,null,this);
 
         titlebar = (EaseTitleBar) findViewById(R.id.titlebar_video_select);
-        titlebar.setTitle("选择视频(4-14s)");
+        titlebar.setTitle("选择视频(4-17s)");
         titlebar.setLeftImageResource(R.drawable.ease_mm_title_back);
         titlebar.setLeftLayoutClickListener(new View.OnClickListener() {
             @Override
@@ -114,6 +114,7 @@ public class VideoSelectActivity extends BaseActivity <ChangeMsgModel, ChangeMsg
         } catch (IOException e) {
             e.printStackTrace();
         }
+        showLoading("视频上传中......");
     }
 
     String objectName;
@@ -147,7 +148,7 @@ public class VideoSelectActivity extends BaseActivity <ChangeMsgModel, ChangeMsg
 
             @Override
             public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
-
+                stopLoading();
                 String info = "";
                 // 请求异常
                 if (clientExcepion != null) {
@@ -170,12 +171,12 @@ public class VideoSelectActivity extends BaseActivity <ChangeMsgModel, ChangeMsg
 
     @Override
     public void showLoading(String title) {
-
+        startProgressDialog(title);
     }
 
     @Override
     public void stopLoading() {
-
+        stopProgressDialog();
     }
 
     @Override
@@ -183,8 +184,10 @@ public class VideoSelectActivity extends BaseActivity <ChangeMsgModel, ChangeMsg
 
     }
 
+
     @Override
     public void changeMsgSucess() {
+        stopLoading();
         UserInfoProvider.setUserVideo("http://zhuozhuo.oss-cn-shenzhen.aliyuncs.com/" + objectName);
         ToastUitl.showLong("修改成功");
         finish();

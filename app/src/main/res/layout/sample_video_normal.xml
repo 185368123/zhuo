@@ -71,6 +71,7 @@
             android:layout_height="fill_parent"
             android:paddingRight="16dp"
             android:scaleType="center"
+            android:id="@+id/fullscreen"
             android:src="@drawable/video_enlarge" />
     </LinearLayout>
 

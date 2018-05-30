@@ -227,14 +227,7 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_13" />
 
-            <TextView
-                android:id="@+id/zhuo1_tv6"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:background="@drawable/textview_shape"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size_13" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -255,7 +248,15 @@
                     android:text="跳过"
                     android:textColor="@color/white"
                     android:textSize="15sp" />
-
+                <TextView
+                    android:id="@+id/zhuo1_tv6"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/textview_shape"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_13" />
                 <TextView
                     android:id="@+id/button_receive"
                     android:layout_width="70dp"
@@ -264,7 +265,7 @@
                     android:background="@drawable/receive_button_maincolor_shape"
                     android:clickable="true"
                     android:gravity="center"
-                    android:text="接受"
+                    android:text="喜欢"
                     android:textColor="@color/white"
                     android:textSize="15sp" />
 
@@ -273,7 +274,20 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1" />
             </LinearLayout>
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="5dp" />
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/button_save"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:background="@drawable/receive_button_maincolor_shape"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="保留"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="5dp" />

@@ -20,7 +20,6 @@ import li.com.base.base.BaseFragment;
 import li.com.base.basesinglebean.SingleBeans;
 import rx.functions.Action1;
 import zhuozhuo.com.zhuo.R;
-import zhuozhuo.com.zhuo.adapter.VideoSelectAdapter;
 import zhuozhuo.com.zhuo.view.activity.GetRemarkActivity;
 import zhuozhuo.com.zhuo.view.activity.GetStoryActivity;
 import zhuozhuo.com.zhuo.view.activity.MineActivity;
@@ -28,6 +27,7 @@ import zhuozhuo.com.zhuo.view.activity.AllArticleActivity;
 import zhuozhuo.com.zhuo.view.activity.MyLevelActivity;
 import zhuozhuo.com.zhuo.view.activity.MyVideoPlayActivity;
 import zhuozhuo.com.zhuo.view.activity.RecordVideoActivity;
+import zhuozhuo.com.zhuo.view.activity.SaveMatchActivity;
 import zhuozhuo.com.zhuo.view.activity.SetActivity;
 import zhuozhuo.com.zhuo.view.activity.VideoSelectActivity;
 import zhuozhuo.com.zhuo.widget.CircleImageView;
@@ -166,8 +166,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     private void initData() {
         UserDB userDB= UserMsgDBHelp.getUserMsgDBHelp().searchByUserId(UserInfoProvider.getUserID());
         if (userDB!=null) {
-            tv_use1.setText(userDB.getHundred_level().trim().toUpperCase()+"级");
-            tv_use2.setText("第"+userDB.getHundred_rate()+"名");
+            if (userDB.getLine_num()==null){
+                tv_use1.setText("   0");
+            }else {
+                tv_use1.setText("   "+userDB.getLine_num());
+            }
+
         }
         Glide.with(getContext()).load(UserInfoProvider.getPhotoLink()).into(iv_use);
         tv_use.setText(UserInfoProvider.getNickName());
@@ -180,7 +184,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 startActivity(GetRemarkActivity.class);
                 break;
             case R.id.linearlayout2://反馈论坛
-                startActivity(AllArticleActivity.class);
+                startActivity(SaveMatchActivity.class);
                 break;
             case R.id.linearlayout3://设置
                 startActivity(SetActivity.class);
@@ -192,7 +196,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 startActivity(GetStoryActivity.class);
                 break;
             case R.id.linearlayout6://我的等级
-                startActivity(MyLevelActivity.class);
+                //startActivity(MyLevelActivity.class);
+                break;
             case R.id.linearlayout7://我的介绍视频
                if(UserInfoProvider.getUserVideo()!=null&&!UserInfoProvider.getUserVideo().equals("")){
                    startActivity(MyVideoPlayActivity.class);

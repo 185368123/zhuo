@@ -280,4 +280,13 @@ public class UrlConstant {
 
     //
     public static final String Order_URL="/OrderPay/order_goods";
+
+    //保存匹配到的用户
+    public static final String MatchSet_URL="/Evaluate/matchSet";
+
+    //获取保存的用户列表
+    public static final String GetUserLine_URL="/Evaluate/getUserLine";
+
+    //解除保存的用户
+    public static final String RelieveLine_URL="/Evaluate/RelieveLine";
 }

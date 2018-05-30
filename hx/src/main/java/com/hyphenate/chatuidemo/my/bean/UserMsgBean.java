@@ -7,6 +7,7 @@ import java.util.List;
  */
 
 public class UserMsgBean {
+
         /**
          * account : 无
          * nick_name : 波结衣
@@ -20,6 +21,7 @@ public class UserMsgBean {
          * hundred_rate : 0
          * user_video : http://zhuozhuo.oss-cn-shenzhen.aliyuncs.com/Single/321525853429252.mp4
          * hundred_level : c
+         * line_num : 0
          * card : ["0","2","5","0","1","1","0","0","2"]
          */
 
@@ -35,6 +37,7 @@ public class UserMsgBean {
         private String hundred_rate;
         private String user_video;
         private String hundred_level;
+        private String line_num;
         private List<String> card;
 
         public String getAccount() {
@@ -131,6 +134,14 @@ public class UserMsgBean {
 
         public void setHundred_level(String hundred_level) {
             this.hundred_level = hundred_level;
+        }
+
+        public String getLine_num() {
+            return line_num;
+        }
+
+        public void setLine_num(String line_num) {
+            this.line_num = line_num;
         }
 
         public List<String> getCard() {

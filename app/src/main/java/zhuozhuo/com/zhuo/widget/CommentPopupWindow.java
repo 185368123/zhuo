@@ -35,6 +35,7 @@ public class CommentPopupWindow extends PopupWindow {
     private TextView popupCommentSendTv;
     private FragmentActivity context;
     private RelativeLayout popupCommentParent;
+    String text;
 
     public interface LiveCommentSendClick {
         //第二个参数标记是不是弹幕，第三个是评论内容
@@ -43,10 +44,11 @@ public class CommentPopupWindow extends PopupWindow {
 
 
     //构造方法
-    public CommentPopupWindow(FragmentActivity context, LiveCommentSendClick sendClick) {
+    public CommentPopupWindow(FragmentActivity context, LiveCommentSendClick sendClick,String text) {
         super(context);
         this.context = context;
         this.sendClick = sendClick;
+        this.text=text;
         foundPopup();
     }
 

@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 
 import java.io.File;
 
+import li.com.base.baseuntils.ToastUitl;
 import zhuozhuo.com.zhuo.R;
 import zhuozhuo.com.zhuo.view.activity.VideoSelectActivity;
 
@@ -79,9 +80,17 @@ public class VideoSelectAdapter extends CursorAdapter {
         }
         int dur = Integer.parseInt(duration);
         String time =formatMillisec(dur);
-        if (dur/1000<4||dur/1000>14){
+        if (dur/1000<4||dur/1000>17){
             view.setOnClickListener(null);
-            holder.dur.setText(time+"(时间不符)");
+            holder.dur.setText("(时间不符)"+time);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(listener!=null){
+                        ToastUitl.showLong("视频时间不符，请选择4-17秒的视频");
+                    }
+                }
+            });
         }else {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -136,11 +145,9 @@ public class VideoSelectAdapter extends CursorAdapter {
     public static String formatMillisec(int millisec){
         int sec=millisec/1000;
         int min=sec/60;
-        int hour=min/60;
         min=min%60;
         sec=sec%60;
         String t="";
-        t=hour>=10?t+hour:t+"0"+hour+":";
         t=min>=10?t+min:t+"0"+min+":";
         t=sec>=10?t+sec:t+"0"+sec;
         return t;

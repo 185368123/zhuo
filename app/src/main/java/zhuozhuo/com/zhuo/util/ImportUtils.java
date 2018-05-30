@@ -7,15 +7,13 @@ import java.util.Date;
 import java.util.regex.Pattern;
 
 /**
- * author：kang
- * time: 2017/3/9
  *
  * 判断输入的内容是否合法
  */
 public class ImportUtils {
 
     /** 手机号码 - 正则表达式 */
-    private static final String PHONE = "^1[3,4,5,7,8]\\d{9}$";
+    private static final String PHONE = "^1[3,4,5,6,7,8]\\d{9}$";
 
     /** 邮箱地址 - 正则表达式 */
     private static final Pattern EMAIL = Pattern.compile("^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$");

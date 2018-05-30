@@ -39,6 +39,10 @@ public class Zhuo1FragmentPresenter extends Zhuo1FragmentConstract.Presenter {
     public void getSingleChoose() {
         mModel.getSingleChoose(UserInfoProvider.getToken(), "single").subscribe(new RxSubscriber<List<SingleChooseBean>>(mContext,false) {
             @Override
+            public void onStart() {
+                super.onStart();
+            }
+            @Override
             protected void _onNext(List<SingleChooseBean> singleChooseBeans) {
                 mView.returnSingleChoose(singleChooseBeans);
                 SingleBeans.getInstance().setSingleChooseBeans(singleChooseBeans);
@@ -80,6 +84,10 @@ public class Zhuo1FragmentPresenter extends Zhuo1FragmentConstract.Presenter {
     @Override
     public void getHundredMsg() {
         mModel.getHundredMsg(UserInfoProvider.getToken()).subscribe(new RxSubscriber<List<HundredBean>>(mContext) {
+            @Override
+            public void onStart() {
+                super.onStart();
+            }
             @Override
             protected void _onNext(List<HundredBean> list) {
                 mView.returnHundredMsg(list);
@@ -127,6 +135,10 @@ public class Zhuo1FragmentPresenter extends Zhuo1FragmentConstract.Presenter {
     public void getAllMatch() {
         mModel.getAllMatch(UserInfoProvider.getToken()).subscribe(new RxSubscriber<List<MatchPersonBean>>(mContext,false) {
             @Override
+            public void onStart() {
+                super.onStart();
+            }
+            @Override
             protected void _onNext(List<MatchPersonBean> matchPersonBeans) {
                 SingleBeans.getInstance().setMatchPersonBeans(matchPersonBeans);
                 mView.returnAllMatch(matchPersonBeans);
@@ -145,6 +157,21 @@ public class Zhuo1FragmentPresenter extends Zhuo1FragmentConstract.Presenter {
             @Override
             protected void _onNext(Object o) {
                 mView.joinSucess();
+            }
+
+            @Override
+            protected void _onError(String message) {
+
+            }
+        });
+    }
+
+    @Override
+    public void matchSet(String you_user_id, String choice_id,String content) {
+        mModel.matchSet(UserInfoProvider.getToken(),you_user_id,choice_id,content).subscribe(new RxSubscriber<Object>(mContext,false) {
+            @Override
+            protected void _onNext(Object o) {
+
             }
 
             @Override

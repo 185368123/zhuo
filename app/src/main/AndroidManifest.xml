@@ -503,7 +503,12 @@
         <activity android:name=".view.activity.UpdateActivity" />
         <activity android:name=".view.activity.RecordVideoActivity" />
         <activity android:name=".view.activity.MyVideoPlayActivity" />
-        <activity android:name=".view.activity.VideoSelectActivity"></activity>
+        <activity android:name=".view.activity.VideoSelectActivity" />
+        <activity android:name=".view.activity.SaveMatchActivity" />
+        <activity
+            android:name="com.hyphenate.chatuidemo.my.RemarkActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyDialogStyle" />
     </application>
 
 </manifest>

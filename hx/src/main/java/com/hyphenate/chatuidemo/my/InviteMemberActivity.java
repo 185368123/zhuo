@@ -112,8 +112,6 @@ public class InviteMemberActivity extends BaseActivity implements InviteMemberCo
         button_search.setOnClickListener(this);
         iv_back.setOnClickListener(this);
         button_team.setOnClickListener(this);
-        //mPresenter.getAllMember("1","10",et.getText().toString());
-
         rx.Observable.create(new rx.Observable.OnSubscribe<List<String>>() {
             private List<String> usernames;
             @Override
@@ -141,12 +139,12 @@ public class InviteMemberActivity extends BaseActivity implements InviteMemberCo
                     public void onNext(List<String> strings) {
                         SingleBeans.getInstance().setFriends(strings);
                         mPresenter.getFriends(StringUtils.arryToString(strings),page+"",pagesize+"",et.getText().toString());
-                       /* for (int i = 0; i < strings.size(); i++) {
+                        for (int i = 0; i < strings.size(); i++) {
                             DemoHelper.getInstance().saveContact(new EaseUser(strings.get(i)));
                         }
                         EMClient.getInstance().groupManager().loadAllGroups();
                         EMClient.getInstance().chatManager().loadAllConversations();
-                        DemoHelper.getInstance().getUserProfileManager().asyncGetCurrentUserInfo();*/
+                        DemoHelper.getInstance().getUserProfileManager().asyncGetCurrentUserInfo();
                     }
                 });
 

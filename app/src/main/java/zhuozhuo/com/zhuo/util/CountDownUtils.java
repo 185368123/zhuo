@@ -52,6 +52,9 @@ public class CountDownUtils extends CountDownTimer {
         this.textView = textView;
     }
 
+    public void cancle(){
+        super.cancel();
+    }
     /**
      * @param textView       显示时间的控件
      * @param millisInFuture 倒计时多少秒

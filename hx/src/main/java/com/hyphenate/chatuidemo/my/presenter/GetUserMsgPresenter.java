@@ -5,6 +5,7 @@ import com.hyphenate.chatuidemo.my.constract.GetUserMsgConstract;
 import com.hyphenate.chatuidemo.my.bean.UserMsgBean;
 import java.util.List;
 import li.com.base.baserx.RxSubscriber;
+import li.com.base.baseuntils.LogUtils;
 
 /**
  * Created by Administrator on 2018/3/27.
@@ -31,6 +32,7 @@ public class GetUserMsgPresenter extends GetUserMsgConstract.Presenter{
                 userDB.setPhone_type(msgBean.getPhone_type());
                 userDB.setHundred_rate(msgBean.getHundred_rate());
                 userDB.setHundred_level(msgBean.getHundred_level());
+                userDB.setLine_num(msgBean.getLine_num());
                 userDB.setCard(msgBean.getCard());
                 if (mView!=null){
                     mView.returnUserMsg(msgBean);

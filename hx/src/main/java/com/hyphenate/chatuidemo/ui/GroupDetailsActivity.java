@@ -41,8 +41,9 @@ import com.hyphenate.chat.EMGroup;
 import com.hyphenate.chat.EMMucSharedFile;
 import com.hyphenate.chat.EMPushConfigs;
 import com.hyphenate.chatuidemo.R;
-import com.hyphenate.chatuidemo.my.EmptyView;
-import com.hyphenate.chatuidemo.my.PresentModel.QuitGroupPresentModel;
+import com.hyphenate.chatuidemo.my.constract.QuitGroupConstract;
+import com.hyphenate.chatuidemo.my.model.QuitGroupModel;
+import com.hyphenate.chatuidemo.my.presenter.QuitGroupPresenter;
 import com.hyphenate.easeui.ui.EaseGroupListener;
 import com.hyphenate.easeui.utils.EaseUserUtils;
 import com.hyphenate.easeui.widget.EaseExpandGridView;
@@ -54,7 +55,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class GroupDetailsActivity extends BaseActivity implements OnClickListener {
+public class GroupDetailsActivity extends BaseActivity implements OnClickListener, QuitGroupConstract.View {
 
 	public static final int  RESULT_QUIT_GROUP=0011;
 	private static final String TAG = "GroupDetailsActivity";
@@ -86,6 +87,8 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 
 	GroupChangeListener groupChangeListener;
 	private Button bt_quit_group;
+	private QuitGroupPresenter groupPresenter;
+	private QuitGroupModel groupModel;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +105,10 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
         }
         
 		setContentView(R.layout.em_activity_group_details);
+
+		groupPresenter = new QuitGroupPresenter();
+		groupModel = new QuitGroupModel();
+		groupPresenter.setVM(groupModel,this);
 
 		bt_quit_group = (Button) findViewById(R.id.bt_quit_group);
 		bt_quit_group.setOnClickListener(this);
@@ -288,13 +295,7 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 					.setPositiveButton("确定", new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							new QuitGroupPresentModel(new EmptyView() {
-								@Override
-								public void emptyBack() {
-									setResult(RESULT_QUIT_GROUP);
-									finish();
-								}
-							}).quitGroup(groupId);
+							groupPresenter.quitGroup(groupId);
 						}
 					}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
 
@@ -421,6 +422,27 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 		        }
 		    }).start();
 		}
+	}
+
+	@Override
+	public void showLoading(String title) {
+
+	}
+
+	@Override
+	public void stopLoading() {
+
+	}
+
+	@Override
+	public void showErrorTip(String msg) {
+
+	}
+
+	@Override
+	public void quitSudcess() {
+		setResult(RESULT_QUIT_GROUP);
+		finish();
 	}
 
 

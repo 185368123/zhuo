@@ -80,4 +80,11 @@ public class Zhuo1FragmentModel implements Zhuo1FragmentConstract.Model{
                 .compose(RxHelper.handleResult());
     }
 
+    @Override
+    public Observable<Object> matchSet(String token, String you_user_id, String choice_id,String content) {
+        return Api.getDefault(HostType.INCLUE_COOKIE).matchSet(token, you_user_id, choice_id,content)
+                .compose(RxSchedulers.<BaseRespose<Object>>io_main())
+                .compose(RxHelper.handleResult());
+    }
+
 }

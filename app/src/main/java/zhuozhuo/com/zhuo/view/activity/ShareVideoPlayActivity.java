@@ -74,7 +74,7 @@ public class ShareVideoPlayActivity extends BaseActivity implements CommentPopup
 
     @Override
     public void initView() {
-        popupWindow = new CommentPopupWindow(this, this);
+        popupWindow = new CommentPopupWindow(this, this,"发送");
         detailPlayer = (LandLayoutVideo) findViewById(R.id.detail_player);
         refreshListView = (PullToRefreshListView) findViewById(R.id.lv_comment);
         getList = new GetCommentListPresentModel(this);
@@ -239,7 +239,7 @@ public class ShareVideoPlayActivity extends BaseActivity implements CommentPopup
             public void onSendClick(View view, boolean isBull, String comment) {
                 commentPresentModel.comment(id, list.get(i - 1).getUser_id(), list.get(i - 1).getComment_id(), comment);
             }
-        }).showReveal();
+        },"发送").showReveal();
     }
 
 

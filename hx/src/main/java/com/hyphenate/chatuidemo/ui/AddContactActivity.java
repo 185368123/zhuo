@@ -28,36 +28,40 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.hyphenate.chatuidemo.R;
 import com.hyphenate.chatuidemo.my.FindUserListAdapter;
-import com.hyphenate.chatuidemo.my.IAddContactView;
-import com.hyphenate.chatuidemo.my.Untils.SearchUser;
 import com.hyphenate.chatuidemo.my.UserListBean;
+import com.hyphenate.chatuidemo.my.constract.SearchUserConstract;
+import com.hyphenate.chatuidemo.my.model.SearchUserModel;
+import com.hyphenate.chatuidemo.my.presenter.SearchUserPresenter;
 import com.hyphenate.easeui.widget.EaseAlertDialog;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddContactActivity extends BaseActivity implements IAddContactView {
+public class AddContactActivity extends BaseActivity implements SearchUserConstract.View {
 	private EditText editText;
 	private Button searchBtn;
 	private String toAddUsername;
 	private ProgressDialog progressDialog;
-	private SearchUser searchUser;
 	private int index=0;
 	private ILoadingLayout endLabels;
 	private PullToRefreshListView lv;
 	private boolean isBottom = false;
-	private List<UserListBean.DataBean> list;
+	private List<UserListBean> list;
 	private FindUserListAdapter adapter;
+	private SearchUserPresenter searchUserPresenter;
+	private SearchUserModel searchUserModel;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.em_activity_add_contact);
+		searchUserPresenter = new SearchUserPresenter();
+		searchUserModel = new SearchUserModel();
+		searchUserPresenter.setVM(searchUserModel,this);
 		lv = (PullToRefreshListView) findViewById(R.id.lv_find);
 		list = new ArrayList<>();
 		adapter = new FindUserListAdapter(this, list,this);
 		lv.setAdapter(adapter);
-		searchUser = new SearchUser(this);
 		TextView mTextView = (TextView) findViewById(R.id.add_list_friends);
 		
 		editText = (EditText) findViewById(R.id.edit_note);
@@ -111,14 +115,14 @@ public class AddContactActivity extends BaseActivity implements IAddContactView 
 
 	private void addmore() {
 		index += 10;
-		searchUser.search(editText.getText().toString(),index);
+		searchUserPresenter.searchUser(editText.getText().toString(),index+"");
 	}
 
 	private void refresh() {
 		isBottom=false;
 		index = 0;
 		list.clear();
-		searchUser.search(editText.getText().toString(),index);
+		searchUserPresenter.searchUser(editText.getText().toString(),index+"");
 	}
 
 
@@ -136,7 +140,7 @@ public class AddContactActivity extends BaseActivity implements IAddContactView 
 				new EaseAlertDialog(this, R.string.Please_enter_a_username).show();
 				return;
 			}
-             searchUser.search(editText.getText().toString(),index);
+			searchUserPresenter.searchUser(editText.getText().toString(),index+"");
 		} 
 	}	
 	
@@ -145,13 +149,30 @@ public class AddContactActivity extends BaseActivity implements IAddContactView 
 		finish();
 	}
 
+
+
 	@Override
-	public void setList(List<UserListBean.DataBean> list) {
-		if (list==null||list.size()==0){
+	public void showLoading(String title) {
+
+	}
+
+	@Override
+	public void stopLoading() {
+
+	}
+
+	@Override
+	public void showErrorTip(String msg) {
+
+	}
+
+	@Override
+	public void returnUser(List<UserListBean> data) {
+		if (data==null||data.size()==0){
 			lv.onRefreshComplete();
 			isBottom=true;
 		}else {
-			this.list.addAll(list);
+			this.list.addAll(data);
 			adapter.notifyDataSetChanged();
 			lv.onRefreshComplete();
 		}

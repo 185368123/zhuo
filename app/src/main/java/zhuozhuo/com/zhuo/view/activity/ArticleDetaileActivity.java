@@ -103,7 +103,7 @@ public class ArticleDetaileActivity extends BaseActivity implements ArticleDetai
                     public void onSendClick(View view, boolean isBull, String comment) {
                         commentPresentModel.comment(id, comment);
                     }
-                }).showReveal();
+                },"发送").showReveal();
             }
         });
     }
@@ -128,7 +128,7 @@ public class ArticleDetaileActivity extends BaseActivity implements ArticleDetai
             public void onSendClick(View view, boolean isBull, String comment) {
                 commentPresentModel.comment(id, list.get(i - 2).getUser_id(), list.get(i - 2).getComment_id(), comment);
             }
-        }).showReveal();
+        },"发送").showReveal();
     }
 
     @Override

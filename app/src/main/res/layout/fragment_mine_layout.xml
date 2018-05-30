@@ -68,13 +68,13 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
 
-            <TextView
-                style="@style/mine_text_style1"
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="等级：" />
+                android:background="@drawable/lovenum"/>
 
             <TextView
+                android:text="0"
                 android:id="@+id/tv_user2"
                 style="@style/mine_text_style1"
                 android:layout_width="wrap_content"
@@ -84,9 +84,10 @@
                 style="@style/mine_text_style1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="-" />
+                android:text="人喜欢了你" />
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/tv_user3"
                 style="@style/mine_text_style1"
                 android:layout_width="wrap_content"
@@ -102,7 +103,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/colorBackground" />
-        <!--我的评分-->
+        <!--我的介绍视频-->
         <LinearLayout
             android:id="@+id/linearlayout7"
             android:layout_width="match_parent"
@@ -113,9 +114,9 @@
             android:padding="10dp">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@mipmap/mine1" />
+                android:layout_width="55px"
+                android:layout_height="55px"
+                android:background="@drawable/mine_moive" />
 
             <TextView
                 style="@style/mine_text_style1"
@@ -151,9 +152,9 @@
             android:padding="10dp">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@mipmap/mine1" />
+                android:layout_width="55px"
+                android:layout_height="55px"
+                android:background="@drawable/mine_soccor" />
 
             <TextView
                 style="@style/mine_text_style1"
@@ -195,9 +196,9 @@
             android:padding="10dp">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@mipmap/mine2" />
+                android:layout_width="55px"
+                android:layout_height="55px"
+                android:background="@drawable/mine_save" />
 
             <TextView
                 style="@style/mine_text_style1"
@@ -233,8 +234,8 @@
             android:padding="10dp">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="55px"
+                android:layout_height="55px"
                 android:background="@mipmap/mine4" />
 
             <TextView
@@ -271,9 +272,9 @@
             android:padding="10dp">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@mipmap/mine3" />
+                android:layout_width="55px"
+                android:layout_height="55px"
+                android:background="@drawable/mine_set" />
 
             <TextView
                 style="@style/mine_text_style1"

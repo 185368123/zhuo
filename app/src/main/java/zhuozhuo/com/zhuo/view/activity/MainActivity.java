@@ -31,15 +31,21 @@ import com.hyphenate.chatuidemo.ui.ConversationListFragment;
 import com.hyphenate.easeui.EaseUI;
 import com.hyphenate.easeui.domain.EaseUser;
 import com.hyphenate.easeui.events.RxBusConstants;
+import com.hyphenate.exceptions.HyphenateException;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.litepal.tablemanager.Connector;
 
+import java.util.List;
+
 import li.com.base.basesinglebean.SingleBeans;
 import li.com.base.baseuntils.LogUtils;
+import li.com.base.baseuntils.StringUtils;
+import rx.Subscriber;
 import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 import zhuozhuo.com.zhuo.R;
 import zhuozhuo.com.zhuo.constants.TabHostConstant;
 import zhuozhuo.com.zhuo.service.SocketService;
@@ -102,9 +108,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         SQLiteDatabase db = Connector.getDatabase();
 
         //更新我的个人信息
-        GetUserMsgPresenter getUserMsgPresenter=new GetUserMsgPresenter();
-        getUserMsgPresenter.setVM(new GetUserMsgModel(),null);
-        getUserMsgPresenter.getUserMsg(UserInfoProvider.getUserID());
+        UserMsgDBHelp.getUserMsgDBHelp().updateMsg(UserInfoProvider.getUserID());
 
         EaseUI easeUI = EaseUI.getInstance();
         easeUI.setUserProfileProvider(new EaseUI.EaseUserProfileProvider() {
@@ -128,6 +132,42 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 }
 
         });
+
+
+        rx.Observable.create(new rx.Observable.OnSubscribe<List<String>>() {
+            private List<String> usernames;
+            @Override
+            public void call(Subscriber<? super List<String>> subscriber) {
+                try {
+                    usernames = EMClient.getInstance().contactManager().getAllContactsFromServer();
+                } catch (HyphenateException e) {
+                    e.printStackTrace();
+                }
+                subscriber.onNext(usernames);
+            }
+        }).subscribeOn(Schedulers.newThread())
+                .subscribe(new Subscriber<List<String>>() {
+                    @Override
+                    public void onCompleted() {
+                        LogUtils.logd("获取聊天好友成功！");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(List<String> strings) {
+                        SingleBeans.getInstance().setFriends(strings);
+                        for (int i = 0; i < strings.size(); i++) {
+                            DemoHelper.getInstance().saveContact(new EaseUser(strings.get(i)));
+                        }
+                        EMClient.getInstance().groupManager().loadAllGroups();
+                        EMClient.getInstance().chatManager().loadAllConversations();
+                        DemoHelper.getInstance().getUserProfileManager().asyncGetCurrentUserInfo();
+                    }
+                });
     }
 
     private void initRxManger() {
