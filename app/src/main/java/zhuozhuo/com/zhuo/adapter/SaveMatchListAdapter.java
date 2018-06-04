@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -28,7 +29,10 @@ public class SaveMatchListAdapter extends BaseAdapter {
     private final List<String> friends;
 
     public interface BTOnClickLiseten{
+
        public void onClick(String id);
+
+        public void onLongClick(String id);
     }
     public SaveMatchListAdapter(Context context, List<SaveMatchBean> data,BTOnClickLiseten onClickLiseten) {
         this.data=data;
@@ -43,7 +47,7 @@ public class SaveMatchListAdapter extends BaseAdapter {
     }
 
     @Override
-    public SaveMatchBean getItem(int position) {
+    public Object getItem(int position) {
         return data.get(position);
     }
 
@@ -53,25 +57,28 @@ public class SaveMatchListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHold viewHold;
-        if (convertView==null){
-            convertView= LayoutInflater.from(context).inflate(R.layout.save_match_item_layout,parent,false);
+    public View getView(int position, View view, ViewGroup parent) {
+        ViewHold viewHold=null;
+        //if (view == null){
             viewHold=new ViewHold();
-            viewHold.bt_friend=convertView.findViewById(R.id.bt_save_friend);
-            viewHold.iv_img=convertView.findViewById(R.id.iv_save_img);
-            viewHold.tv_com=convertView.findViewById(R.id.tv_save_com);
-            viewHold.tv_name=convertView.findViewById(R.id.tv_save_name);
-            viewHold.tv_flag=convertView.findViewById(R.id.tv_save_flag);
-            convertView.setTag(viewHold);
-        }else {
-            viewHold= (ViewHold) convertView.getTag();
-        }
+            view= LayoutInflater.from(context).inflate(R.layout.save_match_item_layout,parent,false);
+            viewHold.bt_friend=view.findViewById(R.id.bt_save_friend);
+            viewHold.iv_img=view.findViewById(R.id.iv_save_img);
+            viewHold.tv_com=view.findViewById(R.id.tv_save_com);
+            viewHold.tv_name=view.findViewById(R.id.tv_save_name);
+            viewHold.tv_flag=view.findViewById(R.id.tv_save_flag);
+            viewHold.ll=view.findViewById(R.id.ll_save_item);
+            view.setTag(viewHold);
+    /*    }else {
+            viewHold= (ViewHold) view.getTag();
+        }*/
+
         SaveMatchBean matchBean=data.get(position);
         Glide.with(context).load(matchBean.getPhoto_link()).into(viewHold.iv_img);
         viewHold.tv_name.setText(matchBean.getNick_name());
         viewHold.tv_com.setText(matchBean.getContent());
         viewHold.bt_friend.setTag(matchBean.getYou_user_id());
+        viewHold.ll.setTag(matchBean.getYou_user_id());
         if (matchBean.getStatus().equals("1")){
             viewHold.tv_flag.setVisibility(View.VISIBLE);
         }else
@@ -92,10 +99,21 @@ public class SaveMatchListAdapter extends BaseAdapter {
                 }
             }
         });
-        return convertView;
+
+        viewHold.ll.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (onClickLiseten!=null){
+                    onClickLiseten.onLongClick((String) v.getTag());
+                }
+                return false;
+            }
+        });
+        return view;
     }
 
     class ViewHold{
+        LinearLayout ll;
         TextView tv_name;
         TextView tv_com;
         ImageView iv_img;

@@ -32,4 +32,12 @@ public class SimpleVideoActivity extends BaseActivity {
             sv.getStartButton().performClick();
         }
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (sv.getCurrentState()==sv.CURRENT_STATE_PLAYING){
+            sv.getStartButton().performClick();
+        }
+    }
 }

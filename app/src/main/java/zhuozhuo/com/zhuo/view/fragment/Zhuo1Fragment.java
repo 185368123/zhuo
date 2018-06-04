@@ -365,6 +365,9 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
             case R.id.button_skip:
                 countDownUtils1.deletCallBack();
                 mPresenter.match_(choice_id);
+                if (simpleVideo.getCurrentState()==SimpleVideo.CURRENT_STATE_PLAYING){
+                    simpleVideo.getStartButton().performClick();
+                }
                 break;
             case R.id.button_receive://接受这次匹配
                 button_receive.setClickable(false);
@@ -675,4 +678,11 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
         }
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (simpleVideo.getCurrentState()==SimpleVideo.CURRENT_STATE_PLAYING){
+            simpleVideo.getStartButton().performClick();
+        }
+    }
 }

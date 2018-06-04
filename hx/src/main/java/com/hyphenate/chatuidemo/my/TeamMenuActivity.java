@@ -32,6 +32,7 @@ public class TeamMenuActivity extends BaseActivity implements TeamMenuConstract.
         line_id = getIntent().getStringExtra("line_id");
         you_user_id = getIntent().getStringExtra("you_user_id");
         group_id = getIntent().getStringExtra("group_id");
+        String id=getIntent().getStringExtra("id");
         mPresenter = new TeamMenuPresenter();
         mModel = new TeamMenuModel();
         mPresenter.setVM(mModel,this);

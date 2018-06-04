@@ -470,4 +470,11 @@ public interface ApiService {
     Observable<BaseRespose<List<SaveMatchBean>>> getSaveUser(@Field("token") String token,
                                                              @Field("page") String page,
                                                              @Field("page_size") String page_size);
+
+    //保存匹配到的用户
+    @FormUrlEncoded
+    @POST(UrlConstant.RelieveLine_URL)
+    Observable<BaseRespose<Object>> relieveLine(@Field("token") String token,
+                                             @Field("you_user_id") String you_user_id,
+                                             @Field("type") String type);
 }

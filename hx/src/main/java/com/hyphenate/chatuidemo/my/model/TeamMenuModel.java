@@ -27,4 +27,6 @@ public class TeamMenuModel implements TeamMenuConstract.Model {
                 .compose(RxSchedulers.<BaseRespose<Object>>io_main())
                 .compose(RxHelper.handleResult());
     }
+
+
 }

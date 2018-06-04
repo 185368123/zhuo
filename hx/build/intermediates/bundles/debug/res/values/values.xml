@@ -509,15 +509,15 @@
         <item name="android:textSize">15sp</item>
     </style>
     <style name="progress_dialog_style1" parent="Theme.AppCompat.Light.Dialog.Alert">
-        
+        <!-- 按钮的颜色,进度对话框时，是进度条的颜色 -->
         <item name="colorAccent">@color/my_color2</item>
-        
+        <!-- 背景颜色 -->
         <item name="android:background">@color/white</item>
-        
+        <!-- 字体颜色 -->
         <item name="android:textColor">@color/app_black</item>
     </style>
     <style name="progress_dialog_style3" parent="progress_dialog_style1">
-        
+        <!--设置对话框显示时 Activity 是透明的-->
         <item name="android:backgroundDimEnabled">false</item>
     </style>
     <style name="text_style">

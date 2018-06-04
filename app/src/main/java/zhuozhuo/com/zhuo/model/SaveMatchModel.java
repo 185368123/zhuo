@@ -23,4 +23,11 @@ public class SaveMatchModel implements SaveMatchConstract.Model {
                 .compose(RxSchedulers.<BaseRespose<List<SaveMatchBean>>>io_main())
                 .compose(RxHelper.<List<SaveMatchBean>>handleResult());
     }
+
+    @Override
+    public Observable<Object> relieveLine(String token, String you_user_id, String type) {
+        return Api.getDefault(HostType.INCLUE_COOKIE).relieveLine(token, you_user_id, type)
+                .compose(RxSchedulers.<BaseRespose<Object>>io_main())
+                .compose(RxHelper.handleResult());
+    }
 }

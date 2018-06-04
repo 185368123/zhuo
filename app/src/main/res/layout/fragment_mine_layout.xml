@@ -76,7 +76,8 @@
             <TextView
                 android:text="0"
                 android:id="@+id/tv_user2"
-                style="@style/mine_text_style1"
+                android:textSize="@dimen/text_size_18"
+                android:textColor="@color/main_color"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 

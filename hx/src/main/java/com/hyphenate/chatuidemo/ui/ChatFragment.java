@@ -261,7 +261,6 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
                 intent.putExtra("you_user_id", cupBean.getData().get(index).getUser_id());
                 intent.putExtra("group_id", cupBean.getData().get(index).getGroup_id());
                 startActivity(intent);
-
             }
         });
         setChatFragmentHelper(this);

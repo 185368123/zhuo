@@ -27,4 +27,19 @@ public class SaveMatchPresent extends SaveMatchConstract.Presenter {
             }
         });
     }
+
+    @Override
+    public void relieveLine(String you_user_id, String type) {
+        mModel.relieveLine(UserInfoProvider.getToken(),you_user_id,type).subscribe(new RxSubscriber<Object>(mContext,false) {
+            @Override
+            protected void _onNext(Object o) {
+                mView.relieveLineSucess();
+            }
+
+            @Override
+            protected void _onError(String message) {
+
+            }
+        });
+    }
 }

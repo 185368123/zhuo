@@ -541,19 +541,19 @@ public final class R {
         public static final int abc_textfield_search_default_mtrl_alpha = 0x7f060050;
         public static final int abc_textfield_search_material = 0x7f060051;
         public static final int abc_vector_test = 0x7f060052;
-        public static final int notification_template_icon_bg = 0x7f0601b1;
-        public static final int ucrop_ic_angle = 0x7f0601c9;
-        public static final int ucrop_ic_crop = 0x7f0601ca;
-        public static final int ucrop_ic_cross = 0x7f0601cb;
-        public static final int ucrop_ic_done = 0x7f0601cc;
-        public static final int ucrop_ic_next = 0x7f0601cd;
-        public static final int ucrop_ic_reset = 0x7f0601ce;
-        public static final int ucrop_ic_rotate = 0x7f0601cf;
-        public static final int ucrop_ic_scale = 0x7f0601d0;
-        public static final int ucrop_shadow_upside = 0x7f0601d1;
-        public static final int ucrop_vector_ic_crop = 0x7f0601d2;
-        public static final int ucrop_vector_loader = 0x7f0601d3;
-        public static final int ucrop_vector_loader_animated = 0x7f0601d4;
+        public static final int notification_template_icon_bg = 0x7f0601b3;
+        public static final int ucrop_ic_angle = 0x7f0601cb;
+        public static final int ucrop_ic_crop = 0x7f0601cc;
+        public static final int ucrop_ic_cross = 0x7f0601cd;
+        public static final int ucrop_ic_done = 0x7f0601ce;
+        public static final int ucrop_ic_next = 0x7f0601cf;
+        public static final int ucrop_ic_reset = 0x7f0601d0;
+        public static final int ucrop_ic_rotate = 0x7f0601d1;
+        public static final int ucrop_ic_scale = 0x7f0601d2;
+        public static final int ucrop_shadow_upside = 0x7f0601d3;
+        public static final int ucrop_vector_ic_crop = 0x7f0601d4;
+        public static final int ucrop_vector_loader = 0x7f0601d5;
+        public static final int ucrop_vector_loader_animated = 0x7f0601d6;
     }
     public static final class id {
         public static final int action0 = 0x7f070020;

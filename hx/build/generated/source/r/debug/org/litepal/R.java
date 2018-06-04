@@ -465,7 +465,7 @@ public final class R {
         public static int abc_textfield_search_activated_mtrl_alpha = 0x7f090068;
         public static int abc_textfield_search_default_mtrl_alpha = 0x7f090069;
         public static int abc_textfield_search_material = 0x7f09006a;
-        public static int notification_template_icon_bg = 0x7f090204;
+        public static int notification_template_icon_bg = 0x7f090206;
     }
     public static final class id {
         public static int action0 = 0x7f0c0005;

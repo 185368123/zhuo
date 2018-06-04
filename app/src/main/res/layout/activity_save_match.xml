@@ -5,11 +5,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <com.hyphenate.easeui.widget.EaseTitleBar
-        android:id="@+id/saveMatch_titlebar"
+    <RelativeLayout
+        android:id="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:titleBarBackground="#f76243" />
+        android:layout_height="@dimen/height_top_bar"
+        android:background="@color/titlebarcolor"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:background="@drawable/ease_mm_title_back"
+            android:onClick="back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:text="我的保留"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/team"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ease_common_tab_bg"
+            android:onClick="clearSaveClick"
+            android:text="清空"
+            android:textColor="#fff"
+            android:textSize="16sp" />
+    </RelativeLayout>
     <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/lv_savematch"
         android:layout_width="wrap_content"
