@@ -36,8 +36,8 @@
 
     </RelativeLayout>
 
-    <zhuozhuo.com.zhuo.widget.SimpleVideo
+    <com.hyphenate.chatuidemo.my.SimpleVideo
         android:id="@+id/lv_my_video"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></zhuozhuo.com.zhuo.widget.SimpleVideo>
+        android:layout_height="match_parent"></com.hyphenate.chatuidemo.my.SimpleVideo>
 </LinearLayout>

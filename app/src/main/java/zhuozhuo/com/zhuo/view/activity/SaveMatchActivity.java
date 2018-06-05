@@ -161,7 +161,8 @@ public class SaveMatchActivity extends BaseActivity<SaveMatchModel, SaveMatchPre
 
     @Override
     public void relieveLineSucess() {
-       refresh();
+        list.clear();
+        adapter.notifyDataSetChanged();
     }
 
     @Override

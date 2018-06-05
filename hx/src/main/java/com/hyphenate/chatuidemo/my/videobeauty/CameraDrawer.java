@@ -6,6 +6,7 @@ import android.opengl.EGL14;
 import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
+import android.view.MotionEvent;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -240,7 +241,12 @@ public class CameraDrawer implements GLSurfaceView.Renderer {
         }
     }
 
-
+    /**
+     * 触摸事件的传递
+     * */
+    public void onTouch(MotionEvent event){
+        mSlideFilterGroup.onTouchEvent(event);
+    }
     /**
      * 设置预览效果的size
      */

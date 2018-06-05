@@ -1,12 +1,12 @@
-package zhuozhuo.com.zhuo.widget;
+package com.hyphenate.chatuidemo.my;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
+import com.hyphenate.chatuidemo.R;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 
-import zhuozhuo.com.zhuo.R;
 
 /**
  * Created by Administrator on 2018/5/9.

@@ -1480,15 +1480,6 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
         rxManager.on("stepupload", new Action1<String>() {
             @Override
             public void call(String s) {
-                /*if (s != null) {
-                    try {
-                        JSONObject jsonObject = new JSONObject(s);
-                        donext();
-                        video_id = jsonObject.getJSONObject("data").getString("video_id");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }*/
                 buffer.append("{action: step,token: " + UserInfoProvider.getToken() + ", user_id:" + UserInfoProvider.getUserID() + ",you_user_id  :" + toChatUsername + ",new_step:123" + "}");
                 sendSocketMsg();
             }
@@ -1615,9 +1606,8 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
         rxManager.on("next", new Action1<String>() {
             @Override
             public void call(String s) {
-                if (s != null) {
-
-                }
+                buffer.append("{action: step,token: " + UserInfoProvider.getToken() + ", user_id:" + UserInfoProvider.getUserID() + ",you_user_id  :" + toChatUsername + ",new_step:123" + "}");
+                sendSocketMsg();
             }
         });
 

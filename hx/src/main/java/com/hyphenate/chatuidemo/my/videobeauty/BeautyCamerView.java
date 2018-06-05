@@ -2,34 +2,46 @@ package com.hyphenate.chatuidemo.my.videobeauty;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Point;
+import android.hardware.Camera;
+import android.net.Uri;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.VideoView;
 
 import com.hyphenate.chatuidemo.R;
+import com.hyphenate.chatuidemo.my.SimpleVideo;
 import com.hyphenate.chatuidemo.my.button.CameraListener;
 import com.hyphenate.chatuidemo.my.button.CaptureLayout;
 import com.hyphenate.chatuidemo.my.button.CaptureListener;
 import com.hyphenate.chatuidemo.my.button.ClickListener;
 import com.hyphenate.chatuidemo.my.button.ReturnListener;
 import com.hyphenate.chatuidemo.my.button.TypeListener;
+import com.shuyu.gsyvideoplayer.builder.GSYVideoOptionBuilder;
 
 import java.io.File;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import li.com.base.baseapp.BaseApplication;
+import li.com.base.baserx.RxManager;
+import rx.functions.Action1;
 
 
 /**
  * Created by Administrator on 2018/5/21.
  */
 
-public class BeautyCamerView extends FrameLayout {
+public class BeautyCamerView extends FrameLayout implements View.OnTouchListener, SensorControler.CameraFocusListener {
 
     public static final int BUTTON_STATE_ONLY_CAPTURE = 0x101;      //只能拍照
     public static final int BUTTON_STATE_ONLY_RECORDER = 0x102;     //只能录像
@@ -53,6 +65,12 @@ public class BeautyCamerView extends FrameLayout {
     public ImageView mSwitchCamera;
     private CaptureLayout mCaptureLayout;
     private CameraView cv;
+    private FocusImageView mFocus;
+    private SensorControler mSensorControler;
+    private SimpleVideo video;
+    private GSYVideoOptionBuilder gsyVideoOption;
+    private RxManager rxManager=new RxManager();
+    private final String SATRT_VIDEO="StartPlayVideo";
 
     public BeautyCamerView(@NonNull Context context) {
         this(context, null);
@@ -81,8 +99,22 @@ public class BeautyCamerView extends FrameLayout {
     }
 
     private void initView() {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.beauty_camer_layout, this);
+        rxManager.on(SATRT_VIDEO, new Action1<Object>() {
+            @Override
+            public void call(Object o) {
+                if (video.getCurrentState()!=SimpleVideo.CURRENT_STATE_PLAYING){
+                    video.getStartButton().performClick();
+                }
+            }
+        });
+        final View view = LayoutInflater.from(mContext).inflate(R.layout.beauty_camer_layout, this);
+        video = (SimpleVideo) view.findViewById(R.id.video_view);
+        video.getBackButton().setVisibility(View.GONE);
         cv = (CameraView) view.findViewById(R.id.cv);
+        cv.setOnTouchListener(this);
+        mFocus = (FocusImageView) view.findViewById(R.id.focusImageView);
+        mSensorControler = SensorControler.getInstance();
+        mSensorControler.setCameraFocusListener(this);
         mSwitchCamera = (ImageView) view.findViewById(R.id.image_switch);
         mSwitchCamera.setImageResource(iconSrc);
         mCaptureLayout = (CaptureLayout) view.findViewById(R.id.capture_layout);
@@ -125,6 +157,17 @@ public class BeautyCamerView extends FrameLayout {
             @Override
             public void recordEnd(long time) {
                 cv.stopRecord();
+                video.setVisibility(VISIBLE);
+                gsyVideoOption = new GSYVideoOptionBuilder();
+                gsyVideoOption.setUrl(savePath);
+                gsyVideoOption.setLooping(true);
+                gsyVideoOption.build(video);
+                new Timer().schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        rxManager.post(SATRT_VIDEO,"");
+                    }
+                },500);
             }
 
             @Override
@@ -141,13 +184,21 @@ public class BeautyCamerView extends FrameLayout {
         mCaptureLayout.setTypeLisenter(new TypeListener() {
             @Override
             public void cancel() {
-             deleteVideo();
-              mCaptureLayout.resetCaptureLayout();
+                if (video.getCurrentState()==SimpleVideo.CURRENT_STATE_PLAYING){
+                    video.getStartButton().performClick();
+                }
+                video.setVisibility(GONE);
+                deleteVideo();
+                mSwitchCamera.setVisibility(VISIBLE);
+                mCaptureLayout.resetCaptureLayout();
             }
 
             @Override
             public void confirm() {
-             cameraLisenter.recordSuccess(savePath,null);
+                if (video.getCurrentState()==SimpleVideo.CURRENT_STATE_PLAYING){
+                    video.getStartButton().performClick();
+                }
+                cameraLisenter.recordSuccess(savePath, null);
             }
         });
         //退出
@@ -155,6 +206,9 @@ public class BeautyCamerView extends FrameLayout {
             @Override
             public void onReturn() {
                 if (cameraLisenter != null) {
+                    if (video.getCurrentState()==SimpleVideo.CURRENT_STATE_PLAYING){
+                        video.getStartButton().performClick();
+                    }
                     cameraLisenter.quit();
                 }
             }
@@ -180,7 +234,7 @@ public class BeautyCamerView extends FrameLayout {
     }
 
     private void deleteVideo() {
-        File file=new File(savePath);
+        File file = new File(savePath);
         file.delete();
     }
 
@@ -204,6 +258,53 @@ public class BeautyCamerView extends FrameLayout {
             }
         }
         return baseFolder;
+    }
+
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        cv.onTouch(event);
+        if (cv.getCameraId() == 1) {
+            return false;
+        }
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_UP:
+                float sRawX = event.getRawX();
+                float sRawY = event.getRawY();
+                float rawY = sRawY * BaseApplication.screenWidth / BaseApplication.screenHeight;
+                float temp = sRawX;
+                float rawX = rawY;
+                rawY = (BaseApplication.screenWidth - temp) * BaseApplication.screenHeight / BaseApplication.screenWidth;
+
+                Point point = new Point((int) rawX, (int) rawY);
+                cv.onFocus(point, callback);
+                mFocus.startFocus(new Point((int) sRawX, (int) sRawY));
+        }
+        return true;
+    }
+
+    Camera.AutoFocusCallback callback = new Camera.AutoFocusCallback() {
+        @Override
+        public void onAutoFocus(boolean success, Camera camera) {
+            //聚焦之后根据结果修改图片
+            Log.e("hero", "----onAutoFocus====" + success);
+            if (success) {
+                mFocus.onFocusSuccess();
+            } else {
+                //聚焦失败显示的图片
+                mFocus.onFocusFailed();
+
+            }
+        }
+    };
+
+    @Override
+    public void onFocus() {
+        if (cv.getCameraId() == 1) {
+            return;
+        }
+        Point point = new Point(BaseApplication.screenWidth / 2, BaseApplication.screenHeight / 2);
+        cv.onFocus(point, callback);
     }
 
 
@@ -247,6 +348,9 @@ public class BeautyCamerView extends FrameLayout {
     }
 
     public void onPause() {
+        if (video.getCurrentState()==SimpleVideo.CURRENT_STATE_PLAYING){
+            video.getStartButton().performClick();
+        }
         cv.onPause();
     }
 

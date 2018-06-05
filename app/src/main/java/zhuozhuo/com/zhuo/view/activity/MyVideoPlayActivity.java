@@ -11,10 +11,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.hyphenate.chatuidemo.my.LayoutVideo;
 import com.hyphenate.chatuidemo.my.SampleListener;
 import com.hyphenate.easeui.provider.UserInfoProvider;
-import com.hyphenate.easeui.widget.EaseTitleBar;
 import com.shuyu.gsyvideoplayer.builder.GSYVideoOptionBuilder;
 import com.shuyu.gsyvideoplayer.listener.LockClickListener;
 import com.shuyu.gsyvideoplayer.utils.Debuger;
@@ -22,7 +20,7 @@ import com.shuyu.gsyvideoplayer.utils.OrientationUtils;
 import com.shuyu.gsyvideoplayer.video.base.GSYVideoPlayer;
 
 import zhuozhuo.com.zhuo.R;
-import zhuozhuo.com.zhuo.widget.SimpleVideo;
+import com.hyphenate.chatuidemo.my.SimpleVideo;
 
 public class MyVideoPlayActivity extends BaseActivity {
 

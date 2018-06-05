@@ -69,7 +69,7 @@ import zhuozhuo.com.zhuo.view.activity.MainActivity;
 import zhuozhuo.com.zhuo.view.activity.RecordVideoActivity;
 import zhuozhuo.com.zhuo.view.activity.VideoSelectActivity;
 import zhuozhuo.com.zhuo.widget.CommentPopupWindow;
-import zhuozhuo.com.zhuo.widget.SimpleVideo;
+import com.hyphenate.chatuidemo.my.SimpleVideo;
 
 
 /**

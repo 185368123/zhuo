@@ -3,8 +3,10 @@ package com.hyphenate.chatuidemo.my.videobeauty;
 import android.content.Context;
 import android.graphics.Point;
 import android.graphics.SurfaceTexture;
+import android.hardware.Camera;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -102,6 +104,13 @@ public class CameraView extends GLSurfaceView implements GLSurfaceView.Renderer,
         }
     }
 
+    /**
+     * 摄像头聚焦
+     * */
+    public void onFocus(Point point, Camera.AutoFocusCallback callback){
+        cameraController.onFocus(point,callback);
+    }
+
     public int getCameraId() {
         return cameraId;
     }
@@ -149,7 +158,14 @@ public class CameraView extends GLSurfaceView implements GLSurfaceView.Renderer,
             }
         });
     }
-
+    public void onTouch(final MotionEvent event){
+        queueEvent(new Runnable() {
+            @Override
+            public void run() {
+                mCameraDrawer.onTouch(event);
+            }
+        });
+    }
     public void pause(final boolean auto) {
         queueEvent(new Runnable() {
             @Override

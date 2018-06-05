@@ -1,6 +1,7 @@
 package com.hyphenate.chatuidemo;
 
 import com.hyphenate.chatuidemo.my.bean.UserDB;
+import com.hyphenate.chatuidemo.my.constract.GetUserMsgConstract;
 import com.hyphenate.chatuidemo.my.model.GetUserMsgModel;
 import com.hyphenate.chatuidemo.my.presenter.GetUserMsgPresenter;
 
@@ -51,6 +52,13 @@ public class UserMsgDBHelp {
         DataSupport.deleteAll(UserDB.class,"user_id = ?", userId);
         GetUserMsgPresenter getUserMsgPresenter=new GetUserMsgPresenter();
         getUserMsgPresenter.setVM(new GetUserMsgModel(),null);
+        getUserMsgPresenter.getUserMsg(userId);
+    }
+
+    public void updateMsg(String userId, GetUserMsgConstract.View  call) {//根据用户ID从服务器获取用户信息并且保存在数据库
+        DataSupport.deleteAll(UserDB.class,"user_id = ?", userId);
+        GetUserMsgPresenter getUserMsgPresenter=new GetUserMsgPresenter();
+        getUserMsgPresenter.setVM(new GetUserMsgModel(),call);
         getUserMsgPresenter.getUserMsg(userId);
     }
 }

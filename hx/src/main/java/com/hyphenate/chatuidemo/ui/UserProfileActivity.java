@@ -18,12 +18,15 @@ import com.hyphenate.chatuidemo.R;
 import com.hyphenate.chatuidemo.UserMsgDBHelp;
 import com.hyphenate.chatuidemo.my.SimpleVideoActivity;
 import com.hyphenate.chatuidemo.my.bean.UserDB;
+import com.hyphenate.chatuidemo.my.bean.UserMsgBean;
+import com.hyphenate.chatuidemo.my.constract.GetUserMsgConstract;
 
 import java.util.List;
 
 import li.com.base.baseuntils.ToastUitl;
 
 public class UserProfileActivity extends BaseActivity implements View.OnClickListener {
+
     private ImageView headAvatar;
     private TextView tvNickName;
     private TextView tv_card1;
@@ -52,7 +55,27 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
         initView();
         username = getIntent().getStringExtra("username");
         setView(username);
-        UserMsgDBHelp.getUserMsgDBHelp().updateMsg(username);
+        UserMsgDBHelp.getUserMsgDBHelp().updateMsg(username, new GetUserMsgConstract.View() {
+            @Override
+            public void returnUserMsg(UserMsgBean userMsgBean) {
+                userDB = UserMsgDBHelp.getUserMsgDBHelp().searchByUserId(username);
+            }
+
+            @Override
+            public void showLoading(String title) {
+
+            }
+
+            @Override
+            public void stopLoading() {
+
+            }
+
+            @Override
+            public void showErrorTip(String msg) {
+
+            }
+        });
     }
 
     private void setView(final String username) {
@@ -158,7 +181,7 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
         int i = v.getId();
         if (i == R.id.ll_video) {
             if (userDB.getUser_video()==null){
-                ToastUitl.showLong("对方未设置视频");
+                ToastUitl.showLong("暂未获取到对方的视频，请稍后再试！");
         }else {
                 Intent intent = new Intent(this, SimpleVideoActivity.class);
                 intent.putExtra("url", userDB.getUser_video());
