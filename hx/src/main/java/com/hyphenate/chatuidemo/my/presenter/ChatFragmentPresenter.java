@@ -128,8 +128,8 @@ public class ChatFragmentPresenter extends ChatFragmentConstract.Presenter {
     }
 
     @Override
-    public void teamRegister(String line_id,String hundred_id) {
-        mModel.teamRegister(UserInfoProvider.getToken(), line_id,hundred_id).subscribe(new RxSubscriber<Object>(mContext, false) {
+    public void teamRegister(String line_id, String hundred_id) {
+        mModel.teamRegister(UserInfoProvider.getToken(), line_id, hundred_id).subscribe(new RxSubscriber<Object>(mContext, false) {
             @Override
             protected void _onNext(Object o) {
                 mView.teamRegisterSucess();
@@ -144,7 +144,7 @@ public class ChatFragmentPresenter extends ChatFragmentConstract.Presenter {
 
     @Override
     public void getTag(String choice_id, String you_user_id) {
-        mModel.getTag(UserInfoProvider.getToken(),choice_id,you_user_id).subscribe(new RxSubscriber<TagBean>(mContext,false) {
+        mModel.getTag(UserInfoProvider.getToken(), choice_id, you_user_id).subscribe(new RxSubscriber<TagBean>(mContext, false) {
             @Override
             protected void _onNext(TagBean tagBean) {
                 mView.returnTag(tagBean);
@@ -159,7 +159,7 @@ public class ChatFragmentPresenter extends ChatFragmentConstract.Presenter {
 
     @Override
     public void getRandom(String you_user_id, String choice_id) {
-        mModel.getRandom(UserInfoProvider.getToken(),you_user_id,choice_id).subscribe(new RxSubscriber<List<Object>>(mContext,false) {
+        mModel.getRandom(UserInfoProvider.getToken(), you_user_id, choice_id).subscribe(new RxSubscriber<List<Object>>(mContext, false) {
             @Override
             protected void _onNext(List<Object> list) {
 
@@ -175,10 +175,10 @@ public class ChatFragmentPresenter extends ChatFragmentConstract.Presenter {
 
     @Override
     public void isEvaluate(String you_user_id) {
-        mModel.isEvaluate(UserInfoProvider.getToken(),you_user_id).subscribe(new RxSubscriber<IsRemarkBean>(mContext,false) {
+        mModel.isEvaluate(UserInfoProvider.getToken(), you_user_id).subscribe(new RxSubscriber<IsRemarkBean>(mContext, false) {
             @Override
             protected void _onNext(IsRemarkBean isRemarkBean) {
-mView.getIsEvaluateSucess(isRemarkBean);
+                mView.getIsEvaluateSucess(isRemarkBean);
             }
 
             @Override

@@ -8,6 +8,8 @@ import android.widget.EditText;
 import com.hyphenate.chatuidemo.R;
 import com.hyphenate.chatuidemo.ui.BaseActivity;
 
+import li.com.base.basesinglebean.SingleBeans;
+
 /**
  * Created by Administrator on 2018/5/30.
  */
@@ -26,6 +28,7 @@ public class SetCitykActivity extends BaseActivity {
         setResult(RESULT_OK,new Intent().putExtra("com",""));
         finish();
     }
+
     @Override
     public void onBackPressed() {
 

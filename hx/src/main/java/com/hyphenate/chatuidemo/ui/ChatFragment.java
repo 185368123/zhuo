@@ -274,23 +274,23 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
             }
             setVisibility(View.GONE);
             setNormal_input();
-            /*for (int j = 0; j < SingleBeans.getInstance().getMatchPersonBeans().size(); j++) {
+           /* for (int j = 0; j < SingleBeans.getInstance().getMatchPersonBeans().size(); j++) {
                 if (SingleBeans.getInstance().getMatchPersonBeans().get(j).getUser_id().equals(toChatUsername)){
                     buffer.append("{action: step,token: " + UserInfoProvider.getToken() + ", user_id:" + UserInfoProvider.getUserID() + ",you_user_id  :" + toChatUsername + ",new_step:123" + "}");
                     sendSocketMsg();
                 }
-            }
+            }*/
 
             if (SingleBeans.getInstance().getMatchPersonBeans().size() > 0) {
                 for (int j = 0; j < SingleBeans.getInstance().getMatchPersonBeans().size(); j++) {
                     if (SingleBeans.getInstance().getMatchPersonBeans().get(j).isMe(toChatUsername)) {
                         isMatch = true;
-                        setVisibility(View.VISIBLE);
-                        setMatch_input();
+                        //setVisibility(View.VISIBLE);
+                        //setMatch_input();
                         break;
                     }
                 }
-            }*/
+            }
 
         }
         super.setUpView();
@@ -1068,9 +1068,20 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
 
     @Override
     public void getIsEvaluateSucess(IsRemarkBean isRemarkBean) {
+        choice_id=isRemarkBean.getChoice_id();
        if (isRemarkBean.getIs_status().equals("1")){
            layout_chatted.setVisibility(View.VISIBLE);
        }
+        if (isRemarkBean.getType().equals("1")){
+           frameLayout.setVisibility(View.GONE);
+            setNormal_input();
+        }else if (isRemarkBean.getType().equals("2")){
+            frameLayout.setVisibility(View.VISIBLE);
+            setNormal_input();
+            chatlinearLayout.setVisibility(View.GONE);
+            ll_tag.setVisibility(View.VISIBLE);
+            mPresenter.getTag(choice_id, toChatUsername);
+        }
     }
 
 

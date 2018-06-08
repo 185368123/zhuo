@@ -128,10 +128,10 @@ public class Zhuo1NewItemFragment_ extends BaseFragment<Zhuo1FragmentNewPresente
         if (data != null) {
             this.data.clear();
             this.data.addAll(data);
+            adapter.clearViewSaveList();
             adapter.notifyDataSetChanged();
         }
         listView.onRefreshComplete();
-
     }
 
     @Override

@@ -21,6 +21,7 @@ import java.util.List;
 
 import li.com.base.baserx.RxManager;
 import li.com.base.basesinglebean.SingleChooseBean;
+import li.com.base.baseuntils.LogUtils;
 import zhuozhuo.com.zhuo.R;
 import zhuozhuo.com.zhuo.constants.Constant;
 
@@ -85,7 +86,7 @@ public class Zhuo1NewItemListAdapter extends BaseAdapter {
         viewSave.position=position;
         viewSaveList.add(viewSave);
 
-
+        LogUtils.logd(list.get(position).getChoice_id()+"匹配状态："+list.get(position).getMatch_status());
         if (list.get(position).getMatch_status().equals("1")&&list.get(position).getStatus().equals("66")){
             ViewSave save= viewSaveList.get(position);
             rxManager.post(Constant.MATCH_BEGIN,save);
@@ -150,6 +151,9 @@ public class Zhuo1NewItemListAdapter extends BaseAdapter {
 
     public List<ViewSave> getViewSaveList(){
         return viewSaveList;
+    }
+    public void clearViewSaveList(){
+        viewSaveList.clear();
     }
 
     public class ViewSave{
