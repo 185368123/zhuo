@@ -6,7 +6,6 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
-import com.hyphenate.chatuidemo.my.CreatTeamActivity;
 import com.hyphenate.easeui.provider.UserInfoProvider;
 import com.hyphenate.easeui.events.RxBusConstants;
 import org.java_websocket.client.WebSocketClient;
@@ -95,8 +94,8 @@ public class SocketService extends Service {
                 public void onOpen(ServerHandshake handshakedata) {
                     LogUtils.logd(TAG + "Socket连接成功");
                     flag = true;
-                    mThread = new MyThread();
-                    mThread.start();
+                   // mThread = new MyThread();
+                   // mThread.start();
                 }
 
                 @Override

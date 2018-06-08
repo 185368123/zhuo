@@ -334,7 +334,7 @@ public class SetActivity extends BaseActivity implements AdapterView.OnItemSelec
 
     public void showNoUpdateDialog(){
         AlertDialog.Builder builder_ = new AlertDialog.Builder(this);
-        builder_.setTitle("版本提示").setIcon(R.drawable.logo_80)
+        builder_.setTitle("版本提示").setIcon(R.drawable.logo)
                 .setMessage("当前已是最新版本")
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
@@ -349,7 +349,7 @@ public class SetActivity extends BaseActivity implements AdapterView.OnItemSelec
         // 创建构建器
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         // 设置参数
-        builder.setTitle("版本提示").setIcon(R.drawable.logo_80)
+        builder.setTitle("版本提示").setIcon(R.drawable.logo)
                 .setMessage("发现新版本，是否更新？")
                 .setNeutralButton("普通更新", new DialogInterface.OnClickListener() {
                     @Override
@@ -374,7 +374,7 @@ public class SetActivity extends BaseActivity implements AdapterView.OnItemSelec
         // 创建构建器
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         // 设置参数
-        builder.setTitle("版本提示").setIcon(R.drawable.logo_80)
+        builder.setTitle("版本提示").setIcon(R.drawable.logo)
                 .setMessage("发现新版本，是否更新？")
                 .setNeutralButton("普通更新", new DialogInterface.OnClickListener() {
                     @Override

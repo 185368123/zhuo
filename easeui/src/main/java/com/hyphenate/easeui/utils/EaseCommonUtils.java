@@ -84,7 +84,7 @@ public class EaseCommonUtils {
         case LOCATION:
             if (message.direct() == EMMessage.Direct.RECEIVE) {
                 digest = getString(context, R.string.location_recv);
-                digest = String.format(digest, message.getFrom());
+                digest = String.format(digest, EaseUserUtils.getUserNameById(message.getFrom()));
                 return digest;
             } else {
                 digest = getString(context, R.string.location_prefix);

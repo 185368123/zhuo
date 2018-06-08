@@ -37,4 +37,21 @@ public interface Constant {
     String single="单人匹配";
 
 
+    String FRAGMENT_NAME="name";
+
+    String FRAGMENT_TITLE="title";
+
+    String FRAGMENT_IMAGE="image";
+
+    String FRAGMENT_BEAN="bean";
+
+    String MATCH_BEGIN="begin_match";
+
+    String MATCH_STOP="stop_match";
+
+    String MATCH_BEGIN_="begin_match_";
+
+    String MATCH_STOP_="stop_match_";
+
+
 }

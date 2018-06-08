@@ -2,6 +2,7 @@ package com.hyphenate.chatuidemo.my.model;
 
 import com.hyphenate.chatuidemo.my.api.Api;
 import com.hyphenate.chatuidemo.my.api.HostType;
+import com.hyphenate.chatuidemo.my.bean.IsRemarkBean;
 import com.hyphenate.chatuidemo.my.bean.TagBean;
 import com.hyphenate.easeui.HundredCupBean;
 import com.hyphenate.chatuidemo.my.bean.VideoLinkBean;
@@ -86,6 +87,14 @@ public class ChatFragmentModel implements ChatFragmentConstract.Model{
         return Api.getDefault(HostType.INCLUE_COOKIE).getRandom(token, you_user_id, choice_id)
                 .compose(RxSchedulers.<BaseRespose<List<Object>>>io_main())
                 .compose(RxHelper.<List<Object>>handleResult());
+    }
+
+    @Override
+    public Observable<IsRemarkBean> isEvaluate(String token, String you_user_id) {
+        return Api.getDefault(HostType.INCLUE_COOKIE)
+                .isEvaluate(token, you_user_id)
+                .compose(RxSchedulers.<BaseRespose<IsRemarkBean>>io_main())
+                .compose(RxHelper.<IsRemarkBean>handleResult());
     }
 
 }

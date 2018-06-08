@@ -62,6 +62,7 @@
     <color name="white">@android:color/white</color>
     <declare-styleable name="ContactItemView"><attr format="reference" name="contactItemImage"/><attr format="string" name="contactItemName"/></declare-styleable>
     <declare-styleable name="DragDropGirdView"><attr format="boolean" name="fixed_type"/><attr format="integer" name="anim_duration"/></declare-styleable>
+    <declare-styleable name="FocusImageView"><attr format="integer" name="focus_focusing_id"/><attr format="integer" name="focus_success_id"/><attr format="integer" name="focus_fail_id"/></declare-styleable>
     <declare-styleable name="JCameraView"><attr name="iconSize"/><attr name="iconMargin"/><attr name="iconSrc"/><attr name="iconLeft"/><attr name="iconRight"/><attr name="duration_max"/></declare-styleable>
     <dimen name="abroad_dialog_item_hight">45dp</dimen>
     <dimen name="abroad_dialog_textsize">18sp</dimen>

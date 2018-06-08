@@ -143,4 +143,52 @@ public class SingleBeans {
     public List<String> getFriends() {
         return friends;
     }
+
+    private String choose_id;
+
+    public String getChoose_id() {
+        return choose_id;
+    }
+
+    public void setChoose_id(String choose_id) {
+        this.choose_id = choose_id;
+    }
+
+    private String match_type;
+    private String destination;
+    private String location;
+
+    public String getMatch_type() {
+        return match_type;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setMatch_type(String match_type) {
+        this.match_type = match_type;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    private  List<CitiesSingBean> singBeans;
+
+    public void setCitiesSingBean(List<CitiesSingBean> singBeans) {
+        this.singBeans = singBeans;
+    }
+
+    public List<CitiesSingBean> getCitiesSingBean() {
+        return singBeans;
+    }
 }

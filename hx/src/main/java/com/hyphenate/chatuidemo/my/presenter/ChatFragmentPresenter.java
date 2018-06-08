@@ -1,5 +1,6 @@
 package com.hyphenate.chatuidemo.my.presenter;
 
+import com.hyphenate.chatuidemo.my.bean.IsRemarkBean;
 import com.hyphenate.chatuidemo.my.bean.TagBean;
 import com.hyphenate.easeui.HundredCupBean;
 import com.hyphenate.chatuidemo.my.bean.VideoLinkBean;
@@ -163,6 +164,21 @@ public class ChatFragmentPresenter extends ChatFragmentConstract.Presenter {
             protected void _onNext(List<Object> list) {
 
 
+            }
+
+            @Override
+            protected void _onError(String message) {
+
+            }
+        });
+    }
+
+    @Override
+    public void isEvaluate(String you_user_id) {
+        mModel.isEvaluate(UserInfoProvider.getToken(),you_user_id).subscribe(new RxSubscriber<IsRemarkBean>(mContext,false) {
+            @Override
+            protected void _onNext(IsRemarkBean isRemarkBean) {
+mView.getIsEvaluateSucess(isRemarkBean);
             }
 
             @Override

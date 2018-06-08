@@ -1,5 +1,7 @@
 package zhuozhuo.com.zhuo.contract;
 
+import java.util.List;
+
 import li.com.base.basesinglebean.VisonBean;
 
 import li.com.base.base.BaseModel;
@@ -18,6 +20,7 @@ public interface GetVisonConstract {
         Observable<VisonBean> getVison(String type);
 
         Observable<Object>  order(String token,String goods_id,String goods_price,String pay_type);
+
     }
 
     interface View extends BaseView {

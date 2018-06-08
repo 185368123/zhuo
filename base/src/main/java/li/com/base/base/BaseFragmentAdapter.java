@@ -25,6 +25,7 @@ public class BaseFragmentAdapter extends FragmentPagerAdapter {
     public BaseFragmentAdapter(FragmentManager fm, List<Fragment> fragmentList) {
         super(fm);
         this.fragmentList = fragmentList;
+        setFragments(fm,fragmentList);
     }
 
     public BaseFragmentAdapter(FragmentManager fm, List<Fragment> fragmentList, List<String> mTitles) {
@@ -36,6 +37,21 @@ public class BaseFragmentAdapter extends FragmentPagerAdapter {
     //刷新fragment
     public void setFragments(FragmentManager fm, List<Fragment> fragments, List<String> mTitles) {
         this.mTitles = mTitles;
+        if (this.fragmentList != null) {
+            FragmentTransaction ft = fm.beginTransaction();
+            for (Fragment f : this.fragmentList) {
+                ft.remove(f);
+            }
+            ft.commitAllowingStateLoss();
+            ft = null;
+            fm.executePendingTransactions();
+        }
+        this.fragmentList = fragments;
+        notifyDataSetChanged();
+    }
+
+    //刷新fragment
+    public void setFragments(FragmentManager fm, List<Fragment> fragments) {
         if (this.fragmentList != null) {
             FragmentTransaction ft = fm.beginTransaction();
             for (Fragment f : this.fragmentList) {

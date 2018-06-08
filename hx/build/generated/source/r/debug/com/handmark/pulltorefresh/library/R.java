@@ -59,8 +59,8 @@ public final class R {
         public static int webview = 0x7f0c02fb;
     }
     public static final class layout {
-        public static int pull_to_refresh_header_horizontal = 0x7f0f00d4;
-        public static int pull_to_refresh_header_vertical = 0x7f0f00d5;
+        public static int pull_to_refresh_header_horizontal = 0x7f0f00d5;
+        public static int pull_to_refresh_header_vertical = 0x7f0f00d6;
     }
     public static final class string {
         public static int pull_to_refresh_from_bottom_pull_label = 0x7f1501a7;

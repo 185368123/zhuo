@@ -1,4 +1,5 @@
 package com.hyphenate.chatuidemo.my;
+
 import android.graphics.Bitmap;
 import android.media.MediaScannerConnection;
 import android.net.Uri;

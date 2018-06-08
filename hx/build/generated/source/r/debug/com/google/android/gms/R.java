@@ -471,21 +471,21 @@ public final class R {
         public static int google_play_services_version = 0x7f0d000a;
     }
     public static final class layout {
-        public static int cast_expanded_controller_activity = 0x7f0f0030;
-        public static int cast_help_text = 0x7f0f0031;
-        public static int cast_intro_overlay = 0x7f0f0032;
-        public static int cast_mini_controller = 0x7f0f0033;
-        public static int cast_tracks_chooser_dialog_layout = 0x7f0f0034;
-        public static int cast_tracks_chooser_dialog_row_layout = 0x7f0f0035;
-        public static int libraries_social_licenses_license = 0x7f0f00b4;
-        public static int libraries_social_licenses_license_activity = 0x7f0f00b5;
-        public static int libraries_social_licenses_license_menu_activity = 0x7f0f00b6;
-        public static int license_menu_activity_no_licenses = 0x7f0f00b7;
-        public static int place_autocomplete_fragment = 0x7f0f00cf;
-        public static int place_autocomplete_item_powered_by_google = 0x7f0f00d0;
-        public static int place_autocomplete_item_prediction = 0x7f0f00d1;
-        public static int place_autocomplete_progress = 0x7f0f00d2;
-        public static int wallet_test_layout = 0x7f0f00f4;
+        public static int cast_expanded_controller_activity = 0x7f0f0031;
+        public static int cast_help_text = 0x7f0f0032;
+        public static int cast_intro_overlay = 0x7f0f0033;
+        public static int cast_mini_controller = 0x7f0f0034;
+        public static int cast_tracks_chooser_dialog_layout = 0x7f0f0035;
+        public static int cast_tracks_chooser_dialog_row_layout = 0x7f0f0036;
+        public static int libraries_social_licenses_license = 0x7f0f00b5;
+        public static int libraries_social_licenses_license_activity = 0x7f0f00b6;
+        public static int libraries_social_licenses_license_menu_activity = 0x7f0f00b7;
+        public static int license_menu_activity_no_licenses = 0x7f0f00b8;
+        public static int place_autocomplete_fragment = 0x7f0f00d0;
+        public static int place_autocomplete_item_powered_by_google = 0x7f0f00d1;
+        public static int place_autocomplete_item_prediction = 0x7f0f00d2;
+        public static int place_autocomplete_progress = 0x7f0f00d3;
+        public static int wallet_test_layout = 0x7f0f00f5;
     }
     public static final class raw {
         public static int keep_third_party_licenses = 0x7f140005;

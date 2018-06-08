@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:background="#f76243"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_service_new"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:paddingLeft="25dp"
+            android:text="Service"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="啄"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+
+        <FrameLayout
+            android:id="@+id/chat_frame_new"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:paddingRight="25dp"
+                android:text="Chats"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id="@+id/tv_unread_num"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="right|top"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/unreadmsg"
+                android:gravity="center"
+                android:textColor="#f76243"
+                android:textSize="10sp"
+                android:visibility="gone" />
+        </FrameLayout>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vp_zhuo1_new"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"></android.support.v4.view.ViewPager>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_zhuo1_"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"></android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/wait_zhuo1_"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/zhuo1_background"
+            android:clickable="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingRight="20dp"
+                android:paddingTop="20dp">
+
+                <ImageView
+                    android:id="@+id/iv_cancle_zhuo1_"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/canclematch" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2" />
+
+            <ImageView
+                android:id="@+id/iv_wait_zhuo1_"
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/wait_animation" />
+
+            <Chronometer
+                android:id="@+id/time_zhuo1_"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white" />
+
+            <TextView
+                style="@style/mine_text_style1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:text="等待中..."
+                android:textColor="@color/white" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_zhuo1_"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/zhuo1_background"
+            android:clickable="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:paddingTop="10dp">
+
+                <ImageView
+                    android:id="@+id/iv_cancle_zhuo1_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/canclematch" />
+            </RelativeLayout>
+
+            <com.hyphenate.chatuidemo.my.SimpleVideo
+                android:id="@+id/sv_zhuo1_"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"></com.hyphenate.chatuidemo.my.SimpleVideo>
+
+            <TextView
+                android:id="@+id/tv1_zhuo1_"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_13" />
+
+            <TextView
+                android:id="@+id/tv2_zhuo1_"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_13" />
+
+            <TextView
+                android:id="@+id/tv3_zhuo1_"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_13" />
+
+            <TextView
+                android:id="@+id/tv4_zhuo1_"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_13" />
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/button_skip_zhuo1_"
+                    android:layout_width="70dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/skip_button_maincolor_shape"
+                    android:text="跳过"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/tv5_zhuo1_"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/textview_shape"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_13" />
+                <TextView
+                    android:id="@+id/button_receive_zhuo1_"
+                    android:layout_width="70dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/receive_button_maincolor_shape"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:text="喜欢"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="5dp" />
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/button_save_zhuo1_"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:background="@drawable/receive_button_maincolor_shape"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="保留"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="5dp" />
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>

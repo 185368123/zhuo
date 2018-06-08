@@ -63,5 +63,15 @@ public class EaseUserUtils {
         	}
         }
     }
-    
+
+
+    public static String getUserNameById(String userid){
+        EaseUser user=getUserInfo(userid);
+            if(user != null && user.getNick() != null){
+                return  user.getNick();
+            }else{
+                return userid;
+            }
+
+    }
 }

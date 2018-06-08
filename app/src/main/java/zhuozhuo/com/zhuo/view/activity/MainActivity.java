@@ -64,7 +64,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private TextView tv1;
     private TextView tv3;
     private TextView tv4;
-    private SlidingMenu menu;
+    public SlidingMenu menu;
     private TextView tv2;
     private TextView tv_chat_unread;
     private TextView tv_friend_unread;
@@ -318,6 +318,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         // configure the SlidingMenu
         menu = new SlidingMenu(this);
         menu.setMode(SlidingMenu.RIGHT);
+
         // 设置触摸屏幕的模式
         menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
         menu.setShadowWidthRes(R.dimen.shadow_width);
@@ -491,6 +492,5 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             }
         }
     }
-
 
 }

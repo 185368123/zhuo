@@ -185,7 +185,7 @@ mPresenter.setVM(mModel,this);
                 // 创建构建器
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 // 设置参数
-                builder.setTitle("请选择性别").setIcon(R.drawable.logo_80)
+                builder.setTitle("请选择性别").setIcon(R.drawable.logo)
                         .setMessage("")
                         .setPositiveButton("男", new DialogInterface.OnClickListener() {
                             @Override

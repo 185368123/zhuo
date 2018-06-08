@@ -4,10 +4,12 @@ import li.com.base.basesinglebean.GroupStatusBean;
 
 import com.hyphenate.chatuidemo.my.UserListBean;
 import com.hyphenate.chatuidemo.my.bean.AllArticleBean;
+import li.com.base.basesinglebean.CitiesSingBean;
 import com.hyphenate.chatuidemo.my.bean.CupMemberBean;
 import com.hyphenate.chatuidemo.my.bean.CupTeamBean;
 import com.hyphenate.chatuidemo.my.bean.GroupChoicesBean;
 import com.hyphenate.chatuidemo.my.bean.IntegralBean;
+import com.hyphenate.chatuidemo.my.bean.IsRemarkBean;
 import com.hyphenate.chatuidemo.my.bean.RaceBean;
 import com.hyphenate.chatuidemo.my.bean.SaveMatchBean;
 import com.hyphenate.chatuidemo.my.bean.SuggestTagBean;
@@ -442,13 +444,13 @@ public interface ApiService {
     @FormUrlEncoded
     @POST(UrlConstant.QuitHundredGroup_URL)
     Observable<BaseRespose<Object>> qiutGroup(@Field("token") String token,
-                                          @Field("goods_id") String goods_id);
+                                              @Field("goods_id") String goods_id);
 
     //搜索用户
     @FormUrlEncoded
     @POST(UrlConstant.SearchUser)
     Observable<BaseRespose<List<UserListBean>>> searchUser(@Field("index") String index,
-                                                          @Field("keyword") String keyword);
+                                                           @Field("keyword") String keyword);
 
     //搜索用户
     @FormUrlEncoded
@@ -471,10 +473,56 @@ public interface ApiService {
                                                              @Field("page") String page,
                                                              @Field("page_size") String page_size);
 
-    //保存匹配到的用户
+    //删除保存的用户
     @FormUrlEncoded
     @POST(UrlConstant.RelieveLine_URL)
     Observable<BaseRespose<Object>> relieveLine(@Field("token") String token,
-                                             @Field("you_user_id") String you_user_id,
-                                             @Field("type") String type);
+                                                @Field("you_user_id") String you_user_id,
+                                                @Field("type") String type);
+
+    //开始主题匹配
+    @FormUrlEncoded
+    @POST(UrlConstant.NewMatchBegin_URL)
+    Observable<BaseRespose<List<Object>>> matchBegin_new(@Field("token") String token,
+                                                   @Field("choice_id") String choice_id,
+                                                   @Field("user_sex") String user_sex,
+                                                   @Field("dest_sex") String dest_sex,
+                                                   @Field("type") String type,
+                                                   @Field("status") String status,
+                                                   @Field("destination") String destination,
+                                                   @Field("location") String location);
+
+    //接受主题匹配
+    @FormUrlEncoded
+    @POST(UrlConstant.NewMatchAccept_URL)
+    Observable<BaseRespose<List<Object>>> matchAccept_new(@Field("token") String token,
+                                                   @Field("choice_id") String choice_id,
+                                                   @Field("you_user_id") String you_user_id,
+                                                   @Field("other_party_id") String other_party_id,
+                                                   @Field("is_status") String is_status);
+
+    //取消主题匹配
+    @FormUrlEncoded
+    @POST(UrlConstant.NewMatchCancle_URL)
+    Observable<BaseRespose<List<Object>>> matchCancle_new(@Field("token") String token,
+                                                    @Field("choice_id") String choice_id,
+                                                    @Field("status") String status);
+
+    //获取所有城市列表
+    @FormUrlEncoded
+    @POST(UrlConstant.GetProvices_URL)
+    Observable<BaseRespose<List<CitiesSingBean>>> getProvices(@Field("token") String token);
+
+    //获取推荐好友列表
+    @FormUrlEncoded
+    @POST(UrlConstant.GetSuggest_URL)
+    Observable<BaseRespose<List<Object>>> getSuggest(@Field("token") String token,
+                                                    @Field("you_user_id") String you_user_id);
+
+    //获取推荐好友列表
+    @FormUrlEncoded
+    @POST(UrlConstant.IsEvaluate_URL)
+    Observable<BaseRespose<IsRemarkBean>> isEvaluate(@Field("token") String token,
+                                                     @Field("you_user_id") String you_user_id);
+
 }

@@ -82,7 +82,7 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
     protected String[] permissions2 = { Manifest.permission.RECORD_AUDIO};
     protected String str;
 
-    public final int CHAT = 10010;
+    public final static int CHAT = 10010;
     PullToRefreshListView pulllist_zhuo1;
     private ImageView iv_cancle1;
     private ImageView iv_cancle;
@@ -152,7 +152,6 @@ public class Zhuo1Fragment extends BaseFragment<Zhuo1FragmentPresenter,Zhuo1Frag
         initializationPresenter.getSingleStatus();
         mPresenter.getAllMatch();
         activity = (MainActivity) getActivity();
-
 
         list = new ArrayList<>();
         list2=new ArrayList<>();

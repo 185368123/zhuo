@@ -4,6 +4,7 @@ package zhuozhuo.com.zhuo.constants;
 import zhuozhuo.com.zhuo.R;
 import zhuozhuo.com.zhuo.view.fragment.MineFragment;
 import zhuozhuo.com.zhuo.view.fragment.Zhuo1Fragment;
+import zhuozhuo.com.zhuo.view.fragment.Zhuo1NewFragment;
 import zhuozhuo.com.zhuo.view.fragment.Zhuo2Fragment;
 import zhuozhuo.com.zhuo.view.fragment.Zhuo3Fragment;
 
@@ -28,7 +29,7 @@ public class TabHostConstant {
 
     //标签对应的Fragment的Class
     public static final Class[] fragments = {
-            Zhuo1Fragment.class,
+            Zhuo1NewFragment.class,
             //Zhuo2Fragment.class,
             Zhuo3Fragment.class,
             MineFragment.class

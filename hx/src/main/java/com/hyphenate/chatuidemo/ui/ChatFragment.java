@@ -54,6 +54,7 @@ import com.hyphenate.chatuidemo.my.InviteMemberActivity;
 import com.hyphenate.chatuidemo.my.SetTagActivity;
 import com.hyphenate.chatuidemo.my.TeamActivity;
 import com.hyphenate.chatuidemo.my.TeamMenuActivity;
+import com.hyphenate.chatuidemo.my.bean.IsRemarkBean;
 import com.hyphenate.chatuidemo.my.bean.TagBean;
 import com.hyphenate.easeui.HundredCupBean;
 import com.hyphenate.chatuidemo.my.constract.ChatFragmentConstract;
@@ -205,6 +206,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
 
     @Override
     protected void setUpView() {
+        mPresenter.isEvaluate(toChatUsername);
         setVisibility(View.GONE);
         hundred_bt.setOnClickListener(this);
         match_input.init();
@@ -272,7 +274,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
             }
             setVisibility(View.GONE);
             setNormal_input();
-            for (int j = 0; j < SingleBeans.getInstance().getMatchPersonBeans().size(); j++) {
+            /*for (int j = 0; j < SingleBeans.getInstance().getMatchPersonBeans().size(); j++) {
                 if (SingleBeans.getInstance().getMatchPersonBeans().get(j).getUser_id().equals(toChatUsername)){
                     buffer.append("{action: step,token: " + UserInfoProvider.getToken() + ", user_id:" + UserInfoProvider.getUserID() + ",you_user_id  :" + toChatUsername + ",new_step:123" + "}");
                     sendSocketMsg();
@@ -288,7 +290,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
                         break;
                     }
                 }
-            }
+            }*/
 
         }
         super.setUpView();
@@ -447,7 +449,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
                 File file = new File(PathUtil.getInstance().getImagePath(), "thvideo" + System.currentTimeMillis());
                 try {
                     FileOutputStream fos = new FileOutputStream(file);
-                    Bitmap ThumbBitmap = ThumbnailUtils.createVideoThumbnail(filePath, 3);
+                    Bitmap ThumbBitmap = ThumbnailUtils.createVideoThumbnail(filePath, 1);
                     ThumbBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
                     fos.close();
                     sendVideoMessage(filePath, file.getAbsolutePath(), duration);
@@ -1062,6 +1064,13 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
                 bt_start.setClickable(true);
             }
         }
+    }
+
+    @Override
+    public void getIsEvaluateSucess(IsRemarkBean isRemarkBean) {
+       if (isRemarkBean.getIs_status().equals("1")){
+           layout_chatted.setVisibility(View.VISIBLE);
+       }
     }
 
 

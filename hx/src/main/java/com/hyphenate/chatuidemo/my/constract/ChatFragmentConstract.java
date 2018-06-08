@@ -1,5 +1,6 @@
 package com.hyphenate.chatuidemo.my.constract;
 
+import com.hyphenate.chatuidemo.my.bean.IsRemarkBean;
 import com.hyphenate.chatuidemo.my.bean.TagBean;
 import com.hyphenate.easeui.HundredCupBean;
 import com.hyphenate.chatuidemo.my.bean.VideoLinkBean;
@@ -9,6 +10,7 @@ import java.util.List;
 import li.com.base.base.BaseModel;
 import li.com.base.base.BasePresenter;
 import li.com.base.base.BaseView;
+import li.com.base.basesinglebean.SingleBeans;
 import rx.Observable;
 
 
@@ -33,6 +35,8 @@ public interface ChatFragmentConstract {
         Observable<TagBean> getTag(String token, String choice_id, String you_user_id);
 
         Observable<List<Object>> getRandom(String token, String you_user_id, String choice_id);
+
+        Observable<IsRemarkBean> isEvaluate(String token, String you_user_id);
     }
 
     interface View extends BaseView {
@@ -50,6 +54,8 @@ public interface ChatFragmentConstract {
         void teamRegisterSucess();
 
         void returnTag(TagBean tagBean);
+
+        void getIsEvaluateSucess(IsRemarkBean isRemarkBean);
 
     }
 
@@ -74,5 +80,7 @@ public interface ChatFragmentConstract {
         public abstract void getTag(String choice_id,String you_user_id);
 
         public abstract void getRandom(String you_user_id,String choice_id);
+
+        public abstract void isEvaluate(String you_user_id);
     }
 }

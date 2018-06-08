@@ -106,7 +106,7 @@ public class Api {
 
 
         okHttpClient = new OkHttpClient.Builder()
-                .readTimeout(READ_TIME_OUT, TimeUnit.MILLISECONDS)
+                .readTimeout(READ_TIME_OUT, TimeUnit.MILLISECONDS)//MILLISECONDS    毫秒   千分之一秒
                 .connectTimeout(CONNECT_TIME_OUT, TimeUnit.MILLISECONDS)
                 .addInterceptor(mRewriteCacheControlInterceptor)
                 .addNetworkInterceptor(mRewriteCacheControlInterceptor)

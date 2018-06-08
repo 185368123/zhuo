@@ -131,7 +131,7 @@ public class AddContactActivity extends BaseActivity implements SearchUserConstr
 	 * @param v
 	 */
 	public void searchContact(View v) {
-		final String name = editText.getText().toString();
+		String name = editText.getText().toString();
 		String saveText = searchBtn.getText().toString();
 		
 		if (getString(R.string.button_search).equals(saveText)) {
@@ -140,7 +140,7 @@ public class AddContactActivity extends BaseActivity implements SearchUserConstr
 				new EaseAlertDialog(this, R.string.Please_enter_a_username).show();
 				return;
 			}
-			searchUserPresenter.searchUser(editText.getText().toString(),index+"");
+			searchUserPresenter.searchUser(index+"",name);
 		} 
 	}	
 	

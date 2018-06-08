@@ -430,7 +430,7 @@ public class Welcome2Activity extends BaseActivity<GetVisonModel, GetVisonPresen
         // 创建构建器
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         // 设置参数
-        builder.setTitle("版本提示").setIcon(R.drawable.logo_80)
+        builder.setTitle("版本提示").setIcon(R.drawable.logo)
                 .setMessage("发现新版本，是否更新？")
                 .setNeutralButton("普通更新", new DialogInterface.OnClickListener() {
                     @Override
@@ -456,7 +456,7 @@ public class Welcome2Activity extends BaseActivity<GetVisonModel, GetVisonPresen
         // 创建构建器
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         // 设置参数
-        builder.setTitle("版本提示").setIcon(R.drawable.logo_80)
+        builder.setTitle("版本提示").setIcon(R.drawable.logo)
                 .setMessage("发现新版本，是否更新？")
                 .setPositiveButton("是", new DialogInterface.OnClickListener() {
                     @Override

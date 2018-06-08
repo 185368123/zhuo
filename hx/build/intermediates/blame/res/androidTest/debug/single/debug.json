@@ -2036,6 +2036,10 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\ucrop-2.2.0.aar\\5bb66a645f4fe80685df646e91039068\\res\\drawable-xxhdpi-v4\\ucrop_ic_done.png"
     },
     {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_mine_video_simple.xml.flat",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\bundles\\debug\\res\\layout\\mine_video_simple.xml"
+    },
+    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\color_abc_tint_switch_thumb.xml.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.0.0.aar\\d66d3c79acb841b9401b652e6aafcc11\\res\\color\\abc_tint_switch_thumb.xml"
     },
@@ -3180,6 +3184,10 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.0.0.aar\\d66d3c79acb841b9401b652e6aafcc11\\res\\drawable\\abc_ratingbar_small_material.xml"
     },
     {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\mipmap_focus_focusing.9.png.flat",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\bundles\\debug\\res\\mipmap\\focus_focusing.9.png"
+    },
+    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldrtl-mdpi-v17_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.0.0.aar\\d66d3c79acb841b9401b652e6aafcc11\\res\\drawable-ldrtl-mdpi-v17\\abc_ic_menu_copy_mtrl_am_alpha.png"
     },
@@ -3408,6 +3416,10 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.0.0.aar\\d66d3c79acb841b9401b652e6aafcc11\\res\\drawable-xhdpi-v4\\abc_ic_star_black_48dp.png"
     },
     {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\mipmap_focus_focus_failed.9.png.flat",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\bundles\\debug\\res\\mipmap\\focus_focus_failed.9.png"
+    },
+    {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_cup_fragment_2_listitem_layout_4.xml.flat",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\bundles\\debug\\res\\layout\\cup_fragment_2_listitem_layout_4.xml"
     },
@@ -3442,6 +3454,10 @@
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_video_error_normal.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-2.1.1.aar\\3989dcfc5ecc9967fb0985eec159a991\\res\\drawable-xxhdpi-v4\\video_error_normal.png"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\mipmap_focus_focused.9.png.flat",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\bundles\\debug\\res\\mipmap\\focus_focused.9.png"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_abc_edit_text_material.xml.flat",
@@ -4066,6 +4082,10 @@
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_em_mm_title_act_btn.xml.flat",
         "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\bundles\\debug\\res\\drawable\\em_mm_title_act_btn.xml"
+    },
+    {
+        "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim_focusview_show.xml.flat",
+        "source": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\bundles\\debug\\res\\anim\\focusview_show.xml"
     },
     {
         "merged": "E:\\WorkSpace\\useless\\zhuo\\hx\\build\\intermediates\\res\\merged\\androidTest\\debug\\color_abc_secondary_text_material_light.xml.flat",

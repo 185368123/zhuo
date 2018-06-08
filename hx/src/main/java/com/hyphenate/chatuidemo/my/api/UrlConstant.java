@@ -289,4 +289,22 @@ public class UrlConstant {
 
     //解除保存的用户
     public static final String RelieveLine_URL="/Evaluate/RelieveLine";
+
+    //开始主题匹配
+    public static final String NewMatchBegin_URL="/PlayerMatch/playerDestination";
+
+    //接受主题匹配
+    public static final String NewMatchAccept_URL="/PlayerMatch/PlayerDestinationPlay";
+
+    //取消主题匹配
+    public static final String NewMatchCancle_URL="/PlayerMatch/cancelPlayerDestination";
+
+    //获取所有城市列表
+    public static final String GetProvices_URL="/PlayerMatch/getProvincesCities";
+
+    //获取推荐用户
+    public static final String GetSuggest_URL="/PlayerMatch/getFriends";
+
+    //获取推荐用户
+    public static final String IsEvaluate_URL="/PlayerMatch/isEvaluate";
 }
