@@ -100,7 +100,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <zhuozhuo.com.zhuo.widget.SlidingLetter
+        <com.hyphenate.chatuidemo.widget.SlidingLetter
             android:id="@+id/slidingLetter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

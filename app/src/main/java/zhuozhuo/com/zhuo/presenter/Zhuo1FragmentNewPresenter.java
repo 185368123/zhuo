@@ -13,7 +13,11 @@ import li.com.base.basesinglebean.SingleBeans;
 import li.com.base.basesinglebean.SingleChooseBean;
 import li.com.base.basesinglebean.SingleChooseDetailBean;
 import li.com.base.basesinglebean.SingleStatusBean;
+import li.com.base.basesinglebean.SuggestFriendBean;
+import li.com.base.baseuntils.LogUtils;
 import zhuozhuo.com.zhuo.contract.Zhuo1FragmentNewConstract;
+
+import static zhuozhuo.com.zhuo.view.fragment.Zhuo1NewItemFragment_.ToItemFragment1;
 
 /**
  * Created by Administrator on 2017/10/21.
@@ -69,7 +73,8 @@ public class Zhuo1FragmentNewPresenter extends Zhuo1FragmentNewConstract.Present
 
             @Override
             protected void _onError(String message) {
-
+                LogUtils.logd("matchBegin请求匹配开始失败---"+message);
+                new RxManager().post(ToItemFragment1,"");
             }
         });
     }
@@ -171,6 +176,21 @@ public class Zhuo1FragmentNewPresenter extends Zhuo1FragmentNewConstract.Present
             @Override
             protected void _onNext(List<CitiesSingBean> list) {
               SingleBeans.getInstance().setCitiesSingBean(list);
+            }
+
+            @Override
+            protected void _onError(String message) {
+
+            }
+        });
+    }
+
+    @Override
+    public void getSuggestFriend(String you_user_id) {
+        mModel.getSuggestFriend(UserInfoProvider.getToken(),you_user_id).subscribe(new RxSubscriber<List<SuggestFriendBean>>(mContext,false) {
+            @Override
+            protected void _onNext(List<SuggestFriendBean> suggestFriendBeans) {
+                mView.returnSuggestFriend(suggestFriendBeans);
             }
 
             @Override

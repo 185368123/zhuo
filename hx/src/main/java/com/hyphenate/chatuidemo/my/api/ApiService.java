@@ -28,6 +28,8 @@ import com.hyphenate.chatuidemo.my.bean.VideoBean;
 import com.hyphenate.chatuidemo.my.bean.VideoLinkBean;
 import com.hyphenate.easeui.TeamUnreadBean;
 
+import li.com.base.basesinglebean.RandStrBean;
+import li.com.base.basesinglebean.SuggestFriendBean;
 import li.com.base.basesinglebean.VisonBean;
 
 import java.util.List;
@@ -516,13 +518,17 @@ public interface ApiService {
     //获取推荐好友列表
     @FormUrlEncoded
     @POST(UrlConstant.GetSuggest_URL)
-    Observable<BaseRespose<List<Object>>> getSuggest(@Field("token") String token,
-                                                    @Field("you_user_id") String you_user_id);
+    Observable<BaseRespose<List<SuggestFriendBean>>> getSuggestFriend(@Field("token") String token,
+                                                                @Field("you_user_id") String you_user_id);
 
-    //获取推荐好友列表
+    //查看对方是否已评价
     @FormUrlEncoded
     @POST(UrlConstant.IsEvaluate_URL)
     Observable<BaseRespose<IsRemarkBean>> isEvaluate(@Field("token") String token,
                                                      @Field("you_user_id") String you_user_id);
 
+    //获取推荐用户
+    @FormUrlEncoded
+    @POST(UrlConstant.GetRandStr_URL)
+    Observable<BaseRespose<List<RandStrBean>>> getRandStr(@Field("token") String token);
 }

@@ -125,10 +125,12 @@ public class Zhuo3Fragment extends BaseFragment<Zhuo3FragmentPresenter,Zhuo3Frag
         });
 
         data = SingleBeans.getInstance().getSingleChooseBeans();
-        for (int i = 0; i < data.size(); i++) {
-            if(data.get(i).getValue().split(",").length>2){
-                tablayout.addTab(tablayout.newTab().setText(data.get(i).getChoice_name()));
-                tablayout.getTabAt(i+1).setTag(data.get(i).getChoice_id());
+        if (data!=null){
+            for (int i = 0; i < data.size(); i++) {
+                if(data.get(i).getValue().split(",").length>2){
+                    tablayout.addTab(tablayout.newTab().setText(data.get(i).getChoice_name()));
+                    tablayout.getTabAt(i+1).setTag(data.get(i).getChoice_id());
+                }
             }
         }
         tablayout.addTab(tablayout.newTab().setText("其他"));

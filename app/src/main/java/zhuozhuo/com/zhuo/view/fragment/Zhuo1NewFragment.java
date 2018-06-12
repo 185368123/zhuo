@@ -17,11 +17,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.hyphenate.chatuidemo.UserMsgDBHelp;
 import com.hyphenate.chatuidemo.my.EmptyView;
 import com.hyphenate.chatuidemo.my.RemarkActivity;
 import com.hyphenate.chatuidemo.my.SimpleVideo;
-import com.hyphenate.chatuidemo.my.Untils.CountDownUtil;
-import com.hyphenate.chatuidemo.my.bean.HundredBean;
+import com.hyphenate.chatuidemo.my.model.GetRandStrModel;
+import com.hyphenate.chatuidemo.my.presenter.GetRandStrPresenter;
 import com.hyphenate.chatuidemo.ui.ChatActivity;
 import com.hyphenate.easeui.events.RxBusConstants;
 import com.hyphenate.easeui.provider.UserInfoProvider;
@@ -32,6 +33,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import li.com.base.base.BaseFragment;
 import li.com.base.base.BaseFragmentAdapter;
@@ -40,17 +43,16 @@ import li.com.base.basesinglebean.SingleBeans;
 import li.com.base.basesinglebean.SingleChooseBean;
 import li.com.base.basesinglebean.SingleChooseDetailBean;
 import li.com.base.basesinglebean.SingleStatusBean;
+import li.com.base.basesinglebean.SuggestFriendBean;
 import li.com.base.baseuntils.LogUtils;
+import li.com.base.baseuntils.ToastUitl;
 import rx.functions.Action1;
 import zhuozhuo.com.zhuo.R;
 import zhuozhuo.com.zhuo.adapter.Zhuo1RecycleAdapter;
 import zhuozhuo.com.zhuo.constants.Constant;
-import zhuozhuo.com.zhuo.contract.Zhuo1FragmentConstract;
 import zhuozhuo.com.zhuo.contract.Zhuo1FragmentNewConstract;
-import zhuozhuo.com.zhuo.model.Zhuo1FragmentModel;
 import zhuozhuo.com.zhuo.model.Zhuo1FragmentNewModel;
 import zhuozhuo.com.zhuo.presenter.Zhuo1FragmentNewPresenter;
-import zhuozhuo.com.zhuo.presenter.Zhuo1FragmentPresenter;
 import zhuozhuo.com.zhuo.util.CountDownUtils;
 import zhuozhuo.com.zhuo.view.activity.MainActivity;
 
@@ -92,6 +94,16 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
     private String useId;
     private String other_party_id = "";
     private CountDownUtils countDownUtils1;
+    private String is_status;
+    private LinearLayout ll_prize;
+    private TextView iv_see_prize;
+    private TextView iv_see_prize_msg;
+    private TextView tv_prize_msg;
+    private LinearLayout ll_prize_show;
+    private GetRandStrPresenter randStrPresenter;
+    private GetRandStrModel randStrModel;
+    private ImageView ll_prize_hide;
+
 
     @Override
     protected int getLayoutResource() {
@@ -109,12 +121,19 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
         mPresenter.getSingleStatus();
         mPresenter.getAllMatch();
         mPresenter.getAllCities();
+
+        randStrPresenter = new GetRandStrPresenter();
+        randStrModel = new GetRandStrModel();
+        randStrPresenter.setVM(randStrModel,null);
+        randStrPresenter.getRandStr();
+
         vp = view.findViewById(R.id.vp_zhuo1_new);
         tv_unread = (TextView) view.findViewById(R.id.tv_unread_num);
         tv_service = view.findViewById(R.id.tv_service_new);
         frameLayout_chat = (FrameLayout) view.findViewById(R.id.chat_frame_new);
         rv = view.findViewById(R.id.rv_zhuo1_);
         ll = view.findViewById(R.id.wait_zhuo1_);
+        ll_prize_hide = view.findViewById(R.id.ll_prize_hide);
         iv_cancle = view.findViewById(R.id.iv_cancle_zhuo1_);
         iv_cancle1 = (ImageView) view.findViewById(R.id.iv_cancle_zhuo1_2);
         iv_animation = view.findViewById(R.id.iv_wait_zhuo1_);
@@ -127,6 +146,11 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
         tv3 = view.findViewById(R.id.tv3_zhuo1_);
         tv4 = view.findViewById(R.id.tv4_zhuo1_);
         tv5 = view.findViewById(R.id.tv5_zhuo1_);
+        ll_prize = view.findViewById(R.id.ll_prize);
+        ll_prize_show = view.findViewById(R.id.ll_prize_show);
+        iv_see_prize = view.findViewById(R.id.iv_see_prize);
+        iv_see_prize_msg = view.findViewById(R.id.iv_see_prize_msg);
+        tv_prize_msg = view.findViewById(R.id.tv_prize_msg);
         layout_user = view.findViewById(R.id.ll_zhuo1_);
         button_receive = view.findViewById(R.id.button_receive_zhuo1_);
         button_skip = view.findViewById(R.id.button_skip_zhuo1_);
@@ -135,6 +159,9 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
         button_skip.setOnClickListener(this);
         button_save.setOnClickListener(this);
         iv_cancle1.setOnClickListener(this);
+        iv_see_prize.setOnClickListener(this);
+        iv_see_prize_msg.setOnClickListener(this);
+        ll_prize_hide.setOnClickListener(this);
 
         //创建布局管理器
         glm = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL);
@@ -163,6 +190,12 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
         }
 
         vp.setOffscreenPageLimit(4);
+
+        if (SingleBeans.getInstance().getVisonBean().getStr_type().equals("1")){
+            ll_prize.setVisibility(View.VISIBLE);
+        }else {
+            ll.setVisibility(View.GONE);
+        }
         initRxManger();
         initViewPage();
     }
@@ -200,6 +233,28 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
                 mPresenter.getAllMatch();
             }
         });
+        mRxManager.on("match_accept", new Action1<String>() {//双方接受匹配
+            @Override
+            public void call(String s) {
+                randStrPresenter.getRandStr();
+                mPresenter.getAllMatch();
+                ll.setVisibility(View.GONE);
+                layout_user.setVisibility(View.GONE);
+                UserInfoProvider.setHelloFlag(true);//设置第一次进入聊天
+                UserMsgDBHelp.getUserMsgDBHelp().searchByUserId(useId);
+                if (countDownUtils1 != null) {
+                    countDownUtils1.deletCallBack();
+                }
+                ToastUitl.showLong("匹配成功");
+                Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        gochat();
+                    }
+                }, 1000);
+            }
+        });
         mRxManager.on("match_line", new Action1<String>() {
             @Override
             public void call(String s) {
@@ -208,15 +263,22 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
                     object = new JSONObject(s);
                     String type = object.getString("type");
                     if (type.equals("4000")) {
-                        useId = object.getString("user_id");
-                        String user_video = object.getString("user_video");
-                        String name = object.getString("nick_name");
-                        String location = object.getString("location");
-                        String account = object.getString("account");
-                        String sex = object.getString("sex");
-                        other_party_id = object.getString("other_party_id");
-                        SingleBeans.getInstance().setChoose_id(object.getString("choice_id"));
-                        judge(useId, user_video, name, location, account, sex);
+                        if (SingleBeans.getInstance().getStatu().equals("0")){
+                            useId = object.getString("user_id");
+                            String user_video = object.getString("user_video");
+                            String name = object.getString("nick_name");
+                            String location = object.getString("location");
+                            String account = object.getString("account");
+                            String sex = object.getString("sex");
+                            is_status = object.getString("is_status");
+                            other_party_id = object.getString("other_party_id");
+                            SingleBeans.getInstance().setChoose_id(object.getString("choice_id"));
+                            judge(useId, user_video, name, location, account, sex);
+                        }else if (SingleBeans.getInstance().getStatu().equals("66")){
+                            mPresenter.getAllMatch();
+                        }
+                    }else if (type.equals("3000")){
+                        mPresenter.getAllMatch();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -227,6 +289,13 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
     }
 
 
+    public void gochat() {
+        chronometer.stop();
+        drawable_wait.stop();
+        Intent intent = new Intent(getActivity(), ChatActivity.class);
+        intent.putExtra("userId", useId);
+        startActivityForResult(intent, CHAT);
+    }
     private void judge(String userId, String user_video, String userName, String location, String hobby, String sex) {//第一次匹配成功时候更改UI界面
         chronometer.stop();
         if (userId != null && !userId.equals("")) {
@@ -275,9 +344,7 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
     }
 
     public void skipMatch() {
-
-        mPresenter.matchBegin(SingleBeans.getInstance().getChoose_id(), SingleBeans.getInstance().getMatch_type(), "0", SingleBeans.getInstance().getDestination(), SingleBeans.getInstance().getLocation());
-
+        mPresenter.matchBegin(SingleBeans.getInstance().getChoose_id(), SingleBeans.getInstance().getMatch_type(), "0", SingleBeans.getInstance().getCityID(), SingleBeans.getInstance().getLocation_id());
     }
 
     @Override
@@ -295,11 +362,10 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
                 mPresenter.matchCancle(SingleBeans.getInstance().getChoose_id(), "0");
                 break;
             case R.id.button_receive_zhuo1_:
-                ll.setVisibility(View.GONE);
-                layout_user.setVisibility(View.GONE);
-                Intent intent_ = new Intent(getActivity(), ChatActivity.class);
-                intent_.putExtra("userId","1");
-                startActivityForResult(intent_, CHAT);
+                button_receive.setClickable(false);
+                button_receive.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.skip_button_maincolor_shape));
+                mPresenter.matchAccept(SingleBeans.getInstance().getChoose_id(),useId,other_party_id,is_status);
+
                 break;
             case R.id.button_skip_zhuo1_:
                 skipMatch();
@@ -309,6 +375,25 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
                 break;
             case R.id.iv_cancle_zhuo1_2:
                 mPresenter.matchCancle(SingleBeans.getInstance().getChoose_id(), "0");
+                break;
+            case R.id.iv_see_prize:
+                StringBuffer stringBuffer=new StringBuffer();
+                ll_prize_show.setVisibility(View.VISIBLE);
+                for (int i = 0; i < SingleBeans.getInstance().getRandStrBeans().size(); i++) {
+                    if ((i+1)==SingleBeans.getInstance().getRandStrBeans().size()){
+                        stringBuffer.append(SingleBeans.getInstance().getRandStrBeans().get(i).getStr());
+                    }else {
+                        stringBuffer.append(SingleBeans.getInstance().getRandStrBeans().get(i).getStr()+",");
+                    }
+                }
+                tv_prize_msg.setText(stringBuffer.toString().replace(",","\n"));
+                break;
+            case R.id.iv_see_prize_msg:
+                ll_prize_show.setVisibility(View.VISIBLE);
+                tv_prize_msg.setText(SingleBeans.getInstance().getVisonBean().getVersion_type().replace("/n","\n"));
+                break;
+            case R.id.ll_prize_hide:
+                ll_prize_show.setVisibility(View.GONE);
                 break;
         }
     }
@@ -321,7 +406,7 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
         if (requestCode == 1634) {
             mPresenter.matchSet(useId, SingleBeans.getInstance().getChoose_id(), data.getStringExtra("com"));
 
-            mPresenter.matchBegin(SingleBeans.getInstance().getChoose_id(), SingleBeans.getInstance().getMatch_type(), "0", SingleBeans.getInstance().getDestination(), SingleBeans.getInstance().getLocation());
+            mPresenter.matchBegin(SingleBeans.getInstance().getChoose_id(), SingleBeans.getInstance().getMatch_type(), "0", SingleBeans.getInstance().getCityID(), SingleBeans.getInstance().getLocation_id());
         }
     }
 
@@ -368,7 +453,7 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
                     ll.setVisibility(View.VISIBLE);
                     ll.setVisibility(View.VISIBLE);
                     drawable_wait.start();
-                    chronometer.setBase(data.get(i).getStart_time());
+                    chronometer.setBase(SystemClock.elapsedRealtime()-(System.currentTimeMillis()/1000-data.get(i).getStart_time())*1000);
                     chronometer.start();
                 }
             }
@@ -385,6 +470,9 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
 
     @Override
     public void matchBeginSucess() {
+        if (countDownUtils1 != null) {
+            countDownUtils1.deletCallBack();
+        }
         if (simpleVideo.getCurrentState() == SimpleVideo.CURRENT_STATE_PLAYING) {
             simpleVideo.getStartButton().performClick();
         }
@@ -392,7 +480,9 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
         ll.setVisibility(View.VISIBLE);
         chronometer.setBase(SystemClock.elapsedRealtime());
         drawable_wait.start();
+        chronometer.start();
     }
+
 
     @Override
     public void matchAcceptSucess() {
@@ -401,6 +491,9 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
 
     @Override
     public void matchCancle() {
+        if (countDownUtils1 != null) {
+            countDownUtils1.deletCallBack();
+        }
         ll.setVisibility(View.GONE);
         layout_user.setVisibility(View.GONE);
         chronometer.stop();
@@ -419,10 +512,16 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
         } else {
             rv.setVisibility(View.GONE);
         }
+        mRxManager.post(Zhuo1NewItemFragment_.ToItemFragment1,"");
     }
 
     @Override
     public void returnSingleStatus(SingleStatusBean singleStatusBean) {
+
+    }
+
+    @Override
+    public void returnSuggestFriend(List<SuggestFriendBean> suggestFriends) {
 
     }
 }

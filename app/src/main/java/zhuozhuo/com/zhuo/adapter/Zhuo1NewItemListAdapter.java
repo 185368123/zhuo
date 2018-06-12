@@ -41,6 +41,8 @@ public class Zhuo1NewItemListAdapter extends BaseAdapter {
     private ImageOnClick imageOnClick;
     private RxManager rxManager=new RxManager();
     private List<ViewSave>  viewSaveList=new ArrayList<>();
+    private ImageView iv_zhuo1_item_2;
+    private AnimationDrawable drawable;
 
 
     public interface ImageOnClick {
@@ -79,6 +81,9 @@ public class Zhuo1NewItemListAdapter extends BaseAdapter {
         iv_go = convertView.findViewById(R.id.iv_zhuo1_item);
         iv_cancle = convertView.findViewById(R.id.cancle_iv_zhuo1_item);
         iv_wait = convertView.findViewById(R.id.iv_wait_zhuo1_item);
+        iv_zhuo1_item_2 = convertView.findViewById(R.id.iv_zhuo1_item_2);
+        drawable = (AnimationDrawable) iv_zhuo1_item_2.getDrawable();
+        drawable.start();
         viewSave.iv_go=iv_go;
         viewSave.drawable = (AnimationDrawable) iv_wait.getDrawable();
         viewSave.ll = convertView.findViewById(R.id.wait_zhuo1_item);
@@ -92,8 +97,8 @@ public class Zhuo1NewItemListAdapter extends BaseAdapter {
             rxManager.post(Constant.MATCH_BEGIN,save);
             startWaitView(save);
         }
-        tv_name.setText(list.get(position).getChoice_name());
-        tv_title.setText(list.get(position).getChoice_title());
+        tv_name.setText(list.get(position).getChoice_name().replace("/n","\n"));
+        tv_title.setText(list.get(position).getChoice_title().replace("/n","\n"));
         switch (position) {
             case 0:
                 Glide.with(context).load(R.mipmap.zhuo1_item_1).into(iv_go);
@@ -152,6 +157,7 @@ public class Zhuo1NewItemListAdapter extends BaseAdapter {
     public List<ViewSave> getViewSaveList(){
         return viewSaveList;
     }
+
     public void clearViewSaveList(){
         viewSaveList.clear();
     }

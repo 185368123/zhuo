@@ -75,11 +75,74 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"></android.support.v4.view.ViewPager>
 
+            <LinearLayout
+                android:id="@+id/ll_prize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:background="@drawable/skip_button_maincolor_shape"
+                    android:textColor="@color/black"
+                    android:id="@+id/iv_see_prize"
+                    android:textSize="@dimen/text_size_18"
+                    android:text="抽奖码"/>
+                <TextView
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="？"
+                    android:padding="5dp"
+                    android:textSize="20sp"
+                    android:textColor="@color/main_color"
+                    android:textStyle="bold"
+                    android:id="@+id/iv_see_prize_msg"/>
+            </LinearLayout>
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_zhuo1_"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"></android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_margin="10dp"
+            android:layout_gravity="center"
+            android:id="@+id/ll_prize_show"
+            android:orientation="vertical"
+            android:background="#f3f3ee"
+            android:visibility="gone">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:background="@color/gray_pressed"
+                android:padding="5dp"
+                android:id="@+id/ll_prize_hide"
+                android:src="@drawable/canclematch" />
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/gray_shape"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textSize="@dimen/text_size_15"
+                    android:id="@+id/tv_prize_msg"/>
+            </ScrollView>
         </LinearLayout>
 
         <LinearLayout
@@ -209,7 +272,6 @@
                 android:textSize="@dimen/text_size_13" />
 
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -229,6 +291,7 @@
                     android:text="跳过"
                     android:textColor="@color/white"
                     android:textSize="15sp" />
+
                 <TextView
                     android:id="@+id/tv5_zhuo1_"
                     android:layout_width="20dp"
@@ -238,6 +301,7 @@
                     android:gravity="center"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_13" />
+
                 <TextView
                     android:id="@+id/button_receive_zhuo1_"
                     android:layout_width="70dp"
@@ -255,20 +319,23 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1" />
             </LinearLayout>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="5dp" />
+
             <TextView
-                android:layout_gravity="center_horizontal"
                 android:id="@+id/button_save_zhuo1_"
                 android:layout_width="70dp"
                 android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
                 android:background="@drawable/receive_button_maincolor_shape"
                 android:clickable="true"
                 android:gravity="center"
                 android:text="保留"
                 android:textColor="@color/white"
                 android:textSize="15sp" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="5dp" />

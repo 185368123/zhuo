@@ -37,7 +37,7 @@ import java.util.List;
 /**
  * Also allows for a configurable number of columns as well as a maximum row of tiled view.
  */
-public abstract class AbsTipAdapter extends BaseAdapter implements
+public abstract class   AbsTipAdapter extends BaseAdapter implements
         OnDragDropListener {
     private static final String TAG = "AbsTipAdapter";
 

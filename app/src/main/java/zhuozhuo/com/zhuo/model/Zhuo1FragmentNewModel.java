@@ -13,6 +13,7 @@ import li.com.base.basesinglebean.MatchPersonBean;
 import li.com.base.basesinglebean.SingleChooseBean;
 import li.com.base.basesinglebean.SingleChooseDetailBean;
 import li.com.base.basesinglebean.SingleStatusBean;
+import li.com.base.basesinglebean.SuggestFriendBean;
 import rx.Observable;
 import zhuozhuo.com.zhuo.contract.Zhuo1FragmentNewConstract;
 
@@ -90,5 +91,13 @@ public class Zhuo1FragmentNewModel implements Zhuo1FragmentNewConstract.Model {
                 .getProvices(token)
                 .compose(RxSchedulers.<BaseRespose<List<CitiesSingBean>>>io_main())
                 .compose(RxHelper.<List<CitiesSingBean>>handleResult());
+    }
+
+    @Override
+    public Observable<List<SuggestFriendBean>> getSuggestFriend(String token, String you_user_id) {
+        return Api.getDefault(HostType.INCLUE_COOKIE)
+                .getSuggestFriend(token, you_user_id)
+                .compose(RxSchedulers.<BaseRespose<List<SuggestFriendBean>>>io_main())
+                .compose(RxHelper.<List<SuggestFriendBean>>handleResult());
     }
 }

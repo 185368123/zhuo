@@ -53,5 +53,7 @@ public interface Constant {
 
     String MATCH_STOP_="stop_match_";
 
+    String MATCH_BEGIN_1="match_begin_1";
+
 
 }

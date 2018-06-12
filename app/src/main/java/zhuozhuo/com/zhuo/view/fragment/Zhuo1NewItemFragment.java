@@ -1,6 +1,7 @@
 package zhuozhuo.com.zhuo.view.fragment;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
@@ -11,6 +12,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.hyphenate.chatuidemo.UserMsgDBHelp;
+import com.hyphenate.chatuidemo.my.SetCitykActivity;
+import com.hyphenate.chatuidemo.ui.UserProfileActivity;
 import com.hyphenate.easeui.provider.UserInfoProvider;
 
 import java.util.List;
@@ -21,7 +25,7 @@ import li.com.base.basesinglebean.SingleBeans;
 import li.com.base.basesinglebean.SingleChooseBean;
 import li.com.base.basesinglebean.SingleChooseDetailBean;
 import li.com.base.basesinglebean.SingleStatusBean;
-import li.com.base.baseuntils.LogUtils;
+import li.com.base.basesinglebean.SuggestFriendBean;
 import rx.functions.Action1;
 import zhuozhuo.com.zhuo.R;
 import zhuozhuo.com.zhuo.adapter.Zhuo1NewItemListAdapter;
@@ -52,6 +56,10 @@ public class Zhuo1NewItemFragment extends BaseFragment<Zhuo1FragmentNewPresenter
     private Chronometer chronometer;
     private AnimationDrawable drawable_wait;
     Zhuo1NewItemListAdapter.ViewSave viewSave;
+    private LinearLayout ll_suggest;
+    private TextView tv_suggest1;
+    private TextView tv_suggest2;
+    private List<SuggestFriendBean> suggestFriend;
 
     @Override
     protected int getLayoutResource() {
@@ -76,23 +84,30 @@ public class Zhuo1NewItemFragment extends BaseFragment<Zhuo1FragmentNewPresenter
         iv2 = view.findViewById(R.id.iv_zhuo1item_2);
 
         ll = view.findViewById(R.id.wait_zhuo1_item_);
+        ll_suggest = view.findViewById(R.id.ll_suggest);
         iv_cancle = view.findViewById(R.id.iv_cancle_zhuo1_item_);
         iv_animation = view.findViewById(R.id.iv_wait_zhuo1_item_);
         drawable_wait = (AnimationDrawable) iv_animation.getDrawable();
         chronometer = view.findViewById(R.id.time_zhuo1_item_);
+        tv_suggest1 = view.findViewById(R.id.people_suggest1);
+        tv_suggest2 = view.findViewById(R.id.people_suggest2);
 
         drawable = (AnimationDrawable) iv2.getDrawable();
         drawable.start();
         iv1.setOnClickListener(this);
         iv_cancle.setOnClickListener(this);
-        tv1.setText(name);
-        tv2.setText(title);
+        tv_suggest1.setOnClickListener(this);
+        tv_suggest2.setOnClickListener(this);
+        tv1.setText(name.replace("/n","\n"));
+        tv2.setText(title.replace("/n","\n"));
         switch (image) {
             case "1":
                 Glide.with(getContext()).load(R.mipmap.zhuo1_item_1).into(iv1);
                 break;
             case "2":
                 Glide.with(getContext()).load(R.mipmap.zhuo1_item_2).into(iv1);
+                ll_suggest.setVisibility(View.VISIBLE);
+                mPresenter.getSuggestFriend(SingleBeans.getInstance().getFriensToString());
                 break;
             case "3":
                 Glide.with(getContext()).load(R.mipmap.zhuo1_item_3).into(iv1);
@@ -115,6 +130,17 @@ public class Zhuo1NewItemFragment extends BaseFragment<Zhuo1FragmentNewPresenter
                 }
             }
         });
+
+        mRxManager.on(Constant.MATCH_STOP_, new Action1<Object>() {
+            @Override
+            public void call(Object o) {
+                if (image.equals("1")) {
+                    ll.setVisibility(View.GONE);
+                    chronometer.stop();
+                }
+            }
+        });
+
         mRxManager.on(Constant.MATCH_STOP, new Action1<Zhuo1NewItemListAdapter.ViewSave>() {
             @Override
             public void call(Zhuo1NewItemListAdapter.ViewSave save) {
@@ -127,7 +153,14 @@ public class Zhuo1NewItemFragment extends BaseFragment<Zhuo1FragmentNewPresenter
                 }
             }
         });
+        mRxManager.on(Constant.MATCH_BEGIN_1, new Action1<Object>() {
+            @Override
+            public void call(Object o) {
+                mPresenter.matchBegin(SingleBeans.getInstance().getSingleChooseBeans().get(Integer.parseInt(image)-1).getChoice_id(),"1","0",SingleBeans.getInstance().getCityID(),SingleBeans.getInstance().getLocation_id());
+            }
+        });
     }
+
 
     @Override
     public void onClick(View v) {
@@ -137,12 +170,16 @@ public class Zhuo1NewItemFragment extends BaseFragment<Zhuo1FragmentNewPresenter
                 break;
             case R.id.iv_zhuo1item_1:
                 if(UserInfoProvider.getUserVideo()!=null&&!UserInfoProvider.getUserVideo().equals("")){
+                    if (image.equals("1")){
+                        SingleBeans.getInstance().setStatu("0");
+                        SingleBeans.getInstance().setMatch_type("1");
+                        startActivity(SetCitykActivity.class);
+                    }else {
+                        mPresenter.matchBegin(SingleBeans.getInstance().getSingleChooseBeans().get(Integer.parseInt(image)-1).getChoice_id(),"2","0","","");
+                    }
                     SingleBeans.getInstance().setMatch_type(image.equals("1")?"1":"2");
                     //ToDo 保存匹配信息
-                    SingleBeans.getInstance().setDestination("");
-                    SingleBeans.getInstance().setLocation("");
                     SingleBeans.getInstance().setChoose_id(SingleBeans.getInstance().getSingleChooseBeans().get(Integer.parseInt(image)-1).getChoice_id());
-                    mPresenter.matchBegin(SingleBeans.getInstance().getSingleChooseBeans().get(Integer.parseInt(image)-1).getChoice_id(),image.equals("1")?"1":"2","0","","");
                 }else {
                     // 创建构建器
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -165,6 +202,20 @@ public class Zhuo1NewItemFragment extends BaseFragment<Zhuo1FragmentNewPresenter
                         }
                     });
                     builder.create().show();
+                }
+                break;
+            case R.id.people_suggest1:
+                if (suggestFriend!=null&&suggestFriend.size()>1){
+                    Intent intent=new Intent(getContext(), UserProfileActivity.class);
+                    intent.putExtra("username",suggestFriend.get(0).getUser_id());
+                    startActivity(intent);
+                }
+                break;
+            case R.id.people_suggest2:
+                if (suggestFriend!=null&&suggestFriend.size()>1){
+                    Intent intent=new Intent(getContext(), UserProfileActivity.class);
+                    intent.putExtra("username",suggestFriend.get(1).getUser_id());
+                    startActivity(intent);
                 }
                 break;
         }
@@ -200,6 +251,7 @@ public class Zhuo1NewItemFragment extends BaseFragment<Zhuo1FragmentNewPresenter
         mRxManager.post(Constant.MATCH_BEGIN_, "");
     }
 
+
     @Override
     public void matchAcceptSucess() {
 
@@ -224,5 +276,16 @@ public class Zhuo1NewItemFragment extends BaseFragment<Zhuo1FragmentNewPresenter
     @Override
     public void returnSingleStatus(SingleStatusBean singleStatusBean) {
 
+    }
+
+    @Override
+    public void returnSuggestFriend(List<SuggestFriendBean> suggestFriends) {
+        suggestFriend = suggestFriends;
+       if (suggestFriends.size()>=2){
+           tv_suggest1.setText(suggestFriends.get(0).getNick_name());
+           tv_suggest2.setText(suggestFriends.get(1).getNick_name());
+           UserMsgDBHelp.getUserMsgDBHelp().updateMsg(suggestFriends.get(0).getUser_id());
+           UserMsgDBHelp.getUserMsgDBHelp().updateMsg(suggestFriends.get(1).getUser_id());
+       }
     }
 }

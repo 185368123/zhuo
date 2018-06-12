@@ -25,13 +25,13 @@ import zhuozhuo.com.zhuo.R;
 import zhuozhuo.com.zhuo.adapter.ClassChoseAdapter;
 import zhuozhuo.com.zhuo.adapter.LocationRecyclerViewAdapter;
 import zhuozhuo.com.zhuo.adapter.SpinnerAdapter;
-import zhuozhuo.com.zhuo.bean.ClassBean;
+import com.hyphenate.chatuidemo.my.bean.ClassBean;
 import zhuozhuo.com.zhuo.constants.LocationRecycleViewConstant;
 import zhuozhuo.com.zhuo.contract.ChangeMsgConstract;
 import zhuozhuo.com.zhuo.model.ChangeMsgModel;
 import zhuozhuo.com.zhuo.presenter.ChangeMsgPresenter;
 import zhuozhuo.com.zhuo.util.ToastUtils;
-import zhuozhuo.com.zhuo.widget.SlidingLetter;
+import com.hyphenate.chatuidemo.widget.SlidingLetter;
 
 public class LocationChangeActivity extends BaseActivity<ChangeMsgModel,ChangeMsgPresenter> implements LocationRecyclerViewAdapter.OnItemOnClickListener, AdapterView.OnItemSelectedListener, View.OnClickListener, ChangeMsgConstract.View {
     static final String[] letters = {

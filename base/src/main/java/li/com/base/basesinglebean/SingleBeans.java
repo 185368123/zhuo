@@ -46,7 +46,7 @@ public class SingleBeans {
         this.singleStatusBean = singleStatusBean;
     }
 
-    private     SingleChooseDetailBean singleChooseDetailBean;
+    private SingleChooseDetailBean singleChooseDetailBean;
 
     public SingleChooseDetailBean getSingleChooseDetailBean() {
         return singleChooseDetailBean;
@@ -66,7 +66,7 @@ public class SingleBeans {
         this.you_user_id = you_user_id;
     }
 
-    private  List<MatchPersonBean>  matchPersonBeans;
+    private List<MatchPersonBean> matchPersonBeans;
 
     public List<MatchPersonBean> getMatchPersonBeans() {
         return matchPersonBeans;
@@ -96,7 +96,7 @@ public class SingleBeans {
         this.visonBean = visonBean;
     }
 
-    private SingleUnReadBean  unReadBean;
+    private SingleUnReadBean unReadBean;
 
     public void setUnReadBean(SingleUnReadBean unReadBean) {
         this.unReadBean = unReadBean;
@@ -144,6 +144,18 @@ public class SingleBeans {
         return friends;
     }
 
+    public String  getFriensToString(){
+        StringBuffer sb=new StringBuffer();
+        for (int i = 0; i < friends.size(); i++) {
+            if (i==(friends.size()-1)){
+                sb.append(friends.get(i));
+            }else {
+                sb.append(friends.get(i)+",");
+            }
+        }
+        return sb.toString();
+    }
+
     private String choose_id;
 
     public String getChoose_id() {
@@ -154,17 +166,23 @@ public class SingleBeans {
         this.choose_id = choose_id;
     }
 
-    private String match_type;
-    private String destination;
-    private String location;
+    private String match_type= "";
+    private String location= "";
+    private String location_id= "";
+    private String statu= "";
+
+    public String getLocation_id() {
+        return location_id;
+    }
+
+    public void setLocation_id(String location_id) {
+        this.location_id = location_id;
+    }
 
     public String getMatch_type() {
         return match_type;
     }
 
-    public String getDestination() {
-        return destination;
-    }
 
     public String getLocation() {
         return location;
@@ -174,15 +192,11 @@ public class SingleBeans {
         this.match_type = match_type;
     }
 
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
-
     public void setLocation(String location) {
         this.location = location;
     }
 
-    private  List<CitiesSingBean> singBeans;
+    private List<CitiesSingBean> singBeans;
 
     public void setCitiesSingBean(List<CitiesSingBean> singBeans) {
         this.singBeans = singBeans;
@@ -190,5 +204,102 @@ public class SingleBeans {
 
     public List<CitiesSingBean> getCitiesSingBean() {
         return singBeans;
+    }
+
+    public void setStatu(String statu) {
+        this.statu = statu;
+    }
+
+    public String getStatu() {
+        return statu;
+    }
+
+    private String city1 = "";
+    private String city2 = "";
+    private String city3 = "";
+
+    private String city1Name = "";
+    private String city2Name = "";
+    private String city3Name = "";
+
+    public void setCity1(String city1) {
+        this.city1 = city1;
+    }
+
+    public void setCity2(String city2) {
+        this.city2 = city2;
+    }
+
+    public void setCity3(String city3) {
+        this.city3 = city3;
+    }
+
+    public String getCityID() {
+
+        String cityID = "";
+        if (city1.equals("")) {
+            if (city2.equals("")) {
+                if (city3.equals("")) {
+
+                } else {
+                    cityID = city3;
+                }
+            } else {
+                if (city3.equals("")) {
+                    cityID = city2;
+                } else {
+                    cityID = city2 + "," + city3;
+                }
+            }
+        } else {
+            if (city2.equals("")) {
+                if (city3.equals("")) {
+                    cityID = city1;
+                } else {
+                    cityID = city1 + "," + city3;
+                }
+            } else {
+                if (city3.equals("")) {
+                    cityID = city1 + "," + city2;
+                } else {
+                    cityID = city1 + "," + city2 + "," + city3;
+                }
+            }
+        }
+        return cityID;
+    }
+
+    public void setCity1Name(String city1Name) {
+        this.city1Name = city1Name;
+    }
+
+    public void setCity2Name(String city2Name) {
+        this.city2Name = city2Name;
+    }
+
+    public void setCity3Name(String city3Name) {
+        this.city3Name = city3Name;
+    }
+
+    public String getCity1Name() {
+        return city1Name;
+    }
+
+    public String getCity2Name() {
+        return city2Name;
+    }
+
+    public String getCity3Name() {
+        return city3Name;
+    }
+
+    List<RandStrBean> randStrBeans;
+
+    public List<RandStrBean> getRandStrBeans() {
+        return randStrBeans;
+    }
+
+    public void setRandStrBeans(List<RandStrBean> randStrBeans) {
+        this.randStrBeans = randStrBeans;
     }
 }

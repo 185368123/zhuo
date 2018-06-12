@@ -305,6 +305,9 @@ public class UrlConstant {
     //获取推荐用户
     public static final String GetSuggest_URL="/PlayerMatch/getFriends";
 
-    //获取推荐用户
+    //查看对方是否已评价
     public static final String IsEvaluate_URL="/PlayerMatch/isEvaluate";
+
+    //获取推荐用户
+    public static final String GetRandStr_URL="/PlayerMatch/getRandStr";
 }

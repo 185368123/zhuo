@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 import li.com.base.baseuntils.LogUtils;
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 import zhuozhuo.com.zhuo.R;
-import zhuozhuo.com.zhuo.bean.ClassBean;
+import com.hyphenate.chatuidemo.my.bean.ClassBean;
 
 /**
  * 头部悬停adapter

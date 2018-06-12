@@ -35,6 +35,8 @@ import com.umeng.socialize.UMShareAPI;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import zhuozhuo.com.zhuo.R;
 import zhuozhuo.com.zhuo.contract.GetVisonConstract;
@@ -79,6 +81,19 @@ public class Welcome2Activity extends BaseActivity<GetVisonModel, GetVisonPresen
     private ProgressBar pb;
     private TextView tv;
     private LinearLayout ll;
+    private Timer timer;
+
+    Handler h=new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
+            //加载数据
+            initDatas("");
+            //设置adapter
+            initAdapter();
+            goNext();
+            return false;
+        }
+    });
 
     @Override
     public void doBeforeSetcontentView() {
@@ -110,7 +125,15 @@ public class Welcome2Activity extends BaseActivity<GetVisonModel, GetVisonPresen
         tv = (TextView) findViewById(R.id.tv_welcome);
         ll = (LinearLayout) findViewById(R.id.ll_welcome);
         Glide.with(this).load(R.drawable.welcome2).into(iv);
+
         mPresenter.getVison();
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+               h.sendMessage(new Message());
+            }
+        },10*1000);
 
 
 
@@ -366,6 +389,7 @@ public class Welcome2Activity extends BaseActivity<GetVisonModel, GetVisonPresen
 
     @Override
     public void returnVison(boolean isUpate, final String upateUrl, String imageUrl) {
+        timer.cancel();
         //加载数据
         initDatas(imageUrl);
         //设置adapter

@@ -94,8 +94,8 @@ public class SocketService extends Service {
                 public void onOpen(ServerHandshake handshakedata) {
                     LogUtils.logd(TAG + "Socket连接成功");
                     flag = true;
-                   // mThread = new MyThread();
-                   // mThread.start();
+                    mThread = new MyThread();
+                    mThread.start();
                 }
 
                 @Override
@@ -127,6 +127,8 @@ public class SocketService extends Service {
                                     intent.putExtra("type",type);
                                     intent.putExtra("group_name",group_name);
                                     startActivity(intent);
+                                }else if(type.equals("3000")||type.equals("4000")){
+                                    manager.post(method,message);
                                 }else {
                                     String user_id = object.getString("user_id");
                                     String group_id = object.getString("group_id");

@@ -10,6 +10,7 @@ import android.widget.ListView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.hyphenate.chatuidemo.my.SetCitykActivity;
 import com.hyphenate.chatuidemo.my.bean.HundredBean;
 import com.hyphenate.easeui.provider.UserInfoProvider;
 
@@ -18,11 +19,16 @@ import java.util.List;
 
 import li.com.base.base.BaseFragment;
 import li.com.base.basesinglebean.MatchPersonBean;
+import li.com.base.basesinglebean.SingleBeans;
 import li.com.base.basesinglebean.SingleChooseBean;
 import li.com.base.basesinglebean.SingleChooseDetailBean;
 import li.com.base.basesinglebean.SingleStatusBean;
+import li.com.base.basesinglebean.SuggestFriendBean;
+import li.com.base.baseuntils.LogUtils;
+import rx.functions.Action1;
 import zhuozhuo.com.zhuo.R;
 import zhuozhuo.com.zhuo.adapter.Zhuo1NewItemListAdapter;
+import zhuozhuo.com.zhuo.constants.Constant;
 import zhuozhuo.com.zhuo.contract.Zhuo1FragmentConstract;
 import zhuozhuo.com.zhuo.contract.Zhuo1FragmentNewConstract;
 import zhuozhuo.com.zhuo.model.Zhuo1FragmentModel;
@@ -41,6 +47,7 @@ public class Zhuo1NewItemFragment_ extends BaseFragment<Zhuo1FragmentNewPresente
     private PullToRefreshListView listView;
     private List<SingleChooseBean> data = new ArrayList<>();
     private Zhuo1NewItemListAdapter adapter;
+    public static final String ToItemFragment1="ToItemFragment1";
 
     @Override
     protected int getLayoutResource() {
@@ -66,13 +73,35 @@ public class Zhuo1NewItemFragment_ extends BaseFragment<Zhuo1FragmentNewPresente
                 mPresenter.getSingleChoose();
             }
         });
-
+        mRxManager.on(ToItemFragment1, new Action1<Object>() {
+            @Override
+            public void call(Object o) {
+                mPresenter.getSingleChoose();
+            }
+        });
+        mRxManager.on("match_begin_2", new Action1<Object>() {
+            @Override
+            public void call(Object o) {
+                if ( SingleBeans.getInstance().getCityID().equals("")||SingleBeans.getInstance().getLocation_id().equals("")){
+                    mPresenter.getSingleChoose();
+                }else {
+                    mPresenter.matchBegin(data.get(0).getChoice_id(), "", SingleBeans.getInstance().getStatu(), SingleBeans.getInstance().getCityID(), SingleBeans.getInstance().getLocation_id());
+                    Zhuo1NewItemListAdapter.ViewSave save=adapter.getViewSaveList().get(0);
+                }
+            }
+        });
     }
 
     @Override
     public void onImageWaitClick(int posion) {
         if(UserInfoProvider.getUserVideo()!=null&&!UserInfoProvider.getUserVideo().equals("")){
-            mPresenter.matchBegin(data.get(posion).getChoice_id(), posion == 0 ? "1" : "2", "66", "", "");
+            if (posion==0){
+                SingleBeans.getInstance().setStatu("0");
+                SingleBeans.getInstance().setMatch_type("1");
+                startActivity(SetCitykActivity.class);
+            }else {
+                mPresenter.matchBegin(data.get(posion).getChoice_id(), posion == 0 ? "1" : "2", "66", "", "");
+            }
         }else {
             // 创建构建器
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -130,13 +159,16 @@ public class Zhuo1NewItemFragment_ extends BaseFragment<Zhuo1FragmentNewPresente
             this.data.addAll(data);
             adapter.clearViewSaveList();
             adapter.notifyDataSetChanged();
+            if (data.get(0).getMatch_status().equals("0")){
+                mRxManager.post(Constant.MATCH_STOP_,"");
+            }
         }
         listView.onRefreshComplete();
     }
 
     @Override
     public void matchBeginSucess() {
-        //adapter.getViewSaveList().get(2).iv_go.performClick();
+
     }
 
     @Override
@@ -156,6 +188,11 @@ public class Zhuo1NewItemFragment_ extends BaseFragment<Zhuo1FragmentNewPresente
 
     @Override
     public void returnSingleStatus(SingleStatusBean singleStatusBean) {
+
+    }
+
+    @Override
+    public void returnSuggestFriend(List<SuggestFriendBean> suggestFriends) {
 
     }
 }

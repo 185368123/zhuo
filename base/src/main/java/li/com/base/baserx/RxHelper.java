@@ -41,7 +41,7 @@ public class RxHelper {
                         }else if (result.remind()){//请求数据失败，提示错误信息
                             LogUtils.logd("请求数据失败，提示错误信息");
                             ToastUitl.showLong(result.msg);
-                            return null;
+                            return Observable.error(new ServerException(result.msg));
                         }else if (result.relogin()){//Token失效，从新登陆
                             LogUtils.logd("Token失效，从新登陆");
                             new RxManager().post("restart","");

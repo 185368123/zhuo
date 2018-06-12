@@ -8,9 +8,11 @@ import li.com.base.base.BaseModel;
 import li.com.base.base.BasePresenter;
 import li.com.base.base.BaseView;
 import li.com.base.basesinglebean.MatchPersonBean;
+import li.com.base.basesinglebean.RandStrBean;
 import li.com.base.basesinglebean.SingleChooseBean;
 import li.com.base.basesinglebean.SingleChooseDetailBean;
 import li.com.base.basesinglebean.SingleStatusBean;
+import li.com.base.basesinglebean.SuggestFriendBean;
 import rx.Observable;
 
 
@@ -39,6 +41,10 @@ public interface Zhuo1FragmentNewConstract {
 
         Observable<List<CitiesSingBean>> getAllCities(String token);
 
+        Observable<List<SuggestFriendBean>> getSuggestFriend(String token,String you_user_id);
+
+
+
     }
 
     interface View extends BaseView {
@@ -56,6 +62,10 @@ public interface Zhuo1FragmentNewConstract {
         void returnAllMatch(List<MatchPersonBean> data);
 
         void returnSingleStatus(SingleStatusBean singleStatusBean);
+
+        void returnSuggestFriend(List<SuggestFriendBean> suggestFriends);
+
+
 
     }
 
@@ -77,5 +87,9 @@ public interface Zhuo1FragmentNewConstract {
         public abstract void getSingleStatus();
 
         public abstract void getAllCities();
+
+        public abstract void getSuggestFriend(String you_user_id);
+
+
     }
 }
