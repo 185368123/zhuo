@@ -5,10 +5,12 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
@@ -103,6 +105,19 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
     private GetRandStrPresenter randStrPresenter;
     private GetRandStrModel randStrModel;
     private ImageView ll_prize_hide;
+    private List<String> names;
+    private List<Fragment> mNewsFragmentList;
+
+    public class MyThread extends Thread {
+        @Override
+        public void run() {
+            mPresenter.getSingleChoose();
+            mPresenter.getSingleStatus();
+            mPresenter.getAllMatch();
+            mPresenter.getAllCities();
+            randStrPresenter.getRandStr();
+        }
+    }
 
 
     @Override
@@ -117,15 +132,11 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
 
     @Override
     protected void initView(View view) {
-        mPresenter.getSingleChoose();
-        mPresenter.getSingleStatus();
-        mPresenter.getAllMatch();
-        mPresenter.getAllCities();
 
         randStrPresenter = new GetRandStrPresenter();
         randStrModel = new GetRandStrModel();
-        randStrPresenter.setVM(randStrModel,null);
-        randStrPresenter.getRandStr();
+        randStrPresenter.setVM(randStrModel, null);
+        new MyThread().run();
 
         vp = view.findViewById(R.id.vp_zhuo1_new);
         tv_unread = (TextView) view.findViewById(R.id.tv_unread_num);
@@ -191,18 +202,14 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
 
         vp.setOffscreenPageLimit(4);
 
-        if (SingleBeans.getInstance().getVisonBean().getStr_type().equals("1")){
+        if (SingleBeans.getInstance().getVisonBean()!=null&&SingleBeans.getInstance().getVisonBean().getStr_type().equals("1")) {
             ll_prize.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             ll.setVisibility(View.GONE);
         }
         initRxManger();
-        initViewPage();
     }
 
-    private void initViewPage() {
-
-    }
 
     private void initRxManger() {
         mRxManager.on(RxBusConstants.UNREAD_MSG_COUNT, new Action1<Integer>() {//未读消息数量
@@ -263,7 +270,7 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
                     object = new JSONObject(s);
                     String type = object.getString("type");
                     if (type.equals("4000")) {
-                        if (SingleBeans.getInstance().getStatu().equals("0")){
+                        if (SingleBeans.getInstance().getStatu().equals("0")) {
                             useId = object.getString("user_id");
                             String user_video = object.getString("user_video");
                             String name = object.getString("nick_name");
@@ -274,10 +281,10 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
                             other_party_id = object.getString("other_party_id");
                             SingleBeans.getInstance().setChoose_id(object.getString("choice_id"));
                             judge(useId, user_video, name, location, account, sex);
-                        }else if (SingleBeans.getInstance().getStatu().equals("66")){
+                        } else if (SingleBeans.getInstance().getStatu().equals("66")) {
                             mPresenter.getAllMatch();
                         }
-                    }else if (type.equals("3000")){
+                    } else if (type.equals("3000")) {
                         mPresenter.getAllMatch();
                     }
                 } catch (JSONException e) {
@@ -296,6 +303,7 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
         intent.putExtra("userId", useId);
         startActivityForResult(intent, CHAT);
     }
+
     private void judge(String userId, String user_video, String userName, String location, String hobby, String sex) {//第一次匹配成功时候更改UI界面
         chronometer.stop();
         if (userId != null && !userId.equals("")) {
@@ -364,8 +372,7 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
             case R.id.button_receive_zhuo1_:
                 button_receive.setClickable(false);
                 button_receive.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.skip_button_maincolor_shape));
-                mPresenter.matchAccept(SingleBeans.getInstance().getChoose_id(),useId,other_party_id,is_status);
-
+                mPresenter.matchAccept(SingleBeans.getInstance().getChoose_id(), useId, other_party_id, is_status);
                 break;
             case R.id.button_skip_zhuo1_:
                 skipMatch();
@@ -377,20 +384,20 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
                 mPresenter.matchCancle(SingleBeans.getInstance().getChoose_id(), "0");
                 break;
             case R.id.iv_see_prize:
-                StringBuffer stringBuffer=new StringBuffer();
+                StringBuffer stringBuffer = new StringBuffer();
                 ll_prize_show.setVisibility(View.VISIBLE);
                 for (int i = 0; i < SingleBeans.getInstance().getRandStrBeans().size(); i++) {
-                    if ((i+1)==SingleBeans.getInstance().getRandStrBeans().size()){
+                    if ((i + 1) == SingleBeans.getInstance().getRandStrBeans().size()) {
                         stringBuffer.append(SingleBeans.getInstance().getRandStrBeans().get(i).getStr());
-                    }else {
-                        stringBuffer.append(SingleBeans.getInstance().getRandStrBeans().get(i).getStr()+",");
+                    } else {
+                        stringBuffer.append(SingleBeans.getInstance().getRandStrBeans().get(i).getStr() + ",");
                     }
                 }
-                tv_prize_msg.setText(stringBuffer.toString().replace(",","\n"));
+                tv_prize_msg.setText(stringBuffer.toString().replace(",", "\n"));
                 break;
             case R.id.iv_see_prize_msg:
                 ll_prize_show.setVisibility(View.VISIBLE);
-                tv_prize_msg.setText(SingleBeans.getInstance().getVisonBean().getVersion_type().replace("/n","\n"));
+                tv_prize_msg.setText(Html.fromHtml(SingleBeans.getInstance().getVisonBean().getVersion_type().replace("/n", "<br />").replace("3666","<font color='#f76243'>3666</font>")));
                 break;
             case R.id.ll_prize_hide:
                 ll_prize_show.setVisibility(View.GONE);
@@ -443,8 +450,8 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
     @Override
     public void returnSingleChoose(List<SingleChooseBean> data) {
         if (data != null) {
-            List<String> names = new ArrayList<>();
-            List<Fragment> mNewsFragmentList = new ArrayList<>();
+            names = new ArrayList<>();
+            mNewsFragmentList = new ArrayList<>();
             for (int i = 0; i < data.size(); i++) {
                 names.add(data.get(i).getChoice_name());
                 mNewsFragmentList.add(createListFragments(data.get(i), i + 1 + ""));
@@ -453,11 +460,18 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
                     ll.setVisibility(View.VISIBLE);
                     ll.setVisibility(View.VISIBLE);
                     drawable_wait.start();
-                    chronometer.setBase(SystemClock.elapsedRealtime()-(System.currentTimeMillis()/1000-data.get(i).getStart_time())*1000);
+                    chronometer.setBase(SystemClock.elapsedRealtime() - (System.currentTimeMillis() / 1000 - data.get(i).getStart_time()) * 1000);
                     chronometer.start();
                 }
             }
             mNewsFragmentList.add(new Zhuo1NewItemFragment_());
+
+            FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+            for (Fragment fragment : mNewsFragmentList) {
+                fragmentTransaction.remove(fragment);
+            }
+            fragmentTransaction.commitAllowingStateLoss();
+
             if (fragmentAdapter == null) {
                 fragmentAdapter = new BaseFragmentAdapter(getChildFragmentManager(), mNewsFragmentList);
             } else {
@@ -512,7 +526,7 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
         } else {
             rv.setVisibility(View.GONE);
         }
-        mRxManager.post(Zhuo1NewItemFragment_.ToItemFragment1,"");
+        mRxManager.post(Zhuo1NewItemFragment_.ToItemFragment1, "");
     }
 
     @Override

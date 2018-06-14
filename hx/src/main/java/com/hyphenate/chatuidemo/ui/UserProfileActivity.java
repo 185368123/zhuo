@@ -80,7 +80,7 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
 
     private void setView(final String username) {
         userDB = UserMsgDBHelp.getUserMsgDBHelp().searchByUserId(username);
-        if (userDB !=null) {
+        if (userDB != null) {
             Glide.with(this).load(userDB.getPhoto_link()).into(headAvatar);
             tvNickName.setText(userDB.getNick_name());
             if (userDB.getSex().equals("1")) {
@@ -88,27 +88,27 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
             } else if (userDB.getSex().equals("2")) {
                 tv_sex.setText("女");
             }
-            if (userDB.getLocation()==null|| userDB.getLocation().equals("")){
+            if (userDB.getLocation() == null || userDB.getLocation().equals("")) {
                 tv_college.setText("无");
-            }else {
+            } else {
                 tv_college.setText(userDB.getLocation());
             }
-            if (userDB.getAccount()==null|| userDB.getAccount().equals("")){
+            if (userDB.getAccount() == null || userDB.getAccount().equals("")) {
                 tv_hobby.setText("无");
-            }else {
+            } else {
                 tv_hobby.setText(userDB.getAccount());
             }
 
-            List<String> card= userDB.getCard();
-            tv_card1.setText(card.get(0%card.size()));
-            tv_card2.setText(card.get(1%card.size()));
-            tv_card3.setText(card.get(2%card.size()));
-            tv_card4.setText(card.get(3%card.size()));
-            tv_card5.setText(card.get(4%card.size()));
-            tv_card6.setText(card.get(5%card.size()));
-            tv_card7.setText(card.get(6%card.size()));
-            tv_card8.setText(card.get(7%card.size()));
-            tv_card9.setText(card.get(8%card.size()));
+            List<String> card = userDB.getCard();
+            tv_card1.setText(card.get(0 % card.size()));
+            tv_card2.setText(card.get(1 % card.size()));
+            tv_card3.setText(card.get(2 % card.size()));
+            tv_card4.setText(card.get(3 % card.size()));
+            tv_card5.setText(card.get(4 % card.size()));
+            tv_card6.setText(card.get(5 % card.size()));
+            tv_card7.setText(card.get(6 % card.size()));
+            tv_card8.setText(card.get(7 % card.size()));
+            tv_card9.setText(card.get(8 % card.size()));
             bt_add_friend.setOnClickListener(new View.OnClickListener() {//添加好友
                 @Override
                 public void onClick(View view) {
@@ -122,7 +122,7 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
                         public void run() {
                             try {
                                 //demo use a hardcode reason here, you need let user to input if you like
-                                String s =getResources().getString(R.string.Add_a_friend);
+                                String s = getResources().getString(R.string.Add_a_friend);
                                 EMClient.getInstance().contactManager().addContact(username, s);
                                 DBOpenHelp.getDBOpenHelp().selectByUserId(username);
                                 runOnUiThread(new Runnable() {
@@ -133,7 +133,7 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
                                     }
                                 });
                             } catch (final Exception e) {
-                               runOnUiThread(new Runnable() {
+                                runOnUiThread(new Runnable() {
                                     public void run() {
                                         progressDialog.dismiss();
                                         String s2 = getResources().getString(R.string.Request_add_buddy_failure);
@@ -147,7 +147,7 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
             });
             if (!DemoHelper.getInstance().getContactList().containsKey(username)) {
                 bt_add_friend.setVisibility(View.VISIBLE);
-            }else {
+            } else {
                 bt_add_friend.setVisibility(View.GONE);
             }
         }
@@ -158,8 +158,8 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
         headAvatar = (ImageView) findViewById(R.id.user_head_avatar);
         tvNickName = (TextView) findViewById(R.id.user_nickname);
         tv_sex = (TextView) findViewById(R.id.tv_sex);
-        tv_college= (TextView)findViewById(R.id.tv_college);
-        tv_hobby= (TextView)findViewById(R.id.tv_hobby);
+        tv_college = (TextView) findViewById(R.id.tv_college);
+        tv_hobby = (TextView) findViewById(R.id.tv_hobby);
         tv_card1 = (TextView) findViewById(R.id.tv_card1);
         tv_card2 = (TextView) findViewById(R.id.tv_card2);
         tv_card3 = (TextView) findViewById(R.id.tv_card3);
@@ -180,13 +180,18 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
     public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.ll_video) {
-            if (userDB.getUser_video()==null){
-                ToastUitl.showLong("暂未获取到对方的视频，请稍后再试！");
-        }else {
-                Intent intent = new Intent(this, SimpleVideoActivity.class);
-                intent.putExtra("url", userDB.getUser_video());
-                startActivity(intent);
+            try {
+                if (userDB.getUser_video() != null) {
+                    Intent intent = new Intent(this, SimpleVideoActivity.class);
+                    intent.putExtra("url", userDB.getUser_video());
+                    startActivity(intent);
+                } else {
+                    ToastUitl.showLong("对方暂未设置视频，请稍后再试!");
+                }
+            }catch (NullPointerException e){
+                ToastUitl.showLong("对方暂未设置视频，请稍后再试!");
             }
+
         }
     }
 }

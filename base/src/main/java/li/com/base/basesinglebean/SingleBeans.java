@@ -146,6 +146,7 @@ public class SingleBeans {
 
     public String  getFriensToString(){
         StringBuffer sb=new StringBuffer();
+        if (friends!=null){
         for (int i = 0; i < friends.size(); i++) {
             if (i==(friends.size()-1)){
                 sb.append(friends.get(i));
@@ -153,7 +154,8 @@ public class SingleBeans {
                 sb.append(friends.get(i)+",");
             }
         }
-        return sb.toString();
+            return sb.toString();
+        }else return "";
     }
 
     private String choose_id;

@@ -19,7 +19,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:paddingLeft="25dp"
-            android:text="Service"
+            android:text="客服"
             android:textColor="#ffffff" />
 
         <TextView
@@ -43,7 +43,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:paddingRight="25dp"
-                android:text="Chats"
+                android:text="聊天"
                 android:textColor="#ffffff" />
 
             <TextView
@@ -94,7 +94,7 @@
                     android:textSize="@dimen/text_size_18"
                     android:text="抽奖码"/>
                 <TextView
-                    android:layout_width="10dp"
+                    android:layout_width="20dp"
                     android:layout_height="match_parent" />
                 <TextView
                     android:layout_width="wrap_content"
@@ -135,9 +135,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
+                    android:paddingTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/gray_shape"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:textSize="@dimen/text_size_15"

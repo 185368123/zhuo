@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -492,5 +493,4 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             }
         }
     }
-
 }

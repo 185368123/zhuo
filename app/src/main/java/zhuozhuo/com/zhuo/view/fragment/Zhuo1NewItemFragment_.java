@@ -1,17 +1,13 @@
 package zhuozhuo.com.zhuo.view.fragment;
 
 import android.content.DialogInterface;
-import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
-import android.widget.Chronometer;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.hyphenate.chatuidemo.my.SetCitykActivity;
-import com.hyphenate.chatuidemo.my.bean.HundredBean;
 import com.hyphenate.easeui.provider.UserInfoProvider;
 
 import java.util.ArrayList;
@@ -24,17 +20,14 @@ import li.com.base.basesinglebean.SingleChooseBean;
 import li.com.base.basesinglebean.SingleChooseDetailBean;
 import li.com.base.basesinglebean.SingleStatusBean;
 import li.com.base.basesinglebean.SuggestFriendBean;
-import li.com.base.baseuntils.LogUtils;
+import li.com.base.baseuntils.ToastUitl;
 import rx.functions.Action1;
 import zhuozhuo.com.zhuo.R;
 import zhuozhuo.com.zhuo.adapter.Zhuo1NewItemListAdapter;
 import zhuozhuo.com.zhuo.constants.Constant;
-import zhuozhuo.com.zhuo.contract.Zhuo1FragmentConstract;
 import zhuozhuo.com.zhuo.contract.Zhuo1FragmentNewConstract;
-import zhuozhuo.com.zhuo.model.Zhuo1FragmentModel;
 import zhuozhuo.com.zhuo.model.Zhuo1FragmentNewModel;
 import zhuozhuo.com.zhuo.presenter.Zhuo1FragmentNewPresenter;
-import zhuozhuo.com.zhuo.presenter.Zhuo1FragmentPresenter;
 import zhuozhuo.com.zhuo.view.activity.RecordVideoActivity;
 import zhuozhuo.com.zhuo.view.activity.VideoSelectActivity;
 
@@ -84,8 +77,9 @@ public class Zhuo1NewItemFragment_ extends BaseFragment<Zhuo1FragmentNewPresente
             public void call(Object o) {
                 if ( SingleBeans.getInstance().getCityID().equals("")||SingleBeans.getInstance().getLocation_id().equals("")){
                     mPresenter.getSingleChoose();
+                    ToastUitl.showLong("所在地或目的地为空！");
                 }else {
-                    mPresenter.matchBegin(data.get(0).getChoice_id(), "", SingleBeans.getInstance().getStatu(), SingleBeans.getInstance().getCityID(), SingleBeans.getInstance().getLocation_id());
+                    mPresenter.matchBegin(data.get(0).getChoice_id(), "1", SingleBeans.getInstance().getStatu(), SingleBeans.getInstance().getCityID(), SingleBeans.getInstance().getLocation_id());
                     Zhuo1NewItemListAdapter.ViewSave save=adapter.getViewSaveList().get(0);
                 }
             }
@@ -96,7 +90,7 @@ public class Zhuo1NewItemFragment_ extends BaseFragment<Zhuo1FragmentNewPresente
     public void onImageWaitClick(int posion) {
         if(UserInfoProvider.getUserVideo()!=null&&!UserInfoProvider.getUserVideo().equals("")){
             if (posion==0){
-                SingleBeans.getInstance().setStatu("0");
+                SingleBeans.getInstance().setStatu("66");
                 SingleBeans.getInstance().setMatch_type("1");
                 startActivity(SetCitykActivity.class);
             }else {

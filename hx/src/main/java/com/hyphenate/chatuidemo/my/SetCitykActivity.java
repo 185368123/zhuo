@@ -90,6 +90,7 @@ public class SetCitykActivity extends BaseActivity implements View.OnClickListen
     }
 
     public void back_(View view) {
+        new RxManager().post("ToItemFragment1", "");
         finish();
     }
 

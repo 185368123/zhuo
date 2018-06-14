@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import li.com.base.baserx.RxManager;
+import li.com.base.basesinglebean.SingleBeans;
 import li.com.base.basesinglebean.SingleChooseBean;
 import li.com.base.baseuntils.LogUtils;
 import zhuozhuo.com.zhuo.R;
@@ -73,7 +74,7 @@ public class Zhuo1NewItemListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewSave viewSave=new ViewSave();
         convertView = LayoutInflater.from(context).inflate(R.layout.zhuo1_item_list_item_layout, parent, false);
         tv_name = convertView.findViewById(R.id.tv_name_list_item);
@@ -98,7 +99,7 @@ public class Zhuo1NewItemListAdapter extends BaseAdapter {
             startWaitView(save);
         }
         tv_name.setText(list.get(position).getChoice_name().replace("/n","\n"));
-        tv_title.setText(list.get(position).getChoice_title().replace("/n","\n"));
+        tv_title.setText("(挂机模式)");
         switch (position) {
             case 0:
                 Glide.with(context).load(R.mipmap.zhuo1_item_1).into(iv_go);
@@ -119,6 +120,9 @@ public class Zhuo1NewItemListAdapter extends BaseAdapter {
             public void onClick(View v) {
                 if (imageOnClick != null) {
                     ViewSave save= (ViewSave) v.getTag();
+                    SingleBeans.getInstance().setStatu("66");
+                    SingleBeans.getInstance().setMatch_type(save.position==0 ? "1" : "2");
+                    SingleBeans.getInstance().setChoose_id(list.get(save.position).getChoice_id());
                     imageOnClick.onImageWaitClick(save.position);
                     rxManager.post(Constant.MATCH_BEGIN,save);
                     startWaitView(save);
