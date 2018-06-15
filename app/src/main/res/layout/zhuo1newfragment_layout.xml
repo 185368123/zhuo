@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/ll_zhuo1_new"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -149,7 +150,7 @@
             android:id="@+id/wait_zhuo1_"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/zhuo1_background"
+            android:background="@color/black_background"
             android:clickable="true"
             android:gravity="center_horizontal"
             android:orientation="vertical"
@@ -212,7 +213,7 @@
             android:id="@+id/ll_zhuo1_"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/zhuo1_background"
+            android:background="@color/black_background"
             android:clickable="true"
             android:gravity="center_horizontal"
             android:orientation="vertical"

@@ -445,8 +445,9 @@
         <activity
             android:name=".view.activity.MineVideoPlayActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".view.activity.UnReadListActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".view.activity.UnReadListActivity"
+            android:screenOrientation="portrait" />
         <!-- 语音通话 -->
         <activity
             android:name="com.hyphenate.chatuidemo.ui.VoiceCallActivity"
@@ -501,18 +502,24 @@
             android:exported="false"
             android:process=":TMAssistantDownloadSDKService" />
 
-        <activity android:name=".view.activity.UpdateActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".view.activity.RecordVideoActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".view.activity.MyVideoPlayActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".view.activity.VideoSelectActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".view.activity.SaveMatchActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.hyphenate.chatuidemo.my.CityChooseActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".view.activity.UpdateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activity.RecordVideoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activity.MyVideoPlayActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activity.VideoSelectActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activity.SaveMatchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hyphenate.chatuidemo.my.CityChooseActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.hyphenate.chatuidemo.my.RemarkActivity"
             android:screenOrientation="portrait"
@@ -521,6 +528,7 @@
             android:name="com.hyphenate.chatuidemo.my.SetCitykActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyDialogStyle" />
+        <activity android:name=".view.activity.MyCollege"></activity>
     </application>
 
 </manifest>

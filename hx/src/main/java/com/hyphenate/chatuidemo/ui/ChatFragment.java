@@ -299,7 +299,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
             public void onClick(View v) {
                 if (chatType == EaseConstant.CHATTYPE_SINGLE) {
                     if (isMatch) {
-                        bottomDialog = BottomDialog.newInstance("", new String[]{"查看资料", "放弃匹配", "举报", "清空记录"});
+                        bottomDialog = BottomDialog.newInstance("", new String[]{"查看资料", "完成匹配", "举报", "清空记录"});
                         bottomDialog.show(getFragmentManager(), "dialog");
                         bottomDialog.setListener(new BottomDialog.OnClickListener() {
                             @Override

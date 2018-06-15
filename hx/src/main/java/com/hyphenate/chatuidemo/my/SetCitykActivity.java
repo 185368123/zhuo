@@ -61,22 +61,22 @@ public class SetCitykActivity extends BaseActivity implements View.OnClickListen
         tv_end_2.setText(SingleBeans.getInstance().getCity2Name());
         tv_end_3.setText(SingleBeans.getInstance().getCity3Name());
         if (SingleBeans.getInstance().getLocation().equals("")){
-            iv_delete1.setVisibility(View.GONE);
+            iv_delete1.setVisibility(View.INVISIBLE);
         }else {
             iv_delete1.setVisibility(View.VISIBLE);
         }
         if (SingleBeans.getInstance().getCity1Name().equals("")){
-            iv_delete2.setVisibility(View.GONE);
+            iv_delete2.setVisibility(View.INVISIBLE);
         }else {
             iv_delete2.setVisibility(View.VISIBLE);
         }
         if (SingleBeans.getInstance().getCity2Name().equals("")){
-            iv_delete3.setVisibility(View.GONE);
+            iv_delete3.setVisibility(View.INVISIBLE);
         }else {
             iv_delete3.setVisibility(View.VISIBLE);
         }
         if (SingleBeans.getInstance().getCity3Name().equals("")){
-            iv_delete4.setVisibility(View.GONE);
+            iv_delete4.setVisibility(View.INVISIBLE);
         }else {
             iv_delete4.setVisibility(View.VISIBLE);
         }

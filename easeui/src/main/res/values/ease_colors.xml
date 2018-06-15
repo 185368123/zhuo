@@ -2,6 +2,8 @@
 <resources>
     <color name="zhuo1_background">#f7101010</color>
 
+    <color name="black_background">#80101010</color>
+
     <color name="m_color1">#e79750</color>
     <color name="m_color2">#333333</color>
     <color name="m_color3">#f03436</color>

@@ -310,4 +310,7 @@ public class UrlConstant {
 
     //获取推荐用户
     public static final String GetRandStr_URL="/PlayerMatch/getRandStr";
+
+    //获取推荐用户
+    public static final String GetCollege_URL="/PlayerMatch/getCollege";
 }

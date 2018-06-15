@@ -1,6 +1,8 @@
 package zhuozhuo.com.zhuo.view.activity;
 
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -29,8 +31,11 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import li.com.base.baseuntils.LogUtils;
+import li.com.base.baseuntils.ToastUitl;
 import zhuozhuo.com.zhuo.MainApplication;
 import zhuozhuo.com.zhuo.R;
 import zhuozhuo.com.zhuo.adapter.SpinnerAdapter;
@@ -69,7 +74,16 @@ public class SetActivity extends BaseActivity implements AdapterView.OnItemSelec
     private String saveVideoPath;
     private File file;
     private FileInputStream fis = null;
+    private Timer timer;
 
+    Handler h=new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
+            ToastUitl.showLong("注销失败，请重试！");
+            stopProgressDialog();
+            return false;
+        }
+    });
     @Override
     public int getLayoutId() {
         return R.layout.activity_set;
@@ -271,12 +285,21 @@ public class SetActivity extends BaseActivity implements AdapterView.OnItemSelec
             public void click(int position) {
                 switch (position) {
                     case 0:
+                        timer = new Timer();
+                        timer.schedule(new TimerTask() {
+                            @Override
+                            public void run() {
+                                h.sendMessage(new Message());
+                            }
+                        },10*1000);
+
                         startProgressDialog("正在注销......");
                         String st = getResources().getString(com.hyphenate.chatuidemo.R.string.Are_logged_out);
                         UserInfoProvider.setStatus("0");
                         DemoHelper.getInstance().logout(true, new EMCallBack() {
                             @Override
                             public void onSuccess() {
+                                timer.cancel();
                                 PreferenceManager.getPreferenceManager().setIsFirstStart(true);
                                 EMClient.getInstance().logout(true);
                                 startActivity(LoginWeiXinActivity.class);

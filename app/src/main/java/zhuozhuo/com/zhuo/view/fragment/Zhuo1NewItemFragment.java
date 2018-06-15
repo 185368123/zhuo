@@ -33,6 +33,7 @@ import zhuozhuo.com.zhuo.constants.Constant;
 import zhuozhuo.com.zhuo.contract.Zhuo1FragmentNewConstract;
 import zhuozhuo.com.zhuo.model.Zhuo1FragmentNewModel;
 import zhuozhuo.com.zhuo.presenter.Zhuo1FragmentNewPresenter;
+import zhuozhuo.com.zhuo.view.activity.MyCollege;
 import zhuozhuo.com.zhuo.view.activity.RecordVideoActivity;
 import zhuozhuo.com.zhuo.view.activity.VideoSelectActivity;
 
@@ -59,7 +60,17 @@ public class Zhuo1NewItemFragment extends BaseFragment<Zhuo1FragmentNewPresenter
     private LinearLayout ll_suggest;
     private TextView tv_suggest1;
     private TextView tv_suggest2;
-    private List<SuggestFriendBean> suggestFriend;
+    private SuggestFriendBean suggestFriend;
+    private TextView tv_friend_num;
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (image!=null&&image.equals("2")) {
+            mPresenter.getSuggestFriend(SingleBeans.getInstance().getFriensToString());
+        }
+    }
 
     @Override
     protected int getLayoutResource() {
@@ -73,16 +84,19 @@ public class Zhuo1NewItemFragment extends BaseFragment<Zhuo1FragmentNewPresenter
 
     @Override
     protected void initView(View view) {
+
         if (getArguments() != null) {
             name = getArguments().getString(Constant.FRAGMENT_NAME);
             title = getArguments().getString(Constant.FRAGMENT_TITLE);
             image = getArguments().getString(Constant.FRAGMENT_IMAGE);
         }
+
         tv1 = view.findViewById(R.id.tv_zhuo1item_name);
         tv2 = view.findViewById(R.id.tv_zhuo1item_title);
         iv1 = view.findViewById(R.id.iv_zhuo1item_1);
         iv2 = view.findViewById(R.id.iv_zhuo1item_2);
 
+        tv_friend_num = view.findViewById(R.id.tv_friend_num);
         ll = view.findViewById(R.id.wait_zhuo1_item_);
         ll_suggest = view.findViewById(R.id.ll_suggest);
         iv_cancle = view.findViewById(R.id.iv_cancle_zhuo1_item_);
@@ -98,6 +112,7 @@ public class Zhuo1NewItemFragment extends BaseFragment<Zhuo1FragmentNewPresenter
         iv_cancle.setOnClickListener(this);
         tv_suggest1.setOnClickListener(this);
         tv_suggest2.setOnClickListener(this);
+        tv_friend_num.setOnClickListener(this);
         tv1.setText(name.replace("/n", "\n"));
         tv2.setText(title.replace("/n", "\n"));
         switch (image) {
@@ -107,6 +122,7 @@ public class Zhuo1NewItemFragment extends BaseFragment<Zhuo1FragmentNewPresenter
             case "2":
                 Glide.with(getContext()).load(R.mipmap.zhuo1_item_2).into(iv1);
                 ll_suggest.setVisibility(View.VISIBLE);
+                tv_friend_num.setVisibility(View.VISIBLE);
                 mPresenter.getSuggestFriend(SingleBeans.getInstance().getFriensToString());
                 break;
             case "3":
@@ -206,18 +222,25 @@ public class Zhuo1NewItemFragment extends BaseFragment<Zhuo1FragmentNewPresenter
                 }
                 break;
             case R.id.people_suggest1:
-                if (suggestFriend != null && suggestFriend.size() > 1) {
+                if (suggestFriend != null && suggestFriend.getData().size() > 1) {
                     Intent intent = new Intent(getContext(), UserProfileActivity.class);
-                    intent.putExtra("username", suggestFriend.get(0).getUser_id());
+                    intent.putExtra("username", suggestFriend.getData().get(0).getUser_id());
                     startActivity(intent);
+                } else {
+                    mPresenter.getSuggestFriend(SingleBeans.getInstance().getFriensToString());
                 }
                 break;
             case R.id.people_suggest2:
-                if (suggestFriend != null && suggestFriend.size() > 1) {
+                if (suggestFriend != null && suggestFriend.getData().size() > 1) {
                     Intent intent = new Intent(getContext(), UserProfileActivity.class);
-                    intent.putExtra("username", suggestFriend.get(1).getUser_id());
+                    intent.putExtra("username", suggestFriend.getData().get(1).getUser_id());
                     startActivity(intent);
+                } else {
+                    mPresenter.getSuggestFriend(SingleBeans.getInstance().getFriensToString());
                 }
+                break;
+            case R.id.tv_friend_num:
+                startActivity(MyCollege.class);
                 break;
         }
     }
@@ -280,13 +303,14 @@ public class Zhuo1NewItemFragment extends BaseFragment<Zhuo1FragmentNewPresenter
     }
 
     @Override
-    public void returnSuggestFriend(List<SuggestFriendBean> suggestFriends) {
-        suggestFriend = suggestFriends;
-        if (suggestFriends.size() >= 2) {
-            tv_suggest1.setText(suggestFriends.get(0).getNick_name());
-            tv_suggest2.setText(suggestFriends.get(1).getNick_name());
-            UserMsgDBHelp.getUserMsgDBHelp().updateMsg(suggestFriends.get(0).getUser_id());
-            UserMsgDBHelp.getUserMsgDBHelp().updateMsg(suggestFriends.get(1).getUser_id());
+    public void returnSuggestFriend(SuggestFriendBean suggestFriend) {
+        this.suggestFriend = suggestFriend;
+        tv_friend_num.setText("认识人数" + SingleBeans.getInstance().getFriends().size() + "/" + suggestFriend.getUser_num());
+        if (suggestFriend.getData().size() >= 2) {
+            tv_suggest1.setText(suggestFriend.getData().get(0).getNick_name());
+            tv_suggest2.setText(suggestFriend.getData().get(1).getNick_name());
+            UserMsgDBHelp.getUserMsgDBHelp().updateMsg(suggestFriend.getData().get(0).getUser_id());
+            UserMsgDBHelp.getUserMsgDBHelp().updateMsg(suggestFriend.getData().get(1).getUser_id());
         }
     }
 }

@@ -80,8 +80,8 @@ public class Zhuo1FragmentNewPresenter extends Zhuo1FragmentNewConstract.Present
     }
 
     @Override
-    public void matchAccept(String choice_id, String you_user_id, String other_party_id, String is_status) {
-        mModel.matchAccept(UserInfoProvider.getToken(), choice_id, you_user_id, other_party_id, is_status).subscribe(new RxSubscriber<List<Object>>(mContext, false) {
+    public void matchAccept(String choice_id, String you_user_id, String other_party_id, String is_status,String destination,String location) {
+        mModel.matchAccept(UserInfoProvider.getToken(), choice_id, you_user_id, other_party_id, is_status,destination,location).subscribe(new RxSubscriber<List<Object>>(mContext, false) {
             @Override
             protected void _onNext(List<Object> o) {
                 mView.matchAcceptSucess();
@@ -187,9 +187,9 @@ public class Zhuo1FragmentNewPresenter extends Zhuo1FragmentNewConstract.Present
 
     @Override
     public void getSuggestFriend(String you_user_id) {
-        mModel.getSuggestFriend(UserInfoProvider.getToken(),you_user_id).subscribe(new RxSubscriber<List<SuggestFriendBean>>(mContext,false) {
+        mModel.getSuggestFriend(UserInfoProvider.getToken(),you_user_id,UserInfoProvider.getLocation().split(",")[0]).subscribe(new RxSubscriber<SuggestFriendBean>(mContext,false) {
             @Override
-            protected void _onNext(List<SuggestFriendBean> suggestFriendBeans) {
+            protected void _onNext(SuggestFriendBean suggestFriendBeans) {
                 mView.returnSuggestFriend(suggestFriendBeans);
             }
 
@@ -199,4 +199,5 @@ public class Zhuo1FragmentNewPresenter extends Zhuo1FragmentNewConstract.Present
             }
         });
     }
+
 }

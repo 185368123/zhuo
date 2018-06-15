@@ -47,9 +47,9 @@ public class Zhuo1FragmentNewModel implements Zhuo1FragmentNewConstract.Model {
     }
 
     @Override
-    public Observable<List<Object>> matchAccept(String token, String choice_id, String you_user_id, String other_party_id, String is_status) {
+    public Observable<List<Object>> matchAccept(String token, String choice_id, String you_user_id, String other_party_id, String is_status,String destination,String location) {
         return Api.getDefault(HostType.INCLUE_COOKIE)
-                .matchAccept_new(token, choice_id, you_user_id, other_party_id, is_status)
+                .matchAccept_new(token, choice_id, you_user_id, other_party_id, is_status,destination,location)
                 .compose(RxSchedulers.<BaseRespose<List<Object>>>io_main())
                 .compose(RxHelper.<List<Object>>handleResult());
     }
@@ -94,10 +94,10 @@ public class Zhuo1FragmentNewModel implements Zhuo1FragmentNewConstract.Model {
     }
 
     @Override
-    public Observable<List<SuggestFriendBean>> getSuggestFriend(String token, String you_user_id) {
+    public Observable<SuggestFriendBean> getSuggestFriend(String token, String you_user_id,String school) {
         return Api.getDefault(HostType.INCLUE_COOKIE)
-                .getSuggestFriend(token, you_user_id)
-                .compose(RxSchedulers.<BaseRespose<List<SuggestFriendBean>>>io_main())
-                .compose(RxHelper.<List<SuggestFriendBean>>handleResult());
+                .getSuggestFriend(token, you_user_id,school)
+                .compose(RxSchedulers.<SuggestFriendBean>io_main());
     }
+
 }

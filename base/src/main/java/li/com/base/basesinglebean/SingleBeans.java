@@ -237,7 +237,6 @@ public class SingleBeans {
     }
 
     public String getCityID() {
-
         String cityID = "";
         if (city1.equals("")) {
             if (city2.equals("")) {
@@ -295,6 +294,40 @@ public class SingleBeans {
         return city3Name;
     }
 
+
+    public String getCityName() {
+        String cityName = "";
+        if (city1.equals("")) {
+            if (city2.equals("")) {
+                if (city3.equals("")) {
+
+                } else {
+                    cityName = city3Name;
+                }
+            } else {
+                if (city3.equals("")) {
+                    cityName = city2Name;
+                } else {
+                    cityName = city2Name + "," + city3Name;
+                }
+            }
+        } else {
+            if (city2.equals("")) {
+                if (city3.equals("")) {
+                    cityName = city1Name;
+                } else {
+                    cityName = city1Name + "," + city3Name;
+                }
+            } else {
+                if (city3.equals("")) {
+                    cityName = city1Name + "," + city2Name;
+                } else {
+                    cityName = city1Name + "," + city2Name + "," + city3Name;
+                }
+            }
+        }
+        return cityName;
+    }
     List<RandStrBean> randStrBeans;
 
     public List<RandStrBean> getRandStrBeans() {

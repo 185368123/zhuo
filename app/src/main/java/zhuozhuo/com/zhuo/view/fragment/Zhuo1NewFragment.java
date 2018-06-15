@@ -107,6 +107,7 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
     private ImageView ll_prize_hide;
     private List<String> names;
     private List<Fragment> mNewsFragmentList;
+    private LinearLayout ll_;
 
     public class MyThread extends Thread {
         @Override
@@ -118,7 +119,6 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
             randStrPresenter.getRandStr();
         }
     }
-
 
     @Override
     protected int getLayoutResource() {
@@ -138,6 +138,7 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
         randStrPresenter.setVM(randStrModel, null);
         new MyThread().run();
 
+        ll_ = view.findViewById(R.id.ll_zhuo1_new);
         vp = view.findViewById(R.id.vp_zhuo1_new);
         tv_unread = (TextView) view.findViewById(R.id.tv_unread_num);
         tv_service = view.findViewById(R.id.tv_service_new);
@@ -185,9 +186,10 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
                 startActivityForResult(intent, CHAT);
             }
         });
+
         rv.setAdapter(recycleAdapter);
         activity = (MainActivity) getActivity();
-        activity.menu.addIgnoredView(vp);
+        activity.menu.addIgnoredView(ll_);
 
         tv_service.setOnClickListener(this);
         frameLayout_chat.setOnClickListener(this);
@@ -202,7 +204,7 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
 
         vp.setOffscreenPageLimit(4);
 
-        if (SingleBeans.getInstance().getVisonBean()!=null&&SingleBeans.getInstance().getVisonBean().getStr_type().equals("1")) {
+        if (SingleBeans.getInstance().getVisonBean() != null && SingleBeans.getInstance().getVisonBean().getStr_type().equals("1")) {
             ll_prize.setVisibility(View.VISIBLE);
         } else {
             ll.setVisibility(View.GONE);
@@ -252,14 +254,16 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
                 if (countDownUtils1 != null) {
                     countDownUtils1.deletCallBack();
                 }
-                ToastUitl.showLong("匹配成功");
-                Timer timer = new Timer();
-                timer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        gochat();
-                    }
-                }, 1000);
+                if (SingleBeans.getInstance().getStatu().equals("0")) {
+                    ToastUitl.showLong("匹配成功");
+                    Timer timer = new Timer();
+                    timer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            gochat();
+                        }
+                    }, 1000);
+                }
             }
         });
         mRxManager.on("match_line", new Action1<String>() {
@@ -320,10 +324,10 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
             tv1.setText(userName);
         }
         if (!location.equals("")) {
-            tv2.setText("信息：" + location);
+            tv2.setText(location);
         }
         if (hobby != null) {
-            tv3.setText("日常：" + hobby);
+            tv3.setText( hobby);
         }
         if (sex != null) {
             if (sex.equals("1")) {
@@ -352,6 +356,9 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
     }
 
     public void skipMatch() {
+        if (simpleVideo.getCurrentState()==SimpleVideo.CURRENT_STATE_PLAYING){
+            simpleVideo.getStartButton().performClick();
+        }
         mPresenter.matchBegin(SingleBeans.getInstance().getChoose_id(), SingleBeans.getInstance().getMatch_type(), "0", SingleBeans.getInstance().getCityID(), SingleBeans.getInstance().getLocation_id());
     }
 
@@ -367,20 +374,33 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
                 activity.showMenu();
                 break;
             case R.id.iv_cancle_zhuo1_:
+                if (simpleVideo.getCurrentState()==SimpleVideo.CURRENT_STATE_PLAYING){
+                    simpleVideo.getStartButton().performClick();
+                }
                 mPresenter.matchCancle(SingleBeans.getInstance().getChoose_id(), "0");
                 break;
             case R.id.button_receive_zhuo1_:
                 button_receive.setClickable(false);
                 button_receive.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.skip_button_maincolor_shape));
-                mPresenter.matchAccept(SingleBeans.getInstance().getChoose_id(), useId, other_party_id, is_status);
+                if (SingleBeans.getInstance().getMatch_type().equals("1")) {
+                    mPresenter.matchAccept(SingleBeans.getInstance().getChoose_id(), useId, other_party_id, is_status, SingleBeans.getInstance().getCityName(), SingleBeans.getInstance().getLocation());
+                } else if (SingleBeans.getInstance().getMatch_type().equals("2")) {
+                    mPresenter.matchAccept(SingleBeans.getInstance().getChoose_id(), useId, other_party_id, is_status, "", "");
+                }
                 break;
             case R.id.button_skip_zhuo1_:
                 skipMatch();
                 break;
             case R.id.button_save_zhuo1_:
+                if (simpleVideo.getCurrentState()==SimpleVideo.CURRENT_STATE_PLAYING){
+                    simpleVideo.getStartButton().performClick();
+                }
                 startActivityForResult(RemarkActivity.class, 1634);
                 break;
             case R.id.iv_cancle_zhuo1_2:
+                if (simpleVideo.getCurrentState()==SimpleVideo.CURRENT_STATE_PLAYING){
+                    simpleVideo.getStartButton().performClick();
+                }
                 mPresenter.matchCancle(SingleBeans.getInstance().getChoose_id(), "0");
                 break;
             case R.id.iv_see_prize:
@@ -397,7 +417,7 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
                 break;
             case R.id.iv_see_prize_msg:
                 ll_prize_show.setVisibility(View.VISIBLE);
-                tv_prize_msg.setText(Html.fromHtml(SingleBeans.getInstance().getVisonBean().getVersion_type().replace("/n", "<br />").replace("3666","<font color='#f76243'>3666</font>")));
+                tv_prize_msg.setText(Html.fromHtml(SingleBeans.getInstance().getVisonBean().getVersion_type().replace("/n", "<br />").replace("3666", "<font color='#f76243'>3666</font>")));
                 break;
             case R.id.ll_prize_hide:
                 ll_prize_show.setVisibility(View.GONE);
@@ -535,7 +555,7 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
     }
 
     @Override
-    public void returnSuggestFriend(List<SuggestFriendBean> suggestFriends) {
+    public void returnSuggestFriend(SuggestFriendBean suggestFriends) {
 
     }
 }

@@ -4,9 +4,12 @@ import li.com.base.basesinglebean.GroupStatusBean;
 
 import com.hyphenate.chatuidemo.my.UserListBean;
 import com.hyphenate.chatuidemo.my.bean.AllArticleBean;
+
 import li.com.base.basesinglebean.CitiesSingBean;
+
 import com.hyphenate.chatuidemo.my.bean.CupMemberBean;
 import com.hyphenate.chatuidemo.my.bean.CupTeamBean;
+import com.hyphenate.chatuidemo.my.bean.FriendsCollegeBean;
 import com.hyphenate.chatuidemo.my.bean.GroupChoicesBean;
 import com.hyphenate.chatuidemo.my.bean.IntegralBean;
 import com.hyphenate.chatuidemo.my.bean.IsRemarkBean;
@@ -486,29 +489,31 @@ public interface ApiService {
     @FormUrlEncoded
     @POST(UrlConstant.NewMatchBegin_URL)
     Observable<BaseRespose<List<Object>>> matchBegin_new(@Field("token") String token,
-                                                   @Field("choice_id") String choice_id,
-                                                   @Field("user_sex") String user_sex,
-                                                   @Field("dest_sex") String dest_sex,
-                                                   @Field("type") String type,
-                                                   @Field("status") String status,
-                                                   @Field("destination") String destination,
-                                                   @Field("location") String location);
+                                                         @Field("choice_id") String choice_id,
+                                                         @Field("user_sex") String user_sex,
+                                                         @Field("dest_sex") String dest_sex,
+                                                         @Field("type") String type,
+                                                         @Field("status") String status,
+                                                         @Field("destination") String destination,
+                                                         @Field("location") String location);
 
     //接受主题匹配
     @FormUrlEncoded
     @POST(UrlConstant.NewMatchAccept_URL)
     Observable<BaseRespose<List<Object>>> matchAccept_new(@Field("token") String token,
-                                                   @Field("choice_id") String choice_id,
-                                                   @Field("you_user_id") String you_user_id,
-                                                   @Field("other_party_id") String other_party_id,
-                                                   @Field("is_status") String is_status);
+                                                          @Field("choice_id") String choice_id,
+                                                          @Field("you_user_id") String you_user_id,
+                                                          @Field("other_party_id") String other_party_id,
+                                                          @Field("is_status") String is_status,
+                                                          @Field("destination") String destination,
+                                                          @Field("location") String location);
 
     //取消主题匹配
     @FormUrlEncoded
     @POST(UrlConstant.NewMatchCancle_URL)
     Observable<BaseRespose<List<Object>>> matchCancle_new(@Field("token") String token,
-                                                    @Field("choice_id") String choice_id,
-                                                    @Field("status") String status);
+                                                          @Field("choice_id") String choice_id,
+                                                          @Field("status") String status);
 
     //获取所有城市列表
     @FormUrlEncoded
@@ -518,8 +523,9 @@ public interface ApiService {
     //获取推荐好友列表
     @FormUrlEncoded
     @POST(UrlConstant.GetSuggest_URL)
-    Observable<BaseRespose<List<SuggestFriendBean>>> getSuggestFriend(@Field("token") String token,
-                                                                @Field("you_user_id") String you_user_id);
+    Observable<SuggestFriendBean> getSuggestFriend(@Field("token") String token,
+                                                   @Field("you_user_id") String you_user_id,
+                                                   @Field("school") String school);
 
     //查看对方是否已评价
     @FormUrlEncoded
@@ -527,8 +533,15 @@ public interface ApiService {
     Observable<BaseRespose<IsRemarkBean>> isEvaluate(@Field("token") String token,
                                                      @Field("you_user_id") String you_user_id);
 
-    //获取推荐用户
+    //获取抽奖码
     @FormUrlEncoded
     @POST(UrlConstant.GetRandStr_URL)
     Observable<BaseRespose<List<RandStrBean>>> getRandStr(@Field("token") String token);
+
+    //获取学校信息
+    @FormUrlEncoded
+    @POST(UrlConstant.GetCollege_URL)
+    Observable<BaseRespose<FriendsCollegeBean>> getCollege(@Field("token") String token,
+                                              @Field("you_user_id") String you_user_id,
+                                              @Field("school") String school);
 }

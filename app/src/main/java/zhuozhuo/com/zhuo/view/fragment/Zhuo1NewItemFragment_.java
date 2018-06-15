@@ -186,7 +186,7 @@ public class Zhuo1NewItemFragment_ extends BaseFragment<Zhuo1FragmentNewPresente
     }
 
     @Override
-    public void returnSuggestFriend(List<SuggestFriendBean> suggestFriends) {
+    public void returnSuggestFriend(SuggestFriendBean suggestFriends) {
 
     }
 }

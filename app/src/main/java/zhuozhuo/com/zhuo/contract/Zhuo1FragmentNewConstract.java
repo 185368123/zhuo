@@ -1,5 +1,7 @@
 package zhuozhuo.com.zhuo.contract;
 
+import com.hyphenate.chatuidemo.my.bean.FriendsCollegeBean;
+
 import li.com.base.basesinglebean.CitiesSingBean;
 
 import java.util.List;
@@ -8,7 +10,6 @@ import li.com.base.base.BaseModel;
 import li.com.base.base.BasePresenter;
 import li.com.base.base.BaseView;
 import li.com.base.basesinglebean.MatchPersonBean;
-import li.com.base.basesinglebean.RandStrBean;
 import li.com.base.basesinglebean.SingleChooseBean;
 import li.com.base.basesinglebean.SingleChooseDetailBean;
 import li.com.base.basesinglebean.SingleStatusBean;
@@ -29,7 +30,7 @@ public interface Zhuo1FragmentNewConstract {
 
         Observable<List<Object>> matchBegin(String token,String choice_id,String user_sex,String dest_sex,String type,String status,String destination,String location);
 
-        Observable<List<Object>> matchAccept(String token,String choice_id,String you_user_id,String other_party_id,String is_status);
+        Observable<List<Object>> matchAccept(String token,String choice_id,String you_user_id,String other_party_id,String is_status,String destination,String location);
 
         Observable<List<Object>> matchCancle(String token,String choice_id,String status);
 
@@ -41,10 +42,7 @@ public interface Zhuo1FragmentNewConstract {
 
         Observable<List<CitiesSingBean>> getAllCities(String token);
 
-        Observable<List<SuggestFriendBean>> getSuggestFriend(String token,String you_user_id);
-
-
-
+        Observable<SuggestFriendBean> getSuggestFriend(String token,String you_user_id,String school);
     }
 
     interface View extends BaseView {
@@ -63,9 +61,7 @@ public interface Zhuo1FragmentNewConstract {
 
         void returnSingleStatus(SingleStatusBean singleStatusBean);
 
-        void returnSuggestFriend(List<SuggestFriendBean> suggestFriends);
-
-
+        void returnSuggestFriend(SuggestFriendBean suggestFriends);
 
     }
 
@@ -76,7 +72,7 @@ public interface Zhuo1FragmentNewConstract {
 
         public abstract void matchBegin(String choice_id,String type,String status,String destination,String location);
 
-        public abstract void matchAccept(String choice_id,String you_user_id,String other_party_id,String is_status);
+        public abstract void matchAccept(String choice_id,String you_user_id,String other_party_id,String is_status,String destination,String location);
 
         public abstract void matchCancle(String choice_id,String status);
 
@@ -89,7 +85,5 @@ public interface Zhuo1FragmentNewConstract {
         public abstract void getAllCities();
 
         public abstract void getSuggestFriend(String you_user_id);
-
-
     }
 }

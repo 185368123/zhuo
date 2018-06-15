@@ -127,6 +127,7 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
                                 DBOpenHelp.getDBOpenHelp().selectByUserId(username);
                                 runOnUiThread(new Runnable() {
                                     public void run() {
+                                        bt_add_friend.setVisibility(View.GONE);
                                         progressDialog.dismiss();
                                         String s1 = getResources().getString(R.string.send_successful);
                                         Toast.makeText(getApplicationContext(), s1, Toast.LENGTH_LONG).show();
