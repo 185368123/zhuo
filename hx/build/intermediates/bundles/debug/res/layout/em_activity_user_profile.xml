@@ -423,12 +423,22 @@
                 android:id="@+id/bt_add_friend"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:layout_margin="20dp"
+                android:layout_margin="10dp"
                 android:background="@drawable/button_selector"
                 android:gravity="center"
                 android:text="加为好友"
                 android:textColor="@color/white"
                 android:visibility="gone" />
+
+            <Button
+                android:id="@+id/bt_join_group"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/button_selector"
+                android:gravity="center"
+                android:text="匿名跟随"
+                android:textColor="@color/white" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

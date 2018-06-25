@@ -57,9 +57,14 @@ public class LoginWeiXinActivity extends BaseActivity<WeiXinLoginModel, WeiXinLo
         button_phonelogin.setOnClickListener(this);
 
         MainApplication.getInstance().addActivity(this);
-        if (SingleBeans.getInstance().getVisonBean().getPhone().getImage_url()!=null){
-            Glide.with(this).load(SingleBeans.getInstance().getVisonBean().getPhone().getImage_url()).into(iv_login);
+        try {
+            if (SingleBeans.getInstance().getVisonBean().getPhone()!=null){
+                Glide.with(this).load(SingleBeans.getInstance().getVisonBean().getPhone().getImage_url()).into(iv_login);
+            }
+        }catch (NullPointerException c){
+            Glide.with(this).load(R.drawable.logingbackground).into(iv_login);
         }
+
     }
 
     public void onClick(View view) {

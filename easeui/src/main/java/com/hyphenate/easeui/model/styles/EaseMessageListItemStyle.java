@@ -11,6 +11,7 @@ public class EaseMessageListItemStyle {
     private boolean showAvatar;
     private Drawable myBubbleBg;
     private Drawable otherBubbleBg;
+    private String groupID;
 
     public EaseMessageListItemStyle(Builder builder){
         showUserNick = builder.showUserNick;
@@ -51,6 +52,13 @@ public class EaseMessageListItemStyle {
         this.otherBubbleBg = otherBubbleBg;
     }
 
+    public void setGroupID(String groupID) {
+        this.groupID = groupID;
+    }
+
+    public String getGroupID() {
+        return groupID;
+    }
 
     public static final class Builder{
         private boolean showUserNick;

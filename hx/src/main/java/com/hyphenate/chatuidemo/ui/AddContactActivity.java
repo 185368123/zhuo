@@ -140,6 +140,7 @@ public class AddContactActivity extends BaseActivity implements SearchUserConstr
 				new EaseAlertDialog(this, R.string.Please_enter_a_username).show();
 				return;
 			}
+			list.clear();
 			searchUserPresenter.searchUser(index+"",name);
 		} 
 	}	

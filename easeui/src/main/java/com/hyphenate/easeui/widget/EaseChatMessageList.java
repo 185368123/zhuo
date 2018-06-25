@@ -133,6 +133,21 @@ public class EaseChatMessageList extends RelativeLayout{
         return itemStyle.isShowUserNick();
     }
 
+    public void setShowAvatar(boolean showAvatar){
+        itemStyle.setShowAvatar(showAvatar);
+    }
+
+    public boolean isShowAvatar(){
+        return itemStyle.isShowAvatar();
+    }
+
+    public void setGroupID(String groupID){
+        itemStyle.setGroupID(groupID);
+    }
+
+    public String getGroupID(){
+        return itemStyle.getGroupID();
+    }
 
     public interface MessageListItemClickListener{
 	    void onResendClick(EMMessage message);

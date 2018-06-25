@@ -11,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMFileMessageBody;
 import com.hyphenate.chat.EMImageMessageBody;
 import com.hyphenate.chat.EMMessage;
@@ -93,6 +94,7 @@ public class EaseChatRowImage extends EaseChatRowFile{
 
         Intent intent = new Intent(context, EaseShowBigImageActivity.class);
         File file = new File(imgBody.getLocalUrl());
+        intent.putExtra("msg", message);
         if (file.exists()) {
             Uri uri = Uri.fromFile(file);
             intent.putExtra("uri", uri);
@@ -113,6 +115,8 @@ public class EaseChatRowImage extends EaseChatRowFile{
             }
         }
         context.startActivity(intent);
+
+
     }
 
     /**

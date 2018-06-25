@@ -5,6 +5,7 @@ import com.hyphenate.chatuidemo.my.constract.GetUserMsgConstract;
 import com.hyphenate.chatuidemo.my.bean.UserMsgBean;
 import java.util.List;
 import li.com.base.baserx.RxSubscriber;
+import li.com.base.baseuntils.LogUtils;
 
 /**
  * Created by Administrator on 2018/3/27.

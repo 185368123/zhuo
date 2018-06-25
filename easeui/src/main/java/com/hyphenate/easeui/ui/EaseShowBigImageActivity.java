@@ -20,6 +20,7 @@ import java.util.Map;
 
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.R;
 import com.hyphenate.easeui.model.EaseImageCache;
@@ -45,11 +46,11 @@ import android.view.ViewConfiguration;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
+import li.com.base.baserx.RxManager;
 import li.com.base.baseuntils.LogUtils;
 
 /**
  * download and show original image
- *
  */
 public class EaseShowBigImageActivity extends EaseBaseActivity {
     private static final String TAG = "ShowBigImage";
@@ -72,6 +73,7 @@ public class EaseShowBigImageActivity extends EaseBaseActivity {
         Uri uri = getIntent().getParcelableExtra("uri");
         localFilePath = getIntent().getExtras().getString("localUrl");
         String msgId = getIntent().getExtras().getString("messageId");
+        final EMMessage message = getIntent().getParcelableExtra("msg");
         EMLog.d(TAG, "show big msgId:" + msgId);
 
         //show the image if it exist in local path
@@ -108,8 +110,6 @@ public class EaseShowBigImageActivity extends EaseBaseActivity {
 
     /**
      * download image
-     *
-     * @param remoteFilePath
      */
     @SuppressLint("NewApi")
     private void downloadImage(final String msgId) {

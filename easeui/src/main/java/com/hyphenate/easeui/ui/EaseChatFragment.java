@@ -83,6 +83,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import li.com.base.baseuntils.LogUtils;
 import li.com.base.baseuntils.ToastUitl;
 
 /**
@@ -191,6 +192,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     protected LinearLayout ll_tag;
     protected StaggeredGridLayoutManager glm;
     protected TextView bt_start;
+    protected boolean isAnonymityGroup=false;//匿名群的标记
 
 
 
@@ -282,6 +284,8 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         messageList = (EaseChatMessageList) getView().findViewById(R.id.message_list);
         if (chatType != EaseConstant.CHATTYPE_SINGLE)
             messageList.setShowUserNick(true);
+
+
 //        messageList.setAvatarShape(1);
         listView = messageList.getListView();
 
@@ -416,7 +420,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         // the number of messages loaded into conversation is getChatOptions().getNumberOfMessagesLoaded
         // you can change this number
 
-        if (!isRoaming) {
+        if (!isRoaming) {//不是漫游消息
             final List<EMMessage> msgs = conversation.getAllMessages();
             int msgCount = msgs != null ? msgs.size() : 0;
             if (msgCount < conversation.getAllMsgCount() && msgCount < pagesize) {
@@ -472,8 +476,8 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         messageList.setItemClickListener(new EaseChatMessageList.MessageListItemClickListener() {
             @Override
             public void onUserAvatarClick(String username) {
-                if (chatFragmentHelper != null) {
-                    chatFragmentHelper.onAvatarClick(username);
+                    if (chatFragmentHelper != null) {
+                        chatFragmentHelper.onAvatarClick(username);
                 }
             }
 
@@ -722,6 +726,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     // implement methods in EMMessageListener
     @Override
     public void onMessageReceived(List<EMMessage> messages) {
+        LogUtils.logd("收到消息数量："+messages.size());
         for (EMMessage message : messages) {
             String username = null;
             // group message
@@ -832,7 +837,6 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
                     break;
             }
         }
-
     }
 
     /**

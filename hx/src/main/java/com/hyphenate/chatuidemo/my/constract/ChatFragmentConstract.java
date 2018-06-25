@@ -1,5 +1,6 @@
 package com.hyphenate.chatuidemo.my.constract;
 
+import com.hyphenate.chatuidemo.my.bean.GroupTypeBean;
 import com.hyphenate.chatuidemo.my.bean.IsRemarkBean;
 import com.hyphenate.chatuidemo.my.bean.TagBean;
 import com.hyphenate.easeui.HundredCupBean;
@@ -37,6 +38,10 @@ public interface ChatFragmentConstract {
         Observable<List<Object>> getRandom(String token, String you_user_id, String choice_id);
 
         Observable<IsRemarkBean> isEvaluate(String token, String you_user_id);
+
+        Observable<GroupTypeBean> getGroupType(String token, String group_id);
+
+        Observable<Object> groupSignOut(String token, String group_id,String you_user_id);
     }
 
     interface View extends BaseView {
@@ -56,6 +61,10 @@ public interface ChatFragmentConstract {
         void returnTag(TagBean tagBean);
 
         void getIsEvaluateSucess(IsRemarkBean isRemarkBean);
+
+        void returnGroupType(GroupTypeBean groupTypeBean);
+
+        void groupSignOutSucess();
 
     }
 
@@ -82,5 +91,9 @@ public interface ChatFragmentConstract {
         public abstract void getRandom(String you_user_id,String choice_id);
 
         public abstract void isEvaluate(String you_user_id);
+
+        public abstract void getGroupType(String group_id);
+
+        public abstract void groupSignOut(String group_id,String you_user_id);
     }
 }

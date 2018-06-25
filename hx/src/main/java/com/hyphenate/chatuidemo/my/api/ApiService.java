@@ -11,8 +11,10 @@ import com.hyphenate.chatuidemo.my.bean.CupMemberBean;
 import com.hyphenate.chatuidemo.my.bean.CupTeamBean;
 import com.hyphenate.chatuidemo.my.bean.FriendsCollegeBean;
 import com.hyphenate.chatuidemo.my.bean.GroupChoicesBean;
+import com.hyphenate.chatuidemo.my.bean.GroupTypeBean;
 import com.hyphenate.chatuidemo.my.bean.IntegralBean;
 import com.hyphenate.chatuidemo.my.bean.IsRemarkBean;
+import com.hyphenate.chatuidemo.my.bean.JoinGroupBean;
 import com.hyphenate.chatuidemo.my.bean.RaceBean;
 import com.hyphenate.chatuidemo.my.bean.SaveMatchBean;
 import com.hyphenate.chatuidemo.my.bean.SuggestTagBean;
@@ -43,6 +45,8 @@ import li.com.base.basesinglebean.SingleChooseDetailBean;
 import li.com.base.basesinglebean.SingleStatusBean;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import rx.Observable;
 
@@ -542,6 +546,28 @@ public interface ApiService {
     @FormUrlEncoded
     @POST(UrlConstant.GetCollege_URL)
     Observable<BaseRespose<FriendsCollegeBean>> getCollege(@Field("token") String token,
-                                              @Field("you_user_id") String you_user_id,
-                                              @Field("school") String school);
+                                                           @Field("you_user_id") String you_user_id,
+                                                           @Field("school") String school);
+
+    //申请加入匿名群
+    @FormUrlEncoded
+    @POST(UrlConstant.JoinUserGroup_URL)
+    Observable<BaseRespose<JoinGroupBean>> joinUserGroup(@Field("token") String token,
+                                                         @Field("nick_name") String nick_name,
+                                                         @Field("you_user_id") String you_user_id);
+
+
+    //群主逐出用户
+    @FormUrlEncoded
+    @POST(UrlConstant.GroupSignOut_URL)
+    Observable<BaseRespose<Object>> groupSignOut(@Field("token") String token,
+                                                     @Field("group_id") String group_id,
+                                                     @Field("you_user_id") String you_user_id);
+
+
+    //获取群的类型
+    @FormUrlEncoded
+    @POST(UrlConstant.GetGroupType_URL)
+    Observable<BaseRespose<GroupTypeBean>> getGroupType(@Field("token") String token,
+                                                        @Field("group_id") String group_id);
 }

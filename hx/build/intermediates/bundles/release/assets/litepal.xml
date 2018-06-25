@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <dbname value="user" ></dbname>
+
+    <version value="5" ></version>
+    <list>
+        <mapping class="com.hyphenate.chatuidemo.my.bean.UserDB"></mapping>
+    </list>
+</litepal>

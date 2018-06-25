@@ -2,6 +2,7 @@ package com.hyphenate.easeui.widget.chatrow;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.BaseAdapter;
@@ -124,11 +125,22 @@ public abstract class EaseChatRow extends LinearLayout {
         if(userAvatarView != null) {
             //set nickname and avatar
             if (message.direct() == Direct.SEND) {
-                EaseUserUtils.setUserAvatar(context, EMClient.getInstance().getCurrentUser(), userAvatarView);
-                EaseUserUtils.setUserNick(EMClient.getInstance().getCurrentUser(), usernickView);
+                if (itemStyle.isShowAvatar()||(itemStyle.getGroupID()!=null&&itemStyle.getGroupID().equals(message.getFrom()))){
+                    EaseUserUtils.setUserAvatar(context, EMClient.getInstance().getCurrentUser(), userAvatarView);
+                    EaseUserUtils.setUserNick(EMClient.getInstance().getCurrentUser(), usernickView);
+                }else {
+                        userAvatarView.setImageResource(R.drawable.peopleallphoto);
+                        usernickView.setText("匿名");
+                }
             } else {
-                EaseUserUtils.setUserAvatar(context, message.getFrom(), userAvatarView);
-                EaseUserUtils.setUserNick(message.getFrom(), usernickView);
+                if (itemStyle.isShowAvatar()||(itemStyle.getGroupID()!=null&&itemStyle.getGroupID().equals(message.getFrom()))){
+                    EaseUserUtils.setUserAvatar(context, message.getFrom(), userAvatarView);
+                    EaseUserUtils.setUserNick(message.getFrom(), usernickView);
+                }else {
+                    userAvatarView.setImageResource(R.drawable.peopleallphoto);
+                    usernickView.setText("匿名");
+                }
+
             }
         }
         if(deliveredView != null){
@@ -152,7 +164,7 @@ public abstract class EaseChatRow extends LinearLayout {
 
         if (itemStyle != null) {
             if (userAvatarView != null) {
-                if (itemStyle.isShowAvatar()) {
+                if (itemStyle.isShowAvatar()||(itemStyle.getGroupID()!=null&&itemStyle.getGroupID().equals(message.getFrom()))) {
                     userAvatarView.setVisibility(View.VISIBLE);
                     EaseAvatarOptions avatarOptions = EaseUI.getInstance().getAvatarOptions();
                     if(avatarOptions != null && userAvatarView instanceof EaseImageView){
@@ -167,14 +179,29 @@ public abstract class EaseChatRow extends LinearLayout {
                             avatarView.setRadius(avatarOptions.getAvatarRadius());
                     }
                 } else {
-                    userAvatarView.setVisibility(View.GONE);
+                    userAvatarView.setVisibility(View.VISIBLE);
+                    userAvatarView.setImageResource(R.drawable.peopleallphoto);
+                    EaseAvatarOptions avatarOptions = EaseUI.getInstance().getAvatarOptions();
+                    if(avatarOptions != null && userAvatarView instanceof EaseImageView){
+                        EaseImageView avatarView = ((EaseImageView)userAvatarView);
+                        if(avatarOptions.getAvatarShape() != 0)
+                            avatarView.setShapeType(avatarOptions.getAvatarShape());
+                        if(avatarOptions.getAvatarBorderWidth() != 0)
+                            avatarView.setBorderWidth(avatarOptions.getAvatarBorderWidth());
+                        if(avatarOptions.getAvatarBorderColor() != 0)
+                            avatarView.setBorderColor(avatarOptions.getAvatarBorderColor());
+                        if(avatarOptions.getAvatarRadius() != 0)
+                            avatarView.setRadius(avatarOptions.getAvatarRadius());
+                    }
                 }
             }
             if (usernickView != null) {
-                if (itemStyle.isShowUserNick())
+                if (itemStyle.isShowAvatar()||(itemStyle.getGroupID()!=null&&itemStyle.getGroupID().equals(message.getFrom())))
                     usernickView.setVisibility(View.VISIBLE);
-                else
-                    usernickView.setVisibility(View.GONE);
+                else{
+                    usernickView.setVisibility(View.VISIBLE);
+                    usernickView.setText("匿名");
+                }
             }
             if (bubbleLayout != null) {
                 if (message.direct() == Direct.SEND) {

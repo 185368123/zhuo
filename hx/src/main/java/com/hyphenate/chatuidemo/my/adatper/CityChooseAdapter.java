@@ -1,10 +1,12 @@
 package com.hyphenate.chatuidemo.my.adatper;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hyphenate.chatuidemo.R;
@@ -82,6 +84,7 @@ public class CityChooseAdapter extends BaseAdapter implements StickyListHeadersA
         //设置数据
         viewHolder.tv.setText(cities.get(position).getFirstLetter());
 
+
         return convertView;
     }
 
@@ -122,13 +125,20 @@ public class CityChooseAdapter extends BaseAdapter implements StickyListHeadersA
             holder = (ViewHolder) convertView.getTag();
         }
         holder.tv.setText(cities.get(position).getClassName());
+        if (cities.get(position).isFlag()){
+            holder.ll.setBackgroundResource(R.color.main_color);
+        }else {
+            holder.ll.setBackgroundColor(Color.WHITE);
+        }
         return convertView;
     }
 
     class ViewHolder {
         TextView tv;
+        LinearLayout ll;
         public ViewHolder(View view) {
             tv = (TextView) view.findViewById(R.id.tv_city_name);
+            ll= (LinearLayout) view.findViewById(R.id.ll_city_name);
         }
 
     }

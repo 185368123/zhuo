@@ -45,12 +45,12 @@ public class LocationChangeActivity extends BaseActivity<ChangeMsgModel,ChangeMs
     private RecyclerView rv;
     private boolean isFirst=false;
 
-
     //声明控件
     StickyListHeadersListView stickyList;
     EditText et_search;
     SlidingLetter slidingLetter;
     TextView tv_letter;
+
     //学院数据源
     List<ClassBean> data = new ArrayList<>();
     List<Boolean> flags = new ArrayList<>();

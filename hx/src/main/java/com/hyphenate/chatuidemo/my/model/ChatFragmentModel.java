@@ -2,6 +2,7 @@ package com.hyphenate.chatuidemo.my.model;
 
 import com.hyphenate.chatuidemo.my.api.Api;
 import com.hyphenate.chatuidemo.my.api.HostType;
+import com.hyphenate.chatuidemo.my.bean.GroupTypeBean;
 import com.hyphenate.chatuidemo.my.bean.IsRemarkBean;
 import com.hyphenate.chatuidemo.my.bean.TagBean;
 import com.hyphenate.easeui.HundredCupBean;
@@ -95,6 +96,22 @@ public class ChatFragmentModel implements ChatFragmentConstract.Model{
                 .isEvaluate(token, you_user_id)
                 .compose(RxSchedulers.<BaseRespose<IsRemarkBean>>io_main())
                 .compose(RxHelper.<IsRemarkBean>handleResult());
+    }
+
+    @Override
+    public Observable<GroupTypeBean> getGroupType(String token, String group_id) {
+        return Api.getDefault(HostType.INCLUE_COOKIE)
+                .getGroupType(token, group_id)
+                .compose(RxSchedulers.<BaseRespose<GroupTypeBean>>io_main())
+                .compose(RxHelper.<GroupTypeBean>handleResult());
+    }
+
+    @Override
+    public Observable<Object> groupSignOut(String token, String group_id, String you_user_id) {
+        return Api.getDefault(HostType.INCLUE_COOKIE)
+                .groupSignOut(token, group_id, you_user_id)
+                .compose(RxSchedulers.<BaseRespose<Object>>io_main())
+                .compose(RxHelper.handleResult());
     }
 
 }

@@ -89,7 +89,7 @@ public class SingleBeans {
     private VisonBean visonBean;
 
     public VisonBean getVisonBean() {
-        return visonBean;
+        return visonBean==null?new VisonBean():visonBean;
     }
 
     public void setVisonBean(VisonBean visonBean) {
@@ -328,6 +328,8 @@ public class SingleBeans {
         }
         return cityName;
     }
+
+
     List<RandStrBean> randStrBeans;
 
     public List<RandStrBean> getRandStrBeans() {

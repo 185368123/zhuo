@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMVideoMessageBody;
 import com.hyphenate.easeui.R;
@@ -50,14 +51,15 @@ public class EaseShowVideoActivity extends EaseBaseActivity{
 		}
 		EMVideoMessageBody messageBody = (EMVideoMessageBody)message.getBody();
 
+		// 消息所属会话
+		//EMConversation conversation = EMClient.getInstance().chatManager().getConversation(message.getFrom(), EMConversation.EMConversationType.Chat, true);
+		//conversation.removeMessage(message.getMsgId());
+
 		localFilePath = messageBody.getLocalUrl();
 
 		if (localFilePath != null && new File(localFilePath).exists()) {
 			Intent intent = new Intent(this, MsgVideoPlayActivity.class);
 			intent.putExtra("url",localFilePath);
-		/*	Intent intent = new Intent(Intent.ACTION_VIEW);
-			intent.setDataAndType(Uri.fromFile(new File(localFilePath)),
-					"video/mp4");*/
 			startActivity(intent);
 			finish();
 		} else {

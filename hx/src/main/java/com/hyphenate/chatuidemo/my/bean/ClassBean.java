@@ -16,7 +16,9 @@ public class ClassBean {
 
     private String classID;
     //是否被选中
-    private boolean flag;
+    private boolean flag=false;
+
+
     public ClassBean(String letter, int id, String className,String classNamePY) {
         this.firstLetter=letter;
         this.letterId=id;

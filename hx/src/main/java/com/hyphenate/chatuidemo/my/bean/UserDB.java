@@ -39,6 +39,7 @@ public class UserDB extends DataSupport {
     private String hundred_level;
     private String line_num;
     private List<String> card;
+
     public String getAccount() {
         return account;
     }

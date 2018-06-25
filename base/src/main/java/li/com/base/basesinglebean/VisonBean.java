@@ -53,6 +53,9 @@ public class VisonBean {
     }
 
     public String getStr_type() {
+        if (str_type==null){
+            return "0";
+        }else
         return str_type;
     }
 

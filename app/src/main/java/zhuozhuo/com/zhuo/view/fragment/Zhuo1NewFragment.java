@@ -108,6 +108,8 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
     private List<String> names;
     private List<Fragment> mNewsFragmentList;
     private LinearLayout ll_;
+    private ImageView iv1;
+    private ImageView iv2;
 
     public class MyThread extends Thread {
         @Override
@@ -158,6 +160,8 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
         tv3 = view.findViewById(R.id.tv3_zhuo1_);
         tv4 = view.findViewById(R.id.tv4_zhuo1_);
         tv5 = view.findViewById(R.id.tv5_zhuo1_);
+        iv1 = view.findViewById(R.id.iv1_zhuo1_);
+        iv2 = view.findViewById(R.id.iv2_zhuo1_);
         ll_prize = view.findViewById(R.id.ll_prize);
         ll_prize_show = view.findViewById(R.id.ll_prize_show);
         iv_see_prize = view.findViewById(R.id.iv_see_prize);
@@ -245,6 +249,9 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
         mRxManager.on("match_accept", new Action1<String>() {//双方接受匹配
             @Override
             public void call(String s) {
+                if (simpleVideo.getCurrentState()==SimpleVideo.CURRENT_STATE_PLAYING){
+                    simpleVideo.getStartButton().performClick();
+                }
                 randStrPresenter.getRandStr();
                 mPresenter.getAllMatch();
                 ll.setVisibility(View.GONE);
@@ -274,6 +281,7 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
                     object = new JSONObject(s);
                     String type = object.getString("type");
                     if (type.equals("4000")) {
+                        mPresenter.getAllMatch();
                         if (SingleBeans.getInstance().getStatu().equals("0")) {
                             useId = object.getString("user_id");
                             String user_video = object.getString("user_video");
@@ -285,8 +293,6 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
                             other_party_id = object.getString("other_party_id");
                             SingleBeans.getInstance().setChoose_id(object.getString("choice_id"));
                             judge(useId, user_video, name, location, account, sex);
-                        } else if (SingleBeans.getInstance().getStatu().equals("66")) {
-                            mPresenter.getAllMatch();
                         }
                     } else if (type.equals("3000")) {
                         mPresenter.getAllMatch();
@@ -311,7 +317,6 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
     private void judge(String userId, String user_video, String userName, String location, String hobby, String sex) {//第一次匹配成功时候更改UI界面
         chronometer.stop();
         if (userId != null && !userId.equals("")) {
-            LogUtils.logd("userId" + userId + ";   name" + userName);
             useId = userId;
         }
         if (user_video != null) {
@@ -335,6 +340,13 @@ public class Zhuo1NewFragment extends BaseFragment<Zhuo1FragmentNewPresenter, Zh
             } else {
                 tv4.setText("女");
             }
+        }
+        if (SingleBeans.getInstance().getMatch_type()!=null&&SingleBeans.getInstance().getMatch_type().equals("1")){
+            iv1.setVisibility(View.VISIBLE);
+            iv2.setVisibility(View.VISIBLE);
+        }else {
+            iv1.setVisibility(View.GONE);
+            iv2.setVisibility(View.GONE);
         }
         layout_user.setVisibility(View.VISIBLE);
         ll.setVisibility(View.GONE);

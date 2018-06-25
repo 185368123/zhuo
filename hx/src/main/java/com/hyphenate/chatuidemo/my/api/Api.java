@@ -79,6 +79,7 @@ public class Api {
         File cacheFile = new File(BaseApplication.getAppContext().getCacheDir(), "cache");
         Cache cache = new Cache(cacheFile, 1024 * 1024 * 100); //100Mb
         Interceptor headerInterceptor;
+
         if (hostType==HostType.UNINCLUE_COOKIE){
             //增加头部信息
            headerInterceptor =new Interceptor() {

@@ -17,15 +17,20 @@ import com.hyphenate.chatuidemo.DemoHelper;
 import com.hyphenate.chatuidemo.R;
 import com.hyphenate.chatuidemo.UserMsgDBHelp;
 import com.hyphenate.chatuidemo.my.SimpleVideoActivity;
+import com.hyphenate.chatuidemo.my.bean.JoinGroupBean;
 import com.hyphenate.chatuidemo.my.bean.UserDB;
 import com.hyphenate.chatuidemo.my.bean.UserMsgBean;
 import com.hyphenate.chatuidemo.my.constract.GetUserMsgConstract;
+import com.hyphenate.chatuidemo.my.constract.UserProfileConstract;
+import com.hyphenate.chatuidemo.my.model.UserProfileModel;
+import com.hyphenate.chatuidemo.my.presenter.UserProfilePresenter;
 
 import java.util.List;
 
+import li.com.base.baseuntils.LogUtils;
 import li.com.base.baseuntils.ToastUitl;
 
-public class UserProfileActivity extends BaseActivity implements View.OnClickListener {
+public class UserProfileActivity extends BaseActivity implements View.OnClickListener, UserProfileConstract.View {
 
     private ImageView headAvatar;
     private TextView tvNickName;
@@ -43,9 +48,13 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
     private TextView tv_sex;
     protected String username;
     private Button bt_add_friend;
+    private Button bt_join_group;
     private ProgressDialog progressDialog;
     private LinearLayout ll_video;
     private UserDB userDB;
+    private UserProfilePresenter mPresenter;
+    private UserProfileModel mModel;
+    String userVideo;
 
 
     @Override
@@ -58,7 +67,7 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
         UserMsgDBHelp.getUserMsgDBHelp().updateMsg(username, new GetUserMsgConstract.View() {
             @Override
             public void returnUserMsg(UserMsgBean userMsgBean) {
-                userDB = UserMsgDBHelp.getUserMsgDBHelp().searchByUserId(username);
+                setView(username);
             }
 
             @Override
@@ -83,6 +92,7 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
         if (userDB != null) {
             Glide.with(this).load(userDB.getPhoto_link()).into(headAvatar);
             tvNickName.setText(userDB.getNick_name());
+            userVideo=userDB.getUser_video();
             if (userDB.getSex().equals("1")) {
                 tv_sex.setText("男");
             } else if (userDB.getSex().equals("2")) {
@@ -152,7 +162,36 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
                 bt_add_friend.setVisibility(View.GONE);
             }
         }
+         bt_join_group.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 if (userDB== null) {
+                     UserMsgDBHelp.getUserMsgDBHelp().updateMsg(username, new GetUserMsgConstract.View() {
+                         @Override
+                         public void returnUserMsg(UserMsgBean userMsgBean) {
+                             mPresenter.joinUserGroup(userMsgBean.getNick_name(),username);
+                         }
 
+                         @Override
+                         public void showLoading(String title) {
+
+                         }
+
+                         @Override
+                         public void stopLoading() {
+
+                         }
+
+                         @Override
+                         public void showErrorTip(String msg) {
+
+                         }
+                     });
+                 }else {
+                     mPresenter.joinUserGroup(userDB.getNick_name(),userDB.getUser_id());
+                 }
+             }
+         });
     }
 
     private void initView() {
@@ -171,9 +210,14 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
         tv_card8 = (TextView) findViewById(R.id.tv_card8);
         tv_card9 = (TextView) findViewById(R.id.tv_card9);
         bt_add_friend = (Button) findViewById(R.id.bt_add_friend);
+        bt_join_group = (Button) findViewById(R.id.bt_join_group);
         ll_video = (LinearLayout) findViewById(R.id.ll_video);
 
         ll_video.setOnClickListener(this);
+
+        mPresenter = new UserProfilePresenter();
+        mModel = new UserProfileModel();
+        mPresenter.setVM(mModel,this);
     }
 
 
@@ -182,9 +226,9 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
         int i = v.getId();
         if (i == R.id.ll_video) {
             try {
-                if (userDB.getUser_video() != null) {
+                if (userVideo != null) {
                     Intent intent = new Intent(this, SimpleVideoActivity.class);
-                    intent.putExtra("url", userDB.getUser_video());
+                    intent.putExtra("url", userVideo);
                     startActivity(intent);
                 } else {
                     ToastUitl.showLong("对方暂未设置视频，请稍后再试!");
@@ -194,6 +238,31 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
             }
 
         }
+    }
+
+    @Override
+    public void showLoading(String title) {
+
+    }
+
+    @Override
+    public void stopLoading() {
+
+    }
+
+    @Override
+    public void showErrorTip(String msg) {
+
+    }
+
+    @Override
+    public void joinUserGroupSucess(JoinGroupBean joinGroupBean) {
+        Intent intent = new Intent(this, ChatActivity.class);
+        intent.putExtra("userId",joinGroupBean.getGroup_id() );
+        intent.putExtra("hundred_id", "");
+        intent.putExtra("userName", joinGroupBean.getGroup_name());
+        intent.putExtra(com.hyphenate.chatuidemo.Constant.EXTRA_CHAT_TYPE, com.hyphenate.chatuidemo.Constant.CHATTYPE_GROUP);
+        startActivity(intent);
     }
 }
 

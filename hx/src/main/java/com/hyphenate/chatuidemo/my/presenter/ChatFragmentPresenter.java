@@ -1,5 +1,6 @@
 package com.hyphenate.chatuidemo.my.presenter;
 
+import com.hyphenate.chatuidemo.my.bean.GroupTypeBean;
 import com.hyphenate.chatuidemo.my.bean.IsRemarkBean;
 import com.hyphenate.chatuidemo.my.bean.TagBean;
 import com.hyphenate.easeui.HundredCupBean;
@@ -179,6 +180,36 @@ public class ChatFragmentPresenter extends ChatFragmentConstract.Presenter {
             @Override
             protected void _onNext(IsRemarkBean isRemarkBean) {
                 mView.getIsEvaluateSucess(isRemarkBean);
+            }
+
+            @Override
+            protected void _onError(String message) {
+
+            }
+        });
+    }
+
+    @Override
+    public void getGroupType(String group_id) {
+        mModel.getGroupType(UserInfoProvider.getToken(),group_id).subscribe(new RxSubscriber<GroupTypeBean>(mContext,false) {
+            @Override
+            protected void _onNext(GroupTypeBean groupTypeBean) {
+                 mView.returnGroupType(groupTypeBean);
+            }
+
+            @Override
+            protected void _onError(String message) {
+
+            }
+        });
+    }
+
+    @Override
+    public void groupSignOut(String group_id, String you_user_id) {
+        mModel.groupSignOut(UserInfoProvider.getToken(),group_id,you_user_id).subscribe(new RxSubscriber<Object>(mContext,false) {
+            @Override
+            protected void _onNext(Object o) {
+                mView.groupSignOutSucess();
             }
 
             @Override

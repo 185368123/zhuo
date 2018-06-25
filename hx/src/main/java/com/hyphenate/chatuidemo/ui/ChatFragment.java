@@ -54,6 +54,7 @@ import com.hyphenate.chatuidemo.my.InviteMemberActivity;
 import com.hyphenate.chatuidemo.my.SetTagActivity;
 import com.hyphenate.chatuidemo.my.TeamActivity;
 import com.hyphenate.chatuidemo.my.TeamMenuActivity;
+import com.hyphenate.chatuidemo.my.bean.GroupTypeBean;
 import com.hyphenate.chatuidemo.my.bean.IsRemarkBean;
 import com.hyphenate.chatuidemo.my.bean.TagBean;
 import com.hyphenate.easeui.HundredCupBean;
@@ -108,6 +109,7 @@ import java.util.Map;
 
 import li.com.base.baserx.RxManager;
 import li.com.base.basesinglebean.SingleChooseBean;
+import li.com.base.baseuntils.LogUtils;
 import li.com.base.baseuntils.ToastUitl;
 import rx.functions.Action1;
 
@@ -174,20 +176,22 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
     int startTime = 0;
     int stopTime = 0;
     public int num = 0;
+    private EMGroup group;
     public Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             try {
                 Change(num);  //改变背景色
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-                num++;                 //依次下一个
-                  //如果到了最后一个item，则循环
+            num++;                 //依次下一个
+            //如果到了最后一个item，则循环
             if (num >= 12) {
                 num = 0;
             }
         }
     };
+
     private TagBean tagBean_;
 
 
@@ -206,7 +210,6 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
 
     @Override
     protected void setUpView() {
-        mPresenter.isEvaluate(toChatUsername);
         setVisibility(View.GONE);
         hundred_bt.setOnClickListener(this);
         match_input.init();
@@ -267,26 +270,17 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
         });
         setChatFragmentHelper(this);
         if (chatType == Constant.CHATTYPE_SINGLE) {
-
+            mPresenter.isEvaluate(toChatUsername);
             Map<String, RobotUser> robotMap = DemoHelper.getInstance().getRobotList();
             if (robotMap != null && robotMap.containsKey(toChatUsername)) {
                 isRobot = true;
             }
             setVisibility(View.GONE);
             setNormal_input();
-           /* for (int j = 0; j < SingleBeans.getInstance().getMatchPersonBeans().size(); j++) {
-                if (SingleBeans.getInstance().getMatchPersonBeans().get(j).getUser_id().equals(toChatUsername)){
-                    buffer.append("{action: step,token: " + UserInfoProvider.getToken() + ", user_id:" + UserInfoProvider.getUserID() + ",you_user_id  :" + toChatUsername + ",new_step:123" + "}");
-                    sendSocketMsg();
-                }
-            }*/
-
             if (SingleBeans.getInstance().getMatchPersonBeans().size() > 0) {
                 for (int j = 0; j < SingleBeans.getInstance().getMatchPersonBeans().size(); j++) {
                     if (SingleBeans.getInstance().getMatchPersonBeans().get(j).isMe(toChatUsername)) {
                         isMatch = true;
-                        //setVisibility(View.VISIBLE);
-                        //setMatch_input();
                         break;
                     }
                 }
@@ -355,7 +349,17 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
         });
         ((EaseEmojiconMenu) inputMenu.getEmojiconMenu()).addEmojiconGroup(EmojiconExampleGroupData.getData());
         if (chatType == EaseConstant.CHATTYPE_GROUP) {
-            mPresenter.getDetail(toChatUsername);
+            mPresenter.getGroupType(toChatUsername);
+            messageList.setShowUserNick(false);
+            messageList.setShowAvatar(false);
+            messageList.refresh();
+            group = EMClient.getInstance().groupManager().getGroup(toChatUsername);
+
+            try {
+                messageList.setGroupID(group.getOwner());
+            }catch (NullPointerException e){
+
+            }
             inputMenu.getPrimaryMenu().getEditText().addTextChangedListener(new TextWatcher() {
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -595,7 +599,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
                 return;
             }
             startActivityForResult(
-                    (new Intent(getActivity(), GroupDetailsActivity.class).putExtra("groupId", toChatUsername)).putExtra("quitGroup", quitGroup),
+                    (new Intent(getActivity(), GroupDetailsActivity.class).putExtra("groupId", toChatUsername)).putExtra("quitGroup", quitGroup).putExtra("isAnonymityGroup", isAnonymityGroup),
                     REQUEST_CODE_GROUP_DETAIL);
         } else if (chatType == Constant.CHATTYPE_CHATROOM) {
             startActivityForResult(new Intent(getActivity(), ChatRoomDetailsActivity.class).putExtra("roomId", toChatUsername), REQUEST_CODE_GROUP_DETAIL);
@@ -603,14 +607,32 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
     }
 
     @Override
-    public void onAvatarClick(String username) {
+    public void onAvatarClick(final String username) {
         //handling when user click avatar
-        if (username.equals("admin")) {
+        if (isAnonymityGroup){
+            if (UserInfoProvider.getUserID().equals(group.getOwner())&&!username.equals(group.getOwner())){
+                bottomDialog = BottomDialog.newInstance("是否移除该成员？", new String[]{"确定"});
+                bottomDialog.show(getFragmentManager(), "dialog");
+                bottomDialog.setListener(new BottomDialog.OnClickListener() {
+                    @Override
+                    public void click(int position) {
+                        switch (position) {
+                            case 0:
+                                mPresenter.groupSignOut(toChatUsername,username);
+                                break;
+                        }
+                    }
+                });
 
-        } else {
-            Intent intent = new Intent(getActivity(), UserProfileActivity.class);
-            intent.putExtra("username", username);
-            startActivity(intent);
+            }
+        }else {
+            if (username.equals("admin")) {
+
+            } else {
+                Intent intent = new Intent(getActivity(), UserProfileActivity.class);
+                intent.putExtra("username", username);
+                startActivity(intent);
+            }
         }
     }
 
@@ -839,7 +861,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
         } else if (i1 == R.id.hundred_bt_3) {
             startActivity(new Intent(getContext(), TeamActivity.class));
         } else if (i1 == R.id.bt_start) {
-            mPresenter.getRandom(choice_id,toChatUsername);
+            mPresenter.getRandom(choice_id, toChatUsername);
         }
     }
 
@@ -1068,20 +1090,42 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
 
     @Override
     public void getIsEvaluateSucess(IsRemarkBean isRemarkBean) {
-        choice_id=isRemarkBean.getChoice_id();
-       if (isRemarkBean.getIs_status().equals("1")){
-           layout_chatted.setVisibility(View.VISIBLE);
-       }
-        if (isRemarkBean.getType().equals("1")){
-           frameLayout.setVisibility(View.GONE);
+        choice_id = isRemarkBean.getChoice_id();
+        if (isRemarkBean.getIs_status().equals("1")) {
+            layout_chatted.setVisibility(View.VISIBLE);
+        }
+        if (isRemarkBean.getType().equals("1")) {
+            frameLayout.setVisibility(View.GONE);
             setNormal_input();
-        }else if (isRemarkBean.getType().equals("2")){
+        } else if (isRemarkBean.getType().equals("2")) {
             frameLayout.setVisibility(View.VISIBLE);
             setNormal_input();
             chatlinearLayout.setVisibility(View.GONE);
             ll_tag.setVisibility(View.VISIBLE);
             mPresenter.getTag(choice_id, toChatUsername);
         }
+    }
+
+    @Override
+    public void returnGroupType(GroupTypeBean groupTypeBean) {
+        if (groupTypeBean.getType().equals("0")) {
+            mPresenter.getDetail(toChatUsername);
+            isAnonymityGroup = false;
+            messageList.setShowUserNick(true);
+            messageList.setShowAvatar(true);
+            swipeRefreshLayout.setEnabled(isAnonymityGroup);
+        } else {
+            isAnonymityGroup = true;
+            messageList.setShowUserNick(false);
+            messageList.setShowAvatar(false);
+            swipeRefreshLayout.setEnabled(isAnonymityGroup);
+        }
+        messageList.refresh();
+    }
+
+    @Override
+    public void groupSignOutSucess() {
+        ToastUitl.showLong("成功移除该成员！");
     }
 
 
@@ -1437,9 +1481,9 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
                         if (jsonObject.has("step_count")) {
                             if (jsonObject.get("l_user_id").equals(UserInfoProvider.getUserID())) {
                                 i = "l_user_status";
-                            } else if (jsonObject.get("r_user_id").equals(UserInfoProvider.getUserID())){
+                            } else if (jsonObject.get("r_user_id").equals(UserInfoProvider.getUserID())) {
                                 i = "r_user_status";
-                            }else {
+                            } else {
                                 return;
                             }
                             step = jsonObject.getInt("step_count");
@@ -1464,7 +1508,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
                                 tv_step.setText("");
                                 new getVideoThread().start();
                             } else {
-                                if (is_status == 1|| status == 1) {
+                                if (is_status == 1 || status == 1) {
                                     layout_chatted.setVisibility(View.VISIBLE);
                                     ToastUitl.showLong("对方已放弃，请评价完成此次匹配");
                                 } else {
@@ -1486,7 +1530,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
                 if (s != null) {
                     try {
                         JSONObject jsonObject = new JSONObject(s);
-                        if (jsonObject.getString("l_user_id").equals(toChatUsername)||jsonObject.getString("r_user_id").equals(toChatUsername)){
+                        if (jsonObject.getString("l_user_id").equals(toChatUsername) || jsonObject.getString("r_user_id").equals(toChatUsername)) {
                             step = jsonObject.getInt("step_count");
                             is_upload = "0";
                             addstep();
@@ -1522,7 +1566,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
             public void call(String s) {
                 try {
                     JSONObject object = new JSONObject(s);
-                    if (object.getString("user_id").equals(toChatUsername)){
+                    if (object.getString("user_id").equals(toChatUsername)) {
                         ToastUitl.showLong("对方已放弃，请评价完成此次匹配");
                         layout_chatted.setVisibility(View.VISIBLE);
                     }
@@ -1609,7 +1653,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
                 if (s != null) {
                     try {
                         JSONObject jsonObject = new JSONObject(s);
-                        if (jsonObject.getString("l_user_id").equals(toChatUsername)||jsonObject.getString("r_user_id").equals(toChatUsername)){
+                        if (jsonObject.getString("l_user_id").equals(toChatUsername) || jsonObject.getString("r_user_id").equals(toChatUsername)) {
                             if (jsonObject.getInt("step_count") >= title.length) {
                                 button.setText("视频制作中...");
                                 dialogUtils.showWaitDialog("视频制作中...", false);
@@ -1631,12 +1675,14 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
             }
         });
 
+
         rxManager.on("upadteTeam", new Action1<String>() {
             @Override
             public void call(String s) {
                 mPresenter.getDetail(toChatUsername);
             }
         });
+
         rxManager.on("RefrshMatch", new Action1<String>() {
             @Override
             public void call(String s) {
@@ -1671,19 +1717,19 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
                     if (type.equals("9") || type.equals("2")) {
                         mPresenter.getDetail(toChatUsername);
                     } else if (type.equals("1001")) {
-                        if (tagBean_!=null&&!(tagBean_.getLabel_error() == 1)) {
+                        if (tagBean_ != null && !(tagBean_.getLabel_error() == 1)) {
                             mPresenter.getTag(choice_id, toChatUsername);
                         }
-                    }else if (type.equals("1002")){
-                        int random_num=object.getInt("random_num");
-                        String id=object.getString("random_user_id");
-                        if (id.equals(toChatUsername)||id.equals(UserInfoProvider.getUserID())){
-                            CountDownUtil countDownUtil=new CountDownUtil(bt_start,6*1000,"s","开始");
+                    } else if (type.equals("1002")) {
+                        int random_num = object.getInt("random_num");
+                        String id = object.getString("random_user_id");
+                        if (id.equals(toChatUsername) || id.equals(UserInfoProvider.getUserID())) {
+                            CountDownUtil countDownUtil = new CountDownUtil(bt_start, 6 * 1000, "s", "开始");
                             countDownUtil.setSetClick(true);
                             countDownUtil.start();
                             tagRecycleViewAdapter.notifyDataSetChanged();
                             startTime = 0;
-                            stopTime = 2400+(random_num-num-1)*100;
+                            stopTime = 2400 + (random_num - num - 1) * 100;
                             runnable.run();
                         }
                     }
@@ -1747,24 +1793,23 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
     }
 
 
-
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
             handler.sendEmptyMessage(0);  //发送消息
             //如果到达指定的时间,则停止
             if (startTime >= stopTime) {
-                if (list.size()>=num){
+                if (list.size() >= num) {
                     ((TextView) (rv_tag.getChildAt(num).findViewById(R.id.tv_tag_item))).setText(list.get(num).getLabel_name());
                 }
                 startTime = 0;
                 stopTime = 0;
                 return;
             }
-            if ((stopTime-startTime)<700){
+            if ((stopTime - startTime) < 700) {
                 //每隔100毫秒运行一次
-                handler.postDelayed(runnable, startTime+700-stopTime);
-            }else {
+                handler.postDelayed(runnable, startTime + 700 - stopTime);
+            } else {
                 //每隔100毫秒运行一次
                 handler.postDelayed(runnable, 100);
             }

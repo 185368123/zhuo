@@ -1,32 +1,22 @@
 package zhuozhuo.com.zhuo.view.activity;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.text.format.DateUtils;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.handmark.pulltorefresh.library.ILoadingLayout;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
-import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chatuidemo.DBOpenHelp;
-import com.hyphenate.chatuidemo.DemoHelper;
-import com.hyphenate.chatuidemo.my.TeamMenuActivity;
 import com.hyphenate.chatuidemo.my.bean.SaveMatchBean;
-import com.hyphenate.chatuidemo.ui.UserProfileActivity;
 import com.hyphenate.chatuidemo.widget.BottomDialog;
-import com.hyphenate.easeui.provider.PreferenceManager;
-import com.hyphenate.easeui.provider.UserInfoProvider;
-import com.hyphenate.easeui.widget.EaseTitleBar;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import zhuozhuo.com.zhuo.MainApplication;
 import zhuozhuo.com.zhuo.R;
 import zhuozhuo.com.zhuo.adapter.SaveMatchListAdapter;
 import zhuozhuo.com.zhuo.contract.SaveMatchConstract;
@@ -176,7 +166,6 @@ public class SaveMatchActivity extends BaseActivity<SaveMatchModel, SaveMatchPre
         new Thread(new Runnable() {
             public void run() {
                 try {
-                    //demo use a hardcode reason here, you need let user to input if you like
                     String s = getResources().getString(com.hyphenate.chatuidemo.R.string.Add_a_friend);
                     EMClient.getInstance().contactManager().addContact(id, s);
                     DBOpenHelp.getDBOpenHelp().selectByUserId(id);

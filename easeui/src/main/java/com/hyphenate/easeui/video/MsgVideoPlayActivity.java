@@ -7,6 +7,7 @@ import android.view.View;
 import com.hyphenate.easeui.R;
 import com.shuyu.gsyvideoplayer.builder.GSYVideoOptionBuilder;
 
+
 public class MsgVideoPlayActivity extends AppCompatActivity {
     private String mPlayUrl;
     private LayoutVideo video;
@@ -25,11 +26,24 @@ public class MsgVideoPlayActivity extends AppCompatActivity {
                 .setCacheWithPlay(true) //是否边下边播
                 .build(video);
         video.getStartButton().performClick();
+
         video.getBackButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (video.getCurrentState()==video.CURRENT_STATE_PLAYING){
+                    video.getStartButton().performClick();
+                }
                 finish();
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        if (video.getCurrentState()==video.CURRENT_STATE_PLAYING){
+            video.getStartButton().performClick();
+        }
+        super.onBackPressed();
+    }
+
 }

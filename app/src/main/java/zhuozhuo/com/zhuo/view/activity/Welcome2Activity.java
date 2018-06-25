@@ -53,7 +53,7 @@ public class Welcome2Activity extends BaseActivity<GetVisonModel, GetVisonPresen
     private AlertDialog dialog;
 
 
-    int maxIndex = 2;//Viewpage总的页数
+    int maxIndex = 1;//Viewpage总的页数
 
     ViewPager viewpager;
 
@@ -402,8 +402,21 @@ public class Welcome2Activity extends BaseActivity<GetVisonModel, GetVisonPresen
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                iv.setVisibility(View.INVISIBLE);
-                viewpager.setVisibility(View.VISIBLE);
+                //跳转到主页
+                if (PreferenceManager.getPreferenceManager().isFirstStart()) {
+                    iv.setVisibility(View.INVISIBLE);
+                    viewpager.setVisibility(View.VISIBLE);
+                } else {
+                    //跳转到主界面
+                    if (UserInfoProvider.getLocation().equals("") || UserInfoProvider.getLocation() == null || UserInfoProvider.getLocation().equals("无")) {
+                        Intent intent = new Intent(Welcome2Activity.this, LocationChangeActivity.class);
+                        intent.putExtra("isFirst", true);
+                        startActivity(intent);
+                    } else {
+                        startActivity(MainActivity.class);
+                    }
+                    finish();
+                }
             }
         });
     }

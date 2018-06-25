@@ -167,7 +167,6 @@ public class SlidingLetter extends View {
         if (index >= letters.length) {
             index = letters.length - 1;
         }
-        LogUtils.logd("当前点击了：" + index + "字母：" + letters[index]);
 
         //判断是否需要重绘，只有上次保存的index与当前手指所在的index不一致时，才需要重绘
         if (this.index != index) {

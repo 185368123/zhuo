@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -24,24 +25,30 @@ import java.util.List;
 import li.com.base.basesinglebean.CitiesSingBean;
 import li.com.base.basesinglebean.SingleBeans;
 import li.com.base.baseuntils.LogUtils;
+import li.com.base.baseuntils.ToastUitl;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
 
 public class CityChooseActivity extends BaseActivity implements View.OnClickListener {
 
-     private String where;
+    private String where;
     static final String[] letters = {
             "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
     };
     private RelativeLayout rl_left;
 
-    private boolean isFirst=false;
+    private FrameLayout fl_right;
+
+    private boolean isFirst = false;
+
+    private int max_num = 0;//最大可填城市数量
+    private int choose_num = 0;//已经选择城市数量
 
     //学院数据源
     List<ClassBean> data = new ArrayList<>();
     Handler handler = new Handler();
 
-    Handler handler_finish=new Handler(new Handler.Callback() {
+    Handler handler_finish = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             setResult(RESULT_OK);
@@ -50,7 +57,7 @@ public class CityChooseActivity extends BaseActivity implements View.OnClickList
         }
     });
 
-private CityChooseAdapter cityChooseAdapter;
+    private CityChooseAdapter cityChooseAdapter;
     //声明控件
     StickyListHeadersListView stickyList;
     EditText et_search;
@@ -61,22 +68,25 @@ private CityChooseAdapter cityChooseAdapter;
      */
     String searchStr;
     TextView tv_msg;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_city_choose);
-        where=getIntent().getStringExtra("where");
+        max_num = SingleBeans.getInstance().getCityID().equals("")?3:3 - SingleBeans.getInstance().getCityID().split(",").length;
+        where = getIntent().getStringExtra("where");
         rl_left = (RelativeLayout) findViewById(R.id.rl_left_setcity);
         stickyList = (StickyListHeadersListView) findViewById(R.id.stickyList_setcity);
         et_search = (EditText) findViewById(R.id.et_search_setcity);
         slidingLetter = (SlidingLetter) findViewById(R.id.slidingLetter_setcity);
         tv_letter = (TextView) findViewById(R.id.tv_letter_setcity);
-        tv_msg = (TextView)findViewById(R.id.tv_setcity_title);
+        tv_msg = (TextView) findViewById(R.id.tv_setcity_title);
+        fl_right = (FrameLayout) findViewById(R.id.fl_right_setcity);
         tv_msg.setText("选择城市");
 
-        data=getClassList();
+        data = getClassList();
 
-        cityChooseAdapter=new CityChooseAdapter(this,data);
+        cityChooseAdapter = new CityChooseAdapter(this, data);
 
         //设置adapter
         stickyList.setAdapter(cityChooseAdapter);
@@ -85,6 +95,8 @@ private CityChooseAdapter cityChooseAdapter;
         setItemClickListener();
         //设置搜索监听
         setSearchListener();
+
+        fl_right.setOnClickListener(this);
     }
 
 
@@ -112,6 +124,7 @@ private CityChooseAdapter cityChooseAdapter;
             }
         });
     }
+
     Runnable searchRun = new Runnable() {
         @Override
         public void run() {
@@ -126,12 +139,35 @@ private CityChooseAdapter cityChooseAdapter;
         stickyList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                LogUtils.logd("max_num:" + max_num + "   max_num:" + max_num);
                 //得到数据源
                 ClassBean bean = data.get(position);
-                if (where.equals("start")){
+                if (where.equals("start")) {
                     SingleBeans.getInstance().setLocation(bean.getClassName());
                     SingleBeans.getInstance().setLocation_id(bean.getClassID());
-                }else if (where.equals("end_1")){
+                    handler_finish.sendMessage(new Message());
+                } else if (bean.getClassName().equals(SingleBeans.getInstance().getCity1Name()) || bean.getClassName().equals(SingleBeans.getInstance().getCity2Name()) || bean.getClassName().equals(SingleBeans.getInstance().getCity3Name())) {
+                    ToastUitl.showLong("城市已存在，请从新选择！");
+                } else {
+                    if (choose_num < max_num) {
+                        data.get(position).setFlag(true);
+                        cityChooseAdapter.notifyDataSetChanged();
+                        view.findViewById(R.id.ll_city_name).setBackgroundResource(R.color.main_color);
+                        if (SingleBeans.getInstance().getCity1Name().equals("")) {
+                            SingleBeans.getInstance().setCity1(bean.getClassID());
+                            SingleBeans.getInstance().setCity1Name(bean.getClassName());
+                        } else if (SingleBeans.getInstance().getCity2Name().equals("")) {
+                            SingleBeans.getInstance().setCity2(bean.getClassID());
+                            SingleBeans.getInstance().setCity2Name(bean.getClassName());
+                        } else if (SingleBeans.getInstance().getCity3Name().equals("")) {
+                            SingleBeans.getInstance().setCity3(bean.getClassID());
+                            SingleBeans.getInstance().setCity3Name(bean.getClassName());
+                        }
+                        choose_num++;
+                    } else {
+                        ToastUitl.showLong("已达到最大可选城市数量，请删除后再试！");
+                    }
+                }/*else if (where.equals("end_1")){
                     SingleBeans.getInstance().setCity1(bean.getClassID());
                     SingleBeans.getInstance().setCity1Name(bean.getClassName());
                 }else if (where.equals("end_2")){
@@ -141,7 +177,7 @@ private CityChooseAdapter cityChooseAdapter;
                     SingleBeans.getInstance().setCity3(bean.getClassID());
                     SingleBeans.getInstance().setCity3Name(bean.getClassName());
                 }
-             handler_finish.sendMessage(new Message());
+             */
             }
 
         });
@@ -172,7 +208,6 @@ private CityChooseAdapter cityChooseAdapter;
     }
 
 
-
     /**
      * 根据字母，得到首字母为指定字母的首个数据的位置
      *
@@ -195,13 +230,13 @@ private CityChooseAdapter cityChooseAdapter;
             // A-Z解析
             //从字母数组中，取出每个字母，
             for (int i = 0; i < letters.length; i++) {
-                List<CitiesSingBean>  arr= SingleBeans.getInstance().getCitiesSingBean();
+                List<CitiesSingBean> arr = SingleBeans.getInstance().getCitiesSingBean();
                 if (arr != null) {
                     int len = arr.size();
                     for (int j = 0; j < len; j++) {
-                        if (arr.get(j).getCities_str().equals(letters[i])){
+                        if (arr.get(j).getCities_str().equals(letters[i])) {
                             //创建CityBean
-                            ClassBean bean = new ClassBean(letters[i], i, arr.get(j).getCities_name(), "AAAAA",arr.get(j).getProvinces_id());
+                            ClassBean bean = new ClassBean(letters[i], i, arr.get(j).getCities_name(), "AAAAA", arr.get(j).getProvinces_id());
                             //添加到集合中
                             data.add(bean);
                         }
@@ -222,6 +257,8 @@ private CityChooseAdapter cityChooseAdapter;
         int i = v.getId();
         if (i == R.id.rl_left_setcity) {
             finish();
+        } else if (i == R.id.fl_right_setcity) {
+            handler_finish.sendMessage(new Message());
         }
     }
 }

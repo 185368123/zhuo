@@ -308,9 +308,18 @@ public class UrlConstant {
     //查看对方是否已评价
     public static final String IsEvaluate_URL="/PlayerMatch/isEvaluate";
 
-    //获取推荐用户
+    //获取随机码
     public static final String GetRandStr_URL="/PlayerMatch/getRandStr";
 
-    //获取推荐用户
+    //获取我的好友大学分部
     public static final String GetCollege_URL="/PlayerMatch/getCollege";
+
+    //申请加入匿名群
+    public static final String JoinUserGroup_URL="/Group/addUserGroup";
+
+    //群主逐出用户
+    public static final String GroupSignOut_URL="/Group/GroupSignOut";
+
+    //获取群的类型
+    public static final String GetGroupType_URL="/Group/isGroupType";
 }

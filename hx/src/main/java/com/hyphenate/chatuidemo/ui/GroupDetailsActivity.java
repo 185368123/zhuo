@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,11 +56,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class GroupDetailsActivity extends BaseActivity implements OnClickListener, QuitGroupConstract.View {
+import li.com.base.baseuntils.ToastUitl;
 
+public class GroupDetailsActivity extends BaseActivity implements OnClickListener, QuitGroupConstract.View {
+	private static final int REQUEST_CODE_EDIT_GROUPNAME = 5;
 	public static final int  RESULT_QUIT_GROUP=0011;
 	private static final String TAG = "GroupDetailsActivity";
 
+	private boolean isAnonymityGroup;
 	private String groupId;
 	private ProgressBar loadingPB;
 	private EMGroup group;
@@ -95,9 +99,9 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 	    super.onCreate(savedInstanceState);
 	    
         groupId = getIntent().getStringExtra("groupId");
+		isAnonymityGroup=getIntent().getBooleanExtra("isAnonymityGroup",false);
         boolean qiutGroup=getIntent().getBooleanExtra("quitGroup",false);
         group = EMClient.getInstance().groupManager().getGroup(groupId);
-
         // we are not supposed to show the group if we don't find the group
         if(group == null){
             finish();
@@ -131,6 +135,8 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 		RelativeLayout blockOfflineLayout = (RelativeLayout) findViewById(R.id.rl_switch_block_offline_message);
 		offlinePushSwitch = (EaseSwitchButton) findViewById(R.id.switch_block_offline_message);
 
+		RelativeLayout changeGroupNameLayout = (RelativeLayout) findViewById(R.id.rl_change_group_name);
+		changeGroupNameLayout.setOnClickListener(this);
 
 		idText.setText(group.getMemberCount()+"");
 
@@ -146,6 +152,11 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 		EaseExpandGridView userGridview = (EaseExpandGridView) findViewById(R.id.gridview);
 		userGridview.setAdapter(membersAdapter);
 
+		if (isAnonymityGroup){
+			userGridview.setVisibility(View.GONE);
+		}else {
+			userGridview.setVisibility(View.VISIBLE);
+		}
 		ownerAdminAdapter = new OwnerAdminAdapter(this, R.layout.em_grid_owner, new ArrayList<String>());
 		//EaseExpandGridView ownerAdminGridview = (EaseExpandGridView) findViewById(R.id.owner_and_administrators_grid_view);
 		//ownerAdminGridview.setAdapter(ownerAdminAdapter);
@@ -305,6 +316,9 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 				}
 			});
 			builder.create().show();
+		}else if (i==R.id.rl_change_group_name){
+			startActivityForResult(new Intent(this, EditActivity.class).putExtra("data", group.getGroupName()).putExtra("editable", isCurrentOwner(group)),
+					REQUEST_CODE_EDIT_GROUPNAME);
 		}
 	}
 
@@ -498,7 +512,6 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 						return;
 					}
 					operationUserId = username;
-					//TODO 查看个人资料
 					Intent intent = new Intent(getContext(), UserProfileActivity.class);
 					intent.putExtra("username", username);
 					startActivity(intent);
@@ -556,9 +569,6 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 				button.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						/*if (!isCurrentOwner(group) && !isCurrentAdmin(group)) {
-							return;
-						}*/
 						operationUserId = username;
 						Log.e("operationUserId",operationUserId);
 						Intent intent = new Intent(getContext(), UserProfileActivity.class);
@@ -766,4 +776,47 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 		}
 	}
 
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == RESULT_OK) {
+			if (progressDialog == null) {
+				progressDialog = new ProgressDialog(GroupDetailsActivity.this);
+				progressDialog.setCanceledOnTouchOutside(false);
+			}
+			switch (requestCode) {
+				case REQUEST_CODE_EDIT_GROUPNAME: //修改群名称
+					final String returnData = data.getStringExtra("data");
+					if(!TextUtils.isEmpty(returnData)){
+						progressDialog.setMessage("正在修改群名称……");
+						progressDialog.show();
+
+						new Thread(new Runnable() {
+							public void run() {
+								try {
+									EMClient.getInstance().groupManager().changeGroupName(groupId, returnData);
+									runOnUiThread(new Runnable() {
+										public void run() {
+											((TextView) findViewById(R.id.group_name)).setText(group.getGroupName() + "(" + group.getMemberCount() + ")");
+											progressDialog.dismiss();
+											Toast.makeText(getApplicationContext(), "修改群名称成功", Toast.LENGTH_SHORT).show();
+										}
+									});
+
+								} catch (HyphenateException e) {
+									e.printStackTrace();
+									runOnUiThread(new Runnable() {
+										public void run() {
+											progressDialog.dismiss();
+											Toast.makeText(getApplicationContext(), "改变群名称失败，请检查网络或稍后重试", Toast.LENGTH_SHORT).show();
+										}
+									});
+								}
+							}
+						}).start();
+					}
+					break;
+			}
+		}
+	}
 }

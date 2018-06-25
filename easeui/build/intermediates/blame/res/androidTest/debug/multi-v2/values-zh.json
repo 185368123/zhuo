@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "E:\\WorkSpace\\useless\\zhuo\\easeui\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-zh\\values-zh.xml",
+            "map": [
+                {
+                    "source": "E:\\WorkSpace\\useless\\zhuo\\locktableview\\build\\intermediates\\bundles\\debug\\res\\values-zh\\values-zh.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,116,180,242,295,341,394,440",
+                        "endColumns": "60,63,61,52,45,52,45,46",
+                        "endOffsets": "111,175,237,290,336,389,435,482"
+                    }
+                }
+            ]
+        }
+    ]
+}
